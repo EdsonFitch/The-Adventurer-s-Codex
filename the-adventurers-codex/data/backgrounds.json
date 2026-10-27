@@ -1,0 +1,5142 @@
+[
+  {
+    "name": "Acolyte",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A holy symbol"
+      },
+      {
+        "item": "a prayer book or prayer wheel"
+      },
+      {
+        "item": "5 sticks of incense"
+      },
+      {
+        "item": "vestments"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Shelter of the Faithful",
+    "feature_description": "You command the respect of those who share your faith and can perform the religious ceremonies of your deity. You and your companions can receive free healing and care at a temple, shrine, or other established presence of your faith (you provide any material components for spells). Those who share your religion support you (but only you) at a modest lifestyle. You may also have ties to a specific temple, with a residence there; while near it you can call on the priests for assistance, provided it is not hazardous and you remain in good standing.",
+    "description": "You command the respect of those who share your faith and can perform the religious ceremonies of your deity. You and your companions can receive free healing and care at a temple, shrine, or other established presence of your faith (you provide any material components for spells). Those who share your religion support you (but only you) at a modest lifestyle. You may also have ties to a specific temple, with a residence there; while near it you can call on the priests for assistance, provided it is not hazardous and you remain in good standing.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Anthropologist",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A leatherbound diary"
+      },
+      {
+        "item": "a bottle of ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "one trinket of special significance"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Adept Linguist",
+    "feature_description": "You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures, enough to communicate on a rudimentary level. (Also includes the Cultural Chameleon trait: choose or roll the culture you adopted.)",
+    "description": "You can communicate with humanoids who don't speak any language you know. You must observe the humanoids interacting with one another for at least 1 day, after which you learn a handful of important words, expressions, and gestures, enough to communicate on a rudimentary level. (Also includes the Cultural Chameleon trait: choose or roll the culture you adopted.)",
+    "defining_events": [
+      {
+        "title": "Adopted Culture",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Aarakocra"
+          },
+          {
+            "roll": "2",
+            "description": "Dwarf"
+          },
+          {
+            "roll": "3",
+            "description": "Elf"
+          },
+          {
+            "roll": "4",
+            "description": "Goblin"
+          },
+          {
+            "roll": "5",
+            "description": "Halfling"
+          },
+          {
+            "roll": "6",
+            "description": "Human"
+          },
+          {
+            "roll": "7",
+            "description": "Lizardfolk"
+          },
+          {
+            "roll": "8",
+            "description": "Orc"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Archaeologist",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Cartographer's tools or navigator's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A wooden case containing a map to a ruin or dungeon"
+      },
+      {
+        "item": "a bullseye lantern"
+      },
+      {
+        "item": "a miner's pick"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "a shovel"
+      },
+      {
+        "item": "a two-person tent"
+      },
+      {
+        "item": "a trinket recovered from a dig site"
+      },
+      {
+        "item": "and a pouch containing 25 gp"
+      }
+    ],
+    "feature_name": "Historical Knowledge",
+    "feature_description": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether dwarves, elves, humans, yuan-ti, or some other known race. You can also determine the monetary value of art objects more than a century old.",
+    "description": "When you enter a ruin or dungeon, you can correctly ascertain its original purpose and determine its builders, whether dwarves, elves, humans, yuan-ti, or some other known race. You can also determine the monetary value of art objects more than a century old.",
+    "defining_events": [
+      {
+        "title": "Signature Item",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "10-foot pole"
+          },
+          {
+            "roll": "2",
+            "description": "Crowbar"
+          },
+          {
+            "roll": "3",
+            "description": "Hat"
+          },
+          {
+            "roll": "4",
+            "description": "Hooded lantern"
+          },
+          {
+            "roll": "5",
+            "description": "Medallion"
+          },
+          {
+            "roll": "6",
+            "description": "Shovel"
+          },
+          {
+            "roll": "7",
+            "description": "Sledgehammer"
+          },
+          {
+            "roll": "8",
+            "description": "Whip"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Athlete",
+    "skill_proficiencies": [
+      {
+        "name": "Acrobatics"
+      },
+      {
+        "name": "Athletics"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (land)"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bronze discus or leather ball"
+      },
+      {
+        "item": "a lucky charm or past trophy"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Echoes of Victory",
+    "feature_description": "When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone who admires you and is willing to provide information or temporary shelter. Between adventures, you can compete in athletic events sufficient to maintain a comfortable lifestyle, as per the \"Practicing a Profession\" downtime activity.",
+    "description": "When visiting any settlement within 100 miles of where you grew up, there is a 50 percent chance you can find someone who admires you and is willing to provide information or temporary shelter. Between adventures, you can compete in athletic events sufficient to maintain a comfortable lifestyle, as per the \"Practicing a Profession\" downtime activity.",
+    "defining_events": [
+      {
+        "title": "Favored Event",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Marathon"
+          },
+          {
+            "roll": "2",
+            "description": "Long-distance running"
+          },
+          {
+            "roll": "3",
+            "description": "Wrestling"
+          },
+          {
+            "roll": "4",
+            "description": "Boxing"
+          },
+          {
+            "roll": "5",
+            "description": "Chariot or horse race"
+          },
+          {
+            "roll": "6",
+            "description": "Pankration (mixed unarmed combat)"
+          },
+          {
+            "roll": "7",
+            "description": "Hoplite race (racing in full armor with a unit)"
+          },
+          {
+            "roll": "8",
+            "description": "Pentathlon (running, long jump, discus, javelin, wrestling)"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Azorius Functionary",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "An Azorius insignia"
+      },
+      {
+        "item": "a scroll containing the text of a law important to you"
+      },
+      {
+        "item": "a bottle of blue ink"
+      },
+      {
+        "item": "a pen"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp (Azorius-minted 1-zino coins)"
+      }
+    ],
+    "feature_name": "Legal Authority",
+    "feature_description": "You have the authority to enforce the laws of Ravnica, which inspires respect and even fear. People mind their manners around you and assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to. If you abuse this privilege you can get in serious trouble or be stripped of your position.",
+    "description": "You have the authority to enforce the laws of Ravnica, which inspires respect and even fear. People mind their manners around you and assume you have the right to be wherever you are. Showing your Azorius insignia gets you an audience with anyone you want to talk to. If you abuse this privilege you can get in serious trouble or be stripped of your position.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Black Fist Double Agent",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Insight"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "and one type of artisan's tools or gaming set"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "Disguise kit"
+      },
+      {
+        "item": "common clothes"
+      },
+      {
+        "item": "a Tears of Virulence emblem"
+      },
+      {
+        "item": "a writ of free agency signed by the Lord Regent"
+      },
+      {
+        "item": "a set of artisan's tools or gaming set you are proficient with"
+      },
+      {
+        "item": "and a pouch with 15 gp"
+      }
+    ],
+    "feature_name": "Double Agent",
+    "feature_description": "You have a reliable contact within the Tears of Virulence garrison in Phlan to whom you pass information, and in exchange you can get away with minor criminal offenses within the town of Phlan. Your Black Fists contacts can also help you secure an audience with the Lord Regent, the Lord Sage, members of the Black Fists, or deposed nobles and authority figures sympathetic to the Phlan refugees and insurgents.",
+    "description": "You have a reliable contact within the Tears of Virulence garrison in Phlan to whom you pass information, and in exchange you can get away with minor criminal offenses within the town of Phlan. Your Black Fists contacts can also help you secure an audience with the Lord Regent, the Lord Sage, members of the Black Fists, or deposed nobles and authority figures sympathetic to the Phlan refugees and insurgents.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Boros Legionnaire",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Cartographer's tools or navigator's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose one of Celestial"
+      },
+      {
+        "name": "Draconic"
+      },
+      {
+        "name": "Goblin"
+      },
+      {
+        "name": "or Minotaur"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Boros insignia"
+      },
+      {
+        "item": "a feather from an angel's wing"
+      },
+      {
+        "item": "a tattered piece of a Boros banner"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 2 gp (Boros-minted 1-zino coins)"
+      }
+    ],
+    "feature_name": "Legion Station",
+    "feature_description": "You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use and gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid 1 gp per week, which with free lodging lets you maintain a poor lifestyle between adventures.",
+    "description": "You have an established place in the hierarchy of the Boros Legion. You can requisition simple equipment for temporary use and gain access to any Boros garrison in Ravnica, where you can rest in safety and receive the attention of medics. You are also paid 1 gp per week, which with free lodging lets you maintain a poor lifestyle between adventures.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Caravan Specialist",
+    "skill_proficiencies": [
+      {
+        "name": "Animal Handling"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (land)"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A whip"
+      },
+      {
+        "item": "a two-person tent"
+      },
+      {
+        "item": "a regional map"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Wagonmaster",
+    "feature_description": "Others look to you for direction when a situation gets serious. You can identify the most defensible locations for camping. If you are part of a caravan outfit, you can attract two additional workers loyal to you based on your reputation. You have an excellent memory for maps and geography and can always determine your cardinal directions while traveling.",
+    "description": "Others look to you for direction when a situation gets serious. You can identify the most defensible locations for camping. If you are part of a caravan outfit, you can attract two additional workers loyal to you based on your reputation. You have an excellent memory for maps and geography and can always determine your cardinal directions while traveling.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Celebrity Adventurer's Scion",
+    "skill_proficiencies": [
+      {
+        "name": "Perception"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Disguise kit"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 30 gp"
+      }
+    ],
+    "feature_name": "Name Dropping",
+    "feature_description": "You know and have met any number of powerful people, and some might remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Common folk treat you with deference, and your heritage and stories might be good for a free meal or a place to sleep.",
+    "description": "You know and have met any number of powerful people, and some might remember you. You might be able to wrangle minor assistance from a major figure in the campaign, at the DM's discretion. Common folk treat you with deference, and your heritage and stories might be good for a free meal or a place to sleep.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Charlatan",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Sleight of Hand"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "a disguise kit"
+      },
+      {
+        "item": "tools of the con of your choice (ten stoppered bottles filled with colored liquid"
+      },
+      {
+        "item": "a set of weighted dice"
+      },
+      {
+        "item": "a deck of marked cards"
+      },
+      {
+        "item": "or a signet ring of an imaginary duke)"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "False Identity",
+    "feature_description": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. You can also forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or handwriting you are trying to copy.",
+    "description": "You have created a second identity that includes documentation, established acquaintances, and disguises that allow you to assume that persona. You can also forge documents including official papers and personal letters, as long as you have seen an example of the kind of document or handwriting you are trying to copy.",
+    "defining_events": [
+      {
+        "title": "Favorite Scheme (Scam)",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I cheat at games of chance."
+          },
+          {
+            "roll": "2",
+            "description": "I shave coins or forge documents."
+          },
+          {
+            "roll": "3",
+            "description": "I insinuate myself into people's lives to prey on their weakness and secure their fortunes."
+          },
+          {
+            "roll": "4",
+            "description": "I put on new identities like clothes."
+          },
+          {
+            "roll": "5",
+            "description": "I run sleight-of-hand cons on street corners."
+          },
+          {
+            "roll": "6",
+            "description": "I convince people that worthless junk is worth their hard-earned money."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "City Watch",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Insight (Investigator variant: Investigation instead of Athletics)"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Any two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A uniform in the style of your unit and indicative of your rank"
+      },
+      {
+        "item": "a horn with which to summon help"
+      },
+      {
+        "item": "a set of manacles"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Watcher's Eye",
+    "feature_description": "Your experience enforcing the law gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former.",
+    "description": "Your experience enforcing the law gives you a feel for local laws and criminals. You can easily find the local outpost of the watch or a similar organization, and just as easily pick out the dens of criminal activity in a community, although you're more likely to be welcome in the former.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Clan Crafter",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Insight"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Dwarvish"
+      },
+      {
+        "name": "or any one of your choice if you know Dwarvish"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools with which you are proficient"
+      },
+      {
+        "item": "a maker's mark chisel"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 5 gp and a gem worth 10 gp"
+      }
+    ],
+    "feature_name": "Respect of the Stout Folk",
+    "feature_description": "You always have free room and board in any place where shield dwarves or gold dwarves dwell, and individuals in such a settlement might vie to offer you (and possibly your companions) the finest accommodations and assistance.",
+    "description": "You always have free room and board in any place where shield dwarves or gold dwarves dwell, and individuals in such a settlement might vie to offer you (and possibly your companions) the finest accommodations and assistance.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Cloistered Scholar",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "plus your choice of one from among Arcana"
+      },
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "and Religion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Any two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "The scholar's robes of your cloister"
+      },
+      {
+        "item": "a writing kit (small pouch with a quill"
+      },
+      {
+        "item": "ink"
+      },
+      {
+        "item": "folded parchment"
+      },
+      {
+        "item": "and a small penknife)"
+      },
+      {
+        "item": "a borrowed book on the subject of your current study"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Library Access",
+    "feature_description": "You have free and easy access to the majority of your library, though it may have repositories of lore too valuable, magical, or secret for immediate access. You know your cloister's personnel and bureaucracy and how to navigate it, and are likely to gain preferential treatment at other libraries across the Realms as professional courtesy.",
+    "description": "You have free and easy access to the majority of your library, though it may have repositories of lore too valuable, magical, or secret for immediate access. You know your cloister's personnel and bureaucracy and how to navigate it, and are likely to gain preferential treatment at other libraries across the Realms as professional courtesy.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Cormanthor Refugee",
+    "skill_proficiencies": [
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Elvish"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A two-person tent"
+      },
+      {
+        "item": "artisan's tools"
+      },
+      {
+        "item": "a holy symbol"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "a belt pouch"
+      },
+      {
+        "item": "5 gp"
+      }
+    ],
+    "feature_name": "Shelter of the Elven Clergy",
+    "feature_description": "The clerics of Elventree have vowed to care for the Cormanthor refugees. They will provide you and your companions with free healing and care at temples, shrines, and other established presences in Elventree, and will provide you (but only you) with a poor lifestyle.",
+    "description": "The clerics of Elventree have vowed to care for the Cormanthor refugees. They will provide you and your companions with free healing and care at temples, shrines, and other established presences in Elventree, and will provide you (but only you) with a poor lifestyle.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Courtier",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Any two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of fine clothes and a pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "Court Functionary",
+    "feature_description": "Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for favors, and what the current intrigues of interest are.",
+    "description": "Your knowledge of how bureaucracies function lets you gain access to the records and inner workings of any noble court or government you encounter. You know who the movers and shakers are, whom to go to for favors, and what the current intrigues of interest are.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Criminal",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A crowbar"
+      },
+      {
+        "item": "a set of dark common clothes including a hood"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Criminal Contact",
+    "feature_description": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances, through local messengers, corrupt caravan masters, and seedy sailors.",
+    "description": "You have a reliable and trustworthy contact who acts as your liaison to a network of other criminals. You know how to get messages to and from your contact, even over great distances, through local messengers, corrupt caravan masters, and seedy sailors.",
+    "defining_events": [
+      {
+        "title": "Specialty",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Blackmailer"
+          },
+          {
+            "roll": "2",
+            "description": "Burglar"
+          },
+          {
+            "roll": "3",
+            "description": "Enforcer"
+          },
+          {
+            "roll": "4",
+            "description": "Fence"
+          },
+          {
+            "roll": "5",
+            "description": "Highway robber"
+          },
+          {
+            "roll": "6",
+            "description": "Hired killer"
+          },
+          {
+            "roll": "7",
+            "description": "Pickpocket"
+          },
+          {
+            "roll": "8",
+            "description": "Smuggler"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Dimir Operative",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Dimir insignia"
+      },
+      {
+        "item": "three small knives"
+      },
+      {
+        "item": "a set of dark-colored common clothes"
+      },
+      {
+        "item": "and the starting equipment of the background for your secondary guild"
+      }
+    ],
+    "feature_name": "False Identity",
+    "feature_description": "You maintain an identity as a member of a guild other than House Dimir, with documentation, established acquaintances, and disguises. Whenever you choose, you can drop this identity and blend into the guildless masses of the city.",
+    "description": "You maintain an identity as a member of a guild other than House Dimir, with documentation, established acquaintances, and disguises. Whenever you choose, you can drop this identity and blend into the guildless masses of the city.",
+    "defining_events": [
+      {
+        "title": "Reason for Infiltration",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "My parents belong to this guild, and I let them think I'm following in their footsteps."
+          },
+          {
+            "roll": "2",
+            "description": "I've been assigned to track this guild's activities."
+          },
+          {
+            "roll": "3",
+            "description": "I've been assigned to get close to an individual in this guild and learn their secrets."
+          },
+          {
+            "roll": "4",
+            "description": "I've been assigned to recruit a new Dimir spy from the ranks of this guild."
+          },
+          {
+            "roll": "5",
+            "description": "I was a member of this guild before the Dimir recruited me."
+          },
+          {
+            "roll": "6",
+            "description": "I don't like what this guild stands for and want to destroy it from within."
+          },
+          {
+            "roll": "7",
+            "description": "I secretly wish I could leave the Dimir and join this guild, but there is no escaping the Dimir."
+          },
+          {
+            "roll": "8",
+            "description": "I chose this guild at random or on a lark."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Dragon Casualty",
+    "skill_proficiencies": [
+      {
+        "name": "Intimidation"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Special (determined by Origin table below)"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Draconic"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A dagger"
+      },
+      {
+        "item": "tattered rags"
+      },
+      {
+        "item": "a loaf of moldy bread"
+      },
+      {
+        "item": "a small cast-off scale belonging to Vorgansharax"
+      },
+      {
+        "item": "and a pouch with 5 gp of various coins"
+      }
+    ],
+    "feature_name": "Dragonscarred",
+    "feature_description": "Your disfigurement from the dragon's experiments marks you as a survivor of the Maimed Virulence. This affords you fame and notoriety: nobles, scholars, mages, and others keen to hear your tale grant you and your companions access to people and places you might not otherwise have. It also makes it difficult to disguise your appearance and hide.",
+    "description": "Your disfigurement from the dragon's experiments marks you as a survivor of the Maimed Virulence. This affords you fame and notoriety: nobles, scholars, mages, and others keen to hear your tale grant you and your companions access to people and places you might not otherwise have. It also makes it difficult to disguise your appearance and hide.",
+    "defining_events": [
+      {
+        "title": "Origin (Occupation) -> Tool Proficiency",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Dockworker/Fisherman -> Vehicles (water)"
+          },
+          {
+            "roll": "2",
+            "description": "Tradesperson/Merchant -> One artisan's tools of your choice"
+          },
+          {
+            "roll": "3",
+            "description": "Black Fist Soldier -> One gaming set of your choice or vehicles (land)"
+          },
+          {
+            "roll": "4",
+            "description": "Adventurer/Visitor -> Vehicles (land)"
+          },
+          {
+            "roll": "5",
+            "description": "Entertainer -> One musical instrument of your choice"
+          },
+          {
+            "roll": "6",
+            "description": "Scholar/Healer -> Alchemist's supplies or Herbalism kit"
+          },
+          {
+            "roll": "7",
+            "description": "Criminal -> Thieves' tools, Forgery kit, or Disguise kit"
+          },
+          {
+            "roll": "8",
+            "description": "Unskilled Laborer -> One gaming set of your choice"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Earthspur Miner",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Dwarvish"
+      },
+      {
+        "name": "Undercommon"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A shovel or a miner's pick"
+      },
+      {
+        "item": "a block and tackle"
+      },
+      {
+        "item": "a climber's kit"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "Deep Miner",
+    "feature_description": "You never get lost in caves or mines if you have either seen an accurate map of them or have been through them before. You can also scrounge fresh water and food for yourself and up to five other people each day in a mine or natural caves.",
+    "description": "You never get lost in caves or mines if you have either seen an accurate map of them or have been through them before. You can also scrounge fresh water and food for yourself and up to five other people each day in a mine or natural caves.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Entertainer",
+    "skill_proficiencies": [
+      {
+        "name": "Acrobatics"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A musical instrument (one of your choice)"
+      },
+      {
+        "item": "the favor of an admirer (love letter"
+      },
+      {
+        "item": "lock of hair"
+      },
+      {
+        "item": "or trinket)"
+      },
+      {
+        "item": "costume clothes"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "By Popular Demand",
+    "feature_description": "You can always find a place to perform (an inn, tavern, circus, theater, or noble's court). There you receive free lodging and food of a modest or comfortable standard as long as you perform each night. Strangers who recognize you in a town where you have performed typically take a liking to you.",
+    "description": "You can always find a place to perform (an inn, tavern, circus, theater, or noble's court). There you receive free lodging and food of a modest or comfortable standard as long as you perform each night. Strangers who recognize you in a town where you have performed typically take a liking to you.",
+    "defining_events": [
+      {
+        "title": "Routine",
+        "die": "d10",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Actor"
+          },
+          {
+            "roll": "2",
+            "description": "Dancer"
+          },
+          {
+            "roll": "3",
+            "description": "Fire-eater"
+          },
+          {
+            "roll": "4",
+            "description": "Jester"
+          },
+          {
+            "roll": "5",
+            "description": "Juggler"
+          },
+          {
+            "roll": "6",
+            "description": "Instrumentalist"
+          },
+          {
+            "roll": "7",
+            "description": "Poet"
+          },
+          {
+            "roll": "8",
+            "description": "Singer"
+          },
+          {
+            "roll": "9",
+            "description": "Storyteller"
+          },
+          {
+            "roll": "10",
+            "description": "Tumbler"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Faceless",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A disguise kit"
+      },
+      {
+        "item": "a costume"
+      },
+      {
+        "item": "a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Dual Personalities",
+    "feature_description": "Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self; by removing the disguise and revealing your true face, you are no longer identifiable as your persona. You can switch between the two as often as you wish, though if someone realizes the connection, your deception might lose its effectiveness.",
+    "description": "Upon donning a disguise and behaving as your persona, you are unidentifiable as your true self; by removing the disguise and revealing your true face, you are no longer identifiable as your persona. You can switch between the two as often as you wish, though if someone realizes the connection, your deception might lose its effectiveness.",
+    "defining_events": [
+      {
+        "title": "Faceless Persona",
+        "die": "d10",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A flamboyant spy or brigand"
+          },
+          {
+            "roll": "2",
+            "description": "The incarnation of a nation or people"
+          },
+          {
+            "roll": "3",
+            "description": "A scoundrel with a masked guise"
+          },
+          {
+            "roll": "4",
+            "description": "A vengeful spirit"
+          },
+          {
+            "roll": "5",
+            "description": "The manifestation of a deity or your faith"
+          },
+          {
+            "roll": "6",
+            "description": "One whose beauty is greatly accented using makeup"
+          },
+          {
+            "roll": "7",
+            "description": "An impersonation of another hero"
+          },
+          {
+            "roll": "8",
+            "description": "The embodiment of a school of magic"
+          },
+          {
+            "roll": "9",
+            "description": "A warrior with distinctive armor"
+          },
+          {
+            "roll": "10",
+            "description": "A disguise with animalistic or monstrous characteristics, meant to inspire fear"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Faction Agent",
+    "skill_proficiencies": [
+      {
+        "name": "Insight and one Intelligence"
+      },
+      {
+        "name": "Wisdom"
+      },
+      {
+        "name": "or Charisma skill of your choice"
+      },
+      {
+        "name": "as appropriate to your faction"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Any two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Badge or emblem of your faction"
+      },
+      {
+        "item": "a copy of a seminal faction text (or code-book for a covert faction)"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Safe Haven",
+    "feature_description": "You have access to a secret network of supporters and operatives. You know secret signs and passwords to identify them; they can provide a hidden safe house, free room and board, or help finding information. They never risk their lives for you or reveal their true identities.",
+    "description": "You have access to a secret network of supporters and operatives. You know secret signs and passwords to identify them; they can provide a hidden safe house, free room and board, or help finding information. They never risk their lives for you or reveal their true identities.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Failed Merchant",
+    "skill_proficiencies": [
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One set of artisan's tools"
+      },
+      {
+        "item": "merchant's scale"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Supply Chain",
+    "feature_description": "You retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call on these connections when looking for items or information.",
+    "description": "You retain connections with wholesalers, suppliers, and other merchants and entrepreneurs. You can call on these connections when looking for items or information.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Far Traveler",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Any one musical instrument or gaming set of your choice"
+      },
+      {
+        "name": "likely something native to your homeland"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One set of traveler's clothes"
+      },
+      {
+        "item": "any one musical instrument or gaming set you are proficient with"
+      },
+      {
+        "item": "poorly wrought maps from your homeland"
+      },
+      {
+        "item": "a small piece of jewelry worth 10 gp in the style of your homeland"
+      },
+      {
+        "item": "and a pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "All Eyes on You",
+    "feature_description": "Your accent, mannerisms, and appearance mark you as foreign. You gain the friendly interest of scholars and others intrigued by far-off lands, and can parley this attention into access to people and places (noble lords, scholars, merchant princes) for you and your companions.",
+    "description": "Your accent, mannerisms, and appearance mark you as foreign. You gain the friendly interest of scholars and others intrigued by far-off lands, and can parley this attention into access to people and places (noble lords, scholars, merchant princes) for you and your companions.",
+    "defining_events": [
+      {
+        "title": "Why Are You Here? (Reason)",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Emissary"
+          },
+          {
+            "roll": "2",
+            "description": "Exile"
+          },
+          {
+            "roll": "3",
+            "description": "Fugitive"
+          },
+          {
+            "roll": "4",
+            "description": "Pilgrim"
+          },
+          {
+            "roll": "5",
+            "description": "Sightseer"
+          },
+          {
+            "roll": "6",
+            "description": "Wanderer"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Feylost",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice of Elvish"
+      },
+      {
+        "name": "Gnomish"
+      },
+      {
+        "name": "Goblin"
+      },
+      {
+        "name": "or Sylvan"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A musical instrument (one of your choice)"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "three trinkets (each determined by rolling on the Feywild Trinkets table)"
+      },
+      {
+        "item": "and a pouch containing 8 gp"
+      }
+    ],
+    "feature_name": "Feywild Connection",
+    "feature_description": "Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.",
+    "description": "Your mannerisms and knowledge of fey customs are recognized by natives of the Feywild, who see you as one of their own. Friendly Fey creatures are inclined to come to your aid if you are lost or need help in the Feywild.",
+    "defining_events": [
+      {
+        "title": "Fey Mark",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Your eyes swirl with iridescent colors."
+          },
+          {
+            "roll": "2",
+            "description": "You have a sweet scent, like that of nectar or honey."
+          },
+          {
+            "roll": "3",
+            "description": "You have long whiskers like those of a cat."
+          },
+          {
+            "roll": "4",
+            "description": "Your ears are covered with soft tufts of fur."
+          },
+          {
+            "roll": "5",
+            "description": "Your skin sparkles in moonlight."
+          },
+          {
+            "roll": "6",
+            "description": "Flowers either bloom or wilt (your choice) in your presence."
+          },
+          {
+            "roll": "7",
+            "description": "Your hair is made of vines or brambles and grows back to normal length within 1 hour of being cut."
+          },
+          {
+            "roll": "8",
+            "description": "You have a tail like that of a dog or another animal."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Fisher",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Fishing tackle"
+      },
+      {
+        "item": "a net"
+      },
+      {
+        "item": "a favorite fishing lure or oiled leather wading boots"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Harvest the Water",
+    "feature_description": "You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle as a fisher and catch enough food to feed yourself and up to ten other people each day. (Also includes Fishing Tale: once a day, tell a story to willing listeners, some of whom may become friendly toward you at the DM's discretion.)",
+    "description": "You gain advantage on ability checks made using fishing tackle. If you have access to a body of water that sustains marine life, you can maintain a moderate lifestyle as a fisher and catch enough food to feed yourself and up to ten other people each day. (Also includes Fishing Tale: once a day, tell a story to willing listeners, some of whom may become friendly toward you at the DM's discretion.)",
+    "defining_events": [
+      {
+        "title": "Fishing Tale",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Lobster Wrestling: You fought in hand-to-hand combat with an immense lobster."
+          },
+          {
+            "roll": "2",
+            "description": "It Dragged the Boat: You nearly caught a fish of monstrous size that pulled your boat for miles."
+          },
+          {
+            "roll": "3",
+            "description": "Fins of Pure Gold: You caught a sea animal whose fins were made of pure gold, but another fisher stole it."
+          },
+          {
+            "roll": "4",
+            "description": "Ghost Fish: You are haunted by a ghostly fish that only you can see."
+          },
+          {
+            "roll": "5",
+            "description": "Nemesis Clam: A large clam containing a pearl the size of your head claimed one of your fingers before jetting away; one day, you'll find that clam."
+          },
+          {
+            "roll": "6",
+            "description": "It Swallowed the Sun: You once saw a fish leap from the water and turn day into night."
+          },
+          {
+            "roll": "7",
+            "description": "Dive into the Abyss: You found yourself in an underwater cave leading to the Abyss, and your luck has been sour ever since."
+          },
+          {
+            "roll": "8",
+            "description": "Love Story: You fell in love with a creature of pure water, but your brief romance ended tragically."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Folk Hero",
+    "skill_proficiencies": [
+      {
+        "name": "Animal Handling"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools (one of your choice)"
+      },
+      {
+        "item": "a shovel"
+      },
+      {
+        "item": "an iron pot"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Rustic Hospitality",
+    "feature_description": "You fit in easily among common folk. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you.",
+    "description": "You fit in easily among common folk. You can find a place to hide, rest, or recuperate among other commoners, unless you have shown yourself to be a danger to them. They will shield you from the law or anyone else searching for you, though they will not risk their lives for you.",
+    "defining_events": [
+      {
+        "title": "Defining Event",
+        "die": "d10",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I stood up to a tyrant's agents."
+          },
+          {
+            "roll": "2",
+            "description": "I saved people during a natural disaster."
+          },
+          {
+            "roll": "3",
+            "description": "I stood alone against a terrible monster."
+          },
+          {
+            "roll": "4",
+            "description": "I stole from a corrupt merchant to help the poor."
+          },
+          {
+            "roll": "5",
+            "description": "I led a militia to fight off an invading army."
+          },
+          {
+            "roll": "6",
+            "description": "I broke into a tyrant's castle and stole weapons to arm the people."
+          },
+          {
+            "roll": "7",
+            "description": "I trained the peasantry to use farming implements as weapons against a tyrant's soldiers."
+          },
+          {
+            "roll": "8",
+            "description": "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
+          },
+          {
+            "roll": "9",
+            "description": "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin."
+          },
+          {
+            "roll": "10",
+            "description": "Recruited into a lord's army, I rose to leadership and was commended for my heroism."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Gambler",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Insight"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One gaming set"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One gaming set"
+      },
+      {
+        "item": "a lucky charm"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Never Tell Me the Odds",
+    "feature_description": "During downtime activities involving games of chance or figuring odds on the best plan, you get a solid sense of which choice is likely best and which opportunities seem too good to be true, at the DM's determination.",
+    "description": "During downtime activities involving games of chance or figuring odds on the best plan, you get a solid sense of which choice is likely best and which opportunities seem too good to be true, at the DM's determination.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Gate Urchin",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Sleight of Hand"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A battered alms box"
+      },
+      {
+        "item": "a musical instrument"
+      },
+      {
+        "item": "a cast-off military jacket"
+      },
+      {
+        "item": "cap"
+      },
+      {
+        "item": "or scarf"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "a belt pouch"
+      },
+      {
+        "item": "and 10 gp"
+      }
+    ],
+    "feature_name": "Red Plume and Mage Guild Contacts",
+    "feature_description": "Your friends among the Red Plumes and the Mage's Guild help you in little ways. In and around Hillsfar you can invoke their assistance to obtain food and simple equipment for temporary use, and to gain access to low-security areas of their garrisons, halls, and encampments.",
+    "description": "Your friends among the Red Plumes and the Mage's Guild help you in little ways. In and around Hillsfar you can invoke their assistance to obtain food and simple equipment for temporary use, and to gain access to low-security areas of their garrisons, halls, and encampments.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Gate Warden",
+    "skill_proficiencies": [
+      {
+        "name": "Persuasion"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice (Abyssal"
+      },
+      {
+        "name": "Celestial"
+      },
+      {
+        "name": "or Infernal recommended)"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A ring of keys to unknown locks"
+      },
+      {
+        "item": "a blank book"
+      },
+      {
+        "item": "an ink pen or quill"
+      },
+      {
+        "item": "a bottle of black ink"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Planar Infusion",
+    "feature_description": "You gain the Scion of the Outer Planes feat. You also know where to find free, modest lodging and food in the community you grew up in.",
+    "description": "You gain the Scion of the Outer Planes feat. You also know where to find free, modest lodging and food in the community you grew up in.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Giant Foundling",
+    "skill_proficiencies": [
+      {
+        "name": "Intimidation"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A backpack"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "a small stone or sprig that reminds you of home"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Strike of the Giants",
+    "feature_description": "You gain the Strike of the Giants feat.",
+    "description": "You gain the Strike of the Giants feat.",
+    "defining_events": [
+      {
+        "title": "Foundling Origin",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "You were found as a baby by a family of nomadic giants who raised you as one of their own."
+          },
+          {
+            "roll": "2",
+            "description": "A family of stone giants rescued you when you fell into a mountain crag, and you have lived with them underground ever since."
+          },
+          {
+            "roll": "3",
+            "description": "You were lost or abandoned as a child in a jungle that teemed with ravenous dinosaurs. There, you found an equally lost frost giant and together, you survived."
+          },
+          {
+            "roll": "4",
+            "description": "Your farm was crushed and your family killed in a battle between warring groups of giants. Racked with guilt, a sympathetic giant soldier promised to care for you."
+          },
+          {
+            "roll": "5",
+            "description": "After a series of strange dreams as a child, your superstitious parents sent you to study with a powerful but aloof storm giant oracle."
+          },
+          {
+            "roll": "6",
+            "description": "While playing hide-and-seek with your friends, you stumbled into the castle of a cloud giant matriarch, who immediately adopted you."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Golgari Agent",
+    "skill_proficiencies": [
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Poisoner's Kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose one of Elvish"
+      },
+      {
+        "name": "Giant"
+      },
+      {
+        "name": "or Kraul"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Golgari insignia"
+      },
+      {
+        "item": "a poisoner's kit"
+      },
+      {
+        "item": "a pet beetle or spider"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp worth of mixed coins"
+      }
+    ],
+    "feature_name": "Undercity Paths",
+    "feature_description": "You know hidden, underground pathways. When not in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths are haunted by dangers, so the journey isn't guaranteed to be safe.",
+    "description": "You know hidden, underground pathways. When not in combat, you and companions you lead can travel between any two locations in the city twice as fast as your speed would normally allow. The paths are haunted by dangers, so the journey isn't guaranteed to be safe.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Grinner",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "a disguise kit"
+      },
+      {
+        "item": "a musical instrument of your choice"
+      },
+      {
+        "item": "a gold-plated ring depicting a smiling face"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Ballad of the Grinning Fool",
+    "feature_description": "In any city of 10,000 people or more on the Menagerie Coast or in the Dwendalian Empire, you can play the \"Ballad of a Grinning Fool\" in any major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. Shelter may be discontinued if it becomes too dangerous, and not all who know the ballad are friends.",
+    "description": "In any city of 10,000 people or more on the Menagerie Coast or in the Dwendalian Empire, you can play the \"Ballad of a Grinning Fool\" in any major tavern or inn. A member of the Golden Grin will find you and give shelter to you and any companions you vouch for. Shelter may be discontinued if it becomes too dangerous, and not all who know the ballad are friends.",
+    "defining_events": [
+      {
+        "title": "Favorite Code-Song",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Zan's Coming Back. Hopeful Tal'Dorei folk song declaring the return of a just ruler. Use it to seek out potential allies."
+          },
+          {
+            "roll": "2",
+            "description": "Blow Fire Down the Coast. Rowdy Clovis Concord fighting song about blasting pirate ships. Use it to encourage battle."
+          },
+          {
+            "roll": "3",
+            "description": "Hush! Onward Come the Dragons. Tal'Dorei folk song recounting terror after the Crimson King's invasion. Use it to encourage caution in speech and deed."
+          },
+          {
+            "roll": "4",
+            "description": "Let the Sword Grow Rust. Antiwar anthem from Marquet. Use it to help quell violent encounters."
+          },
+          {
+            "roll": "5",
+            "description": "Drink Deep, Li'l Hummingbird. Menagerie Coast drinking rondo about a youth who wakes as a stowaway. Use it to encourage alertness in social situations."
+          },
+          {
+            "roll": "6",
+            "description": "Dirge for the Emerald Fire. Elven song with thousands of obscure verses. Use the first two verses to spread news of death and defeat."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Gruul Anarch",
+    "skill_proficiencies": [
+      {
+        "name": "Animal Handling"
+      },
+      {
+        "name": "Athletics"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose one of Draconic"
+      },
+      {
+        "name": "Giant"
+      },
+      {
+        "name": "Goblin"
+      },
+      {
+        "name": "or Sylvan"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Gruul insignia"
+      },
+      {
+        "item": "a hunting trap"
+      },
+      {
+        "item": "an herbalism kit"
+      },
+      {
+        "item": "the skull of a boar"
+      },
+      {
+        "item": "a beast-hide cloak"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp (Azorius 1-zino coins)"
+      }
+    ],
+    "feature_name": "Rubblebelt Refuge",
+    "feature_description": "You are familiar with ruined neighborhoods, overgrown parks, and rubblebelts that most people shun. You can find a suitable place for you and your allies to hide or rest there, and find food and fresh water in these areas for yourself and up to five other people each day.",
+    "description": "You are familiar with ruined neighborhoods, overgrown parks, and rubblebelts that most people shun. You can find a suitable place for you and your allies to hide or rest there, and find food and fresh water in these areas for yourself and up to five other people each day.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Guild Artisan",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools (one of your choice)"
+      },
+      {
+        "item": "a letter of introduction from your guild"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Guild Membership",
+    "feature_description": "Fellow guild members provide lodging and food if necessary and pay for your funeral if needed. A guildhall offers a place to meet potential patrons, allies, or hirelings. The guild supports you if accused of a crime when a good case can be made for your innocence, and can give access to powerful political figures (possibly requiring donations). You must pay dues of 5 gp per month.",
+    "description": "Fellow guild members provide lodging and food if necessary and pay for your funeral if needed. A guildhall offers a place to meet potential patrons, allies, or hirelings. The guild supports you if accused of a crime when a good case can be made for your innocence, and can give access to powerful political figures (possibly requiring donations). You must pay dues of 5 gp per month.",
+    "defining_events": [
+      {
+        "title": "Guild Business",
+        "die": "d20",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Alchemists and apothecaries"
+          },
+          {
+            "roll": "2",
+            "description": "Armorers, locksmiths, and finesmiths"
+          },
+          {
+            "roll": "3",
+            "description": "Brewers, distillers, and vintners"
+          },
+          {
+            "roll": "4",
+            "description": "Calligraphers, scribes, and scriveners"
+          },
+          {
+            "roll": "5",
+            "description": "Carpenters, roofers, and plasterers"
+          },
+          {
+            "roll": "6",
+            "description": "Cartographers, surveyors, and chart-makers"
+          },
+          {
+            "roll": "7",
+            "description": "Cobblers and shoemakers"
+          },
+          {
+            "roll": "8",
+            "description": "Cooks and bakers"
+          },
+          {
+            "roll": "9",
+            "description": "Glassblowers and glaziers"
+          },
+          {
+            "roll": "10",
+            "description": "Jewelers and gemcutters"
+          },
+          {
+            "roll": "11",
+            "description": "Leatherworkers, skinners, and tanners"
+          },
+          {
+            "roll": "12",
+            "description": "Masons and stonecutters"
+          },
+          {
+            "roll": "13",
+            "description": "Painters, limners, and sign-makers"
+          },
+          {
+            "roll": "14",
+            "description": "Potters and tile-makers"
+          },
+          {
+            "roll": "15",
+            "description": "Shipwrights and sail-makers"
+          },
+          {
+            "roll": "16",
+            "description": "Smiths and metal-forgers"
+          },
+          {
+            "roll": "17",
+            "description": "Tinkers, pewterers, and casters"
+          },
+          {
+            "roll": "18",
+            "description": "Wagon-makers and wheelwrights"
+          },
+          {
+            "roll": "19",
+            "description": "Weavers and dyers"
+          },
+          {
+            "roll": "20",
+            "description": "Woodcarvers, coopers, and bowyers"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Harborfolk",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Sleight of Hand"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "Fishing tackle"
+      },
+      {
+        "item": "dice set"
+      },
+      {
+        "item": "playing card set or Three-Dragon Ante set"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "rowboat"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "Harborfolk",
+    "feature_description": "The harborfolk of Mulmaster remember you and treat you as one of them. They welcome you and your companions, offering what food and shelter they have (possibly for a charge), and will hide you if the City Watch is after you (but not if the Hawks are).",
+    "description": "The harborfolk of Mulmaster remember you and treat you as one of them. They welcome you and your companions, offering what food and shelter they have (possibly for a charge), and will hide you if the City Watch is after you (but not if the Hawks are).",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Haunted One",
+    "skill_proficiencies": [
+      {
+        "name": "Choose two from among Arcana"
+      },
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "Religion"
+      },
+      {
+        "name": "or Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Choose two languages"
+      },
+      {
+        "name": "one of which must be Abyssal"
+      },
+      {
+        "name": "Celestial"
+      },
+      {
+        "name": "Deep Speech"
+      },
+      {
+        "name": "Draconic"
+      },
+      {
+        "name": "Infernal"
+      },
+      {
+        "name": "Primordial"
+      },
+      {
+        "name": "Sylvan"
+      },
+      {
+        "name": "or Undercommon"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A monster hunter's pack (chest"
+      },
+      {
+        "item": "crowbar"
+      },
+      {
+        "item": "hammer"
+      },
+      {
+        "item": "three wooden stakes"
+      },
+      {
+        "item": "holy symbol"
+      },
+      {
+        "item": "flask of holy water"
+      },
+      {
+        "item": "set of manacles"
+      },
+      {
+        "item": "steel mirror"
+      },
+      {
+        "item": "flask of oil"
+      },
+      {
+        "item": "tinderbox"
+      },
+      {
+        "item": "3 torches)"
+      },
+      {
+        "item": "one trinket of special significance"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and 1 sp"
+      }
+    ],
+    "feature_name": "Heart of Darkness",
+    "feature_description": "Those who look into your eyes can see you have faced unimaginable horror. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you if you face an enemy alone.",
+    "description": "Those who look into your eyes can see you have faced unimaginable horror. Though they might fear you, commoners will extend you every courtesy and do their utmost to help you. Unless you have shown yourself to be a danger to them, they will even take up arms to fight alongside you if you face an enemy alone.",
+    "defining_events": [
+      {
+        "title": "Harrowing Event",
+        "die": "d10",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A monster that slaughtered dozens of innocent people spared your life, and you don't know why."
+          },
+          {
+            "roll": "2",
+            "description": "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night."
+          },
+          {
+            "roll": "3",
+            "description": "An apparition that has haunted your family for generations now haunts you. You don't know what it wants, and it won't leave you alone."
+          },
+          {
+            "roll": "4",
+            "description": "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror."
+          },
+          {
+            "roll": "5",
+            "description": "An oni took your sibling one cold, dark night, and you were unable to stop it."
+          },
+          {
+            "roll": "6",
+            "description": "You were cursed with lycanthropy and later cured. You are now haunted by the innocents you slaughtered."
+          },
+          {
+            "roll": "7",
+            "description": "A hag kidnapped and raised you. You escaped, but the hag still has a magical hold over you and fills your mind with evil thoughts."
+          },
+          {
+            "roll": "8",
+            "description": "You opened an eldritch tome and saw things unfit for a sane mind. You burned the book, but its words and images are burned into your psyche."
+          },
+          {
+            "roll": "9",
+            "description": "A fiend possessed you as a child. You were locked away but escaped. The fiend is still inside you, but now you try to keep it locked away."
+          },
+          {
+            "roll": "10",
+            "description": "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Hermit",
+    "skill_proficiencies": [
+      {
+        "name": "Medicine"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A scroll case stuffed full of notes from your studies or prayers"
+      },
+      {
+        "item": "a winter blanket"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "an herbalism kit"
+      },
+      {
+        "item": "and 5 gp"
+      }
+    ],
+    "feature_name": "Discovery",
+    "feature_description": "The quiet seclusion of your hermitage gave you access to a unique and powerful discovery (a great truth about the cosmos, a site no one else has seen, a forgotten fact, or a relic that could rewrite history). Work with your DM to determine its details and impact on the campaign.",
+    "description": "The quiet seclusion of your hermitage gave you access to a unique and powerful discovery (a great truth about the cosmos, a site no one else has seen, a forgotten fact, or a relic that could rewrite history). Work with your DM to determine its details and impact on the campaign.",
+    "defining_events": [
+      {
+        "title": "Life of Seclusion",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I was searching for spiritual enlightenment."
+          },
+          {
+            "roll": "2",
+            "description": "I was partaking of communal living in accordance with the dictates of a religious order."
+          },
+          {
+            "roll": "3",
+            "description": "I was exiled for a crime I didn't commit."
+          },
+          {
+            "roll": "4",
+            "description": "I retreated from society after a life-altering event."
+          },
+          {
+            "roll": "5",
+            "description": "I needed a quiet place to work on my art, literature, music, or manifesto."
+          },
+          {
+            "roll": "6",
+            "description": "I needed to commune with nature, far from civilization."
+          },
+          {
+            "roll": "7",
+            "description": "I was the caretaker of an ancient ruin or relic."
+          },
+          {
+            "roll": "8",
+            "description": "I was a pilgrim in search of a person, place, or relic of spiritual significance."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Hillsfar Merchant",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (land)"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "a signet ring"
+      },
+      {
+        "item": "a letter of introduction from your family's trading house"
+      },
+      {
+        "item": "and a purse containing 25 gp"
+      }
+    ],
+    "feature_name": "Factor (alternate: Trade Contact)",
+    "feature_description": "Your family has assigned you a loyal retainer (a factor, husbanding agent, seafarer, caravan guard, or clerk), a commoner who performs mundane tasks like purchases, messages, and errands. He or she won't fight or follow you into obviously dangerous areas, and leaves if frequently endangered or abused; if killed, the family assigns another within a few days. Alternate feature, Trade Contact: once per game session in the Moonsea region or along the Sword Coast, use trade contacts to get local information or pass a message to someone in those areas.",
+    "description": "Your family has assigned you a loyal retainer (a factor, husbanding agent, seafarer, caravan guard, or clerk), a commoner who performs mundane tasks like purchases, messages, and errands. He or she won't fight or follow you into obviously dangerous areas, and leaves if frequently endangered or abused; if killed, the family assigns another within a few days. Alternate feature, Trade Contact: once per game session in the Moonsea region or along the Sword Coast, use trade contacts to get local information or pass a message to someone in those areas.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Hillsfar Smuggler",
+    "skill_proficiencies": [
+      {
+        "name": "Perception"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One racial language"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A forgery kit"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "a belt pouch"
+      },
+      {
+        "item": "and 5 gp"
+      }
+    ],
+    "feature_name": "Secret Passage",
+    "feature_description": "You can call on smuggling contacts to secure secret passage into or out of Hillsfar for yourself and your companions, no questions asked. Since you're calling in a favor, the DM determines whether you can be smuggled; you might owe the Rogues Guild a favor and/or have to pay bribes.",
+    "description": "You can call on smuggling contacts to secure secret passage into or out of Hillsfar for yourself and your companions, no questions asked. Since you're calling in a favor, the DM determines whether you can be smuggled; you might owe the Rogues Guild a favor and/or have to pay bribes.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "House Agent",
+    "skill_proficiencies": [
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Two tools by house (Cannith: alchemist's supplies and tinker's tools; Deneith: one gaming set and vehicles (land); Ghallanda: brewer's supplies and cook's utensils; Jorasco: alchemist's supplies and herbalism kit; Kundarak: tinker's tools and thieves' tools; Lyrandar: navigator's tools and vehicles (sea/air); Medani: disguise kit and thieves' tools; Orien: one gaming set and vehicles (land); Phiarlan: disguise kit and one musical instrument; Sivis: calligrapher's tools and forgery kit; Tharashk: one gaming set and thieves' tools; Thuranni: one musical instrument and poisoner's kit; Vadalis: herbalism kit and vehicles (land))"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "house signet ring"
+      },
+      {
+        "item": "ID papers"
+      },
+      {
+        "item": "and a purse containing 20 gp"
+      }
+    ],
+    "feature_name": "House Connections",
+    "feature_description": "You can always get food and lodging for yourself and your friends at a house enclave. When the house assigns a mission it usually provides supplies and transportation. You have old friends, mentors, and rivals in your house, and how willing they are to help depends on your current standing.",
+    "description": "You can always get food and lodging for yourself and your friends at a house enclave. When the house assigns a mission it usually provides supplies and transportation. You have old friends, mentors, and rivals in your house, and how willing they are to help depends on your current standing.",
+    "defining_events": [
+      {
+        "title": "Role",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Acquisition"
+          },
+          {
+            "roll": "2",
+            "description": "Investigation"
+          },
+          {
+            "roll": "3",
+            "description": "Research and development"
+          },
+          {
+            "roll": "4",
+            "description": "Security"
+          },
+          {
+            "roll": "5",
+            "description": "Intimidation"
+          },
+          {
+            "roll": "6",
+            "description": "Exploration"
+          },
+          {
+            "roll": "7",
+            "description": "Negotiation"
+          },
+          {
+            "roll": "8",
+            "description": "Covert operations"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Inheritor",
+    "skill_proficiencies": [
+      {
+        "name": "Survival"
+      },
+      {
+        "name": "plus one from among Arcana"
+      },
+      {
+        "name": "History"
+      },
+      {
+        "name": "and Religion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Your choice of a gaming set or a musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Your inheritance"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "the tool you choose for this background's tool proficiency (gaming set or musical instrument)"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Inheritance",
+    "feature_description": "You are the heir to an object entrusted to you alone. Choose or roll your inheritance and work with the DM on its details. The DM determines its properties (it might be a minor magic item, grow in potency, or reveal its true nature only when conditions are met) and may use it as a story hook. You can choose whether to tell your companions about it.",
+    "description": "You are the heir to an object entrusted to you alone. Choose or roll your inheritance and work with the DM on its details. The DM determines its properties (it might be a minor magic item, grow in potency, or reveal its true nature only when conditions are met) and may use it as a story hook. You can choose whether to tell your companions about it.",
+    "defining_events": [
+      {
+        "title": "Object or Item (Inheritance)",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A document such as a map, a letter, or a journal"
+          },
+          {
+            "roll": "2-3",
+            "description": "A trinket"
+          },
+          {
+            "roll": "4",
+            "description": "An article of clothing"
+          },
+          {
+            "roll": "5",
+            "description": "A piece of jewelry"
+          },
+          {
+            "roll": "6",
+            "description": "An arcane book or formulary"
+          },
+          {
+            "roll": "7",
+            "description": "A written story, song, poem, or secret"
+          },
+          {
+            "roll": "8",
+            "description": "A tattoo or other body marking"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Initiate",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A simple puzzle box"
+      },
+      {
+        "item": "a scroll containing the basic teachings of the five gods"
+      },
+      {
+        "item": "a gaming set"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 15 gp (plus any cartouches earned from completed trials)"
+      }
+    ],
+    "feature_name": "Trials of the Five Gods",
+    "feature_description": "While you prepare for and undergo the trials, you have constant access to training, plus a comfortable place to live and regular meals provided by servitor mummies under the supervision of viziers. These benefits last only while you obey Naktamun's societal norms; violating them risks being treated as a dissenter.",
+    "description": "While you prepare for and undergo the trials, you have constant access to training, plus a comfortable place to live and regular meals provided by servitor mummies under the supervision of viziers. These benefits last only while you obey Naktamun's societal norms; violating them risks being treated as a dissenter.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Inquisitor",
+    "skill_proficiencies": [
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      },
+      {
+        "name": "one set of artisan's tools of your choice"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A holy symbol"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Legal Authority",
+    "feature_description": "As an inquisitor of the church you have the authority to arrest criminals, and in the absence of other authorities you may pass judgment and carry out sentencing. If you abuse this power, your superiors might strip it from you.",
+    "description": "As an inquisitor of the church you have the authority to arrest criminals, and in the absence of other authorities you may pass judgment and carry out sentencing. If you abuse this power, your superiors might strip it from you.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Investigator",
+    "skill_proficiencies": [
+      {
+        "name": "Choose two from among Insight"
+      },
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "or Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A magnifying glass"
+      },
+      {
+        "item": "evidence from a past case (choose one or roll for a trinket from the Horror Trinkets table)"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and 10 gp"
+      }
+    ],
+    "feature_name": "Official Inquiry",
+    "feature_description": "Through fast-talking, determination, and official-looking documentation, you can gain access to a place or individual related to a crime you're investigating. Those not involved avoid impeding you or pass along your requests. Local law enforcement views you as either a nuisance or one of their own.",
+    "description": "Through fast-talking, determination, and official-looking documentation, you can gain access to a place or individual related to a crime you're investigating. Those not involved avoid impeding you or pass along your requests. Local law enforcement views you as either a nuisance or one of their own.",
+    "defining_events": [
+      {
+        "title": "First Case (Path to Mystery)",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A friend was wrongfully accused of murder. You tracked down the actual killer, proving your friend's innocence and starting your career as a detective."
+          },
+          {
+            "roll": "2",
+            "description": "You're told you went missing for weeks. When you were found, you had no memory of being gone. Now you search to discover what happened to you."
+          },
+          {
+            "roll": "3",
+            "description": "You helped a spirit find peace by finding its missing corpse. Ever since, other spectral clients have sought you out to help them find rest."
+          },
+          {
+            "roll": "4",
+            "description": "You revealed that the monsters terrorizing your home were illusions created by a cruel mage. The magic-user escaped, but you've continued to uncover magical hoaxes."
+          },
+          {
+            "roll": "5",
+            "description": "You were wrongfully accused and convicted of a crime. You escaped and seek to help others avoid the experience you suffered, even while still pursued by the law."
+          },
+          {
+            "roll": "6",
+            "description": "You survived the destructive use of a magic device that wiped out your home. Members of a secret organization found you and you now track dangerous supernatural phenomena with them."
+          },
+          {
+            "roll": "7",
+            "description": "You found evidence of a conspiracy underpinning society. You tried to expose this cabal, but no one believed you. You're still trying to prove what you know is true."
+          },
+          {
+            "roll": "8",
+            "description": "You got a job with an agency that investigates crimes local law enforcement can't solve. You often wonder which you value more, the truth or your pay."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Iron Route Bandit",
+    "skill_proficiencies": [
+      {
+        "name": "Animal Handling"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of dark common clothes"
+      },
+      {
+        "item": "pack saddle"
+      },
+      {
+        "item": "burglar's pack and a belt pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "Black-Market Breeder",
+    "feature_description": "You know people always looking for stolen animals and vehicles. They tell you which animals and vehicles are in high demand in the area, and offer favors and information (DM's choice) if you bring them such animals and vehicles.",
+    "description": "You know people always looking for stolen animals and vehicles. They tell you which animals and vehicles are in high demand in the area, and offer favors and information (DM's choice) if you bring them such animals and vehicles.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Izzet Engineer",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "Investigation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose one of Draconic"
+      },
+      {
+        "name": "Goblin"
+      },
+      {
+        "name": "or Vedalken"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "An Izzet insignia"
+      },
+      {
+        "item": "one set of artisan's tools"
+      },
+      {
+        "item": "the charred and twisted remains of a failed experiment"
+      },
+      {
+        "item": "a hammer"
+      },
+      {
+        "item": "a block and tackle"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp (Azorius 1-zino coins)"
+      }
+    ],
+    "feature_name": "Urban Infrastructure",
+    "feature_description": "You have basic knowledge of the structure of buildings, including the stuff behind the walls, and can find blueprints of a specific building to learn entry points, structural weaknesses, or secret spaces. If obtaining or using this information gets you in trouble with the law, the guild can't shield you.",
+    "description": "You have basic knowledge of the structure of buildings, including the stuff behind the walls, and can find blueprints of a specific building to learn entry points, structural weaknesses, or secret spaces. If obtaining or using this information gets you in trouble with the law, the guild can't shield you.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Knight of the Order",
+    "skill_proficiencies": [
+      {
+        "name": "Persuasion"
+      },
+      {
+        "name": "plus one from among Arcana"
+      },
+      {
+        "name": "History"
+      },
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "and Religion"
+      },
+      {
+        "name": "as appropriate for your order"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Your choice of a gaming set or a musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One set of traveler's clothes"
+      },
+      {
+        "item": "a signet"
+      },
+      {
+        "item": "banner"
+      },
+      {
+        "item": "or seal representing your place or rank in the order"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Knightly Regard",
+    "feature_description": "You receive shelter and succor from members of your order and those sympathetic to its aims (religious orders: temples of your deity; civic orders: the community served; philosophical orders: those aided or sharing the ideals). This includes shelter, meals, healing, and occasionally risky assistance such as locals rallying to a pressed knight or smuggling a hunted knight out of town.",
+    "description": "You receive shelter and succor from members of your order and those sympathetic to its aims (religious orders: temples of your deity; civic orders: the community served; philosophical orders: those aided or sharing the ideals). This includes shelter, meals, healing, and occasionally risky assistance such as locals rallying to a pressed knight or smuggling a hunted knight out of town.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Knight of Solamnia",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "An insignia of rank"
+      },
+      {
+        "item": "a deck of cards"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Squire of Solamnia",
+    "feature_description": "You gain the Squire of Solamnia feat. The Knights of Solamnia also provide you free, modest lodging and food at any of their fortresses or encampments.",
+    "description": "You gain the Squire of Solamnia feat. The Knights of Solamnia also provide you free, modest lodging and food at any of their fortresses or encampments.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Lorehold Student",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a hammer"
+      },
+      {
+        "item": "a hooded lantern"
+      },
+      {
+        "item": "a tinderbox"
+      },
+      {
+        "item": "a tome of history"
+      },
+      {
+        "item": "a school uniform"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Lorehold Initiate",
+    "feature_description": "You gain the Strixhaven Initiate feat and must choose Lorehold within it. If you have Spellcasting or Pact Magic, the Lorehold spells (1st: Comprehend Languages, Identify; 2nd: Borrowed Knowledge, Locate Object; 3rd: Speak With Dead, Spirit Guardians; 4th: Arcane Eye, Stone Shape; 5th: Flame Strike, Legend Lore) are added to your class spell list.",
+    "description": "You gain the Strixhaven Initiate feat and must choose Lorehold within it. If you have Spellcasting or Pact Magic, the Lorehold spells (1st: Comprehend Languages, Identify; 2nd: Borrowed Knowledge, Locate Object; 3rd: Speak With Dead, Spirit Guardians; 4th: Arcane Eye, Stone Shape; 5th: Flame Strike, Legend Lore) are added to your class spell list.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Mage of High Sorcery",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "History"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of colored ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Initiate of High Sorcery",
+    "feature_description": "You gain the Initiate of High Sorcery feat. The Mages of High Sorcery also provide free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.",
+    "description": "You gain the Initiate of High Sorcery feat. The Mages of High Sorcery also provide free, modest lodging and food indefinitely at any occupied Tower of High Sorcery and for one night at the home of an organization member.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Marine",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (water"
+      },
+      {
+        "name": "land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A dagger that belonged to a fallen comrade"
+      },
+      {
+        "item": "a folded flag emblazoned with the symbol of your ship or company"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Steady",
+    "feature_description": "You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march. You can also automatically find a safe route to land a boat on shore, provided such a route exists.",
+    "description": "You can move twice the normal amount of time (up to 16 hours) each day before being subject to the effect of a forced march. You can also automatically find a safe route to land a boat on shore, provided such a route exists.",
+    "defining_events": [
+      {
+        "title": "Hardship Endured",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Nearly Drowned: You hid underwater to avoid detection and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence."
+          },
+          {
+            "roll": "2",
+            "description": "Captured: You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke."
+          },
+          {
+            "roll": "3",
+            "description": "Sacrifice: You enabled the escape of your fellow soldiers, but at great cost to yourself. Some of your past comrades may think you're dead."
+          },
+          {
+            "roll": "4",
+            "description": "Juggernaut: No reasonable explanation can explain how you survived a particular battle. Every arrow and bolt missed you. You slew scores of enemies single-handedly and led your comrades to victory."
+          },
+          {
+            "roll": "5",
+            "description": "Stowaway: For days, you hid in the bilge of an enemy ship, surviving on brackish water and foolhardy rats. At the right moment, you crept up to the deck and took over the ship on your own."
+          },
+          {
+            "roll": "6",
+            "description": "Leave None Behind: You carried an injured marine for miles to avoid capture and death."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Mercenary Veteran",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A uniform of your company (traveler's clothes in quality)"
+      },
+      {
+        "item": "an insignia of your rank"
+      },
+      {
+        "item": "a gaming set of your choice"
+      },
+      {
+        "item": "and a pouch containing the remainder of your last wages (10 gp)"
+      }
+    ],
+    "feature_name": "Mercenary Life",
+    "feature_description": "You can identify mercenary companies by their emblems and know a little about any such company, including who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language, and can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.",
+    "description": "You can identify mercenary companies by their emblems and know a little about any such company, including who has hired them recently. You can find the taverns and festhalls where mercenaries abide in any area, as long as you speak the language, and can find mercenary work between adventures sufficient to maintain a comfortable lifestyle.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Mulmaster Aristocrat",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artistic artisan's tools and one musical instrument"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "One set of artisan's tools or musical instrument"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a purse containing 10 gp"
+      }
+    ],
+    "feature_name": "Highborn",
+    "feature_description": "Every other class of citizen in Mulmaster defers to you, even the priesthood, Soldiery, Hawks, and Cloaks. Other aristocrats and nobles accept you in their circles and likely know you or of you. Your connections can get you the ear of a Zor or Zora under the right circumstances.",
+    "description": "Every other class of citizen in Mulmaster defers to you, even the priesthood, Soldiery, Hawks, and Cloaks. Other aristocrats and nobles accept you in their circles and likely know you or of you. Your connections can get you the ear of a Zor or Zora under the right circumstances.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Noble",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "a signet ring"
+      },
+      {
+        "item": "a scroll of pedigree"
+      },
+      {
+        "item": "and a purse containing 25 gp"
+      }
+    ],
+    "feature_name": "Position of Privilege",
+    "feature_description": "People are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. Common folk accommodate you and avoid your displeasure, other nobles treat you as one of their own, and you can secure an audience with a local noble. (Variant feature: Retainers, three loyal commoner retainers who won't fight or enter obviously dangerous areas.)",
+    "description": "People are inclined to think the best of you. You are welcome in high society, and people assume you have the right to be wherever you are. Common folk accommodate you and avoid your displeasure, other nobles treat you as one of their own, and you can secure an audience with a local noble. (Variant feature: Retainers, three loyal commoner retainers who won't fight or enter obviously dangerous areas.)",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Orzhov Representative",
+    "skill_proficiencies": [
+      {
+        "name": "Intimidation"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "An Orzhov insignia"
+      },
+      {
+        "item": "a foot-long chain made of ten gold coins"
+      },
+      {
+        "item": "vestments"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 1 pp (an Orzhov-minted 10-zino coin)"
+      }
+    ],
+    "feature_name": "Leverage",
+    "feature_description": "You can exert leverage over individuals below you in the guild's hierarchy and demand their help (carrying a message, a free carriage ride, cleaning up a mess). The DM decides if demands are reasonable and subordinates are available. As your status improves, you gain influence over more people.",
+    "description": "You can exert leverage over individuals below you in the guild's hierarchy and demand their help (carrying a message, a free carriage ride, cleaning up a mess). The DM decides if demands are reasonable and subordinates are available. As your status improves, you gain influence over more people.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Outlander",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A staff"
+      },
+      {
+        "item": "a hunting trap"
+      },
+      {
+        "item": "a trophy from an animal you killed"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Wanderer",
+    "feature_description": "You have an excellent memory for maps and geography and can always recall the general layout of terrain, settlements, and other features around you. You can find food and fresh water for yourself and up to five other people each day, provided the land offers berries, small game, water, and so forth.",
+    "description": "You have an excellent memory for maps and geography and can always recall the general layout of terrain, settlements, and other features around you. You can find food and fresh water for yourself and up to five other people each day, provided the land offers berries, small game, water, and so forth.",
+    "defining_events": [
+      {
+        "title": "Origin",
+        "die": "d10",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Forester"
+          },
+          {
+            "roll": "2",
+            "description": "Trapper"
+          },
+          {
+            "roll": "3",
+            "description": "Homesteader"
+          },
+          {
+            "roll": "4",
+            "description": "Guide"
+          },
+          {
+            "roll": "5",
+            "description": "Exile or outcast"
+          },
+          {
+            "roll": "6",
+            "description": "Bounty hunter"
+          },
+          {
+            "roll": "7",
+            "description": "Pilgrim"
+          },
+          {
+            "roll": "8",
+            "description": "Tribal nomad"
+          },
+          {
+            "roll": "9",
+            "description": "Hunter-gatherer"
+          },
+          {
+            "roll": "10",
+            "description": "Tribal marauder"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Phlan Insurgent",
+    "skill_proficiencies": [
+      {
+        "name": "Stealth"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A bag of caltrops (20)"
+      },
+      {
+        "item": "a small trinket that connects you to your former life"
+      },
+      {
+        "item": "a healer's kit"
+      },
+      {
+        "item": "a set of dark common clothes that includes a cloak and hood"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "Guerilla",
+    "feature_description": "You know the surrounding forests, streams, caves, and other natural features in which to take refuge or set ambushes, and can quickly survey your environment for advantageous features. You can also scavenge to cobble together simple consumable supplies (improvised torches, rope, patches of fabric, etc.).",
+    "description": "You know the surrounding forests, streams, caves, and other natural features in which to take refuge or set ambushes, and can quickly survey your environment for advantageous features. You can also scavenge to cobble together simple consumable supplies (improvised torches, rope, patches of fabric, etc.).",
+    "defining_events": [
+      {
+        "title": "Origin -> Specification (choose one column, not both)",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Fisher / Stojanow River Worker"
+          },
+          {
+            "roll": "2",
+            "description": "Hunter / Twilight Marsh Worker"
+          },
+          {
+            "roll": "3",
+            "description": "Craftsperson / Mantor's Library Scribe"
+          },
+          {
+            "roll": "4",
+            "description": "Priest/Priestess / Clergy of Ilmater"
+          },
+          {
+            "roll": "5",
+            "description": "Cook / Laughing Goblin Server"
+          },
+          {
+            "roll": "6",
+            "description": "City Watch / Black Fist Guard"
+          },
+          {
+            "roll": "7",
+            "description": "Servant / House Sokol Retainer"
+          },
+          {
+            "roll": "8",
+            "description": "Unskilled Laborer / Bay of Phlan Dockworker"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Phlan Refugee",
+    "skill_proficiencies": [
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Athletics"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools (one of your choice)"
+      },
+      {
+        "item": "a token of the life you once knew"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a belt pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Phlan Survivor",
+    "feature_description": "As one of the many Phlan refugees in Mulmaster, you can find refuge with other refugees from Phlan and those who sympathize with your plight, a place to bed down, recover, and hide from the watch, either with other refugees or with the Zhents within the ghettos.",
+    "description": "As one of the many Phlan refugees in Mulmaster, you can find refuge with other refugees from Phlan and those who sympathize with your plight, a place to bed down, recover, and hide from the watch, either with other refugees or with the Zhents within the ghettos.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Plaintiff",
+    "skill_proficiencies": [
+      {
+        "name": "Medicine"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One set of artisan's tools"
+      },
+      {
+        "item": "fine clothes"
+      },
+      {
+        "item": "20 gp"
+      }
+    ],
+    "feature_name": "Legalese",
+    "feature_description": "Your experience with your local legal system gives you a firm knowledge of its ins and outs. Even when the law is not on your side, you can use complex legal terms to frighten people into thinking you know what you're talking about, and might intimidate or deceive common folk into favors or special treatment.",
+    "description": "Your experience with your local legal system gives you a firm knowledge of its ins and outs. Even when the law is not on your side, you can use complex legal terms to frighten people into thinking you know what you're talking about, and might intimidate or deceive common folk into favors or special treatment.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Planar Philosopher",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp comprised of coins from different worlds and planes"
+      }
+    ],
+    "feature_name": "Conviction",
+    "feature_description": "You gain the Scion of the Outer Planes feat. Members of your organization also provide free, modest lodging and food at any of their holdings or the homes of other faction members.",
+    "description": "You gain the Scion of the Outer Planes feat. Members of your organization also provide free, modest lodging and food at any of their holdings or the homes of other faction members.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Prismari Student",
+    "skill_proficiencies": [
+      {
+        "name": "Acrobatics"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument or artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a set of artisan's tools or a musical instrument (one of your choice)"
+      },
+      {
+        "item": "a school uniform"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Prismari Initiate",
+    "feature_description": "You gain the Strixhaven Initiate feat and must choose Prismari within it. If you have Spellcasting or Pact Magic, the Prismari spells (1st: Chromatic Orb, Thunderwave; 2nd: Flaming Sphere, Kinetic Jaunt; 3rd: Haste, Water Walk; 4th: Freedom of Movement, Wall of Fire; 5th: Cone of Cold, Conjure Elemental) are added to your class spell list.",
+    "description": "You gain the Strixhaven Initiate feat and must choose Prismari within it. If you have Spellcasting or Pact Magic, the Prismari spells (1st: Chromatic Orb, Thunderwave; 2nd: Flaming Sphere, Kinetic Jaunt; 3rd: Haste, Water Walk; 4th: Freedom of Movement, Wall of Fire; 5th: Cone of Cold, Conjure Elemental) are added to your class spell list.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Quandrix Student",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "Nature"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "an abacus"
+      },
+      {
+        "item": "a book of arcane theory"
+      },
+      {
+        "item": "a school uniform"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Quandrix Initiate",
+    "feature_description": "You gain the Strixhaven Initiate feat and must choose Quandrix within it. If you have Spellcasting or Pact Magic, the Quandrix spells (1st: Entangle, Guiding Bolt; 2nd: Enlarge/Reduce, Vortex Warp; 3rd: Aura of Vitality, Haste; 4th: Control Water, Freedom of Movement; 5th: Circle of Power, Passwall) are added to your class spell list.",
+    "description": "You gain the Strixhaven Initiate feat and must choose Quandrix within it. If you have Spellcasting or Pact Magic, the Quandrix spells (1st: Entangle, Guiding Bolt; 2nd: Enlarge/Reduce, Vortex Warp; 3rd: Aura of Vitality, Haste; 4th: Control Water, Freedom of Movement; 5th: Circle of Power, Passwall) are added to your class spell list.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Rakdos Cultist",
+    "skill_proficiencies": [
+      {
+        "name": "Acrobatics"
+      },
+      {
+        "name": "Performance"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose either Abyssal or Giant"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Rakdos insignia"
+      },
+      {
+        "item": "a musical instrument (one of your choice)"
+      },
+      {
+        "item": "a costume"
+      },
+      {
+        "item": "a hooded lantern made of wrought iron"
+      },
+      {
+        "item": "a 10-foot length of chain with sharply spiked links"
+      },
+      {
+        "item": "a tinderbox"
+      },
+      {
+        "item": "10 torches"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "a belt pouch containing 10 gp"
+      },
+      {
+        "item": "and a bottle of sweet"
+      },
+      {
+        "item": "red juice"
+      }
+    ],
+    "feature_name": "Fearsome Reputation",
+    "feature_description": "People recognize you as a member of the Cult of Rakdos and are careful not to draw your anger or ridicule. You can get away with minor criminal offenses, such as refusing to pay for food or breaking down a door at a shop, if no legal authorities witness the crime.",
+    "description": "People recognize you as a member of the Cult of Rakdos and are careful not to draw your anger or ridicule. You can get away with minor criminal offenses, such as refusing to pay for food or breaking down a door at a shop, if no legal authorities witness the crime.",
+    "defining_events": [
+      {
+        "title": "Type of Performer (A Flair for the Dramatic)",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Spikewheel acrobat"
+          },
+          {
+            "roll": "2",
+            "description": "Lampooning satirist"
+          },
+          {
+            "roll": "3",
+            "description": "Fire juggler"
+          },
+          {
+            "roll": "4",
+            "description": "Marionette puppeteer"
+          },
+          {
+            "roll": "5",
+            "description": "Pain artist"
+          },
+          {
+            "roll": "6",
+            "description": "Noise musician"
+          },
+          {
+            "roll": "7",
+            "description": "Nightmare clown"
+          },
+          {
+            "roll": "8",
+            "description": "Master of ceremonies"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Rival Intern",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Investigation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "One set of artisan's tools"
+      },
+      {
+        "item": "a ledger from your previous employer containing a small piece of useful information"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Inside Informant",
+    "feature_description": "You have connections to your previous employer or other groups you dealt with. You can communicate with your contacts, gaining information at the DM's discretion.",
+    "description": "You have connections to your previous employer or other groups you dealt with. You can communicate with your contacts, gaining information at the DM's discretion.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Rune Carver",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "None (equipment includes a set of artisan's tools of your choice)"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Giant and one other language of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools (one of your choice)"
+      },
+      {
+        "item": "a small knife"
+      },
+      {
+        "item": "a whetstone"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Rune Carver Apprentice",
+    "feature_description": "You gain the Rune Carver Apprentice feat.",
+    "description": "You gain the Rune Carver Apprentice feat.",
+    "defining_events": [
+      {
+        "title": "Rune Style",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "You inscribe your runes with a fine metal needle."
+          },
+          {
+            "roll": "2",
+            "description": "You whittle down pieces of wood into small figurines you mark with your runes."
+          },
+          {
+            "roll": "3",
+            "description": "You engrave runes onto glass beads and thread them onto necklaces and bracelets."
+          },
+          {
+            "roll": "4",
+            "description": "You stitch your runes into the hems of clothing."
+          },
+          {
+            "roll": "5",
+            "description": "You carve runes on a set of animal bones you can throw in different formations."
+          },
+          {
+            "roll": "6",
+            "description": "You draw your runes into candles, melting the wax to smooth over the engravings."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Sage",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "History"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "a quill"
+      },
+      {
+        "item": "a small knife"
+      },
+      {
+        "item": "a letter from a dead colleague posing a question you have not yet been able to answer"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Researcher",
+    "feature_description": "When you attempt to learn or recall a piece of lore you don't know, you often know where and from whom you can obtain it (a library, scriptorium, university, or a sage or other learned person or creature). The DM might rule the knowledge is secreted away in an almost inaccessible place, or cannot be found.",
+    "description": "When you attempt to learn or recall a piece of lore you don't know, you often know where and from whom you can obtain it (a library, scriptorium, university, or a sage or other learned person or creature). The DM might rule the knowledge is secreted away in an almost inaccessible place, or cannot be found.",
+    "defining_events": [
+      {
+        "title": "Field of Study",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Alchemist"
+          },
+          {
+            "roll": "2",
+            "description": "Astronomer"
+          },
+          {
+            "roll": "3",
+            "description": "Discredited academic"
+          },
+          {
+            "roll": "4",
+            "description": "Librarian"
+          },
+          {
+            "roll": "5",
+            "description": "Professor"
+          },
+          {
+            "roll": "6",
+            "description": "Researcher"
+          },
+          {
+            "roll": "7",
+            "description": "Wizard's apprentice"
+          },
+          {
+            "roll": "8",
+            "description": "Scribe"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Sailor",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Navigator's tools"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A belaying pin (club)"
+      },
+      {
+        "item": "50 feet of silk rope"
+      },
+      {
+        "item": "a lucky charm such as a rabbit foot or a small stone with a hole in the center (or a random trinket)"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Ship's Passage",
+    "feature_description": "You can secure free passage on a sailing ship for yourself and your adventuring companions, on your former ship or another with which you have good relations. The DM determines schedule and travel time, and you are expected to assist the crew. (Variant feature: Bad Reputation, where people in civilized settlements fear you and let you get away with minor criminal offenses.)",
+    "description": "You can secure free passage on a sailing ship for yourself and your adventuring companions, on your former ship or another with which you have good relations. The DM determines schedule and travel time, and you are expected to assist the crew. (Variant feature: Bad Reputation, where people in civilized settlements fear you and let you get away with minor criminal offenses.)",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Secret Identity",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "forgery kit"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A disguise kit"
+      },
+      {
+        "item": "a forgery kit"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "a belt pouch"
+      },
+      {
+        "item": "5 gp"
+      }
+    ],
+    "feature_name": "Secret Identity",
+    "feature_description": "You have created a secret identity that conceals your true race and offers a covering explanation for your presence in Hillsfar. You can also forge documents, including official papers and personal letters, as long as you have seen an example of the document or handwriting you are copying.",
+    "description": "You have created a secret identity that conceals your true race and offers a covering explanation for your presence in Hillsfar. You can also forge documents, including official papers and personal letters, as long as you have seen an example of the document or handwriting you are copying.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Selesnya Initiate",
+    "skill_proficiencies": [
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools or one musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Choose one of Elvish"
+      },
+      {
+        "name": "Loxodon"
+      },
+      {
+        "name": "or Sylvan"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Selesnya insignia"
+      },
+      {
+        "item": "a healer's kit"
+      },
+      {
+        "item": "robes"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp (Azorius 1-zino coins)"
+      }
+    ],
+    "feature_name": "Conclave's Shelter",
+    "feature_description": "You and your companions can find a place to hide or rest in any Selesnya enclave in the city, unless you have proven a danger to them. Members will shield you from the law or anyone searching for you, though they won't risk their lives. You can also receive free healing and care at an enclave (you provide material components for spells).",
+    "description": "You and your companions can find a place to hide or rest in any Selesnya enclave in the city, unless you have proven a danger to them. Members will shield you from the law or anyone searching for you, though they won't risk their lives. You can also receive free healing and care at an enclave (you provide material components for spells).",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Shade Fanatic",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Netherese"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A forgery kit"
+      },
+      {
+        "item": "a transparent cylinder of shadow that has no opening"
+      },
+      {
+        "item": "a signet ring"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and 15 gp"
+      }
+    ],
+    "feature_name": "Secret Society",
+    "feature_description": "When you enter a village or larger city you can identify a contact who will give you information on those who would hinder your goals and those who would help you, simply because of your desire to see the Shade Enclave return in all its glory.",
+    "description": "When you enter a village or larger city you can identify a contact who will give you information on those who would hinder your goals and those who would help you, simply because of your desire to see the Shade Enclave return in all its glory.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Shipwright",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Carpenter's tools"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of well-loved carpenter's tools"
+      },
+      {
+        "item": "a blank book"
+      },
+      {
+        "item": "1 ounce of ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a leather pouch with 10 gp"
+      }
+    ],
+    "feature_name": "I'll Patch It!",
+    "feature_description": "Provided you have carpenter's tools and wood, you can repair a water vehicle, restoring hull hit points equal to 5 x your proficiency modifier. A vehicle can't be patched this way again until it has been pulled ashore and fully repaired.",
+    "description": "Provided you have carpenter's tools and wood, you can repair a water vehicle, restoring hull hit points equal to 5 x your proficiency modifier. A vehicle can't be patched this way again until it has been pulled ashore and fully repaired.",
+    "defining_events": [
+      {
+        "title": "Life at Sea (Sea's Influence)",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Grand Designs: You are working on plans for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure its success."
+          },
+          {
+            "roll": "2",
+            "description": "Solid and Sound: You patched up a war galley and prevented it from sinking. The local navy regards you as a friend."
+          },
+          {
+            "roll": "3",
+            "description": "Favored: You insisted on thicker planking for a merchant vessel's hull, which saved it when it smashed against a reef. You have a standing invitation to visit the merchant's distant mansion."
+          },
+          {
+            "roll": "4",
+            "description": "Master of Armaments: You specialized in designing and mounting defenses for the navy. You easily recognize and determine the quality of such items."
+          },
+          {
+            "roll": "5",
+            "description": "Low Places: You have contacts in smuggling outfits along the coast; you occasionally repair criminals' ships in exchange for coin and favors."
+          },
+          {
+            "roll": "6",
+            "description": "Mysteries of the Deep: You encountered a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters it revealed to you."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Silverquill Student",
+    "skill_proficiencies": [
+      {
+        "name": "Intimidation"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a book of poetry"
+      },
+      {
+        "item": "a school uniform"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Silverquill Initiate",
+    "feature_description": "You gain the Strixhaven Initiate feat and must choose Silverquill within it. If you have Spellcasting or Pact Magic, the Silverquill spells (1st: Dissonant Whispers, Silvery Barbs; 2nd: Calm Emotions, Darkness; 3rd: Beacon of Hope, Daylight; 4th: Compulsion, Confusion; 5th: Dominate Person, Rary's Telepathic Bond) are added to your class spell list.",
+    "description": "You gain the Strixhaven Initiate feat and must choose Silverquill within it. If you have Spellcasting or Pact Magic, the Silverquill spells (1st: Dissonant Whispers, Silvery Barbs; 2nd: Calm Emotions, Darkness; 3rd: Beacon of Hope, Daylight; 4th: Compulsion, Confusion; 5th: Dominate Person, Rary's Telepathic Bond) are added to your class spell list.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Smuggler",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Deception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (water)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A fancy leather vest or a pair of leather boots"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a leather pouch with 15 gp"
+      }
+    ],
+    "feature_name": "Down Low",
+    "feature_description": "You know a network of smugglers willing to help you out of tight situations. In a town, city, or similarly sized community (DM's discretion), you and your companions can stay for free in safe houses (poor lifestyle), and can choose to keep your presence secret.",
+    "description": "You know a network of smugglers willing to help you out of tight situations. In a town, city, or similarly sized community (DM's discretion), you and your companions can stay for free in safe houses (poor lifestyle), and can choose to keep your presence secret.",
+    "defining_events": [
+      {
+        "title": "Claim to Fame (Accomplishment)",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Spirit of the Whale: You smuggled stolen dwarven spirits in the body of a dead whale being pulled behind a fishing boat. When you delivered the goods, the corpse exploded, sending whale meat and whiskey bottles for half a mile."
+          },
+          {
+            "roll": "2",
+            "description": "Cart and Sword: You drove a cart filled with stolen art through the middle of a battlefield while singing sea shanties to confuse the combatants."
+          },
+          {
+            "roll": "3",
+            "description": "The Recruit: You enlisted in another nation's navy to smuggle stolen jewels to a distant port. You attained a minor rank before disappearing from the navy."
+          },
+          {
+            "roll": "4",
+            "description": "River of Shadows: Your riverboat accidentally slipped through the veil into the Shadowfell for several hours, where you sold stolen dragonborn artifacts before returning to this plane."
+          },
+          {
+            "roll": "5",
+            "description": "Gold-Hearted: You agreed to transport a family escaping a war. When the baby cried at a checkpoint, you gave the guards all your gold to let you pass. The family never found out."
+          },
+          {
+            "roll": "6",
+            "description": "Playing Both Sides: You smuggled crates of crossbow bolts and bundles of arrows, each destined for an opposing side in a regional war, at the same time, and the buyers never discovered your trickery."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Soldier",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Intimidation"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "An insignia of rank"
+      },
+      {
+        "item": "a trophy taken from a fallen enemy (a dagger"
+      },
+      {
+        "item": "broken blade"
+      },
+      {
+        "item": "or piece of a banner)"
+      },
+      {
+        "item": "a bone dice set or playing card set"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Military Rank",
+    "feature_description": "Soldiers loyal to your former military organization still recognize your authority and defer to you if they are of lower rank. You can invoke your rank to exert influence over other soldiers, requisition simple equipment or horses for temporary use, and usually gain access to friendly military encampments and fortresses.",
+    "description": "Soldiers loyal to your former military organization still recognize your authority and defer to you if they are of lower rank. You can invoke your rank to exert influence over other soldiers, requisition simple equipment or horses for temporary use, and usually gain access to friendly military encampments and fortresses.",
+    "defining_events": [
+      {
+        "title": "Role",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Officer"
+          },
+          {
+            "roll": "2",
+            "description": "Scout"
+          },
+          {
+            "roll": "3",
+            "description": "Infantry"
+          },
+          {
+            "roll": "4",
+            "description": "Cavalry"
+          },
+          {
+            "roll": "5",
+            "description": "Healer"
+          },
+          {
+            "roll": "6",
+            "description": "Quartermaster"
+          },
+          {
+            "roll": "7",
+            "description": "Standard-bearer"
+          },
+          {
+            "roll": "8",
+            "description": "Support staff (cook, blacksmith, or the like)"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Stojanow Prisoner",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Perception"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A small knife"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "a trinket from the life you stayed behind to defend"
+      },
+      {
+        "item": "a belt pouch with 10 gp"
+      }
+    ],
+    "feature_name": "Ex-Convict",
+    "feature_description": "Your time in prison gives you insight into local guards and jailors; you know which will accept bribes or look the other way. You can also seek shelter from the authorities with other criminals in the area.",
+    "description": "Your time in prison gives you insight into local guards and jailors; you know which will accept bribes or look the other way. You can also seek shelter from the authorities with other criminals in the area.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Ticklebelly Nomad",
+    "skill_proficiencies": [
+      {
+        "name": "Animal Handling"
+      },
+      {
+        "name": "Nature"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Giant"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Herbalism kit"
+      },
+      {
+        "item": "a small article of jewelry distinct to your tribe"
+      },
+      {
+        "item": "a hunting trap"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a belt pouch containing 5 gp"
+      }
+    ],
+    "feature_name": "At Home in the Wild",
+    "feature_description": "You can find a place to hide, rest, or recuperate in the wild that is secure enough to conceal you from most natural threats. Supernatural, magical, or actively hunting threats may find you with difficulty depending on their nature (DM's call), and the feature doesn't shield you from scrying, mental probing, or threats that don't require the five senses.",
+    "description": "You can find a place to hide, rest, or recuperate in the wild that is secure enough to conceal you from most natural threats. Supernatural, magical, or actively hunting threats may find you with difficulty depending on their nature (DM's call), and the feature doesn't shield you from scrying, mental probing, or threats that don't require the five senses.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Trade Sheriff",
+    "skill_proficiencies": [
+      {
+        "name": "Investigation"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Elvish"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Thieves' tools"
+      },
+      {
+        "item": "a gray cloak"
+      },
+      {
+        "item": "Sheriff's insignia (badge)"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and 17 gp"
+      }
+    ],
+    "feature_name": "Investigative Services",
+    "feature_description": "You can invoke your rank to access a crime scene or requisition equipment or horses temporarily. When you enter a town or village around Hillsfar you can identify a contact who will give you local rumors and help you because of your desire to get answers for anyone wanting to disrupt trade.",
+    "description": "You can invoke your rank to access a crime scene or requisition equipment or horses temporarily. When you enter a town or village around Hillsfar you can identify a contact who will give you local rumors and help you because of your desire to get answers for anyone wanting to disrupt trade.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Urban Bounty Hunter",
+    "skill_proficiencies": [
+      {
+        "name": "Choose two from among Deception"
+      },
+      {
+        "name": "Insight"
+      },
+      {
+        "name": "Persuasion"
+      },
+      {
+        "name": "and Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Choose two from among one type of gaming set"
+      },
+      {
+        "name": "one musical instrument"
+      },
+      {
+        "name": "and thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of clothes appropriate to your duties and a pouch containing 20 gp"
+      }
+    ],
+    "feature_name": "Ear to the Ground",
+    "feature_description": "You are in frequent contact with people in the segment of society your quarries move through (criminal underworld, street folk, or high society). In any city you visit you have a contact who provides information about the people and places of the local area.",
+    "description": "You are in frequent contact with people in the segment of society your quarries move through (criminal underworld, street folk, or high society). In any city you visit you have a contact who provides information about the people and places of the local area.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Urchin",
+    "skill_proficiencies": [
+      {
+        "name": "Sleight of Hand"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A small knife"
+      },
+      {
+        "item": "a map of the city you grew up in"
+      },
+      {
+        "item": "a pet mouse"
+      },
+      {
+        "item": "a token to remember your parents by"
+      },
+      {
+        "item": "a set of common clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "City Secrets",
+    "feature_description": "You know the secret patterns and flow of cities and can find passages through the urban sprawl that others would miss. When not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
+    "description": "You know the secret patterns and flow of cities and can find passages through the urban sprawl that others would miss. When not in combat, you (and companions you lead) can travel between any two locations in the city twice as fast as your speed would normally allow.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Uthgardt Tribe Member",
+    "skill_proficiencies": [
+      {
+        "name": "Athletics"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument or artisan's tools"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A hunting trap"
+      },
+      {
+        "item": "a totemic token or set of tattoos marking your loyalty to Uthgar and your tribal totem"
+      },
+      {
+        "item": "a set of traveler's clothes"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Uthgardt Heritage",
+    "feature_description": "You know your tribe's territory and the terrain and natural resources of the rest of the North, and can find twice as much food and water as normal when foraging in any wilderness area. You can also call on the hospitality of your people and their allies (druid circles, nomadic elves, the Harpers, priesthoods of the First Circle).",
+    "description": "You know your tribe's territory and the terrain and natural resources of the rest of the North, and can find twice as much food and water as normal when foraging in any wilderness area. You can also call on the hospitality of your people and their allies (druid circles, nomadic elves, the Harpers, priesthoods of the First Circle).",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Vizier",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Religion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of artisan's tools or a musical instrument (one of your choice)"
+      },
+      {
+        "item": "a scroll of your god's teachings"
+      },
+      {
+        "item": "a vizier's cartouche"
+      },
+      {
+        "item": "a set of fine clothes"
+      },
+      {
+        "item": "and a pouch containing 25 gp"
+      }
+    ],
+    "feature_name": "Voice of Authority",
+    "feature_description": "Your voice is the voice of your god. Initiates are expected to defer to you and obey your commands, and you may train and instruct them. If you abuse this authority, your god might personally punish you.",
+    "description": "Your voice is the voice of your god. Initiates are expected to defer to you and obey your commands, and you may train and instruct them. If you abuse this authority, your god might personally punish you.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Volstrucker Agent",
+    "skill_proficiencies": [
+      {
+        "name": "Deception"
+      },
+      {
+        "name": "Stealth"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Poisoner's kit"
+      }
+    ],
+    "languages": [],
+    "equipment": [
+      {
+        "item": "A set of common clothes"
+      },
+      {
+        "item": "a black cloak with a hood"
+      },
+      {
+        "item": "a poisoner's kit"
+      },
+      {
+        "item": "and a pouch containing 10 gp"
+      }
+    ],
+    "feature_name": "Shadow Network",
+    "feature_description": "You can communicate with other Volstrucker over long distances: write a letter in special arcane ink (10 gp per page), address it to a member, and cast it into fire; it burns to cinders and materializes whole on the addressee.",
+    "description": "You can communicate with other Volstrucker over long distances: write a letter in special arcane ink (10 gp per page), address it to a member, and cast it into fire; it burns to cinders and materializes whole on the addressee.",
+    "defining_events": [
+      {
+        "title": "Tragedy",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Familicide. Through deceit or manipulation, the Volstrucker convinced you to slaughter your own family."
+          },
+          {
+            "roll": "2",
+            "description": "Amnesia. You were forced to study magic so potent that it strained your mind beyond its mortal limits, stealing away the memories of your past."
+          },
+          {
+            "roll": "3",
+            "description": "Capture. You were captured and tortured by agents of the Kryn Dynasty, and barely escaped."
+          },
+          {
+            "roll": "4",
+            "description": "Starvation. A terrible blight afflicted your rural village, and many friends and family starved to death. You barely survived."
+          },
+          {
+            "roll": "5",
+            "description": "Disfigurement. One of your arcane experiments went wrong and scarred or dismembered you so gravely that others shun you. Only the Volstrucker showed you kindness after that day."
+          },
+          {
+            "roll": "6",
+            "description": "Vicissitude. You were once the scion of a wealthy family who lost their entire fortune in the blink of an eye."
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Waterdhavian Noble",
+    "skill_proficiencies": [
+      {
+        "name": "History"
+      },
+      {
+        "name": "Persuasion"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set or musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A set of fine clothes"
+      },
+      {
+        "item": "a signet ring or brooch"
+      },
+      {
+        "item": "a scroll of pedigree"
+      },
+      {
+        "item": "a skin of fine zzar or wine"
+      },
+      {
+        "item": "and a purse containing 20 gp"
+      }
+    ],
+    "feature_name": "Kept in Style",
+    "feature_description": "In Waterdeep or elsewhere in the North, your house sees to your everyday needs, with establishments recording your debt and sending an accounting to your family's estate. This covers the 2 gp a day for a comfortable lifestyle, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. It is a line of credit, not income.",
+    "description": "In Waterdeep or elsewhere in the North, your house sees to your everyday needs, with establishments recording your debt and sending an accounting to your family's estate. This covers the 2 gp a day for a comfortable lifestyle, or reduces the cost of a wealthy or aristocratic lifestyle by that amount. It is a line of credit, not income.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Witchlight Hand",
+    "skill_proficiencies": [
+      {
+        "name": "Performance"
+      },
+      {
+        "name": "Sleight of Hand"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit or one type of musical instrument"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A disguise kit or a musical instrument of your choice"
+      },
+      {
+        "item": "a deck of cards"
+      },
+      {
+        "item": "a carnival uniform or costume"
+      },
+      {
+        "item": "one trinket (rolled on the Feywild Trinkets table)"
+      },
+      {
+        "item": "and a pouch containing 8 gp"
+      }
+    ],
+    "feature_name": "Carnival Fixture",
+    "feature_description": "The Witchlight Carnival provides you with free, modest lodging and food. You may also wander the carnival and partake of its wonders at no cost, provided you don't disrupt its shows or cause trouble.",
+    "description": "The Witchlight Carnival provides you with free, modest lodging and food. You may also wander the carnival and partake of its wonders at no cost, provided you don't disrupt its shows or cause trouble.",
+    "defining_events": [
+      {
+        "title": "Carnival Companion",
+        "die": "d8",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Old, cantankerous Witchlight hand"
+          },
+          {
+            "roll": "2",
+            "description": "Young, impressionable Witchlight hand"
+          },
+          {
+            "roll": "3",
+            "description": "Performer (such as an acrobat, a clown, or a musician)"
+          },
+          {
+            "roll": "4",
+            "description": "Retired performer"
+          },
+          {
+            "roll": "5",
+            "description": "Seasoned animal trainer"
+          },
+          {
+            "roll": "6",
+            "description": "Old blink dog"
+          },
+          {
+            "roll": "7",
+            "description": "Cheery sprite"
+          },
+          {
+            "roll": "8",
+            "description": "Harmless, magical wisp of light (flying speed 30 ft., hovers, bright light 5 ft. and dim light an additional 5 ft.)"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Witherbloom Student",
+    "skill_proficiencies": [
+      {
+        "name": "Nature"
+      },
+      {
+        "name": "Survival"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A bottle of black ink"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a book about plant identification"
+      },
+      {
+        "item": "an iron pot"
+      },
+      {
+        "item": "an herbalism kit"
+      },
+      {
+        "item": "a school uniform"
+      },
+      {
+        "item": "and a pouch containing 15 gp"
+      }
+    ],
+    "feature_name": "Witherbloom Initiate",
+    "feature_description": "You gain the Strixhaven Initiate feat and must choose Witherbloom within it. If you have Spellcasting or Pact Magic, the Witherbloom spells (1st: Cure Wounds, Inflict Wounds; 2nd: Lesser Restoration, Wither and Bloom; 3rd: Revivify, Vampiric Touch; 4th: Blight, Death Ward; 5th: Antilife Shell, Greater Restoration) are added to your class spell list.",
+    "description": "You gain the Strixhaven Initiate feat and must choose Witherbloom within it. If you have Spellcasting or Pact Magic, the Witherbloom spells (1st: Cure Wounds, Inflict Wounds; 2nd: Lesser Restoration, Wither and Bloom; 3rd: Revivify, Vampiric Touch; 4th: Blight, Death Ward; 5th: Antilife Shell, Greater Restoration) are added to your class spell list.",
+    "defining_events": [],
+    "is_custom": false,
+    "created_by": null
+  },
+  {
+    "name": "Simic Scientist",
+    "skill_proficiencies": [
+      {
+        "name": "Arcana"
+      },
+      {
+        "name": "Medicine"
+      }
+    ],
+    "tool_proficiencies": [],
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "A Simic insignia"
+      },
+      {
+        "item": "a set of commoner's clothes"
+      },
+      {
+        "item": "a book of research notes"
+      },
+      {
+        "item": "an ink pen"
+      },
+      {
+        "item": "a bottle of squid ink"
+      },
+      {
+        "item": "a flask of oil (made from blubber)"
+      },
+      {
+        "item": "a vial of acid"
+      },
+      {
+        "item": "a vial of fish scales"
+      },
+      {
+        "item": "a vial of seaweed"
+      },
+      {
+        "item": "a vial of jellyfish stingers"
+      },
+      {
+        "item": "a glass bottle of unidentified slime"
+      },
+      {
+        "item": "and a belt pouch containing 10 gp (Azorius 1-zino coins)"
+      }
+    ],
+    "feature_name": "Researcher",
+    "feature_description": "When you attempt to learn or recall a magical or scientific fact you don't know, you know where and from whom you can obtain it (usually a Simic laboratory, or sometimes an Izzet facility, library, university, or scholar). You might need to offer bribes, favors, or incentives, and the DM might rule the knowledge is inaccessible or can't be found.",
+    "description": "When you attempt to learn or recall a magical or scientific fact you don't know, you know where and from whom you can obtain it (usually a Simic laboratory, or sometimes an Izzet facility, library, university, or scholar). You might need to offer bribes, favors, or incentives, and the DM might rule the knowledge is inaccessible or can't be found.",
+    "defining_events": [
+      {
+        "title": "Clade/Project",
+        "die": "d6",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Hull Clade, focused on protection and durability"
+          },
+          {
+            "roll": "2",
+            "description": "Fin Clade, focused on movement"
+          },
+          {
+            "roll": "3",
+            "description": "Gyre Clade, focused on cyclical patterns and metamagic"
+          },
+          {
+            "roll": "4",
+            "description": "Guardian Project, focused on creating guard monsters and super soldiers"
+          },
+          {
+            "roll": "5",
+            "description": "Crypsis Project, focused on intelligence and counterintelligence"
+          },
+          {
+            "roll": "6",
+            "description": "Independent research in a new area"
+          }
+        ]
+      }
+    ],
+    "is_custom": false,
+    "created_by": null
+  }
+]
