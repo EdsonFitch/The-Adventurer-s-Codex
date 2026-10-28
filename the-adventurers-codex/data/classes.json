@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Artificer",
+    "hit_die": 8,
+    "primary_ability": "INT",
+    "saving_throw_proficiencies": ["CON", "INT"],
+    "spellcasting_ability": "INT"
+  },
+  {
+    "name": "Barbarian",
+    "hit_die": 12,
+    "primary_ability": "STR",
+    "saving_throw_proficiencies": ["STR", "CON"],
+    "spellcasting_ability": null
+  },
+  {
+    "name": "Bard",
+    "hit_die": 8,
+    "primary_ability": "CHA",
+    "saving_throw_proficiencies": ["DEX", "CHA"],
+    "spellcasting_ability": "CHA"
+  },
+  {
+    "name": "Cleric",
+    "hit_die": 8,
+    "primary_ability": "WIS",
+    "saving_throw_proficiencies": ["WIS", "CHA"],
+    "spellcasting_ability": "WIS"
+  },
+  {
+    "name": "Druid",
+    "hit_die": 8,
+    "primary_ability": "WIS",
+    "saving_throw_proficiencies": ["INT", "WIS"],
+    "spellcasting_ability": "WIS"
+  },
+  {
+    "name": "Fighter",
+    "hit_die": 10,
+    "primary_ability": "STR",
+    "saving_throw_proficiencies": ["STR", "CON"],
+    "spellcasting_ability": null
+  },
+  {
+    "name": "Monk",
+    "hit_die": 8,
+    "primary_ability": "DEX",
+    "saving_throw_proficiencies": ["STR", "DEX"],
+    "spellcasting_ability": null
+  },
+  {
+    "name": "Paladin",
+    "hit_die": 10,
+    "primary_ability": "STR",
+    "saving_throw_proficiencies": ["WIS", "CHA"],
+    "spellcasting_ability": "CHA"
+  },
+  {
+    "name": "Ranger",
+    "hit_die": 10,
+    "primary_ability": "DEX",
+    "saving_throw_proficiencies": ["STR", "DEX"],
+    "spellcasting_ability": "WIS"
+  },
+  {
+    "name": "Rogue",
+    "hit_die": 8,
+    "primary_ability": "DEX",
+    "saving_throw_proficiencies": ["DEX", "INT"],
+    "spellcasting_ability": null
+  },
+  {
+    "name": "Sorcerer",
+    "hit_die": 6,
+    "primary_ability": "CHA",
+    "saving_throw_proficiencies": ["CON", "CHA"],
+    "spellcasting_ability": "CHA"
+  },
+  {
+    "name": "Warlock",
+    "hit_die": 8,
+    "primary_ability": "CHA",
+    "saving_throw_proficiencies": ["WIS", "CHA"],
+    "spellcasting_ability": "CHA"
+  },
+  {
+    "name": "Wizard",
+    "hit_die": 6,
+    "primary_ability": "INT",
+    "saving_throw_proficiencies": ["INT", "WIS"],
+    "spellcasting_ability": "INT"
+  }
+]
