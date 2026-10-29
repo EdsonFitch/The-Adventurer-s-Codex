@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* Custom Font Utilities */
+.font-medieval {
+  font-family: "MedievalSharp", cursive, serif;
+}
+
+.font-metamorphous {
+  font-family: "Metamorphous", serif;
+}
+
+.font-antiqua {
+  font-family: "Modern Antiqua", serif;
+}
+
 :root {
   --text: #6b6375;
   --text-h: #08060d;
