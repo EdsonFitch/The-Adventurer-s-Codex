@@ -2,6 +2,16 @@ import React, { useState, useEffect } from "react";
 // Import the authentication modal wrapper
 import AuthFormModal from "./AuthFormModal";
 
+// 1. Import local hero image assets from src/assets/hero/
+import slide1 from "../../assets/hero/slide-1.png";
+import slide2 from "../../assets/hero/slide-2.png";
+import slide3 from "../../assets/hero/slide-3.png";
+
+// 2. Import feature card image assets
+import charactersImg from "../../assets/hero/Characters.png";
+import journalImg from "../../assets/hero/Journal.png";
+import inventoryImg from "../../assets/hero/Inventory.png";
+
 export default function LandingPage() {
   // State hook to control opening/closing of the auth modal
   const [isAuthOpen, setIsAuthOpen] = useState(false);
@@ -11,21 +21,18 @@ export default function LandingPage() {
   const heroSlides = [
     {
       id: 1,
-      image:
-        "https://via.placeholder.com/1600x650/5f3426/a59075?text=Epic+Artwork+Slide+1",
-      alt: "Dungeons and Dragons Battle Scene",
+      image: slide1,
+      alt: "Duel Amid the Ruined Storm",
     },
     {
       id: 2,
-      image:
-        "https://via.placeholder.com/1600x650/3e2219/889c9b?text=Epic+Artwork+Slide+2",
-      alt: "Mystic Dungeon Exploration",
+      image: slide2,
+      alt: "Moonlit Heroes of the Ruined Citadel",
     },
     {
       id: 3,
-      image:
-        "https://via.placeholder.com/1600x650/2a1711/938f71?text=Epic+Artwork+Slide+3",
-      alt: "Ancient Dragon Lair",
+      image: slide3,
+      alt: "Bustling Fantasy Guild Cafeteria",
     },
   ];
 
@@ -187,7 +194,7 @@ export default function LandingPage() {
           <div className="bg-[#937460]/30 border border-[#a59075]/40 rounded-xl overflow-hidden hover:border-[#889c9b] transition shadow-xl group">
             <div className="h-44 overflow-hidden relative">
               <img
-                src="https://via.placeholder.com/400x250/5f3426/a59075?text=Character+Sheet"
+                src={charactersImg}
                 alt="Character Creation and Management"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
@@ -209,7 +216,7 @@ export default function LandingPage() {
           <div className="bg-[#937460]/30 border border-[#a59075]/40 rounded-xl overflow-hidden hover:border-[#889c9b] transition shadow-xl group">
             <div className="h-44 overflow-hidden relative">
               <img
-                src="https://via.placeholder.com/400x250/5f3426/a59075?text=Journal+Entries"
+                src={journalImg}
                 alt="Adventurer Journal Entries"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
@@ -231,7 +238,7 @@ export default function LandingPage() {
           <div className="bg-[#937460]/30 border border-[#a59075]/40 rounded-xl overflow-hidden hover:border-[#889c9b] transition shadow-xl group">
             <div className="h-44 overflow-hidden relative">
               <img
-                src="https://via.placeholder.com/400x250/5f3426/a59075?text=Inventory+Management"
+                src={inventoryImg}
                 alt="Character Inventory Management"
                 className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
               />
