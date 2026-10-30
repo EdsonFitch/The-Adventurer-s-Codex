@@ -3,24 +3,33 @@ import React from "react";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 // 2. Import the LandingPage component for unauthenticated visitors
 import LandingPage from "./components/common/LandingPage";
-// 3. Import the fully modular DashboardContentRouter for authenticated users
+// 3. Import the fully assembled DashboardContentRouter for authenticated users
 import DashboardContentRouter from "./components/dashboard/DashboardContentRouter";
 
-// Main Application View component rendered based on user auth status
+/**
+ * MainApp Component
+ * -----------------------------------------------------------------------------
+ * Renders the appropriate view based on authentication status:
+ * - Unauthenticated users see LandingPage
+ * - Authenticated users see DashboardContentRouter with full TopNavbar and LeftSidebar
+ */
 function MainApp() {
-  // Destructure user session from global context
   const { user } = useAuth();
 
-  // 4. Conditional Rendering: If no user session exists, display the Landing Page
+  // If no user session exists, display Landing Page
   if (!user) {
     return <LandingPage />;
   }
 
-  // 5. Authenticated State View: Renders the complete dark medieval dashboard router
+  // Authenticated State: Renders complete dashboard
   return <DashboardContentRouter />;
 }
 
-// Root Application Component wrapped inside AuthProvider context wrapper
+/**
+ * Root Application Component
+ * -----------------------------------------------------------------------------
+ * Wraps main app inside global AuthProvider context.
+ */
 export default function App() {
   return (
     <AuthProvider>
