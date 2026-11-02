@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
 
 /**
- * MainContentArea Component
  * -----------------------------------------------------------------------------
- * Manages the rendering of the active content canvas, including the Adventurers
- * Roster grid containing character cards and the Character Creator card trigger.
+ * COMPONENT: MainContentArea
+ * -----------------------------------------------------------------------------
+ * Manages the main dashboard content canvas. It renders either sub-views
+ * (like the Character Creator Wizard or Character Sheet) or defaults to
+ * displaying the user's active adventurer cards roster fetched from Supabase.
+ *
+ * Includes optimistic roster synchronization and character deletion from Supabase.
  *
  * @param {Object} props - Component properties.
- * @param {Function} props.onSelectCharacter - Callback when a character card is clicked.
- * @param {Function} props.onOpenCreator - Callback to switch view to the character creator wizard.
- * @param {number} props.refreshTrigger - Counter prop that forces a re-fetch when incremented.
- * @param {React.ReactNode} props.children - Sub-views (wizard, sheet, journal, etc.).
+ * @param {Function} props.onSelectCharacter - Callback triggered when clicking a character card to open their sheet.
+ * @param {Function} props.onOpenCreator - Callback triggered to switch the view to the Character Creator Wizard.
+ * @param {number} props.refreshTrigger - Counter prop that forces the roster effect hook to re-fetch when incremented.
+ * @param {React.ReactNode} props.children - Sub-views rendered inside the container if active.
  */
 export default function MainContentArea({
   onSelectCharacter,
@@ -23,9 +27,16 @@ export default function MainContentArea({
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Tracks which individual character card is currently executing a deletion query
+  const [deletingId, setDeletingId] = useState(null);
+
   /**
-   * Effect Hook: Fetches character cards from Supabase.
-   * Re-runs whenever `refreshTrigger` changes (i.e., when a new hero is forged).
+   * ---------------------------------------------------------------------------
+   * EFFECT HOOK: fetchCharactersRoster
+   * ---------------------------------------------------------------------------
+   * Fetches all character records belonging to the user from the Supabase
+   * 'characters' table, sorted by creation date descending.
+   * Re-runs whenever `refreshTrigger` changes (e.g., after forging a new hero).
    */
   useEffect(() => {
     async function fetchCharactersRoster() {
@@ -39,7 +50,7 @@ export default function MainContentArea({
         if (error) throw error;
         setCharacters(data || []);
       } catch (err) {
-        console.error("Error loading roster cards:", err);
+        console.error("Error loading adventurer roster cards:", err);
       } finally {
         setLoading(false);
       }
@@ -48,9 +59,55 @@ export default function MainContentArea({
     fetchCharactersRoster();
   }, [refreshTrigger]);
 
+  /**
+   * ---------------------------------------------------------------------------
+   * HANDLER: handleDeleteCharacter
+   * ---------------------------------------------------------------------------
+   * Permanently deletes a character record from the Supabase database and
+   * optimistically removes it from local state so the card vanishes instantly.
+   *
+   * @param {Event} e - Mouse click event object (stopped from propagating to card click).
+   * @param {Object} character - The character record targeted for deletion.
+   */
+  const handleDeleteCharacter = async (e, character) => {
+    // 1. Stop event bubbling so clicking delete doesn't trigger card's `onSelectCharacter`
+    e.stopPropagation();
+
+    // 2. Prompt user confirmation to prevent accidental deletions
+    const confirmed = window.confirm(
+      `Are you sure you want to banish ${character.name} to the void? This action cannot be undone.`,
+    );
+
+    if (!confirmed) return;
+
+    try {
+      setDeletingId(character.id);
+
+      // 3. Execute Supabase DELETE query targeted by primary key ID
+      const { error } = await supabase
+        .from("characters")
+        .delete()
+        .eq("id", character.id);
+
+      if (error) throw error;
+
+      // 4. Optimistically filter out the deleted character from local state array
+      setCharacters((prevCharacters) =>
+        prevCharacters.filter((c) => c.id !== character.id),
+      );
+
+      console.log(`Character ${character.name} successfully deleted.`);
+    } catch (err) {
+      console.error("Error deleting character from Supabase:", err);
+      alert(`Failed to delete character: ${err.message || "Unknown error"}`);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="flex-1 overflow-y-auto p-6 bg-[#3d1c14] text-[#938f71]">
-      {/* If children exist (meaning we are on a sub-tab like wizard, sheet, etc.), render them */}
+      {/* Conditional Rendering: If child view exists (Wizard/Sheet), render it */}
       {children ? (
         children
       ) : (
@@ -72,34 +129,56 @@ export default function MainContentArea({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Render existing character cards from Supabase */}
+              {/* Map through fetched character records and render card components */}
               {characters.map((char) => (
                 <div
                   key={char.id}
                   onClick={() => onSelectCharacter(char)}
-                  className="bg-[#5f3426] border-2 border-[#a59075]/40 rounded-xl p-5 cursor-pointer hover:border-[#a59075] transition shadow-xl flex flex-col justify-between"
+                  className="group relative bg-[#5f3426] border-2 border-[#a59075]/40 rounded-xl p-5 cursor-pointer hover:border-[#a59075] transition shadow-xl flex flex-col justify-between"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="w-16 h-16 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center">
-                      {char.portrait_url ? (
-                        <img
-                          src={char.portrait_url}
-                          alt={char.name}
-                          className="w-full h-full object-cover"
-                        />
+                  {/* Card Header: Portrait, Info, and Delete Button */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center space-x-4">
+                      {/* Thumbnail Container */}
+                      <div className="w-16 h-16 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center">
+                        {char.portrait_url ? (
+                          <img
+                            src={char.portrait_url}
+                            alt={char.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-xl">🛡️</span>
+                        )}
+                      </div>
+                      <div>
+                        <h3 className="font-bold font-medieval text-lg text-[#f0e6d2]">
+                          {char.name}
+                        </h3>
+                        <p className="text-xs text-[#889c9b]">
+                          Level {char.level || 1} •{" "}
+                          {char.alignment_code || "LN"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Delete Action Icon Button */}
+                    <button
+                      type="button"
+                      title="Delete Character"
+                      disabled={deletingId === char.id}
+                      onClick={(e) => handleDeleteCharacter(e, char)}
+                      className="p-1.5 rounded-lg bg-red-950/40 hover:bg-red-800/60 border border-red-500/30 text-red-300 opacity-80 group-hover:opacity-100 transition shadow"
+                    >
+                      {deletingId === char.id ? (
+                        <span className="text-xs animate-spin">⏳</span>
                       ) : (
-                        <span className="text-xl">🛡️</span>
+                        <span className="text-xs">🗑️</span>
                       )}
-                    </div>
-                    <div>
-                      <h3 className="font-bold font-medieval text-lg text-[#f0e6d2]">
-                        {char.name}
-                      </h3>
-                      <p className="text-xs text-[#889c9b]">
-                        Level {char.level || 1} • {char.alignment_code || "LN"}
-                      </p>
-                    </div>
+                    </button>
                   </div>
+
+                  {/* Card Footer */}
                   <div className="mt-4 pt-3 border-t border-[#a59075]/20 flex justify-between items-center text-xs">
                     <span className="text-[#a59075]">
                       HP: {char.hp_max || 10}

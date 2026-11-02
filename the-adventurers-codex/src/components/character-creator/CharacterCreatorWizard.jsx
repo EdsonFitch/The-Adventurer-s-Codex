@@ -5,16 +5,25 @@ import StepLineageClass from "./StepLineageClass";
 import StepAbilityScores from "./StepAbilityScores";
 import StepBackgroundGear from "./StepBackgroundGear";
 
+// -----------------------------------------------------------------------------
+// ASSET IMPORT: Faded Background Header Asset
+// -----------------------------------------------------------------------------
+// Adjust filename if your image in assets/hero has a different extension (.png / .jpg / .svg)
+import headerBgImage from "../../assets/hero/hero-bg.png";
+
 /**
- * CharacterCreatorWizard Component
+ * -----------------------------------------------------------------------------
+ * COMPONENT: CharacterCreatorWizard
  * -----------------------------------------------------------------------------
  * Master container and state manager for the multi-step D&D character creator.
  *
  * Architecture & Responsibilities:
  * - Manages active wizard step progression (Step 1 through 5).
  * - Centralizes the master character payload state (`characterData`) shared across all steps.
- * - Pre-fetches relational reference data from Supabase (races, subraces, classes, subclasses, backgrounds).
- * - Executes final database insertion into the 'characters' table upon completion.
+ * - Pre-fetches relational reference data from Supabase in parallel (races, subraces, classes, subclasses, backgrounds).
+ * - Renders a persistent faded hero background asset at the top header section.
+ * - Executes final database insertion into the 'characters' table upon completion,
+ *   including both dashboard roster portraits and full-body sheet artwork URLs.
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge, passing the new record.
@@ -34,7 +43,8 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     name: "",
     campaignName: "",
     alignmentCode: "LN",
-    portraitUrl: "",
+    portraitUrl: "", // Square roster card asset URL
+    fullBodyUrl: "", // Vertical character sheet asset URL
     raceId: "",
     subraceId: "",
     classId: "",
@@ -61,8 +71,12 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   const [backgroundsList, setBackgroundsList] = useState([]);
 
   /**
-   * Effect Hook: Fetches all core relational tables from Supabase in parallel
-   * when the wizard component mounts.
+   * ---------------------------------------------------------------------------
+   * EFFECT HOOK: fetchReferenceData
+   * ---------------------------------------------------------------------------
+   * Fetches all core relational tables from Supabase in parallel using Promise.all
+   * when the wizard component mounts, ensuring all dropdowns and selectors are
+   * populated with game data before user interaction.
    */
   useEffect(() => {
     async function fetchReferenceData() {
@@ -70,6 +84,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         setLoadingData(true);
         setErrorMessage(null);
 
+        // Execute concurrent queries across multiple Supabase tables
         const [
           { data: races, error: raceErr },
           { data: subraces, error: subraceErr },
@@ -90,6 +105,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         if (subclassErr) throw subclassErr;
         if (bgErr) throw bgErr;
 
+        // Populate local reference states
         setRacesList(races || []);
         setSubracesList(subraces || []);
         setClassesList(classes || []);
@@ -113,12 +129,18 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   // ---------------------------------------------------------------------------
 
   /**
-   * Merges partial property updates into the master character payload state.
+   * Merges partial property updates from individual step components into
+   * the master character payload state.
+   *
+   * @param {Object} updatedFields - Key-value pair collection of state modifications.
    */
   const updateCharacterData = (updatedFields) => {
     setCharacterData((prev) => ({ ...prev, ...updatedFields }));
   };
 
+  /**
+   * Advances the wizard step forward with basic field validation on Step 1.
+   */
   const handleNextStep = () => {
     if (currentStep === 1 && !characterData.name.trim()) {
       alert("Please give your adventurer a name before proceeding.");
@@ -127,19 +149,27 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     setCurrentStep((prev) => Math.min(prev + 1, 5));
   };
 
+  /**
+   * Returns the wizard step backward.
+   */
   const handlePrevStep = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
   /**
+   * ---------------------------------------------------------------------------
+   * HANDLER: handleForgeCharacter
+   * ---------------------------------------------------------------------------
    * Final Submission: Maps master character state to database column structure
    * and inserts the new record into the Supabase 'characters' table.
+   * Includes both portrait_url and full_body_url.
    */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
-      setErrorMessage(null); // Clean lowercase setter hook
+      setErrorMessage(null);
 
+      // Construct payload mapping state properties to Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
@@ -152,8 +182,10 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         hp_max: characterData.hitPointsMax,
         hp_temp: 0,
         portrait_url: characterData.portraitUrl || null,
+        full_body_url: characterData.fullBodyUrl || null, // Saved for character sheet rendering
       };
 
+      // Execute Supabase INSERT query and return the newly created row
       const { data, error } = await supabase
         .from("characters")
         .insert([newCharacterRecord])
@@ -189,42 +221,65 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   // 5. RENDER UI STRUCTURE
   // ---------------------------------------------------------------------------
   return (
-    <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl p-6 text-[#938f71] shadow-2xl font-antiqua">
-      {/* Wizard Header & Dynamic Progress Indicator */}
-      <div className="border-b border-[#a59075]/30 pb-4 mb-6 flex justify-between items-center">
-        <div>
-          <h2 className="text-xl font-medieval font-bold text-[#f0e6d2]">
-            Forge a New Hero
-          </h2>
-          <p className="text-xs text-[#889c9b]">
-            Step {currentStep} of 5: {getStepTitle(currentStep)}
-          </p>
+    <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl overflow-hidden text-[#938f71] shadow-2xl font-antiqua">
+      {/* ----------------------------------------------------------------------- */}
+      {/* SECTION A: ATMOSPHERIC FADED HEADER SECTION                              */}
+      {/* Contains the title, step progress indicators, and persistent bg image    */}
+      {/* ----------------------------------------------------------------------- */}
+      <div className="relative p-6 pb-5 overflow-hidden border-b border-[#a59075]/30">
+        {/* Layer 1: Absolute Faded Image Background with Radial Fade Gradient */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <img
+            src={headerBgImage}
+            alt=""
+            className="w-full h-full object-cover opacity-20 mix-blend-luminosity filter contrast-125"
+          />
+          {/* Subtle gradient overlay to blend image seamlessly into the theme background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#5f3426] via-transparent to-[#5f3426] opacity-80" />
         </div>
-        <div className="flex space-x-1">
-          {[1, 2, 3, 4, 5].map((step) => (
-            <div
-              key={step}
-              className={`w-7 h-2 rounded-full transition-all ${
-                step === currentStep
-                  ? "bg-[#937460] shadow-md"
-                  : step < currentStep
-                    ? "bg-[#889c9b]/60"
-                    : "bg-[#937460]/30"
-              }`}
-            />
-          ))}
+
+        {/* Layer 2: Interactive Header Content (Z-Index 10 ensures readability) */}
+        <div className="relative z-10 flex justify-between items-center">
+          <div>
+            <h2 className="text-xl font-medieval font-bold text-[#f0e6d2]">
+              Forge a New Hero
+            </h2>
+            <p className="text-xs text-[#889c9b]">
+              Step {currentStep} of 5: {getStepTitle(currentStep)}
+            </p>
+          </div>
+
+          {/* Progress Tracker Pill Indicators */}
+          <div className="flex space-x-1">
+            {[1, 2, 3, 4, 5].map((step) => (
+              <div
+                key={step}
+                className={`w-7 h-2 rounded-full transition-all ${
+                  step === currentStep
+                    ? "bg-[#937460] shadow-md"
+                    : step < currentStep
+                      ? "bg-[#889c9b]/60"
+                      : "bg-[#937460]/30"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
+      {/* Error Alert Banner */}
       {errorMessage && (
-        <div className="mb-4 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
+        <div className="m-6 mb-0 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
           {errorMessage}
         </div>
       )}
 
-      {/* Main Content Viewport */}
-      <div className="min-h-[400px]">
+      {/* ----------------------------------------------------------------------- */}
+      {/* SECTION B: MAIN CONTENT VIEWPORT                                       */}
+      {/* ----------------------------------------------------------------------- */}
+      <div className="p-6 min-h-[400px]">
         {loadingData ? (
+          /* Loading Spinner State while Supabase tables fetch */
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
             <span className="text-2xl animate-spin">⏳</span>
             <p className="text-xs uppercase tracking-widest">
@@ -233,12 +288,15 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           </div>
         ) : (
           <div>
+            {/* Step 1: Basics & Visual Identity */}
             {currentStep === 1 && (
               <StepBasics
                 characterData={characterData}
                 updateCharacterData={updateCharacterData}
+                userId={userId}
               />
             )}
+            {/* Step 2: Lineage & Class */}
             {currentStep === 2 && (
               <StepLineageClass
                 characterData={characterData}
@@ -250,12 +308,14 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
+            {/* Step 3: Ability Scores */}
             {currentStep === 3 && (
               <StepAbilityScores
                 characterData={characterData}
                 updateCharacterData={updateCharacterData}
               />
             )}
+            {/* Step 4: Background & Gear */}
             {currentStep === 4 && (
               <StepBackgroundGear
                 characterData={characterData}
@@ -264,6 +324,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
+            {/* Step 5: Final Review Summary */}
             {currentStep === 5 && (
               <div className="space-y-4 animate-fadeIn">
                 <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
@@ -303,8 +364,10 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         )}
       </div>
 
-      {/* Footer Navigation Controls */}
-      <div className="border-t border-[#a59075]/30 pt-4 mt-6 flex justify-between items-center">
+      {/* ----------------------------------------------------------------------- */}
+      {/* SECTION C: FOOTER NAVIGATION CONTROLS                                  */}
+      {/* ----------------------------------------------------------------------- */}
+      <div className="p-6 pt-4 border-t border-[#a59075]/30 flex justify-between items-center bg-[#5f3426]">
         {currentStep > 1 ? (
           <button
             type="button"
@@ -344,6 +407,15 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 }
 
+/**
+ * -----------------------------------------------------------------------------
+ * HELPER FUNCTION: getStepTitle
+ * -----------------------------------------------------------------------------
+ * Maps step number integers to descriptive header strings.
+ *
+ * @param {number} step - Current active step integer (1-5).
+ * @returns {string} Human-readable step title.
+ */
 function getStepTitle(step) {
   switch (step) {
     case 1:
