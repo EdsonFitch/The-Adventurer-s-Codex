@@ -1,31 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabaseClient";
+import StepBasics from "./StepBasics";
+import StepLineageClass from "./StepLineageClass";
+import StepAbilityScores from "./StepAbilityScores";
+import StepBackgroundGear from "./StepBackgroundGear";
 
 /**
  * CharacterCreatorWizard Component
  * -----------------------------------------------------------------------------
  * Master container and state manager for the multi-step D&D character creator.
  *
- * - Manages wizard step progression (Step 1 through 5).
- * - Stores comprehensive character payload state across identity, lineage,
- *   classes, ability scores, background, and equipment.
- * - Pre-fetches relational reference data from Supabase (races, classes, backgrounds).
- * - Handles final database insertion into the 'characters' table.
+ * Architecture & Responsibilities:
+ * - Manages active wizard step progression (Step 1 through 5).
+ * - Centralizes the master character payload state (`characterData`) shared across all steps.
+ * - Pre-fetches relational reference data from Supabase (races, subraces, classes, subclasses, backgrounds).
+ * - Executes final database insertion into the 'characters' table upon completion.
  *
  * @param {Object} props - Component properties.
- * @param {Function} props.onComplete - Callback fired after a successful character forge.
+ * @param {Function} props.onComplete - Callback fired after a successful character forge, passing the new record.
  * @param {string} props.userId - Active authenticated user UUID.
  */
 export default function CharacterCreatorWizard({ onComplete, userId }) {
   // ---------------------------------------------------------------------------
-  // 1. WIZARD NAVIGATION & FORM STATE
+  // 1. WIZARD NAVIGATION & FORM STATE HOOKS
   // ---------------------------------------------------------------------------
   const [currentStep, setCurrentStep] = useState(1);
   const [loadingData, setLoadingData] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Core character payload matching your Supabase schema
+  // Master character data payload object matching the Supabase schema requirements
   const [characterData, setCharacterData] = useState({
     name: "",
     campaignName: "",
@@ -56,14 +60,16 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   const [subclassesList, setSubclassesList] = useState([]);
   const [backgroundsList, setBackgroundsList] = useState([]);
 
-  // Fetch reference datasets from Supabase on component mount
+  /**
+   * Effect Hook: Fetches all core relational tables from Supabase in parallel
+   * when the wizard component mounts.
+   */
   useEffect(() => {
     async function fetchReferenceData() {
       try {
         setLoadingData(true);
         setErrorMessage(null);
 
-        // Parallel fetch from core Supabase tables
         const [
           { data: races, error: raceErr },
           { data: subraces, error: subraceErr },
@@ -103,22 +109,17 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   }, []);
 
   // ---------------------------------------------------------------------------
-  // 3. HANDLERS & STEP NAVIGATION
+  // 3. STATE MUTATION & NAVIGATION HANDLERS
   // ---------------------------------------------------------------------------
 
   /**
-   * Updates partial properties within the master character payload.
-   * @param {Object} updatedFields - Key-value pairs to update in characterData.
+   * Merges partial property updates into the master character payload state.
    */
   const updateCharacterData = (updatedFields) => {
     setCharacterData((prev) => ({ ...prev, ...updatedFields }));
   };
 
-  /**
-   * Validates and advances to the next wizard step.
-   */
   const handleNextStep = () => {
-    // Basic validation check for Step 1 (Name)
     if (currentStep === 1 && !characterData.name.trim()) {
       alert("Please give your adventurer a name before proceeding.");
       return;
@@ -126,22 +127,19 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     setCurrentStep((prev) => Math.min(prev + 1, 5));
   };
 
-  /**
-   * Returns to the previous wizard step.
-   */
   const handlePrevStep = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
   /**
-   * Final Submission: Commits the complete character record to Supabase.
+   * Final Submission: Maps master character state to database column structure
+   * and inserts the new record into the Supabase 'characters' table.
    */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
-      setErrorMessage(null);
+      setErrorMessage(null); // Clean lowercase setter hook
 
-      // Construct payload for Supabase 'characters' table
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
@@ -164,14 +162,14 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (error) throw error;
 
-      // Trigger completion callback (e.g., redirect to character sheet)
+      // Trigger completion callback, passing the new record up to the parent container
       if (onComplete) {
         onComplete(data);
       }
     } catch (err) {
-      console.error("Error forging character:", err);
+      console.error("Detailed error forging character:", err);
       setErrorMessage(
-        "Failed to forge hero into the database. Please try again.",
+        `Failed to forge hero: ${err.message || "Check RLS policies."}`,
       );
     } finally {
       setIsSubmitting(false);
@@ -179,11 +177,20 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   };
 
   // ---------------------------------------------------------------------------
-  // 4. RENDER UI
+  // 4. STEP 5 LOOKUP HELPERS (Resolves IDs to human-readable names safely)
+  // ---------------------------------------------------------------------------
+  const selectedRace = racesList.find((r) => r.id === characterData.raceId);
+  const selectedClass = classesList.find((c) => c.id === characterData.classId);
+  const selectedBackground = backgroundsList.find(
+    (b) => b.id === characterData.backgroundId,
+  );
+
+  // ---------------------------------------------------------------------------
+  // 5. RENDER UI STRUCTURE
   // ---------------------------------------------------------------------------
   return (
     <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl p-6 text-[#938f71] shadow-2xl font-antiqua">
-      {/* Wizard Header & Progress Bar */}
+      {/* Wizard Header & Dynamic Progress Indicator */}
       <div className="border-b border-[#a59075]/30 pb-4 mb-6 flex justify-between items-center">
         <div>
           <h2 className="text-xl font-medieval font-bold text-[#f0e6d2]">
@@ -199,7 +206,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
               key={step}
               className={`w-7 h-2 rounded-full transition-all ${
                 step === currentStep
-                  ? "bg-[#938f71] shadow-md"
+                  ? "bg-[#937460] shadow-md"
                   : step < currentStep
                     ? "bg-[#889c9b]/60"
                     : "bg-[#937460]/30"
@@ -209,14 +216,13 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         </div>
       </div>
 
-      {/* Error Banner if any */}
       {errorMessage && (
         <div className="mb-4 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
           {errorMessage}
         </div>
       )}
 
-      {/* Main Content Area */}
+      {/* Main Content Viewport */}
       <div className="min-h-[400px]">
         {loadingData ? (
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
@@ -227,82 +233,39 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           </div>
         ) : (
           <div>
-            {/* Step Content Switcher */}
             {currentStep === 1 && (
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  1. Basics & Identity
-                </h3>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-[#889c9b] mb-1">
-                    Character Name
-                  </label>
-                  <input
-                    type="text"
-                    value={characterData.name}
-                    onChange={(e) =>
-                      updateCharacterData({ name: e.target.value })
-                    }
-                    placeholder="e.g. Baggi the Unyielding"
-                    className="w-full bg-[#4a261c] border border-[#a59075]/40 rounded-lg p-2.5 text-[#f0e6d2] text-sm focus:outline-none focus:border-[#938f71]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-widest text-[#889c9b] mb-1">
-                    Campaign Association
-                  </label>
-                  <input
-                    type="text"
-                    value={characterData.campaignName}
-                    onChange={(e) =>
-                      updateCharacterData({ campaignName: e.target.value })
-                    }
-                    placeholder="e.g. Hoard of the Dragon Queen"
-                    className="w-full bg-[#4a261c] border border-[#a59075]/40 rounded-lg p-2.5 text-[#f0e6d2] text-sm focus:outline-none focus:border-[#938f71]"
-                  />
-                </div>
-              </div>
+              <StepBasics
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+              />
             )}
-
             {currentStep === 2 && (
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  2. Lineage & Class Selection
-                </h3>
-                <p className="text-xs text-[#889c9b]">
-                  Select your race, subrace, class, and subclass (supports
-                  homebrew extensions).
-                </p>
-                {/* Step components will mount here */}
-              </div>
+              <StepLineageClass
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+                racesList={racesList}
+                subracesList={subracesList}
+                classesList={classesList}
+                subclassesList={subclassesList}
+                userId={userId}
+              />
             )}
-
             {currentStep === 3 && (
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  3. Ability Scores
-                </h3>
-                <p className="text-xs text-[#889c9b]">
-                  Allocate your core statistics using Standard Array, Point Buy,
-                  or 4d6 Rolls.
-                </p>
-              </div>
+              <StepAbilityScores
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+              />
             )}
-
             {currentStep === 4 && (
-              <div className="space-y-4">
-                <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  4. Background & Equipment
-                </h3>
-                <p className="text-xs text-[#889c9b]">
-                  Choose your origin, skill proficiencies, and starting
-                  inventory.
-                </p>
-              </div>
+              <StepBackgroundGear
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+                backgroundsList={backgroundsList}
+                userId={userId}
+              />
             )}
-
             {currentStep === 5 && (
-              <div className="space-y-4">
+              <div className="space-y-4 animate-fadeIn">
                 <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
                   5. Final Review & Forge
                 </h3>
@@ -310,6 +273,20 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                   <p>
                     <strong className="text-[#f0e6d2]">Name:</strong>{" "}
                     {characterData.name || "Unnamed Hero"}
+                  </p>
+                  <p>
+                    <strong className="text-[#f0e6d2]">Race / Lineage:</strong>{" "}
+                    {selectedRace ? selectedRace.name : "None selected"}
+                  </p>
+                  <p>
+                    <strong className="text-[#f0e6d2]">Class:</strong>{" "}
+                    {selectedClass ? selectedClass.name : "None selected"}
+                  </p>
+                  <p>
+                    <strong className="text-[#f0e6d2]">Background:</strong>{" "}
+                    {selectedBackground
+                      ? selectedBackground.name
+                      : "None selected"}
                   </p>
                   <p>
                     <strong className="text-[#f0e6d2]">Alignment:</strong>{" "}
@@ -326,10 +303,11 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         )}
       </div>
 
-      {/* Wizard Footer Controls */}
+      {/* Footer Navigation Controls */}
       <div className="border-t border-[#a59075]/30 pt-4 mt-6 flex justify-between items-center">
         {currentStep > 1 ? (
           <button
+            type="button"
             onClick={handlePrevStep}
             disabled={isSubmitting}
             className="px-4 py-2 rounded bg-[#937460]/20 hover:bg-[#937460]/40 border border-[#a59075]/40 text-xs transition"
@@ -342,6 +320,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
         {currentStep < 5 ? (
           <button
+            type="button"
             onClick={handleNextStep}
             disabled={loadingData}
             className="px-5 py-2 rounded bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 font-bold text-xs text-[#f0e6d2] transition shadow-md"
@@ -350,6 +329,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           </button>
         ) : (
           <button
+            type="button"
             onClick={handleForgeCharacter}
             disabled={isSubmitting}
             className="px-6 py-2.5 rounded bg-amber-700 hover:bg-amber-600 border border-amber-500 font-bold text-xs text-white transition shadow-lg flex items-center space-x-2"
@@ -364,9 +344,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 }
 
-/**
- * Helper function to return descriptive step titles.
- */
 function getStepTitle(step) {
   switch (step) {
     case 1:

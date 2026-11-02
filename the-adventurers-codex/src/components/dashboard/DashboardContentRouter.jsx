@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+// 1. Import useAuth to provide user.id to the CharacterCreatorWizard for Supabase RLS
+import { useAuth } from "../../context/AuthContext";
 import DashboardLayout from "./DashboardLayout";
 import TopNavbar from "./TopNavbar";
 import LeftSidebar from "./LeftSidebar";
@@ -15,8 +17,11 @@ import CharacterCreatorWizard from "../character-creator/CharacterCreatorWizard"
  */
 export default function DashboardContentRouter() {
   // ---------------------------------------------------------------------------
-  // 1. STATE MANAGEMENT
+  // 1. AUTHENTICATION & STATE MANAGEMENT
   // ---------------------------------------------------------------------------
+  // Retrieve authenticated user from AuthContext
+  const { user } = useAuth();
+
   // Active navigation tab matching LeftSidebar keys ('characters', 'character-creation', etc.)
   const [activeTab, setActiveTab] = useState("characters");
 
@@ -26,6 +31,9 @@ export default function DashboardContentRouter() {
   // Holds currently selected character object for sheet and campaign tracking
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
+  // Trigger state to notify MainContentArea to re-fetch roster cards when a hero is forged
+  const [characterRefreshTrigger, setCharacterRefreshTrigger] = useState(0);
+
   // ---------------------------------------------------------------------------
   // 2. VIEW TRANSITION HANDLERS
   // ---------------------------------------------------------------------------
@@ -33,6 +41,8 @@ export default function DashboardContentRouter() {
   /**
    * Triggers when a character card is clicked in the roster grid.
    * Switches active view to the character sheet.
+   *
+   * @param {Object} character - Selected character object.
    */
   const handleSelectCharacter = (character) => {
     setSelectedCharacter(character);
@@ -40,17 +50,26 @@ export default function DashboardContentRouter() {
   };
 
   /**
-   * Triggers when a new character is forged in the wizard.
-   * Switches view back to the character roster grid.
+   * Triggers when a new character is successfully forged in the wizard.
+   * Updates state, signals roster refresh, and switches view back to roster.
+   *
+   * @param {Object} forgedCharacter - Newly created character record from Supabase.
    */
   const handleCharacterForged = (forgedCharacter) => {
     console.log("Hero successfully forged in Supabase:", forgedCharacter);
     setSelectedCharacter(forgedCharacter);
+
+    // Increment trigger counter so MainContentArea re-fetches the roster from Supabase
+    setCharacterRefreshTrigger((prev) => prev + 1);
+
+    // Switch view back to the character roster tab
     setActiveTab("characters");
   };
 
   /**
    * Computes top navbar subtitle dynamically based on active tab.
+   *
+   * @returns {string} Dynamic header subtitle.
    */
   const getHeaderSubtitle = () => {
     switch (activeTab) {
@@ -93,13 +112,13 @@ export default function DashboardContentRouter() {
 
         {/* 
           Main Content Canvas:
-          - When activeTab is 'characters', children is falsy, triggering MainContentArea's 
-            default grid view (containing mock character cards + the Character Creator card).
-          - When activeTab is a sub-view, renders the requested component.
+          - Passes refreshTrigger to MainContentArea so it re-fetches when a character is created.
+          - Renders default roster grid when activeTab === 'characters'.
         */}
         <MainContentArea
           onSelectCharacter={handleSelectCharacter}
           onOpenCreator={() => setActiveTab("character-creation")}
+          refreshTrigger={characterRefreshTrigger}
         >
           {activeTab !== "characters" && (
             <>
@@ -116,7 +135,11 @@ export default function DashboardContentRouter() {
                     </button>
                   </div>
 
-                  <CharacterCreatorWizard onComplete={handleCharacterForged} />
+                  {/* Character Creator Wizard receiving userId and completion handler */}
+                  <CharacterCreatorWizard
+                    userId={user?.id}
+                    onComplete={handleCharacterForged}
+                  />
                 </div>
               )}
 

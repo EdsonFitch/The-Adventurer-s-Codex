@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 /**
- * Standard D&D 5e Ability Scores
+ * Standard D&D 5e Ability Scores configuration metadata
  */
 const ABILITY_KEYS = [
   { key: "strength", label: "Strength", abbr: "STR" },
@@ -12,11 +12,15 @@ const ABILITY_KEYS = [
   { key: "charisma", label: "Charisma", abbr: "CHA" },
 ];
 
+// Pre-defined Standard Array values for D&D 5e
 const STANDARD_ARRAY = [15, 14, 13, 12, 10, 8];
 
 /**
  * Calculates the D&D ability modifier from a raw score.
  * Formula: Math.floor((score - 10) / 2)
+ *
+ * @param {number} score - Raw ability score value.
+ * @returns {string} Formatted modifier string with explicit sign (e.g., "+3", "-1").
  */
 export function calculateModifier(score) {
   const mod = Math.floor((score - 10) / 2);
@@ -27,28 +31,26 @@ export function calculateModifier(score) {
  * StepAbilityScores Component
  * -----------------------------------------------------------------------------
  * Manages Step 3 of Character Creation:
- * - Allocates ability scores using Standard Array, Point Buy, or 4d6 Roll.
- * - Displays live calculation of racial attribute bonuses.
+ * - Allocates character ability scores using Standard Array, Point Buy, or 4d6 Roller.
+ * - Displays live calculation of ability modifiers.
+ * - Tracks individual dice breakdowns for the 4d6 drop-lowest generation method.
  *
- * @param {Object} props
- * @param {Object} props.characterData - Master character payload state
- * @param {Function} props.updateCharacterData - Callback to update master state
+ * @param {Object} props - Component properties.
+ * @param {Object} props.characterData - Master character payload state.
+ * @param {Function} props.updateCharacterData - Callback to update master state.
  */
 export default function StepAbilityScores({
   characterData,
   updateCharacterData,
 }) {
-  // Generation mode: 'standard', 'pointBuy', or 'roll'
+  // Generation mode state: 'standard', 'pointBuy', or 'roll'
   const [method, setMethod] = useState("standard");
 
-  // Point Buy remaining points (Starts at 27)
-  const [pointBuyRemaining, setPointBuyRemaining] = useState(27);
-
-  // 4d6 Roller pool state
-  const [rolledPool, setRolledPool] = useState([]);
+  // 4d6 Roller state: stores objects containing the final sum + the 4 raw dice rolls
+  const [rolledScores, setRolledScores] = useState([]);
   const [isRolling, setIsRolling] = useState(false);
 
-  // Local unassigned scores for Standard Array / Point Buy tracking
+  // Local scores fallback from master state
   const scores = characterData.abilityScores || {
     strength: 10,
     dexterity: 10,
@@ -59,7 +61,9 @@ export default function StepAbilityScores({
   };
 
   /**
-   * Updates an individual ability score value safely
+   * Safely updates an individual ability score value in master state.
+   * @param {string} abilityKey - Key of the ability score (e.g., 'strength').
+   * @param {string|number} value - New numeric value.
    */
   const handleScoreChange = (abilityKey, value) => {
     const numValue = parseInt(value) || 8;
@@ -68,30 +72,43 @@ export default function StepAbilityScores({
   };
 
   /**
-   * Simulates rolling 4d6 and dropping the lowest die for 6 ability slots
+   * Simulates rolling 4d6 drop lowest for all 6 ability score slots.
+   * Preserves the individual dice array so players can see how each score was calculated.
    */
   const handleRoll4d6 = () => {
     setIsRolling(true);
     setTimeout(() => {
-      const newPool = [];
+      const generatedScores = [];
+
+      // Loop 6 times to generate 6 independent ability scores
       for (let i = 0; i < 6; i++) {
+        // Roll 4 standard 6-sided dice (values 1 through 6)
         const rolls = Array.from(
           { length: 4 },
           () => Math.floor(Math.random() * 6) + 1,
         );
-        rolls.sort((a, b) => a - b); // sort ascending
-        rolls.shift(); // drop lowest
-        const sum = rolls.reduce((acc, curr) => acc + curr, 0);
-        newPool.push(sum);
+
+        // Sort ascending to easily drop the lowest die
+        rolls.sort((a, b) => a - b);
+        const dropped = rolls[0]; // Lowest die
+        const kept = rolls.slice(1); // Remaining 3 dice
+        const sum = kept.reduce((acc, curr) => acc + curr, 0);
+
+        generatedScores.push({
+          total: sum,
+          rolls: rolls,
+          dropped: dropped,
+        });
       }
-      setRolledPool(newPool);
+
+      setRolledScores(generatedScores);
       setIsRolling(false);
     }, 600);
   };
 
   return (
     <div className="space-y-6 animate-fadeIn">
-      {/* Header & Method Selector */}
+      {/* Header & Method Switcher Tabs */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#a59075]/20 pb-4">
         <div>
           <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
@@ -103,7 +120,7 @@ export default function StepAbilityScores({
           </p>
         </div>
 
-        {/* Method Switcher Tabs */}
+        {/* Method Switcher Button Group */}
         <div className="flex bg-[#4a261c] border border-[#a59075]/40 rounded-lg p-1 space-x-1">
           <button
             type="button"
@@ -141,48 +158,57 @@ export default function StepAbilityScores({
         </div>
       </div>
 
-      {/* Method Sub-UI Controls */}
+      {/* 4d6 Roller Engine Sub-Panel */}
       {method === "roll" && (
-        <div className="p-4 bg-[#4a261c]/50 border border-amber-500/30 rounded-lg flex items-center justify-between">
+        <div className="p-4 bg-[#4a261c]/50 border border-amber-500/30 rounded-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <div>
             <h4 className="text-xs font-bold text-amber-300 uppercase">
-              4d6 Drop Lowest Engine
+              4d6 Drop Lowest Engine (6 Stat Generation)
             </h4>
             <p className="text-[10px] text-[#889c9b]">
-              Roll 4 six-sided dice, discard the lowest die, and sum the
-              remaining three.
+              Rolls 4d6 and drops the lowest die for each of your 6 core
+              attributes.
             </p>
           </div>
           <button
             type="button"
             disabled={isRolling}
             onClick={handleRoll4d6}
-            className="px-4 py-2 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition shadow"
+            className="px-4 py-2 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition shadow whitespace-nowrap"
           >
-            {isRolling ? "Rolling Dice..." : "🎲 Roll Stats"}
+            {isRolling ? "Rolling Dice..." : "🎲 Roll 6 Stats"}
           </button>
         </div>
       )}
 
-      {rolledPool.length > 0 && method === "roll" && (
-        <div className="p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg flex items-center space-x-3">
-          <span className="text-xs text-[#889c9b] font-bold uppercase">
-            Rolled Pool:
+      {/* Visual Breakdown of Rolled Dice Pools */}
+      {rolledScores.length > 0 && method === "roll" && (
+        <div className="p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg space-y-2">
+          <span className="text-xs text-[#889c9b] font-bold uppercase tracking-wider">
+            Generated Stat Pool (Click or Assign to Stats Below):
           </span>
-          <div className="flex space-x-2">
-            {rolledPool.map((val, idx) => (
-              <span
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+            {rolledScores.map((item, idx) => (
+              <div
                 key={idx}
-                className="w-8 h-8 rounded bg-[#4a261c] border border-amber-500/50 flex items-center justify-center text-xs font-bold text-amber-300 shadow"
+                className="p-2 bg-[#4a261c] border border-amber-500/50 rounded text-center shadow"
               >
-                {val}
-              </span>
+                <div className="text-base font-bold text-amber-300">
+                  {item.total}
+                </div>
+                <div className="text-[9px] text-[#889c9b] mt-1">
+                  Rolls: [{item.rolls.join(", ")}]
+                </div>
+                <div className="text-[8px] text-red-300">
+                  Dropped: {item.dropped}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Ability Scores Grid */}
+      {/* Ability Scores Grid Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {ABILITY_KEYS.map(({ key, label, abbr }) => {
           const score = scores[key] || 10;
@@ -218,8 +244,8 @@ export default function StepAbilityScores({
                 ) : (
                   <input
                     type="number"
-                    min={8}
-                    max={18}
+                    min={3}
+                    max={20}
                     value={score}
                     onChange={(e) => handleScoreChange(key, e.target.value)}
                     className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm text-[#f0e6d2] focus:outline-none"
