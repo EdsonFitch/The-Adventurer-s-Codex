@@ -1,0 +1,1442 @@
+[
+  {
+    "class_name": "BARD",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": 4,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": 5,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": 6,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 3,
+    "spells_known": 7,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": 8,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": 9,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 3,
+    "spells_known": 12,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 14,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 11,
+    "max_spell_level": 6,
+    "cantrips_known": 4,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 12,
+    "max_spell_level": 6,
+    "cantrips_known": 4,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 13,
+    "max_spell_level": 7,
+    "cantrips_known": 4,
+    "spells_known": 16,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 14,
+    "max_spell_level": 7,
+    "cantrips_known": 4,
+    "spells_known": 18,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 15,
+    "max_spell_level": 8,
+    "cantrips_known": 4,
+    "spells_known": 19,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 16,
+    "max_spell_level": 8,
+    "cantrips_known": 4,
+    "spells_known": 19,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 17,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": 20,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 18,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": 22,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 19,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": 22,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "BARD",
+    "level": 20,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": 22,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 11,
+    "max_spell_level": 6,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 12,
+    "max_spell_level": 6,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 13,
+    "max_spell_level": 7,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 14,
+    "max_spell_level": 7,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 15,
+    "max_spell_level": 8,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 16,
+    "max_spell_level": 8,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 17,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 18,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 19,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "CLERIC",
+    "level": 20,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 11,
+    "max_spell_level": 6,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 12,
+    "max_spell_level": 6,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 13,
+    "max_spell_level": 7,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 14,
+    "max_spell_level": 7,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 15,
+    "max_spell_level": 8,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 16,
+    "max_spell_level": 8,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 17,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 18,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 19,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "DRUID",
+    "level": 20,
+    "max_spell_level": 9,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 1,
+    "max_spell_level": 0,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 3,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 4,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 5,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 6,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 7,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 8,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 9,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 10,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 11,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 12,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 13,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 14,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 15,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 16,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 17,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 18,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 19,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "PALADIN",
+    "level": 20,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 1,
+    "max_spell_level": 0,
+    "cantrips_known": 0,
+    "spells_known": 0,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": 2,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 3,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": 3,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 4,
+    "max_spell_level": 1,
+    "cantrips_known": 0,
+    "spells_known": 3,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 5,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": 4,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 6,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": 4,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 7,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": 5,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 8,
+    "max_spell_level": 2,
+    "cantrips_known": 0,
+    "spells_known": 5,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 9,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": 6,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 10,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": 6,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 11,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": 7,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 12,
+    "max_spell_level": 3,
+    "cantrips_known": 0,
+    "spells_known": 7,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 13,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": 8,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 14,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": 8,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 15,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": 9,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 16,
+    "max_spell_level": 4,
+    "cantrips_known": 0,
+    "spells_known": 9,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 17,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 18,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 19,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "RANGER",
+    "level": 20,
+    "max_spell_level": 5,
+    "cantrips_known": 0,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 4,
+    "spells_known": 2,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 4,
+    "spells_known": 3,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 4,
+    "spells_known": 4,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 5,
+    "spells_known": 5,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 5,
+    "spells_known": 6,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 5,
+    "spells_known": 7,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 5,
+    "spells_known": 8,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 5,
+    "spells_known": 9,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 5,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 6,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 11,
+    "max_spell_level": 6,
+    "cantrips_known": 6,
+    "spells_known": 12,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 12,
+    "max_spell_level": 6,
+    "cantrips_known": 6,
+    "spells_known": 12,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 13,
+    "max_spell_level": 7,
+    "cantrips_known": 6,
+    "spells_known": 13,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 14,
+    "max_spell_level": 7,
+    "cantrips_known": 6,
+    "spells_known": 13,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 15,
+    "max_spell_level": 8,
+    "cantrips_known": 6,
+    "spells_known": 14,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 16,
+    "max_spell_level": 8,
+    "cantrips_known": 6,
+    "spells_known": 14,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 17,
+    "max_spell_level": 9,
+    "cantrips_known": 6,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 18,
+    "max_spell_level": 9,
+    "cantrips_known": 6,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 19,
+    "max_spell_level": 9,
+    "cantrips_known": 6,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "SORCERER",
+    "level": 20,
+    "max_spell_level": 9,
+    "cantrips_known": 6,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": 2,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": 3,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": 4,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 3,
+    "spells_known": 5,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": 6,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": 7,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": 8,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": 9,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 3,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 10,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 11,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 12,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 11,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 13,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 12,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 14,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 12,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 15,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 13,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 16,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 13,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 17,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 14,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 18,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 14,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 19,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WARLOCK",
+    "level": 20,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 15,
+    "prep_type": "KNOWN"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 3,
+    "spells_known": 6,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 3,
+    "spells_known": 8,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 3,
+    "max_spell_level": 2,
+    "cantrips_known": 3,
+    "spells_known": 10,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 4,
+    "max_spell_level": 2,
+    "cantrips_known": 4,
+    "spells_known": 12,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 5,
+    "max_spell_level": 3,
+    "cantrips_known": 4,
+    "spells_known": 14,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 6,
+    "max_spell_level": 3,
+    "cantrips_known": 4,
+    "spells_known": 16,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 7,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": 18,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 8,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": 20,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 9,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": 22,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 10,
+    "max_spell_level": 5,
+    "cantrips_known": 5,
+    "spells_known": 24,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 11,
+    "max_spell_level": 6,
+    "cantrips_known": 5,
+    "spells_known": 26,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 12,
+    "max_spell_level": 6,
+    "cantrips_known": 5,
+    "spells_known": 28,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 13,
+    "max_spell_level": 7,
+    "cantrips_known": 5,
+    "spells_known": 30,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 14,
+    "max_spell_level": 7,
+    "cantrips_known": 5,
+    "spells_known": 32,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 15,
+    "max_spell_level": 8,
+    "cantrips_known": 5,
+    "spells_known": 34,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 16,
+    "max_spell_level": 8,
+    "cantrips_known": 5,
+    "spells_known": 36,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 17,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": 38,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 18,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": 40,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 19,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": 42,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "WIZARD",
+    "level": 20,
+    "max_spell_level": 9,
+    "cantrips_known": 5,
+    "spells_known": 44,
+    "prep_type": "WIZARD"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 1,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 2,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 3,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 4,
+    "max_spell_level": 1,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 5,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 6,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 7,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 8,
+    "max_spell_level": 2,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 9,
+    "max_spell_level": 3,
+    "cantrips_known": 2,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 10,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 11,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 12,
+    "max_spell_level": 3,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 13,
+    "max_spell_level": 4,
+    "cantrips_known": 3,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 14,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 15,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 16,
+    "max_spell_level": 4,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 17,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 18,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 19,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  },
+  {
+    "class_name": "ARTIFICER",
+    "level": 20,
+    "max_spell_level": 5,
+    "cantrips_known": 4,
+    "spells_known": null,
+    "prep_type": "PREPARED_STAT"
+  }
+]

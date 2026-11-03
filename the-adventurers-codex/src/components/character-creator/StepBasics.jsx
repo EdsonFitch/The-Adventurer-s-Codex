@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { uploadCharacterImage } from "../../utils/uploadImage";
-
 /**
  * -----------------------------------------------------------------------------
  * COMPONENT: StepBasics
  * -----------------------------------------------------------------------------
  * Represents Step 1 of the D&D Character Creator Wizard.
- * Manages foundational character identity data (Name, Campaign, Alignment)
+ * Manages foundational character identity data (Name, Level, Campaign, Alignment)
  * as well as file selections, compression triggers, and live preview rendering
  * for both the Dashboard Roster Portrait and Full-Body Sheet Artwork.
  *
@@ -15,6 +12,10 @@ import { uploadCharacterImage } from "../../utils/uploadImage";
  * @param {Function} props.updateCharacterData - State dispatcher function to merge updates into characterData.
  * @param {string} props.userId - Unique UUID of the active user for storage scoping.
  */
+
+import React, { useState } from "react";
+import { uploadCharacterImage } from "../../utils/uploadImage";
+
 export default function StepBasics({
   characterData,
   updateCharacterData,
@@ -86,11 +87,11 @@ export default function StepBasics({
       </h3>
 
       {/* ----------------------------------------------------------------------- */}
-      {/* SECTION A: Text Inputs & Selectors (Name, Campaign, Alignment)          */}
+      {/* SECTION A: Text Inputs & Selectors (Name, Level, Campaign, Alignment)   */}
       {/* ----------------------------------------------------------------------- */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {/* Character Name Input */}
-        <div className="space-y-1">
+        <div className="space-y-1 md:col-span-2">
           <label className="block text-xs font-bold text-[#a59075]">
             Character Name *
           </label>
@@ -104,20 +105,24 @@ export default function StepBasics({
           />
         </div>
 
-        {/* Campaign Name Input */}
+        {/* Character Level Selector (Levels 1 to 20) */}
         <div className="space-y-1">
           <label className="block text-xs font-bold text-[#a59075]">
-            Campaign Name
+            Character Level
           </label>
-          <input
-            type="text"
-            value={characterData.campaignName || ""}
+          <select
+            value={characterData.level || 1}
             onChange={(e) =>
-              updateCharacterData({ campaignName: e.target.value })
+              updateCharacterData({ level: parseInt(e.target.value, 10) })
             }
-            placeholder="e.g., Hoard of the Dragon Queen"
             className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
-          />
+          >
+            {Array.from({ length: 20 }, (_, i) => i + 1).map((lvl) => (
+              <option key={lvl} value={lvl}>
+                Level {lvl}
+              </option>
+            ))}
+          </select>
         </div>
 
         {/* Alignment Selector Dropdown */}
@@ -142,6 +147,22 @@ export default function StepBasics({
             <option value="NE">Neutral Evil</option>
             <option value="CE">Chaotic Evil</option>
           </select>
+        </div>
+
+        {/* Campaign Name Input */}
+        <div className="space-y-1 md:col-span-4">
+          <label className="block text-xs font-bold text-[#a59075]">
+            Campaign Name
+          </label>
+          <input
+            type="text"
+            value={characterData.campaignName || ""}
+            onChange={(e) =>
+              updateCharacterData({ campaignName: e.target.value })
+            }
+            placeholder="e.g., Hoard of the Dragon Queen"
+            className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
+          />
         </div>
       </div>
 

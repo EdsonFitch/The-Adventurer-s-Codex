@@ -1,16 +1,3 @@
-import React, { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
-import StepBasics from "./StepBasics";
-import StepLineageClass from "./StepLineageClass";
-import StepAbilityScores from "./StepAbilityScores";
-import StepBackgroundGear from "./StepBackgroundGear";
-
-// -----------------------------------------------------------------------------
-// ASSET IMPORT: Faded Background Header Asset
-// -----------------------------------------------------------------------------
-// Adjust filename if your image in assets/hero has a different extension (.png / .jpg / .svg)
-import headerBgImage from "../../assets/hero/hero-bg.png";
-
 /**
  * -----------------------------------------------------------------------------
  * COMPONENT: CharacterCreatorWizard
@@ -18,17 +5,31 @@ import headerBgImage from "../../assets/hero/hero-bg.png";
  * Master container and state manager for the multi-step D&D character creator.
  *
  * Architecture & Responsibilities:
- * - Manages active wizard step progression (Step 1 through 5).
+ * - Manages active wizard step progression (Step 1 through 6).
  * - Centralizes the master character payload state (`characterData`) shared across all steps.
  * - Pre-fetches relational reference data from Supabase in parallel (races, subraces, classes, subclasses, backgrounds).
  * - Renders a persistent faded hero background asset at the top header section.
- * - Executes final database insertion into the 'characters' table upon completion,
- *   including both dashboard roster portraits and full-body sheet artwork URLs.
+ * - Executes final database insertion into 'characters' using the selected character level,
+ *   and bulk inserts chosen spell IDs into 'character_spells'.
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge, passing the new record.
  * @param {string} props.userId - Active authenticated user UUID.
  */
+
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../supabaseClient";
+import StepBasics from "./StepBasics";
+import StepLineageClass from "./StepLineageClass";
+import StepAbilityScores from "./StepAbilityScores";
+import StepBackgroundGear from "./StepBackgroundGear";
+import StepSpells from "./StepSpells";
+
+// -----------------------------------------------------------------------------
+// ASSET IMPORT: Faded Background Header Asset
+// -----------------------------------------------------------------------------
+import headerBgImage from "../../assets/hero/hero-bg.png";
+
 export default function CharacterCreatorWizard({ onComplete, userId }) {
   // ---------------------------------------------------------------------------
   // 1. WIZARD NAVIGATION & FORM STATE HOOKS
@@ -41,6 +42,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   // Master character data payload object matching the Supabase schema requirements
   const [characterData, setCharacterData] = useState({
     name: "",
+    level: 1, // UPDATED: Initialized default character level (1-20) updated via StepBasics
     campaignName: "",
     alignmentCode: "LN",
     portraitUrl: "", // Square roster card asset URL
@@ -59,6 +61,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       charisma: 10,
     },
     hitPointsMax: 10,
+    selectedSpellIds: [], // Stores selected cantrip and spell UUIDs across levels
   });
 
   // ---------------------------------------------------------------------------
@@ -75,8 +78,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
    * EFFECT HOOK: fetchReferenceData
    * ---------------------------------------------------------------------------
    * Fetches all core relational tables from Supabase in parallel using Promise.all
-   * when the wizard component mounts, ensuring all dropdowns and selectors are
-   * populated with game data before user interaction.
+   * when the wizard component mounts.
    */
   useEffect(() => {
     async function fetchReferenceData() {
@@ -131,8 +133,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   /**
    * Merges partial property updates from individual step components into
    * the master character payload state.
-   *
-   * @param {Object} updatedFields - Key-value pair collection of state modifications.
    */
   const updateCharacterData = (updatedFields) => {
     setCharacterData((prev) => ({ ...prev, ...updatedFields }));
@@ -146,7 +146,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       alert("Please give your adventurer a name before proceeding.");
       return;
     }
-    setCurrentStep((prev) => Math.min(prev + 1, 5));
+    setCurrentStep((prev) => Math.min(prev + 1, 6));
   };
 
   /**
@@ -160,9 +160,8 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
    * ---------------------------------------------------------------------------
    * HANDLER: handleForgeCharacter
    * ---------------------------------------------------------------------------
-   * Final Submission: Maps master character state to database column structure
-   * and inserts the new record into the Supabase 'characters' table.
-   * Includes both portrait_url and full_body_url.
+   * Final Submission: Maps master character state to database column structure,
+   * inserts the record into 'characters', and bulk inserts chosen spell IDs into 'character_spells'.
    */
   const handleForgeCharacter = async () => {
     try {
@@ -173,7 +172,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
-        level: 1,
+        level: characterData.level || 1, // UPDATED: Dynamically assigns the level set in StepBasics
         race_id: characterData.raceId || null,
         subrace_id: characterData.subraceId || null,
         background_id: characterData.backgroundId || null,
@@ -182,21 +181,41 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         hp_max: characterData.hitPointsMax,
         hp_temp: 0,
         portrait_url: characterData.portraitUrl || null,
-        full_body_url: characterData.fullBodyUrl || null, // Saved for character sheet rendering
+        full_body_url: characterData.fullBodyUrl || null,
       };
 
-      // Execute Supabase INSERT query and return the newly created row
-      const { data, error } = await supabase
+      // 1. Insert new character into 'characters' table
+      const { data: newChar, error: charError } = await supabase
         .from("characters")
         .insert([newCharacterRecord])
         .select()
         .single();
 
-      if (error) throw error;
+      if (charError) throw charError;
+
+      // 2. If character has chosen spells, bulk insert into 'character_spells' junction table
+      if (
+        characterData.selectedSpellIds &&
+        characterData.selectedSpellIds.length > 0
+      ) {
+        const spellPayload = characterData.selectedSpellIds.map((spellId) => ({
+          character_id: newChar.id,
+          spell_id: spellId,
+          is_prepared: true,
+        }));
+
+        const { error: spellInsertErr } = await supabase
+          .from("character_spells")
+          .insert(spellPayload);
+
+        if (spellInsertErr) {
+          console.error("Error linking character spells:", spellInsertErr);
+        }
+      }
 
       // Trigger completion callback, passing the new record up to the parent container
       if (onComplete) {
-        onComplete(data);
+        onComplete(newChar);
       }
     } catch (err) {
       console.error("Detailed error forging character:", err);
@@ -209,7 +228,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   };
 
   // ---------------------------------------------------------------------------
-  // 4. STEP 5 LOOKUP HELPERS (Resolves IDs to human-readable names safely)
+  // 4. LOOKUP HELPERS (Resolves IDs to human-readable objects safely)
   // ---------------------------------------------------------------------------
   const selectedRace = racesList.find((r) => r.id === characterData.raceId);
   const selectedClass = classesList.find((c) => c.id === characterData.classId);
@@ -223,38 +242,34 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   return (
     <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl overflow-hidden text-[#938f71] shadow-2xl font-antiqua">
       {/* ----------------------------------------------------------------------- */}
-      {/* SECTION A: ATMOSPHERIC FADED HEADER SECTION                              */}
-      {/* Contains the title, step progress indicators, and persistent bg image    */}
+      {/* SECTION A: ATMOSPHERIC FADED HEADER SECTION                             */}
       {/* ----------------------------------------------------------------------- */}
       <div className="relative p-6 pb-5 overflow-hidden border-b border-[#a59075]/30">
-        {/* Layer 1: Absolute Faded Image Background with Radial Fade Gradient */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
             src={headerBgImage}
             alt=""
             className="w-full h-full object-cover opacity-20 mix-blend-luminosity filter contrast-125"
           />
-          {/* Subtle gradient overlay to blend image seamlessly into the theme background */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#5f3426] via-transparent to-[#5f3426] opacity-80" />
         </div>
 
-        {/* Layer 2: Interactive Header Content (Z-Index 10 ensures readability) */}
         <div className="relative z-10 flex justify-between items-center">
           <div>
             <h2 className="text-xl font-medieval font-bold text-[#f0e6d2]">
               Forge a New Hero
             </h2>
             <p className="text-xs text-[#889c9b]">
-              Step {currentStep} of 5: {getStepTitle(currentStep)}
+              Step {currentStep} of 6: {getStepTitle(currentStep)}
             </p>
           </div>
 
-          {/* Progress Tracker Pill Indicators */}
+          {/* Progress Tracker Pill Indicators (6 Steps) */}
           <div className="flex space-x-1">
-            {[1, 2, 3, 4, 5].map((step) => (
+            {[1, 2, 3, 4, 5, 6].map((step) => (
               <div
                 key={step}
-                className={`w-7 h-2 rounded-full transition-all ${
+                className={`w-6 h-2 rounded-full transition-all ${
                   step === currentStep
                     ? "bg-[#937460] shadow-md"
                     : step < currentStep
@@ -279,7 +294,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       {/* ----------------------------------------------------------------------- */}
       <div className="p-6 min-h-[400px]">
         {loadingData ? (
-          /* Loading Spinner State while Supabase tables fetch */
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
             <span className="text-2xl animate-spin">⏳</span>
             <p className="text-xs uppercase tracking-widest">
@@ -324,16 +338,29 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
-            {/* Step 5: Final Review Summary */}
+            {/* Step 5: Spell Selection */}
             {currentStep === 5 && (
+              <StepSpells
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+                selectedClass={selectedClass}
+              />
+            )}
+            {/* Step 6: Final Review & Forge */}
+            {currentStep === 6 && (
               <div className="space-y-4 animate-fadeIn">
                 <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  5. Final Review & Forge
+                  6. Final Review & Forge
                 </h3>
                 <div className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-lg space-y-2 text-xs">
                   <p>
                     <strong className="text-[#f0e6d2]">Name:</strong>{" "}
                     {characterData.name || "Unnamed Hero"}
+                  </p>
+                  {/* UPDATED: Display level in the review summary */}
+                  <p>
+                    <strong className="text-[#f0e6d2]">Level:</strong> Level{" "}
+                    {characterData.level || 1}
                   </p>
                   <p>
                     <strong className="text-[#f0e6d2]">Race / Lineage:</strong>{" "}
@@ -356,6 +383,10 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                   <p>
                     <strong className="text-[#f0e6d2]">Campaign:</strong>{" "}
                     {characterData.campaignName || "Standalone"}
+                  </p>
+                  <p>
+                    <strong className="text-[#f0e6d2]">Prepared Spells:</strong>{" "}
+                    {characterData.selectedSpellIds?.length || 0} selected
                   </p>
                 </div>
               </div>
@@ -381,7 +412,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           <div />
         )}
 
-        {currentStep < 5 ? (
+        {currentStep < 6 ? (
           <button
             type="button"
             onClick={handleNextStep}
@@ -412,9 +443,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
  * HELPER FUNCTION: getStepTitle
  * -----------------------------------------------------------------------------
  * Maps step number integers to descriptive header strings.
- *
- * @param {number} step - Current active step integer (1-5).
- * @returns {string} Human-readable step title.
  */
 function getStepTitle(step) {
   switch (step) {
@@ -427,6 +455,8 @@ function getStepTitle(step) {
     case 4:
       return "Background & Gear";
     case 5:
+      return "Spellcasting & Grimoire";
+    case 6:
       return "Review & Forge";
     default:
       return "";
