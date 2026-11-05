@@ -1,15 +1,28 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: StepAbilityScores
+ * -----------------------------------------------------------------------------
+ * Description:
+ * Manages Step 3 of the character creation wizard:
+ * - Allocates character ability scores using Standard Array, Point Buy, or 4d6 Roller.
+ * - Displays live calculation of ability modifiers.
+ * - Integrates computed results from `statCalculator.js` to render active JSONB effect
+ *   breakdown badges and mathematically accurate equation displays (`Base + Bonuses = Total`).
+ * -----------------------------------------------------------------------------
+ */
+
 import React, { useState } from "react";
 
 /**
- * Standard D&D 5e Ability Scores configuration metadata
+ * Standard D&D 5e Ability Scores configuration metadata mapping long and short keys.
  */
 const ABILITY_KEYS = [
-  { key: "strength", label: "Strength", abbr: "STR" },
-  { key: "dexterity", label: "Dexterity", abbr: "DEX" },
-  { key: "constitution", label: "Constitution", abbr: "CON" },
-  { key: "intelligence", label: "Intelligence", abbr: "INT" },
-  { key: "wisdom", label: "Wisdom", abbr: "WIS" },
-  { key: "charisma", label: "Charisma", abbr: "CHA" },
+  { key: "strength", abbrKey: "str", label: "Strength", abbr: "STR" },
+  { key: "dexterity", abbrKey: "dex", label: "Dexterity", abbr: "DEX" },
+  { key: "constitution", abbrKey: "con", label: "Constitution", abbr: "CON" },
+  { key: "intelligence", abbrKey: "int", label: "Intelligence", abbr: "INT" },
+  { key: "wisdom", abbrKey: "wis", label: "Wisdom", abbr: "WIS" },
+  { key: "charisma", abbrKey: "cha", label: "Charisma", abbr: "CHA" },
 ];
 
 // Pre-defined Standard Array values for D&D 5e
@@ -28,20 +41,17 @@ export function calculateModifier(score) {
 }
 
 /**
- * StepAbilityScores Component
- * -----------------------------------------------------------------------------
- * Manages Step 3 of Character Creation:
- * - Allocates character ability scores using Standard Array, Point Buy, or 4d6 Roller.
- * - Displays live calculation of ability modifiers.
- * - Tracks individual dice breakdowns for the 4d6 drop-lowest generation method.
+ * StepAbilityScores Component definition.
  *
  * @param {Object} props - Component properties.
  * @param {Object} props.characterData - Master character payload state.
- * @param {Function} props.updateCharacterData - Callback to update master state.
+ * @param {Function} props.updateCharacterData - Callback function to update master state.
+ * @param {Object} props.computedStats - Computed stats package returned by statCalculator.js.
  */
 export default function StepAbilityScores({
   characterData,
   updateCharacterData,
+  computedStats,
 }) {
   // Generation mode state: 'standard', 'pointBuy', or 'roll'
   const [method, setMethod] = useState("standard");
@@ -50,14 +60,15 @@ export default function StepAbilityScores({
   const [rolledScores, setRolledScores] = useState([]);
   const [isRolling, setIsRolling] = useState(false);
 
-  // Local scores fallback from master state
-  const scores = characterData.abilityScores || {
-    strength: 10,
-    dexterity: 10,
-    constitution: 10,
-    intelligence: 10,
-    wisdom: 10,
-    charisma: 10,
+  // Normalize raw scores object keys from master state with robust fallbacks
+  const rawScores = characterData.abilityScores || {};
+  const scores = {
+    strength: rawScores.strength ?? rawScores.str ?? 15,
+    dexterity: rawScores.dexterity ?? rawScores.dex ?? 14,
+    constitution: rawScores.constitution ?? rawScores.con ?? 13,
+    intelligence: rawScores.intelligence ?? rawScores.int ?? 12,
+    wisdom: rawScores.wisdom ?? rawScores.wis ?? 10,
+    charisma: rawScores.charisma ?? rawScores.cha ?? 8,
   };
 
   /**
@@ -66,32 +77,50 @@ export default function StepAbilityScores({
    * @param {string|number} value - New numeric value.
    */
   const handleScoreChange = (abilityKey, value) => {
-    const numValue = parseInt(value) || 8;
-    const updated = { ...scores, [abilityKey]: numValue };
+    const numValue = parseInt(value, 10) || 8;
+
+    // Map long component keys to unified short state keys
+    const shortKeyMap = {
+      strength: "str",
+      dexterity: "dex",
+      constitution: "con",
+      intelligence: "int",
+      wisdom: "wis",
+      charisma: "cha",
+    };
+
+    const targetKey = shortKeyMap[abilityKey] || abilityKey;
+
+    const currentBase = {
+      str: rawScores.str ?? rawScores.strength ?? 15,
+      dex: rawScores.dex ?? rawScores.dexterity ?? 14,
+      con: rawScores.con ?? rawScores.constitution ?? 13,
+      int: rawScores.int ?? rawScores.intelligence ?? 12,
+      wis: rawScores.wis ?? rawScores.wisdom ?? 10,
+      cha: rawScores.cha ?? rawScores.charisma ?? 8,
+    };
+
+    const updated = { ...currentBase, [targetKey]: numValue };
     updateCharacterData({ abilityScores: updated });
   };
 
   /**
    * Simulates rolling 4d6 drop lowest for all 6 ability score slots.
-   * Preserves the individual dice array so players can see how each score was calculated.
    */
   const handleRoll4d6 = () => {
     setIsRolling(true);
     setTimeout(() => {
       const generatedScores = [];
 
-      // Loop 6 times to generate 6 independent ability scores
       for (let i = 0; i < 6; i++) {
-        // Roll 4 standard 6-sided dice (values 1 through 6)
         const rolls = Array.from(
           { length: 4 },
           () => Math.floor(Math.random() * 6) + 1,
         );
 
-        // Sort ascending to easily drop the lowest die
         rolls.sort((a, b) => a - b);
-        const dropped = rolls[0]; // Lowest die
-        const kept = rolls.slice(1); // Remaining 3 dice
+        const dropped = rolls[0];
+        const kept = rolls.slice(1);
         const sum = kept.reduce((acc, curr) => acc + curr, 0);
 
         generatedScores.push({
@@ -112,11 +141,11 @@ export default function StepAbilityScores({
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#a59075]/20 pb-4">
         <div>
           <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
-            Step 3: Ability Scores
+            Step 3: Ability Scores & Lineage Modifiers
           </h3>
           <p className="text-xs text-[#889c9b]">
-            Determine your character's foundational physical and mental
-            attributes.
+            Allocate foundational attributes and view active racial and feat
+            bonuses.
           </p>
         </div>
 
@@ -185,7 +214,7 @@ export default function StepAbilityScores({
       {rolledScores.length > 0 && method === "roll" && (
         <div className="p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg space-y-2">
           <span className="text-xs text-[#889c9b] font-bold uppercase tracking-wider">
-            Generated Stat Pool (Click or Assign to Stats Below):
+            Generated Stat Pool:
           </span>
           <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
             {rolledScores.map((item, idx) => (
@@ -208,36 +237,49 @@ export default function StepAbilityScores({
         </div>
       )}
 
-      {/* Ability Scores Grid Inputs */}
+      {/* Ability Scores Grid Inputs & Calculation Breakdown Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {ABILITY_KEYS.map(({ key, label, abbr }) => {
-          const score = scores[key] || 10;
-          const modifier = calculateModifier(score);
+        {ABILITY_KEYS.map(({ key, abbrKey, label, abbr }) => {
+          const baseScore = scores[key] || 10;
+
+          // Pull computed breakdown package from statCalculator results
+          const breakdown = computedStats?.abilityBreakdowns?.[abbrKey] || {
+            base: baseScore,
+            bonuses: [],
+          };
+          const finalScore =
+            computedStats?.abilityScores?.[abbrKey] ?? baseScore;
+          const modifierStr = calculateModifier(finalScore);
+          const totalBonusSum = breakdown.bonuses.reduce(
+            (acc, b) => acc + b.value,
+            0,
+          );
 
           return (
             <div
               key={key}
-              className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl space-y-2 shadow-inner"
+              className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl space-y-3 shadow-inner"
             >
               <div className="flex justify-between items-center">
                 <span className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
                   {label} ({abbr})
                 </span>
                 <span className="text-xs px-2 py-0.5 rounded bg-[#361a12] text-amber-400 font-bold border border-[#a59075]/30">
-                  Mod: {modifier}
+                  Total: {finalScore} ({modifierStr})
                 </span>
               </div>
 
+              {/* Base Score Input Control */}
               <div className="flex items-center space-x-3">
                 {method === "standard" ? (
                   <select
-                    value={score}
+                    value={baseScore}
                     onChange={(e) => handleScoreChange(key, e.target.value)}
                     className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm text-[#f0e6d2] focus:outline-none"
                   >
                     {STANDARD_ARRAY.map((val) => (
                       <option key={val} value={val}>
-                        {val}
+                        Base: {val}
                       </option>
                     ))}
                   </select>
@@ -246,11 +288,34 @@ export default function StepAbilityScores({
                     type="number"
                     min={3}
                     max={20}
-                    value={score}
+                    value={baseScore}
                     onChange={(e) => handleScoreChange(key, e.target.value)}
                     className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm text-[#f0e6d2] focus:outline-none"
                   />
                 )}
+              </div>
+
+              {/* Active Bonus Breakdown Badges & Equation Display */}
+              <div className="pt-2 border-t border-[#a59075]/20 space-y-1">
+                <div className="text-[10px] text-[#889c9b] flex flex-wrap gap-1 items-center">
+                  <span>Base: {breakdown.base}</span>
+                  {breakdown.bonuses.map((b, i) => (
+                    <span
+                      key={i}
+                      className="px-1.5 py-0.5 bg-[#361a12] border border-amber-500/30 rounded text-[9px] text-amber-300"
+                    >
+                      +{b.value} {b.source}
+                    </span>
+                  ))}
+                </div>
+                <div className="text-[10px] text-[#f0e6d2] font-semibold tracking-wide">
+                  {breakdown.base} {abbr}
+                  {totalBonusSum > 0 &&
+                    ` + ${totalBonusSum} (Lineage/Feats)`} ={" "}
+                  <strong className="text-amber-300">
+                    {finalScore} ({modifierStr})
+                  </strong>
+                </div>
               </div>
             </div>
           );

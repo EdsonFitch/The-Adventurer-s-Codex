@@ -5,25 +5,32 @@
  * Master container and state manager for the multi-step D&D character creator.
  *
  * Architecture & Responsibilities:
- * - Manages active wizard step progression (Step 1 through 6).
- * - Centralizes the master character payload state (`characterData`) shared across all steps.
- * - Pre-fetches relational reference data from Supabase in parallel (races, subraces, classes, subclasses, backgrounds).
- * - Renders a persistent faded hero background asset at the top header section.
- * - Executes final database insertion into 'characters' using the selected character level,
- *   and bulk inserts chosen spell IDs into 'character_spells'.
+ * - Manages active wizard step progression across 7 distinct steps.
+ * - Centralizes master character payload state (`characterData`) shared across all steps.
+ * - Pre-fetches relational reference data from Supabase in parallel.
+ * - Dynamically parses `effects`, `ability_bonuses`, and `skill_proficiencies` JSONB arrays
+ *   from background, race, and subrace rows into standardized effect objects.
+ * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
+ * - Executes final database insertion into 'characters' and 'character_spells'.
  *
  * @param {Object} props - Component properties.
- * @param {Function} props.onComplete - Callback fired after a successful character forge, passing the new record.
+ * @param {Function} props.onComplete - Callback fired after a successful character forge.
  * @param {string} props.userId - Active authenticated user UUID.
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { supabase } from "../../supabaseClient";
 import StepBasics from "./StepBasics";
 import StepLineageClass from "./StepLineageClass";
 import StepAbilityScores from "./StepAbilityScores";
 import StepBackgroundGear from "./StepBackgroundGear";
+import StepSkills from "./StepSkills";
 import StepSpells from "./StepSpells";
+
+// -----------------------------------------------------------------------------
+// ENGINE IMPORT: Dynamic Stat & Effect Calculator
+// -----------------------------------------------------------------------------
+import { computeCharacterStats } from "../../utils/statCalculator";
 
 // -----------------------------------------------------------------------------
 // ASSET IMPORT: Faded Background Header Asset
@@ -39,29 +46,34 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  // Active effect array populated dynamically from selected entity JSONB columns
+  const [activeEffects, setActiveEffects] = useState([]);
+
   // Master character data payload object matching the Supabase schema requirements
   const [characterData, setCharacterData] = useState({
     name: "",
-    level: 1, // UPDATED: Initialized default character level (1-20) updated via StepBasics
+    level: 1,
     campaignName: "",
     alignmentCode: "LN",
-    portraitUrl: "", // Square roster card asset URL
-    fullBodyUrl: "", // Vertical character sheet asset URL
+    portraitUrl: "",
+    fullBodyUrl: "",
     raceId: "",
     subraceId: "",
     classId: "",
     subclassId: "",
     backgroundId: "",
     abilityScores: {
-      strength: 10,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
+      str: 15,
+      dex: 14,
+      con: 13,
+      int: 12,
+      wis: 10,
+      cha: 8,
     },
+    skills: [], // Selected class skill proficiencies array (Step 5)
+    spells: { classSpells: [], bonusSpells: [] },
+    selectedSpellIds: [],
     hitPointsMax: 10,
-    selectedSpellIds: [], // Stores selected cantrip and spell UUIDs across levels
   });
 
   // ---------------------------------------------------------------------------
@@ -77,8 +89,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
    * ---------------------------------------------------------------------------
    * EFFECT HOOK: fetchReferenceData
    * ---------------------------------------------------------------------------
-   * Fetches all core relational tables from Supabase in parallel using Promise.all
-   * when the wizard component mounts.
+   * Fetches all core relational tables from Supabase in parallel when mounting.
    */
   useEffect(() => {
     async function fetchReferenceData() {
@@ -86,7 +97,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         setLoadingData(true);
         setErrorMessage(null);
 
-        // Execute concurrent queries across multiple Supabase tables
         const [
           { data: races, error: raceErr },
           { data: subraces, error: subraceErr },
@@ -107,7 +117,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         if (subclassErr) throw subclassErr;
         if (bgErr) throw bgErr;
 
-        // Populate local reference states
         setRacesList(races || []);
         setSubracesList(subraces || []);
         setClassesList(classes || []);
@@ -126,53 +135,166 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     fetchReferenceData();
   }, []);
 
-  // ---------------------------------------------------------------------------
-  // 3. STATE MUTATION & NAVIGATION HANDLERS
-  // ---------------------------------------------------------------------------
-
   /**
-   * Merges partial property updates from individual step components into
-   * the master character payload state.
+   * ---------------------------------------------------------------------------
+   * EFFECT HOOK: Aggregate Active JSONB Effects, Ability Bonuses & Skill Grants
+   * ---------------------------------------------------------------------------
+   * Parses modern `effects` arrays, `ability_bonuses` JSONB objects, and
+   * `skill_proficiencies` JSONB arrays (e.g. [{"name":"Acrobatics"}]) into PROFICIENCY_GRANT effects.
    */
+  useEffect(() => {
+    const extractedEffects = [];
+
+    // Helper to parse effects, ability bonuses, and skill_proficiencies from Supabase rows
+    const appendEntityData = (entity, defaultSource) => {
+      if (!entity) return;
+
+      // 1. Process modern `effects` JSONB array if populated
+      if (
+        entity.effects &&
+        Array.isArray(entity.effects) &&
+        entity.effects.length > 0
+      ) {
+        entity.effects.forEach((e) => {
+          extractedEffects.push({
+            ...e,
+            source: e.source || entity.name || defaultSource,
+          });
+        });
+      }
+
+      // 2. Process database `ability_bonuses` JSONB (e.g., {"DEX": 1})
+      if (entity.ability_bonuses) {
+        const bonuses = entity.ability_bonuses;
+        if (!Array.isArray(bonuses) && typeof bonuses === "object") {
+          Object.entries(bonuses).forEach(([stat, val]) => {
+            extractedEffects.push({
+              type: "STAT_MOD",
+              target: String(stat).toUpperCase(),
+              value: Number(val),
+              source: entity.name || defaultSource,
+            });
+          });
+        } else if (Array.isArray(bonuses)) {
+          bonuses.forEach((b) => {
+            const stat = b.ability_score?.name || b.stat || b.target;
+            const val = b.bonus || b.value;
+            if (stat && val) {
+              extractedEffects.push({
+                type: "STAT_MOD",
+                target: String(stat).substring(0, 3).toUpperCase(),
+                value: Number(val),
+                source: entity.name || defaultSource,
+              });
+            }
+          });
+        }
+      }
+
+      // 3. Process database `skill_proficiencies` JSONB arrays (e.g., [{"name":"Acrobatics"}])
+      const skillGrants =
+        entity.skill_proficiencies ||
+        entity.skills ||
+        entity.proficiencies ||
+        entity.granted_skills;
+
+      if (skillGrants) {
+        const skillArray = Array.isArray(skillGrants)
+          ? skillGrants
+          : [skillGrants];
+        skillArray.forEach((skillItem) => {
+          // Extracts "Acrobatics" from string or object {"name": "Acrobatics"}
+          const skillName =
+            typeof skillItem === "string"
+              ? skillItem
+              : skillItem?.name || skillItem?.skill || skillItem?.index;
+
+          if (skillName) {
+            extractedEffects.push({
+              type: "PROFICIENCY_GRANT",
+              target: skillName.trim(),
+              source: entity.name || defaultSource,
+            });
+          }
+        });
+      }
+    };
+
+    const currentRace = racesList.find((r) => r.id === characterData.raceId);
+    const currentSubrace = subracesList.find(
+      (s) => s.id === characterData.subraceId,
+    );
+    const currentClass = classesList.find(
+      (c) => c.id === characterData.classId,
+    );
+    const currentSubclass = subclassesList.find(
+      (sc) => sc.id === characterData.subclassId,
+    );
+    const currentBackground = backgroundsList.find(
+      (b) => b.id === characterData.backgroundId,
+    );
+
+    appendEntityData(currentRace, "Race Lineage");
+    appendEntityData(currentSubrace, "Subrace Lineage");
+    appendEntityData(currentClass, "Class Feature");
+    appendEntityData(currentSubclass, "Subclass Feature");
+    appendEntityData(currentBackground, "Background");
+
+    setActiveEffects(extractedEffects);
+  }, [
+    characterData.raceId,
+    characterData.subraceId,
+    characterData.classId,
+    characterData.subclassId,
+    characterData.backgroundId,
+    racesList,
+    subracesList,
+    classesList,
+    subclassesList,
+    backgroundsList,
+  ]);
+
+  // ---------------------------------------------------------------------------
+  // 3. COMPUTED STAT ENGINE INVOCATION
+  // ---------------------------------------------------------------------------
+  const computedCharacterPackage = useMemo(() => {
+    return computeCharacterStats(
+      {
+        baseAbilityScores: characterData.abilityScores,
+        level: characterData.level,
+      },
+      activeEffects,
+    );
+  }, [characterData.abilityScores, characterData.level, activeEffects]);
+
+  // ---------------------------------------------------------------------------
+  // 4. STATE MUTATION & NAVIGATION HANDLERS
+  // ---------------------------------------------------------------------------
   const updateCharacterData = (updatedFields) => {
     setCharacterData((prev) => ({ ...prev, ...updatedFields }));
   };
 
-  /**
-   * Advances the wizard step forward with basic field validation on Step 1.
-   */
   const handleNextStep = () => {
     if (currentStep === 1 && !characterData.name.trim()) {
       alert("Please give your adventurer a name before proceeding.");
       return;
     }
-    setCurrentStep((prev) => Math.min(prev + 1, 6));
+    setCurrentStep((prev) => Math.min(prev + 1, 7));
   };
 
-  /**
-   * Returns the wizard step backward.
-   */
   const handlePrevStep = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  /**
-   * ---------------------------------------------------------------------------
-   * HANDLER: handleForgeCharacter
-   * ---------------------------------------------------------------------------
-   * Final Submission: Maps master character state to database column structure,
-   * inserts the record into 'characters', and bulk inserts chosen spell IDs into 'character_spells'.
-   */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
       setErrorMessage(null);
 
-      // Construct payload mapping state properties to Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
-        level: characterData.level || 1, // UPDATED: Dynamically assigns the level set in StepBasics
+        level: characterData.level || 1,
         race_id: characterData.raceId || null,
         subrace_id: characterData.subraceId || null,
         background_id: characterData.backgroundId || null,
@@ -184,7 +306,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         full_body_url: characterData.fullBodyUrl || null,
       };
 
-      // 1. Insert new character into 'characters' table
       const { data: newChar, error: charError } = await supabase
         .from("characters")
         .insert([newCharacterRecord])
@@ -193,7 +314,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (charError) throw charError;
 
-      // 2. If character has chosen spells, bulk insert into 'character_spells' junction table
       if (
         characterData.selectedSpellIds &&
         characterData.selectedSpellIds.length > 0
@@ -213,7 +333,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // Trigger completion callback, passing the new record up to the parent container
       if (onComplete) {
         onComplete(newChar);
       }
@@ -228,7 +347,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   };
 
   // ---------------------------------------------------------------------------
-  // 4. LOOKUP HELPERS (Resolves IDs to human-readable objects safely)
+  // 5. LOOKUP HELPERS
   // ---------------------------------------------------------------------------
   const selectedRace = racesList.find((r) => r.id === characterData.raceId);
   const selectedClass = classesList.find((c) => c.id === characterData.classId);
@@ -237,13 +356,11 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 
   // ---------------------------------------------------------------------------
-  // 5. RENDER UI STRUCTURE
+  // 6. RENDER UI STRUCTURE
   // ---------------------------------------------------------------------------
   return (
     <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl overflow-hidden text-[#938f71] shadow-2xl font-antiqua">
-      {/* ----------------------------------------------------------------------- */}
-      {/* SECTION A: ATMOSPHERIC FADED HEADER SECTION                             */}
-      {/* ----------------------------------------------------------------------- */}
+      {/* HEADER SECTION */}
       <div className="relative p-6 pb-5 overflow-hidden border-b border-[#a59075]/30">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
@@ -260,16 +377,15 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
               Forge a New Hero
             </h2>
             <p className="text-xs text-[#889c9b]">
-              Step {currentStep} of 6: {getStepTitle(currentStep)}
+              Step {currentStep} of 7: {getStepTitle(currentStep)}
             </p>
           </div>
 
-          {/* Progress Tracker Pill Indicators (6 Steps) */}
           <div className="flex space-x-1">
-            {[1, 2, 3, 4, 5, 6].map((step) => (
+            {[1, 2, 3, 4, 5, 6, 7].map((step) => (
               <div
                 key={step}
-                className={`w-6 h-2 rounded-full transition-all ${
+                className={`w-5 h-2 rounded-full transition-all ${
                   step === currentStep
                     ? "bg-[#937460] shadow-md"
                     : step < currentStep
@@ -282,16 +398,13 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         </div>
       </div>
 
-      {/* Error Alert Banner */}
       {errorMessage && (
         <div className="m-6 mb-0 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
           {errorMessage}
         </div>
       )}
 
-      {/* ----------------------------------------------------------------------- */}
-      {/* SECTION B: MAIN CONTENT VIEWPORT                                       */}
-      {/* ----------------------------------------------------------------------- */}
+      {/* MAIN CONTENT VIEWPORT */}
       <div className="p-6 min-h-[400px]">
         {loadingData ? (
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
@@ -302,7 +415,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           </div>
         ) : (
           <div>
-            {/* Step 1: Basics & Visual Identity */}
             {currentStep === 1 && (
               <StepBasics
                 characterData={characterData}
@@ -310,7 +422,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
-            {/* Step 2: Lineage & Class */}
             {currentStep === 2 && (
               <StepLineageClass
                 characterData={characterData}
@@ -322,14 +433,13 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
-            {/* Step 3: Ability Scores */}
             {currentStep === 3 && (
               <StepAbilityScores
                 characterData={characterData}
                 updateCharacterData={updateCharacterData}
+                computedStats={computedCharacterPackage}
               />
             )}
-            {/* Step 4: Background & Gear */}
             {currentStep === 4 && (
               <StepBackgroundGear
                 characterData={characterData}
@@ -338,26 +448,31 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 userId={userId}
               />
             )}
-            {/* Step 5: Spell Selection */}
             {currentStep === 5 && (
+              <StepSkills
+                characterData={characterData}
+                updateCharacterData={updateCharacterData}
+                computedStats={computedCharacterPackage}
+              />
+            )}
+            {currentStep === 6 && (
               <StepSpells
                 characterData={characterData}
                 updateCharacterData={updateCharacterData}
                 selectedClass={selectedClass}
+                computedStats={computedCharacterPackage}
               />
             )}
-            {/* Step 6: Final Review & Forge */}
-            {currentStep === 6 && (
+            {currentStep === 7 && (
               <div className="space-y-4 animate-fadeIn">
                 <h3 className="text-sm font-bold text-[#f0e6d2] uppercase tracking-wider">
-                  6. Final Review & Forge
+                  7. Final Review & Forge
                 </h3>
                 <div className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-lg space-y-2 text-xs">
                   <p>
                     <strong className="text-[#f0e6d2]">Name:</strong>{" "}
                     {characterData.name || "Unnamed Hero"}
                   </p>
-                  {/* UPDATED: Display level in the review summary */}
                   <p>
                     <strong className="text-[#f0e6d2]">Level:</strong> Level{" "}
                     {characterData.level || 1}
@@ -381,8 +496,14 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                     {characterData.alignmentCode}
                   </p>
                   <p>
-                    <strong className="text-[#f0e6d2]">Campaign:</strong>{" "}
-                    {characterData.campaignName || "Standalone"}
+                    <strong className="text-[#f0e6d2]">
+                      Proficiency Bonus:
+                    </strong>{" "}
+                    +{computedCharacterPackage.proficiencyBonus}
+                  </p>
+                  <p>
+                    <strong className="text-[#f0e6d2]">Skills Selected:</strong>{" "}
+                    {(characterData.skills || []).length} chosen
                   </p>
                   <p>
                     <strong className="text-[#f0e6d2]">Prepared Spells:</strong>{" "}
@@ -395,9 +516,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         )}
       </div>
 
-      {/* ----------------------------------------------------------------------- */}
-      {/* SECTION C: FOOTER NAVIGATION CONTROLS                                  */}
-      {/* ----------------------------------------------------------------------- */}
+      {/* FOOTER NAVIGATION CONTROLS */}
       <div className="p-6 pt-4 border-t border-[#a59075]/30 flex justify-between items-center bg-[#5f3426]">
         {currentStep > 1 ? (
           <button
@@ -412,7 +531,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           <div />
         )}
 
-        {currentStep < 6 ? (
+        {currentStep < 7 ? (
           <button
             type="button"
             onClick={handleNextStep}
@@ -438,12 +557,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 }
 
-/**
- * -----------------------------------------------------------------------------
- * HELPER FUNCTION: getStepTitle
- * -----------------------------------------------------------------------------
- * Maps step number integers to descriptive header strings.
- */
 function getStepTitle(step) {
   switch (step) {
     case 1:
@@ -455,8 +568,10 @@ function getStepTitle(step) {
     case 4:
       return "Background & Gear";
     case 5:
-      return "Spellcasting & Grimoire";
+      return "Skills & Passive Perks";
     case 6:
+      return "Spellcasting & Grimoire";
+    case 7:
       return "Review & Forge";
     default:
       return "";
