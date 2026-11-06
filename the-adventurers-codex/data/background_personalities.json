@@ -1,0 +1,4721 @@
+[
+  {
+    "name": "Acolyte",
+    "personality_traits": [
+      "I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
+      "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
+      "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
+      "Nothing can shake my optimistic attitude.",
+      "I quote (or misquote) sacred texts and proverbs in almost every situation.",
+      "I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.",
+      "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
+      "I've spent so long in the temple that I have little practical experience dealing with people in the outside world."
+    ],
+    "ideals": [
+      {
+        "text": "Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Charity. I always try to help those in need, no matter what the personal cost.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Change. We must help bring about the changes the gods are constantly working in the world.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I hope to one day rise to the top of my faith's religious hierarchy.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Faith. I trust that my deity will guide my actions. I have faith that if I work hard, things will go well.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Aspiration. I seek to prove myself worthy of my god's favor by matching my actions against their teachings.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would die to recover an ancient relic of my faith that was lost long ago.",
+      "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
+      "I owe my life to the priest who took me in when my parents died.",
+      "Everything I do is for the common people.",
+      "I will do anything to protect the temple where I served.",
+      "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy."
+    ],
+    "flaws": [
+      "I judge others harshly, and myself even more severely.",
+      "I put too much trust in those who wield power within my temple's hierarchy.",
+      "My piety sometimes leads me to blindly trust those that profess faith in my god.",
+      "I am inflexible in my thinking.",
+      "I am suspicious of strangers and expect the worst of them.",
+      "Once I pick a goal, I become obsessed with it to the detriment of everything else in my life."
+    ]
+  },
+  {
+    "name": "Charlatan",
+    "personality_traits": [
+      "I fall in and out of love easily, and am always pursuing someone.",
+      "I have a joke for every occasion, especially occasions where humor is inappropriate.",
+      "Flattery is my preferred trick for getting what I want.",
+      "I’m a born gambler who can’t resist taking a risk for a potential payoff.",
+      "I lie about almost everything, even when there’s no good reason to.",
+      "Sarcasm and insults are my weapons of choice.",
+      "I keep multiple holy symbols on me and invoke whatever deity might come in useful at any given moment.",
+      "I pocket anything I see that might have some value."
+    ],
+    "ideals": [
+      {
+        "text": "Independence. I am a free spirit—no one tells me what to do.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Fairness. I never target people who can’t afford to lose a few coins.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Charity. I distribute the money I acquire to the people who really need it.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Creativity. I never run the same con twice.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Friendship. Material goods come and go. Bonds of friendship last forever.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Aspiration. I’m determined to make something of myself.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I fleeced the wrong person and must work to ensure that this individual never crosses paths with me or those I care about.",
+      "I owe everything to my mentor—a horrible person who’s probably rotting in jail somewhere.",
+      "Somewhere out there, I have a child who doesn’t know me. I’m making the world better for him or her.",
+      "I come from a noble family, and one day I’ll reclaim my lands and title from those who stole them from me.",
+      "A powerful person killed someone I love. Some day soon, I’ll have my revenge.",
+      "I swindled and ruined a person who didn’t deserve it. I seek to atone for my misdeeds but might never be able to forgive myself."
+    ],
+    "flaws": [
+      "I can’t resist a pretty face.",
+      "I'm always in debt. I spend my ill-gotten gains on decadent luxuries faster than I bring them in.",
+      "I’m convinced that no one could ever fool me the way I fool others.",
+      "I’m too greedy for my own good. I can’t resist taking a risk if there’s money involved.",
+      "I can’t resist swindling people who are more powerful than me.",
+      "I hate to admit it and will hate myself for it, but I'll run and preserve my own hide if the going gets tough."
+    ]
+  },
+  {
+    "name": "Criminal",
+    "personality_traits": [
+      "I always have a plan for what to do when things go wrong.",
+      "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
+      "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
+      "I don't pay attention to the risks in a situation. Never tell me the odds.",
+      "The best way to get me to do something is to tell me I can't do it.",
+      "I blow up at the slightest insult.",
+      "I know a guy who knows a guy, who knows another guy.",
+      "My favorable regard for my friends and allies is the only thing that keeps me from being a total monster."
+    ],
+    "ideals": [
+      {
+        "text": "Honor. I don’t steal from others in the trade.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Chains are meant to be broken, as are those who would forge them.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Charity. I steal from the wealthy so that I can help people in need.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I will do whatever it takes to become wealthy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I’m loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Redemption. There’s a spark of good in everyone.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I’m trying to pay off an old debt I owe to a generous benefactor.",
+      "My ill-gotten gains go to support my family.",
+      "Something important was taken from me, and I aim to steal it back.",
+      "I will become the greatest thief that ever lived.",
+      "I’m guilty of a terrible crime. I hope I can redeem myself for it.",
+      "Someone I loved died because of a mistake I made. That will never happen again."
+    ],
+    "flaws": [
+      "When I see something valuable, I can’t think about anything but how to steal it.",
+      "When faced with a choice between money and my friends, I usually choose the money.",
+      "If there’s a plan, I’ll forget it. If I don’t forget it, I’ll ignore it.",
+      "I have a “tell” that reveals when I'm lying.",
+      "I turn tail and run when things look bad.",
+      "An innocent person is in prison for a crime that I committed. I’m okay with that."
+    ]
+  },
+  {
+    "name": "Entertainer",
+    "personality_traits": [
+      "I know a story relevant to almost every situation.",
+      "Whenever I come to a new place, I collect local rumors and spread gossip.",
+      "I’m a hopeless romantic, always in search of that \"special someone.\"",
+      "Nobody stays angry at me or around me for long, since I can defuse any tension.",
+      "I love a good insult, even one directed at me.",
+      "I get bitter if I’m not the center of attention.",
+      "I’ll settle for nothing less than perfection.",
+      "I change my mood or my mind as quickly as I change key in a song."
+    ],
+    "ideals": [
+      {
+        "text": "Beauty. When I perform, I make the world better than it was.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Tradition. The stories, legends, and songs of the past must never be forgotten, for they teach us who we are.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Creativity. The world is in need of new ideas and bold action.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. I'm only in it for the money and fame.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I like seeing the smiles on people's faces when I perform. That's all that matters.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Honesty. Art should reflect the soul; it must come from the heart.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "My instrument is my most treasured possession, and it reminds me of someone I love.",
+      "Someone stole my precious instrument, and someday I’ll get it back.",
+      "I pursue wealth to secure the love of someone.",
+      "I scandalized my hometown, and I can never go back.",
+      "I would do anything for the other members of my old troupe.",
+      "I seek fame so I can be remembered for generations."
+    ],
+    "flaws": [
+      "I’ll do anything to win fame and renown.",
+      "I’m a sucker for a pretty face.",
+      "A scandal prevents me from ever returning home.",
+      "I once satirized a noble who still wants my head.",
+      "I have trouble keeping my true feelings hidden.",
+      "I have a hard time trusting that someone won't betray me."
+    ]
+  },
+  {
+    "name": "Folk Hero",
+    "personality_traits": [
+      "I judge people by their actions, not their words.",
+      "If someone is in trouble, I’m always ready to lend help.",
+      "When I set my mind to something, I follow through no matter what gets in my way.",
+      "I have a strong sense of fair play and always try to find the most equitable solution to arguments.",
+      "I’m confident in my own abilities and do what I can to instill confidence in others.",
+      "Thinking is for other people. I prefer action.",
+      "I misuse long words in an attempt to sound smarter.",
+      "I get bored easily. When am I going to get on with my destiny?"
+    ],
+    "ideals": [
+      {
+        "text": "Respect. People deserve to be treated with dignity and respect.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Fairness. No one should get preferential treatment before the law, and no one is above the law.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Tyrants must not be allowed to oppress the people.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. If I become strong, I can take what I want—what I deserve.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Sincerity. There’s no good in pretending to be something I’m not.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Destiny. Nothing and no one can steer me away from my higher calling.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I have a family, but I have no idea where they are. One day, I hope to see them again.",
+      "I worked the land, I love the land, and I will protect the land.",
+      "A proud noble once gave me a horrible beating, and I will take my revenge on any bully I encounter.",
+      "My tools are symbols of my past life, and I carry them so that I will never forget my roots.",
+      "I protect those who cannot protect themselves.",
+      "I wish my childhood sweetheart had come with me to pursue my destiny."
+    ],
+    "flaws": [
+      "The tyrant who rules my land will stop at nothing to see me killed.",
+      "I’m convinced of the significance of my destiny, and blind to my shortcomings and the risk of failure.",
+      "The people who knew me when I was young know my shameful secret, so I can never go home again.",
+      "I have a weakness for the vices of the city, especially hard drink.",
+      "Secretly, I believe that things would be better if I were a tyrant lording over the land.",
+      "I have trouble trusting in my allies."
+    ]
+  },
+  {
+    "name": "Guild Artisan",
+    "personality_traits": [
+      "I believe that anything worth doing is worth doing right. I can't help it—I'm a perfectionist.",
+      "I'm a snob who looks down on those who can't appreciate fine art.",
+      "I always want to know how things work and what makes people tick.",
+      "I'm full of witty aphorisms and have a proverb for every occasion.",
+      "I'm rude to people who lack my commitment to hard work and fair play.",
+      "I like to talk at length about my profession.",
+      "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
+      "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me."
+    ],
+    "ideals": [
+      {
+        "text": "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Generosity. My talents were given to me so that I could use them to benefit the world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. Everyone should be free to pursue his or her own livelihood.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. I'm only in it for the money.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm committed to the people I care about, not to ideals.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. I work hard to be the best there is at my craft.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "The workshop where I learned my trade is the most important place in the world to me.",
+      "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
+      "I owe my guild a great debt for forging me into the person I am today.",
+      "I pursue wealth to secure someone's love.",
+      "One day I will return to my guild and prove that I am the greatest artisan of them all.",
+      "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood."
+    ],
+    "flaws": [
+      "I'll do anything to get my hands on something rare or priceless.",
+      "I'm quick to assume that someone is trying to cheat me.",
+      "No one must ever learn that I once stole money from guild coffers.",
+      "I'm never satisfied with what I have—I always want more.",
+      "I would kill to acquire a noble title.",
+      "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals."
+    ]
+  },
+  {
+    "name": "Hermit",
+    "personality_traits": [
+      "I’ve been isolated for so long that I rarely speak, preferring gestures and the occasional grunt.",
+      "I am utterly serene, even in the face of disaster.",
+      "The leader of my community had something wise to say on every topic, and I am eager to share that wisdom.",
+      "I feel tremendous empathy for all who suffer.",
+      "I’m oblivious to etiquette and social expectations.",
+      "I connect everything that happens to me to a grand, cosmic plan.",
+      "I often get lost in my own thoughts and contemplation, becoming oblivious to my surroundings.",
+      "I am working on a grand philosophical theory and love sharing my ideas."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. My gifts are meant to be shared with all, not used for my own benefit.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Logic. Emotions must not cloud our sense of what is right and true, or our logical thinking.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Free Thinking. Inquiry and curiosity are the pillars of progress.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Solitude and contemplation are paths toward mystical or magical power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Meddling in the affairs of others only causes trouble.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Self-Knowledge. If you know yourself, there’s nothing left to know.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "Nothing is more important than the other members of my hermitage, order, or association.",
+      "I entered seclusion to hide from the ones who might still be hunting me. I must someday confront them.",
+      "I’m still seeking the enlightenment I pursued in my seclusion, and it still eludes me.",
+      "I entered seclusion because I loved someone I could not have.",
+      "Should my discovery come to light, it could bring ruin to the world.",
+      "My isolation gave me great insight into a great evil that only I can destroy."
+    ],
+    "flaws": [
+      "Now that I've returned to the world, I enjoy its delights a little too much.",
+      "I harbor dark, bloodthirsty thoughts that my isolation and meditation failed to quell.",
+      "I am dogmatic in my thoughts and philosophy.",
+      "I let my need to win arguments overshadow friendships and harmony.",
+      "I'd risk too much to uncover a lost bit of knowledge.",
+      "I like keeping secrets and won't share them with anyone."
+    ]
+  },
+  {
+    "name": "Noble",
+    "personality_traits": [
+      "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
+      "The common folk love me for my kindness and generosity.",
+      "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+      "I take great pains to always look my best and follow the latest fashions.",
+      "I don’t like to get my hands dirty, and I won’t be caught dead in unsuitable accommodations.",
+      "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
+      "My favor, once lost, is lost forever.",
+      "If you do me an injury, I will crush you, ruin your name, and salt your fields."
+    ],
+    "ideals": [
+      {
+        "text": "Respect. Respect is due to me because of my position, but all people regardless of station deserve to be treated with dignity.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. It is my duty to respect the authority of those above me, just as those below me must respect mine.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. I must prove that I can handle myself without the coddling of my family.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. If I can attain more power, no one will tell me what to do.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Family. Blood runs thicker than water.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Noble Obligation. It is my duty to protect and care for the people beneath me.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I will face any challenge to win the approval of my family.",
+      "My house’s alliance with another noble family must be sustained at all costs.",
+      "Nothing is more important than the other members of my family.",
+      "I am in love with the heir of a family that my family despises.",
+      "My loyalty to my sovereign is unwavering.",
+      "The common folk must see me as a hero of the people."
+    ],
+    "flaws": [
+      "I secretly believe that everyone is beneath me.",
+      "I hide a truly scandalous secret that could ruin my family forever.",
+      "I too often hear veiled insults and threats in every word addressed to me, and I’m quick to anger.",
+      "I have an insatiable desire for carnal pleasures.",
+      "In fact, the world does revolve around me.",
+      "By my words and actions, I often bring shame to my family."
+    ]
+  },
+  {
+    "name": "Outlander",
+    "personality_traits": [
+      "I'm driven by a wanderlust that led me away from home.",
+      "I watch over my friends as if they were a litter of newborn pups.",
+      "I once ran twenty-five miles without stopping to warn to my clan of an approaching orc horde. I'd do it again if I had to.",
+      "I have a lesson for every situation, drawn from observing nature.",
+      "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
+      "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
+      "I feel far more comfortable around animals than people.",
+      "I was, in fact, raised by wolves."
+    ],
+    "ideals": [
+      {
+        "text": "Change. Life is like the seasons, in constant change, and we must change with it.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greater Good. It is each person's responsibility to make the most happiness for the whole tribe.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Honor. If I dishonor myself, I dishonor my whole clan.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Might. The strongest are meant to rule.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Nature. The natural world is more important than all the constructs of civilization.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Glory. I must earn glory in battle, for myself and my clan.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "My family, clan, or tribe is the most important thing in my life, even when they are far from me.",
+      "An injury to the unspoiled wilderness of my home is an injury to me.",
+      "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
+      "I am the last of my tribe, and it is up to me to ensure their names enter legend.",
+      "I suffer awful visions of a coming disaster and will do anything to prevent it.",
+      "It is my duty to provide children to sustain my tribe."
+    ],
+    "flaws": [
+      "I am too enamored of ale, wine, and other intoxicants.",
+      "There’s no room for caution in a life lived to the fullest.",
+      "I remember every insult I’ve received and nurse a silent resentment toward anyone who’s ever wronged me.",
+      "I am slow to trust members of other races, tribes, and societies.",
+      "Violence is my answer to almost any challenge.",
+      "Don’t expect me to save those who can’t save themselves. It is nature’s way that the strong thrive and the weak perish."
+    ]
+  },
+  {
+    "name": "Sage",
+    "personality_traits": [
+      "I use polysyllabic words that convey the impression of great erudition.",
+      "I've read every book in the world's greatest libraries—or I like to boast that I have.",
+      "I'm used to helping out those who aren't as smart as I am, and I patiently explain anything and everything to others.",
+      "There's nothing I like more than a good mystery.",
+      "I'm willing to listen to every side of an argument before I make my own judgment.",
+      "I… speak… slowly… when talking… to idiots,… which… almost… everyone… is… compared… to me.",
+      "I am horribly, horribly awkward in social situations.",
+      "I'm convinced that people are always trying to steal my secrets."
+    ],
+    "ideals": [
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Beauty. What is beautiful points us beyond itself toward what is true.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Logic. Emotions must not cloud our logical thinking.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "No Limits. Nothing should fetter the infinite possibility inherent in all existence.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Knowledge is the path to power and domination.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Self-Improvement. The goal of a life of study is the betterment of oneself.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "It is my duty to protect my students.",
+      "I have an ancient text that holds terrible secrets that must not fall into the wrong hands.",
+      "I work to preserve a library, university, scriptorium, or monastery.",
+      "My life's work is a series of tomes related to a specific field of lore.",
+      "I've been searching my whole life for the answer to a certain question.",
+      "I sold my soul for knowledge. I hope to do great deeds and win it back."
+    ],
+    "flaws": [
+      "I am easily distracted by the promise of information.",
+      "Most people scream and run when they see a demon. I stop and take notes on its anatomy.",
+      "Unlocking an ancient mystery is worth the price of a civilization.",
+      "I overlook obvious solutions in favor of complicated ones.",
+      "I speak without really thinking through my words, invariably insulting others.",
+      "I can't keep a secret to save my life, or anyone else's."
+    ]
+  },
+  {
+    "name": "Sailor",
+    "personality_traits": [
+      "My friends know they can rely on me, no matter what.",
+      "I work hard so that I can play hard when the work is done.",
+      "I enjoy sailing into new ports and making new friends over a flagon of ale.",
+      "I stretch the truth for the sake of a good story.",
+      "To me, a tavern brawl is a nice way to get to know a new city.",
+      "I never pass up a friendly wager.",
+      "My language is as foul as an otyugh nest.",
+      "I like a job well done, especially if I can convince someone else to do it."
+    ],
+    "ideals": [
+      {
+        "text": "Respect. The thing that keeps a ship together is mutual respect between captain and crew.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Fairness. We all do the work, so we all share in the rewards.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. The sea is freedom—the freedom to go anywhere and do anything.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Mastery. I'm a predator, and the other ships on the sea are my prey.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm committed to my crewmates, not to ideals.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. Someday I'll own my own ship and chart my own destiny.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I'm loyal to my captain first, everything else second.",
+      "The ship is most important—crewmates and captains come and go.",
+      "I'll always remember my first ship.",
+      "In a harbor town, I have a paramour whose eyes nearly stole me from the sea.",
+      "I was cheated out of my fair share of the profits, and I want to get my due.",
+      "Ruthless pirates murdered my captain and crewmates, plundered our ship, and left me to die. Vengeance will be mine."
+    ],
+    "flaws": [
+      "I follow orders, even if I think they're wrong.",
+      "I'll say anything to avoid having to do extra work.",
+      "Once someone questions my courage, I never back down no matter how dangerous the situation.",
+      "Once I start drinking, it's hard for me to stop.",
+      "I can't help but pocket loose coins and other trinkets I come across.",
+      "My pride will probably lead to my destruction."
+    ]
+  },
+  {
+    "name": "Soldier",
+    "personality_traits": [
+      "I’m always polite and respectful.",
+      "I’m haunted by memories of war. I can’t get the images of violence out of my mind.",
+      "I’ve lost too many friends, and I’m slow to make new ones.",
+      "I’m full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+      "I can stare down a hell hound without flinching.",
+      "I enjoy being strong and like breaking things.",
+      "I have a crude sense of humor.",
+      "I face problems head-on. A simple, direct solution is the best path to success."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. Our lot is to lay down our lives in defense of others.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. I do what I must and obey just authority.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. When people follow orders blindly, they embrace a kind of tyranny.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. In life as in war, the stronger force wins.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Ideals aren’t worth killing over or going to war for.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Nation. My city, nation, or people are all that matter.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would still lay down my life for the people I served with.",
+      "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+      "My honor is my life.",
+      "I’ll never forget the crushing defeat my company suffered or the enemies who dealt it.",
+      "Those who fight beside me are those worth dying for.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+      "I have little respect for anyone who is not a proven warrior.",
+      "I made a terrible mistake in battle that cost many lives—and I would do anything to keep that mistake secret.",
+      "My hatred of my enemies is blind and unreasoning.",
+      "I obey the law, even if the law causes misery.",
+      "I’d rather eat my armor than admit when I’m wrong."
+    ]
+  },
+  {
+    "name": "Urchin",
+    "personality_traits": [
+      "I hide scraps of food and trinkets away in my pockets.",
+      "I ask a lot of questions.",
+      "I like to squeeze into small places where no one else can get to me.",
+      "I sleep with my back to a wall or tree, with everything I own wrapped in a bundle in my arms.",
+      "I eat like a pig and have bad manners.",
+      "I think anyone who’s nice to me is hiding evil intent.",
+      "I don’t like to bathe.",
+      "I bluntly say what other people are hinting at or hiding."
+    ],
+    "ideals": [
+      {
+        "text": "Respect. All people, rich or poor, deserve respect.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Community. We have to take care of each other, because no one else is going to do it.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Change. The low are lifted up, and the high and mighty are brought down. Change is the nature of things.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Retribution. The rich need to be shown what life and death are like in the gutters.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I help the people who help me—that’s what keeps us alive.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. I’m going to prove that I’m worthy of a better life.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "My town or city is my home, and I’ll fight to defend it.",
+      "I sponsor an orphanage to keep others from enduring what I was forced to endure.",
+      "I owe my survival to another urchin who taught me to live on the streets.",
+      "I owe a debt I can never repay to the person who took pity on me.",
+      "I escaped my life of poverty by robbing an important person, and I’m wanted for it.",
+      "No one else should have to endure the hardships I’ve been through."
+    ],
+    "flaws": [
+      "If I’m outnumbered, I will run away from a fight.",
+      "Gold seems like a lot of money to me, and I’ll do just about anything for more of it.",
+      "I will never fully trust anyone other than myself.",
+      "I’d rather kill someone in their sleep than fight fair.",
+      "It’s not stealing if I need it more than someone else.",
+      "People who can’t take care of themselves get what they deserve."
+    ]
+  },
+  {
+    "name": "City Watch (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I'm always polite and respectful.",
+      "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
+      "I've lost too many friends, and I'm slow to make new ones.",
+      "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+      "I can stare down a hell hound without flinching.",
+      "I enjoy being strong and like breaking things.",
+      "I have a crude sense of humor.",
+      "I face problems head-on. A simple, direct solution is the best path to success."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. Our lot is to lay down our lives in defense of others.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. I do what I must and obey just authority.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. When people follow orders blindly, they embrace a kind of tyranny.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. In life as in war, the stronger force wins.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Ideals aren't worth killing over or going to war for.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Nation. My city, nation, or people are all that matter.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would still lay down my life for the people I served with.",
+      "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+      "My honor is my life.",
+      "I'll never forget the crushing defeat my company suffered or the enemies who dealt it.",
+      "Those who fight beside me are those worth dying for.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+      "I have little respect for anyone who is not a proven warrior.",
+      "I made a terrible mistake in battle that cost many lives—and I would do anything to keep that mistake secret.",
+      "My hatred of my enemies is blind and unreasoning.",
+      "I obey the law, even if the law causes misery.",
+      "I'd rather eat my armor than admit when I'm wrong."
+    ]
+  },
+  {
+    "name": "Clan Crafter (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I believe that anything worth doing is worth doing right. I can't help it—I'm a perfectionist.",
+      "I'm a snob who looks down on those who can't appreciate fine art.",
+      "I always want to know how things work and what makes people tick.",
+      "I'm full of witty aphorisms and have a proverb for every occasion.",
+      "I'm rude to people who lack my commitment to hard work and fair play.",
+      "I like to talk at length about my profession.",
+      "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
+      "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me."
+    ],
+    "ideals": [
+      {
+        "text": "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Generosity. My talents were given to me so that I could use them to benefit the world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. Everyone should be free to pursue his or her own livelihood.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. I'm only in it for the money.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm committed to the people I care about, not to ideals.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. I work hard to be the best there is at my craft.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "The workshop where I learned my trade is the most important place in the world to me.",
+      "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
+      "I owe my guild a great debt for forging me into the person I am today.",
+      "I pursue wealth to secure someone's love.",
+      "One day I will return to my guild and prove that I am the greatest artisan of them all.",
+      "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood."
+    ],
+    "flaws": [
+      "I'll do anything to get my hands on something rare or priceless.",
+      "I'm quick to assume that someone is trying to cheat me.",
+      "No one must ever learn that I once stole money from guild coffers.",
+      "I'm never satisfied with what I have—I always want more.",
+      "I would kill to acquire a noble title.",
+      "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals."
+    ]
+  },
+  {
+    "name": "Cloistered Scholar (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I use polysyllabic words that convey the impression of great erudition.",
+      "I've read every book in the world's greatest libraries—or I like to boast that I have.",
+      "I'm used to helping out those who aren't as smart as I am, and I patiently explain anything and everything to others.",
+      "There's nothing I like more than a good mystery.",
+      "I'm willing to listen to every side of an argument before I make my own judgment.",
+      "I… speak… slowly… when talking… to idiots,… which… almost… everyone… is… compared… to me.",
+      "I am horribly, horribly awkward in social situations.",
+      "I'm convinced that people are always trying to steal my secrets."
+    ],
+    "ideals": [
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Beauty. What is beautiful points us beyond itself toward what is true.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Logic. Emotions must not cloud our logical thinking.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "No Limits. Nothing should fetter the infinite possibility inherent in all existence.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Knowledge is the path to power and domination.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Self-Improvement. The goal of a life of study is the betterment of oneself.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "It is my duty to protect my students.",
+      "I have an ancient text that holds terrible secrets that must not fall into the wrong hands.",
+      "I work to preserve a library, university, scriptorium, or monastery.",
+      "My life's work is a series of tomes related to a specific field of lore.",
+      "I've been searching my whole life for the answer to a certain question.",
+      "I sold my soul for knowledge. I hope to do great deeds and win it back."
+    ],
+    "flaws": [
+      "I am easily distracted by the promise of information.",
+      "Most people scream and run when they see a demon. I stop and take notes on its anatomy.",
+      "Unlocking an ancient mystery is worth the price of a civilization.",
+      "I overlook obvious solutions in favor of complicated ones.",
+      "I speak without really thinking through my words, invariably insulting others.",
+      "I can't keep a secret to save my life, or anyone else's."
+    ]
+  },
+  {
+    "name": "Courtier (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I believe that anything worth doing is worth doing right. I can't help it—I'm a perfectionist.",
+      "I'm a snob who looks down on those who can't appreciate fine art.",
+      "I always want to know how things work and what makes people tick.",
+      "I'm full of witty aphorisms and have a proverb for every occasion.",
+      "I'm rude to people who lack my commitment to hard work and fair play.",
+      "I like to talk at length about my profession.",
+      "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
+      "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me."
+    ],
+    "ideals": [
+      {
+        "text": "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Generosity. My talents were given to me so that I could use them to benefit the world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. Everyone should be free to pursue his or her own livelihood.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. I'm only in it for the money.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm committed to the people I care about, not to ideals.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. I work hard to be the best there is at my craft.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "The workshop where I learned my trade is the most important place in the world to me.",
+      "I created a great work for someone, and then found them unworthy to receive it. I'm still looking for someone worthy.",
+      "I owe my guild a great debt for forging me into the person I am today.",
+      "I pursue wealth to secure someone's love.",
+      "One day I will return to my guild and prove that I am the greatest artisan of them all.",
+      "I will get revenge on the evil forces that destroyed my place of business and ruined my livelihood."
+    ],
+    "flaws": [
+      "I'll do anything to get my hands on something rare or priceless.",
+      "I'm quick to assume that someone is trying to cheat me.",
+      "No one must ever learn that I once stole money from guild coffers.",
+      "I'm never satisfied with what I have—I always want more.",
+      "I would kill to acquire a noble title.",
+      "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals."
+    ]
+  },
+  {
+    "name": "Faction Agent (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I idolize a particular hero of my faith, and constantly refer to that person's deeds and example.",
+      "I can find common ground between the fiercest enemies, empathizing with them and always working toward peace.",
+      "I see omens in every event and action. The gods try to speak to us, we just need to listen.",
+      "Nothing can shake my optimistic attitude.",
+      "I quote (or misquote) sacred texts and proverbs in almost every situation.",
+      "I am tolerant (or intolerant) of other faiths and respect (or condemn) the worship of other gods.",
+      "I've enjoyed fine food, drink, and high society among my temple's elite. Rough living grates on me.",
+      "I've spent so long in the temple that I have little practical experience dealing with people in the outside world."
+    ],
+    "ideals": [
+      {
+        "text": "Tradition. The ancient traditions of worship and sacrifice must be preserved and upheld.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Charity. I always try to help those in need, no matter what the personal cost.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Change. We must help bring about the changes the gods are constantly working in the world.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I hope to one day rise to the top of my faith's religious hierarchy.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Faith. I trust that my deity will guide my actions. I have faith that if I work hard, things will go well.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Aspiration. I seek to prove myself worthy of my god's favor by matching my actions against their teachings.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would die to recover an ancient relic of my faith that was lost long ago.",
+      "I will someday get revenge on the corrupt temple hierarchy who branded me a heretic.",
+      "I owe my life to the priest who took me in when my parents died.",
+      "Everything I do is for the common people.",
+      "I will do anything to protect the temple where I served.",
+      "I seek to preserve a sacred text that my enemies consider heretical and seek to destroy."
+    ],
+    "flaws": [
+      "I judge others harshly, and myself even more severely.",
+      "I put too much trust in those who wield power within my temple's hierarchy.",
+      "My piety sometimes leads me to blindly trust those that profess faith in my god.",
+      "I am inflexible in my thinking.",
+      "I am suspicious of strangers and expect the worst of them.",
+      "Once I pick a goal, I become obsessed with it to the detriment of everything else in my life."
+    ]
+  },
+  {
+    "name": "Far Traveler (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I have different assumptions from those around me concerning personal space, blithely invading others' space in innocence, or reacting to ignorant invasion of my own.",
+      "I have my own ideas about what is and is not food, and I find the eating habits of those around me fascinating, confusing, or revolting.",
+      "I have a strong code of honor or sense of propriety that others don't comprehend.",
+      "I express affection or contempt in ways that are unfamiliar to others.",
+      "I begin or end my day with small traditional rituals that are unfamiliar to those around me."
+    ],
+    "ideals": [
+      {
+        "text": "Open. I have much to learn from the kindly folk I meet along my way.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Reserved. As someone new to these strange lands, I am cautious and respectful in my dealings.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Adventure. I'm far from home, and everything is strange and wonderful!",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Cunning. Though I may not know their ways, neither do they know mine, which can be to my advantage.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Inquisitive. Everything is new, but I have a thirst to learn.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Suspicious. I must be careful, for I have no way of telling friend from foe here.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "So long as I have this token from my homeland, I can face any adversity in this strange land.",
+      "The gods of my people are a comfort to me so far from home.",
+      "I hold no greater cause than my service to my people.",
+      "My freedom is my most precious possession. I'll never let anyone take it from me again.",
+      "I'm fascinated by the beauty and wonder of this new land.",
+      "Though I had no choice, I lament having to leave my loved one behind. I hope to see them again one day."
+    ],
+    "flaws": [
+      "I am secretly (or not so secretly) convinced of the superiority of my own culture over that of this foreign land.",
+      "I pretend not to understand the local language in order to avoid interactions I would rather not have.",
+      "I have a weakness for the new intoxicants and other pleasures of this land.",
+      "I don't take kindly to some of the actions and motivations of the people of this land, because these folk are different from me.",
+      "I consider the adherents of other gods to be deluded innocents at best, or ignorant fools at worst.",
+      "I have a weakness for exotic beauties."
+    ]
+  },
+  {
+    "name": "Inheritor (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I judge people by their actions, not their words.",
+      "If someone is in trouble, I'm always ready to lend help.",
+      "When I set my mind to something, I follow through no matter what gets in my way.",
+      "I have a strong sense of fair play and always try to find the most equitable solution to arguments.",
+      "I'm confident in my own abilities and do what I can to instill confidence in others.",
+      "Thinking is for other people. I prefer action.",
+      "I misuse long words in an attempt to sound smarter.",
+      "I get bored easily. When am I going to get on with my destiny?"
+    ],
+    "ideals": [
+      {
+        "text": "Respect. People deserve to be treated with dignity and respect.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Fairness. No one should get preferential treatment before the law, and no one is above the law.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Tyrants must not be allowed to oppress the people.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. If I become strong, I can take what I want—what I deserve.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Sincerity. There's no good in pretending to be something I'm not.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Destiny. Nothing and no one can steer me away from my higher calling.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I have a family, but I have no idea where they are. One day, I hope to see them again.",
+      "I worked the land, I love the land, and I will protect the land.",
+      "A proud noble once gave me a horrible beating, and I will take my revenge on any bully I encounter.",
+      "My tools are symbols of my past life, and I carry them so that I will never forget my roots.",
+      "I protect those who cannot protect themselves.",
+      "I wish my childhood sweetheart had come with me to pursue my destiny."
+    ],
+    "flaws": [
+      "The tyrant who rules my land will stop at nothing to see me killed.",
+      "I'm convinced of the significance of my destiny, and blind to my shortcomings and the risk of failure.",
+      "The people who knew me when I was young know my shameful secret, so I can never go home again.",
+      "I have a weakness for the vices of the city, especially hard drink.",
+      "Secretly, I believe that things would be better if I were a tyrant lording over the land.",
+      "I have trouble trusting in my allies."
+    ]
+  },
+  {
+    "name": "Knight of the Order (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I'm always polite and respectful.",
+      "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
+      "I've lost too many friends, and I'm slow to make new ones.",
+      "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+      "I can stare down a hell hound without flinching.",
+      "I enjoy being strong and like breaking things.",
+      "I have a crude sense of humor.",
+      "I face problems head-on. A simple, direct solution is the best path to success."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. Our lot is to lay down our lives in defense of others.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. I do what I must and obey just authority.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. When people follow orders blindly, they embrace a kind of tyranny.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. In life as in war, the stronger force wins.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Ideals aren't worth killing over or going to war for.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Nation. My city, nation, or people are all that matter.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would still lay down my life for the people I served with.",
+      "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+      "My honor is my life.",
+      "I'll never forget the crushing defeat my company suffered or the enemies who dealt it.",
+      "Those who fight beside me are those worth dying for.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+      "I have little respect for anyone who is not a proven warrior.",
+      "I made a terrible mistake in battle that cost many lives—and I would do anything to keep that mistake secret.",
+      "My hatred of my enemies is blind and unreasoning.",
+      "I obey the law, even if the law causes misery.",
+      "I'd rather eat my armor than admit when I'm wrong."
+    ]
+  },
+  {
+    "name": "Mercenary Veteran (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I'm always polite and respectful.",
+      "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
+      "I've lost too many friends, and I'm slow to make new ones.",
+      "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+      "I can stare down a hell hound without flinching.",
+      "I enjoy being strong and like breaking things.",
+      "I have a crude sense of humor.",
+      "I face problems head-on. A simple, direct solution is the best path to success."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. Our lot is to lay down our lives in defense of others.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. I do what I must and obey just authority.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. When people follow orders blindly, they embrace a kind of tyranny.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. In life as in war, the stronger force wins.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Ideals aren't worth killing over or going to war for.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Nation. My city, nation, or people are all that matter.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would still lay down my life for the people I served with.",
+      "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+      "My honor is my life.",
+      "I'll never forget the crushing defeat my company suffered or the enemies who dealt it.",
+      "Those who fight beside me are those worth dying for.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+      "I have little respect for anyone who is not a proven warrior.",
+      "I made a terrible mistake in battle that cost many lives—and I would do anything to keep that mistake secret.",
+      "My hatred of my enemies is blind and unreasoning.",
+      "I obey the law, even if the law causes misery.",
+      "I'd rather eat my armor than admit when I'm wrong."
+    ]
+  },
+  {
+    "name": "Urban Bounty Hunter (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I always have a plan for what to do when things go wrong.",
+      "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
+      "The first thing I do in a new place is note the locations of everything valuable—or where such things could be hidden.",
+      "I would rather make a new friend than a new enemy.",
+      "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
+      "I don't pay attention to the risks in a situation. Never tell me the odds.",
+      "The best way to get me to do something is to tell me I can't do it.",
+      "I blow up at the slightest insult."
+    ],
+    "ideals": [
+      {
+        "text": "Honor. I don't steal from others in the trade.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Chains are meant to be broken, as are those who would forge them.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Charity. I steal from the wealthy so that I can help people in need.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I will do whatever it takes to become wealthy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Redemption. There's a spark of good in everyone.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I'm trying to pay off an old debt I owe to a generous benefactor.",
+      "My ill-gotten gains go to support my family.",
+      "Something important was taken from me, and I aim to steal it back.",
+      "I will become the greatest thief that ever lived.",
+      "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
+      "Someone I loved died because of a mistake I made. That will never happen again."
+    ],
+    "flaws": [
+      "When I see something valuable, I can't think about anything but how to steal it.",
+      "When faced with a choice between money and my friends, I usually choose the money.",
+      "If there's a plan, I'll forget it. If I don't forget it, I'll ignore it.",
+      "I have a \"tell\" that reveals when I'm lying.",
+      "I turn tail and run when things look bad.",
+      "An innocent person is in prison for a crime that I committed. I'm okay with that."
+    ]
+  },
+  {
+    "name": "Uthgardt Tribe Member (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "I'm driven by a wanderlust that led me away from home.",
+      "I watch over my friends as if they were a litter of newborn pups.",
+      "I once ran twenty-five miles without stopping to warn my clan of an approaching orc horde. I'd do it again if I had to.",
+      "I have a lesson for every situation, drawn from observing nature.",
+      "I place no stock in wealthy or well-mannered folk. Money and manners won't save you from a hungry owlbear.",
+      "I'm always picking things up, absently fiddling with them, and sometimes accidentally breaking them.",
+      "I feel far more comfortable around animals than people.",
+      "I was, in fact, raised by wolves."
+    ],
+    "ideals": [
+      {
+        "text": "Change. Life is like the seasons, in constant change, and we must change with it.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greater Good. It is each person's responsibility to make the most happiness for the whole tribe.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Honor. If I dishonor myself, I dishonor my whole clan.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Might. The strongest are meant to rule.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Nature. The natural world is more important than all the constructs of civilization.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Glory. I must earn glory in battle, for myself and my clan.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "My family, clan, or tribe is the most important thing in my life, even when they are far from me.",
+      "An injury to the unspoiled wilderness of my home is an injury to me.",
+      "I will bring terrible wrath down on the evildoers who destroyed my homeland.",
+      "I am the last of my tribe, and it is up to me to ensure their names enter legend.",
+      "I suffer awful visions of a coming disaster and will do anything to prevent it.",
+      "It is my duty to provide children to sustain my tribe."
+    ],
+    "flaws": [
+      "I am too enamored of ale, wine, and other intoxicants.",
+      "There's no room for caution in a life lived to the fullest.",
+      "I remember every insult I've received and nurse a silent resentment toward anyone who's ever wronged me.",
+      "I am slow to trust members of other races, tribes, and societies.",
+      "Violence is my answer to almost any challenge.",
+      "Don't expect me to save those who can't save themselves. It is nature's way that the strong thrive and the weak perish."
+    ]
+  },
+  {
+    "name": "Waterdhavian Noble (Sword Coast Adventurer's Guide)",
+    "personality_traits": [
+      "My eloquent flattery makes everyone I talk to feel like the most wonderful and important person in the world.",
+      "The common folk love me for my kindness and generosity.",
+      "No one could doubt by looking at my regal bearing that I am a cut above the unwashed masses.",
+      "I take great pains to always look my best and follow the latest fashions.",
+      "I don't like to get my hands dirty, and I won't be caught dead in unsuitable accommodations.",
+      "Despite my noble birth, I do not place myself above other folk. We all have the same blood.",
+      "My favor, once lost, is lost forever.",
+      "If you do me an injury, I will crush you, ruin your name, and salt your fields."
+    ],
+    "ideals": [
+      {
+        "text": "Respect. Respect is due to me because of my position, but all people regardless of station deserve to be treated with dignity.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. It is my duty to respect the authority of those above me, just as those below me must respect mine.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. I must prove that I can handle myself without the coddling of my family.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. If I can attain more power, no one will tell me what to do.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Family. Blood runs thicker than water.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Noble Obligation. It is my duty to protect and care for the people beneath me.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I will face any challenge to win the approval of my family.",
+      "My house's alliance with another noble family must be sustained at all costs.",
+      "Nothing is more important than the other members of my family.",
+      "I am in love with the heir of a family that my family despises.",
+      "My loyalty to my sovereign is unwavering.",
+      "The common folk must see me as a hero of the people."
+    ],
+    "flaws": [
+      "I secretly believe that everyone is beneath me.",
+      "I hide a truly scandalous secret that could ruin my family forever.",
+      "I too often hear veiled insults and threats in every word addressed to me, and I'm quick to anger.",
+      "I have an insatiable desire for carnal pleasures.",
+      "In fact, the world does revolve around me.",
+      "By my words and actions, I often bring shame to my family."
+    ]
+  },
+  {
+    "name": "House Agent (Eberron: Rising from the Last War)",
+    "personality_traits": [
+      "I'm always looking to improve efficiency.",
+      "I love to share trivia about my house's business.",
+      "I never forget an insult against me or my house.",
+      "I'm enthusiastic about everything my house does.",
+      "I represent my house and take pride in my looks.",
+      "I'm critical of my house's rivals and quick to point out their flaws."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. My house's work benefits the world, and I am proud to be part of it.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Tradition. The methods and traditions of my house have stood the test of time.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Innovation. My house must adapt and change to survive.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. My house's influence must grow, no matter the cost.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Business. The bottom line is what matters most.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Excellence. I will be the best agent my house has ever seen.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would do anything for my house and its leaders.",
+      "My house's success is my success.",
+      "A rival house wronged my family, and I will have revenge.",
+      "I am loyal to a specific leader within my house, not the house itself.",
+      "I hope to one day rise to a position of power within my house.",
+      "The work I do for my house is my life's calling."
+    ],
+    "flaws": [
+      "I'm obsessed with conspiracy theories and worried about secret societies and hidden demons.",
+      "I'm a snob who looks down on those who aren't part of a dragonmarked house.",
+      "I'm quick to anger when someone insults my house.",
+      "I would betray my house if offered enough money.",
+      "I'm jealous of agents from other houses who seem more successful.",
+      "I'm inflexible in my methods and refuse to consider alternatives."
+    ]
+  },
+  {
+    "name": "Celebrity Adventurer's Scion (Acquisitions Incorporated)",
+    "personality_traits": [
+      "I will never get out of my famous parent's shadow, and no one else will ever understand this burden.",
+      "I've seen enough of the adventuring life to have realistic expectations and empathy for my peers.",
+      "I'm never impressed by fame or fortune, because I've seen it all before.",
+      "I'm determined to prove that I'm more than just my parent's child.",
+      "I'm a walking encyclopedia of adventuring lore, thanks to the stories I grew up with.",
+      "I'm quick to name-drop my famous parent to get what I want.",
+      "I'm fiercely protective of my parent's legacy.",
+      "I'm secretly terrified that I'll never live up to my parent's reputation."
+    ],
+    "ideals": [
+      {
+        "text": "Fame. I will make a name for myself, no matter what it takes.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Family. My parent's legacy is my responsibility, and I will honor it.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. I will forge my own path, separate from my parent's fame.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Wealth. I'm used to the finer things in life, and I'll do what it takes to keep them.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Friendship. The friends I make along the way are worth more than any fame.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Truth. I will show the world who I really am, not who they expect me to be.",
+        "alignment": "Neutral"
+      }
+    ],
+    "bonds": [
+      "I carry a memento of my famous parent, and it reminds me of what I'm working toward.",
+      "I'm trying to complete a quest my parent never finished.",
+      "I owe my success to a mentor who saw potential in me beyond my name.",
+      "I'm in love with someone who doesn't care about my fame.",
+      "I will prove to my parent that I am worthy of their legacy.",
+      "I'm searching for a sibling I never knew I had."
+    ],
+    "flaws": [
+      "I'm arrogant and assume everyone knows who I am.",
+      "I'm deeply insecure about my own abilities.",
+      "I spend money recklessly to maintain my image.",
+      "I'm jealous of anyone who achieves fame on their own merits.",
+      "I'm quick to anger when someone insults my parent.",
+      "I'm afraid of failure, because it would embarrass my family."
+    ]
+  },
+  {
+    "name": "Fisher (Ghosts of Saltmarsh)",
+    "personality_traits": [
+      "I am unmoved by the wrath of nature.",
+      "My friends are my crew; we sink or float together.",
+      "I need long stretches of quiet to clear my head.",
+      "Rich folk don't know the satisfaction of hard work.",
+      "I laugh heartily, feel deeply, and fear nothing.",
+      "I work hard; nature offers no handouts.",
+      "I dislike bargaining; state your price and mean it.",
+      "Luck favors me, and I take risks others might not."
+    ],
+    "ideals": [
+      {
+        "text": "Community. The sea is a harsh mistress, and we must look out for one another.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Tradition. The old ways of fishing and seamanship must be preserved.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. The sea is freedom, and I will not be bound by the laws of land.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. The sea's bounty is there for the taking, and I intend to take my share.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Nature. The sea is a living thing, and we must respect it.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Mastery. I will become the greatest fisher these waters have ever seen.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my crew and captain above all else.",
+      "The sea took something from me, and I will get it back.",
+      "I support my family with the fruits of the sea.",
+      "I am searching for a legendary catch that will make me famous.",
+      "I owe a debt to the sea, and I must repay it.",
+      "My boat is my life, and I will protect it at all costs."
+    ],
+    "flaws": [
+      "I'm superstitious and see omens in everything.",
+      "I'm a heavy drinker.",
+      "I don't trust outsiders, especially those who don't work the sea.",
+      "I'm reckless and take unnecessary risks.",
+      "I'm greedy and will cheat to get a better catch.",
+      "I'm haunted by a disaster at sea that I survived."
+    ]
+  },
+  {
+    "name": "Marine (Ghosts of Saltmarsh)",
+    "personality_traits": [
+      "I'm always polite and respectful.",
+      "I'm haunted by memories of war. I can't get the images of violence out of my mind.",
+      "I've lost too many friends, and I'm slow to make new ones.",
+      "I'm full of inspiring and cautionary tales from my military experience relevant to almost every combat situation.",
+      "I can stare down a hell hound without flinching.",
+      "I enjoy being strong and like breaking things.",
+      "I have a crude sense of humor.",
+      "I face problems head-on. A simple, direct solution is the best path to success."
+    ],
+    "ideals": [
+      {
+        "text": "Greater Good. Our lot is to lay down our lives in defense of others.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Responsibility. I do what I must and obey just authority.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Independence. When people follow orders blindly, they embrace a kind of tyranny.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Might. In life as in war, the stronger force wins.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Live and Let Live. Ideals aren't worth killing over or going to war for.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Nation. My city, nation, or people are all that matter.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I would still lay down my life for the people I served with.",
+      "Someone saved my life on the battlefield. To this day, I will never leave a friend behind.",
+      "My honor is my life.",
+      "I'll never forget the crushing defeat my company suffered or the enemies who dealt it.",
+      "Those who fight beside me are those worth dying for.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "The monstrous enemy we faced in battle still leaves me quivering with fear.",
+      "I have little respect for anyone who is not a proven warrior.",
+      "I made a terrible mistake in battle that cost many lives—and I would do anything to keep that mistake secret.",
+      "My hatred of my enemies is blind and unreasoning.",
+      "I obey the law, even if the law causes misery.",
+      "I'd rather eat my armor than admit when I'm wrong."
+    ]
+  },
+  {
+    "name": "Shipwright (Ghosts of Saltmarsh)",
+    "personality_traits": [
+      "I believe that anything worth doing is worth doing right. I can't help it—I'm a perfectionist.",
+      "I'm a snob who looks down on those who can't appreciate fine craftsmanship.",
+      "I always want to know how things work and what makes them tick.",
+      "I'm full of witty aphorisms and have a proverb for every occasion.",
+      "I'm rude to people who lack my commitment to hard work and fair play.",
+      "I like to talk at length about my profession.",
+      "I don't part with my money easily and will haggle tirelessly to get the best deal possible.",
+      "I'm well known for my work, and I want to make sure everyone appreciates it. I'm always taken aback when people haven't heard of me."
+    ],
+    "ideals": [
+      {
+        "text": "Community. It is the duty of all civilized people to strengthen the bonds of community and the security of civilization.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Generosity. My talents were given to me so that I could use them to benefit the world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. Everyone should be free to pursue his or her own livelihood.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Greed. I'm only in it for the money.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm committed to the people I care about, not to ideals.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Aspiration. I work hard to be the best there is at my craft.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "The shipyard where I learned my trade is the most important place in the world to me.",
+      "I created a great ship for someone, and then found them unworthy to captain it. I'm still looking for someone worthy.",
+      "I owe my guild a great debt for forging me into the person I am today.",
+      "I pursue wealth to secure someone's love.",
+      "One day I will return to my guild and prove that I am the greatest shipwright of them all.",
+      "I will get revenge on the evil forces that destroyed my shipyard and ruined my livelihood."
+    ],
+    "flaws": [
+      "I'll do anything to get my hands on something rare or priceless.",
+      "I'm quick to assume that someone is trying to cheat me.",
+      "No one must ever learn that I once stole money from guild coffers.",
+      "I'm never satisfied with what I have—I always want more.",
+      "I would kill to acquire a noble title.",
+      "I'm horribly jealous of anyone who can outshine my handiwork. Everywhere I go, I'm surrounded by rivals."
+    ]
+  },
+  {
+    "name": "Smuggler (Ghosts of Saltmarsh)",
+    "personality_traits": [
+      "I always have a plan for what to do when things go wrong.",
+      "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
+      "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
+      "I don't pay attention to the risks in a situation. Never tell me the odds.",
+      "The best way to get me to do something is to tell me I can't do it.",
+      "I blow up at the slightest insult.",
+      "I know a guy who knows a guy, who knows another guy.",
+      "My favorable regard for my friends and allies is the only thing that keeps me from being a total monster."
+    ],
+    "ideals": [
+      {
+        "text": "Honor. I don't steal from others in the trade.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Chains are meant to be broken, as are those who would forge them.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Charity. I smuggle goods to help people in need.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I will do whatever it takes to become wealthy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Redemption. There's a spark of good in everyone.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I'm trying to pay off an old debt I owe to a generous benefactor.",
+      "My ill-gotten gains go to support my family.",
+      "Something important was taken from me, and I aim to steal it back.",
+      "I will become the greatest smuggler that ever lived.",
+      "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
+      "Someone I loved died because of a mistake I made. That will never happen again."
+    ],
+    "flaws": [
+      "When I see something valuable, I can't think about anything but how to steal it.",
+      "When faced with a choice between money and my friends, I usually choose the money.",
+      "If there's a plan, I'll forget it. If I don't forget it, I'll ignore it.",
+      "I have a \"tell\" that reveals when I'm lying.",
+      "I turn tail and run when things look bad.",
+      "An innocent person is in prison for a crime that I committed. I'm okay with that."
+    ]
+  },
+  {
+    "name": "Anthropologist (Tomb of Annihilation)",
+    "personality_traits": [
+      "I prefer the company of those who aren't like me, including people of other races.",
+      "I'm a stickler when it comes to observing proper etiquette and local customs.",
+      "I would rather observe than meddle.",
+      "By living among violent people, I have become desensitized to violence.",
+      "I would risk life and limb to discover a new culture or unravel the secrets of a dead one.",
+      "When I arrive at a new settlement for the first time, I must learn all its customs."
+    ],
+    "ideals": [
+      {
+        "text": "Discovery. I want to be the first person to discover a lost culture.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Distance. One must not interfere with the affairs of another culture—even one in need of aid.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Knowledge. By understanding other races and cultures, we learn to understand ourselves.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Power. Common people crave strong leadership, and I do my utmost to provide it.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Protection. I must do everything possible to save a society facing extinction.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Indifferent. Life is cruel. What's the point in saving people if they're going to die anyway?",
+        "alignment": "Chaotic"
+      }
+    ],
+    "bonds": [
+      "My mentor gave me a journal filled with lore and wisdom. Losing it would devastate me.",
+      "Having lived among the people of a primeval tribe or clan, I long to return and see how they are faring.",
+      "Years ago, tragedy struck the members of an isolated society I befriended, and I will honor them.",
+      "I want to learn more about a particular humanoid culture that fascinates me.",
+      "I seek to avenge a clan, tribe, kingdom, or empire that was wiped out.",
+      "I have a trinket that I believe is the key to finding a long-lost society."
+    ],
+    "flaws": [
+      "Boats make me seasick.",
+      "I talk to myself, and I don't make friends easily.",
+      "I believe that I'm intellectually superior to people from other cultures and have much to teach them.",
+      "I've picked up some unpleasant habits living among goblins, lizardfolk, or orcs.",
+      "I complain about everything.",
+      "I wear a tribal mask and never take it off."
+    ]
+  },
+  {
+    "name": "Archaeologist (Tomb of Annihilation)",
+    "personality_traits": [
+      "I love a good puzzle or mystery.",
+      "I'm a pack rat who never throws anything away.",
+      "Fame is more important to me than money.",
+      "I have no qualms about stealing from the dead.",
+      "I'm happier in a dusty old tomb than in the centers of civilization.",
+      "Traps don't make me nervous. Idiots who trigger traps make me nervous.",
+      "I might fail, but I will never give up.",
+      "You might think I'm a scholar, but I love a good brawl. These fists were made for punching."
+    ],
+    "ideals": [
+      {
+        "text": "Preservation. That artifact belongs in a museum.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I won't risk my life for nothing. I expect some kind of payment.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Death Wish. Nothing is more exhilarating than a narrow escape from the jaws of death.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Dignity. The dead and their belongings deserve to be treated with respect.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Immortality. All my exploring is part of a plan to find the secret of everlasting life.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Danger. With every great discovery comes grave danger. The two walk hand in hand.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "Ever since I was a child, I've heard stories about a lost city. I aim to find it, learn its secrets, and earn my place in the history books.",
+      "I want to find my mentor, who disappeared on an expedition some time ago.",
+      "I have a friendly rival. Only one of us can be the best, and I aim to prove it's me.",
+      "I won't sell an art object or other treasure that has historical significance or is one of a kind.",
+      "I'm secretly in love with the wealthy patron who sponsors my archaeological exploits.",
+      "I hope to bring prestige to a library, a museum, or a university."
+    ],
+    "flaws": [
+      "I have a secret fear of some common wild animal—and in my work, I see them everywhere.",
+      "I can't leave a room without searching it for secret doors.",
+      "When I'm not exploring dungeons or ruins, I get jittery and impatient.",
+      "I have no time for friends or family. I spend every waking moment thinking about and preparing for my next expedition.",
+      "When given the choice of going left or right, I always go left.",
+      "I can't sleep except in total darkness."
+    ]
+  },
+  {
+    "name": "Athlete",
+    "personality_traits": [
+      "I feel most at peace during physical exertion, be it exercise or battle.",
+      "I don't like to sit idle.",
+      "I have a daily exercise routine that I refuse to break.",
+      "Obstacles exist to be overcome.",
+      "When I see others struggling, I offer to help.",
+      "I love to trade banter and gibes.",
+      "Anything worth doing is worth doing best.",
+      "I get irritated if people praise someone else and not me."
+    ],
+    "ideals": [
+      {
+        "text": "Competition. I strive to test myself in all things.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Triumph. The best part of winning is seeing my rivals brought low.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Camaraderie. The strongest bonds are forged through struggle.",
+        "alignment": "Good"
+      },
+      {
+        "text": "People. I strive to inspire my spectators.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Tradition. Every game has rules, and the playing field must be level.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Growth. Lessons hide in victory and defeat.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "My teammates are my family.",
+      "I will overcome a rival and prove myself their better.",
+      "My mistake got someone hurt. I'll never make that mistake again.",
+      "I will be the best for the honor and glory of my home.",
+      "The person who trained me is the most important person in my world.",
+      "I strive to live up to a specific hero's example."
+    ],
+    "flaws": [
+      "I am a poor winner. I gloat.",
+      "I am a sore loser. I sulk.",
+      "I push myself too hard and risk injury.",
+      "I am envious of anyone more skilled than I am.",
+      "I have a short temper when things go wrong.",
+      "I am dismissive of those who cannot match my physical prowess."
+    ]
+  },
+  {
+    "name": "Azorius Functionary",
+    "personality_traits": [
+      "I try never to let my judgment become clouded by emotion.",
+      "I have infinite patience with the dolts and boors I'm forced to deal with every day.",
+      "When I give an order, I expect it to be obeyed.",
+      "I just want things the way I like them: neat, orderly, and clean.",
+      "No wrongdoing can escape my watchful gaze.",
+      "I always say exactly what I mean, no matter how many words it takes to communicate the particular nuance I am attempting to convey.",
+      "I'm very literal and don't appreciate metaphor or sarcasm.",
+      "I never change my mind once it's made up."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Order. The law is meant to ensure that the gears of society turn smoothly and quietly.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Peace. The ultimate object of the law is to remove violence from society.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Compliance. Coercion is a fine way of ensuring that the laws are obeyed.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Legislation. The law embodies excellence in its precision and detail.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Punishment. A public display of consequences is an excellent deterrent for other criminals.",
+        "alignment": "Evil"
+      }
+    ],
+    "bonds": [
+      "I am beholden to an Azorius arrester who captured the criminal who killed my parents, saving me from the same fate.",
+      "I hope one day to write the laws, not just enforce them.",
+      "I tried and failed to prevent a murder, and I have sworn to find and arrest the perpetrator.",
+      "I successfully prevented a murder, and the would-be perpetrator wants me dead.",
+      "One of my parents was prominent in the guild, and I resent constantly being compared to that standard.",
+      "I've modeled my career after a highly respected law-mage or arrester, but I fear that my role model might be involved in something illegal."
+    ],
+    "flaws": [
+      "I'm unable to distinguish between the letter and the spirit of the law.",
+      "I seem like a harsh judge to others, but I am even harsher on myself.",
+      "I am rigid and inflexible in my thinking.",
+      "I believe that the law is the only thing standing between civilization and chaos, and I will do anything to uphold it.",
+      "I am suspicious of anyone who does not respect the law.",
+      "I am blind to the flaws in the legal system I serve."
+    ]
+  },
+  {
+    "name": "Black Fist Double Agent",
+    "personality_traits": [
+      "People are only as trustworthy as you are valuable to them. Always strive to be the most valuable person around.",
+      "My eloquence and sophistication are tools I use to avoid arousing suspicion myself.",
+      "I am a thrill-seeker, excited by covert and dangerous missions.",
+      "I live by my wits and always check every lock twice.",
+      "I never admit to my mistakes lest they be used against me.",
+      "I take pride in my work, no matter which side I'm working for.",
+      "I am always calm and collected, even when things go wrong.",
+      "I am a master of disguise and misdirection."
+    ],
+    "ideals": [
+      {
+        "text": "Secrecy. I must keep my true loyalties hidden.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I work to free Phlan from its oppressors.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I seek to gain influence and control.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Loyalty. I am loyal to the Black Fists, even if I must pretend otherwise.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Redemption. I hope to atone for my past misdeeds.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I have a reliable contact within the Tears of Virulence garrison to whom I pass information.",
+      "My Black Fists contacts can help me secure an audience with important figures.",
+      "I owe a debt to the person who helped me become a double agent.",
+      "I will do anything to protect the people of Phlan.",
+      "I seek to expose the corruption of the Tears of Virulence.",
+      "I have a family member who is a member of the Black Fists."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am greedy and will do anything for money.",
+      "I am quick to anger and prone to violence.",
+      "I am a compulsive liar.",
+      "I am afraid of being discovered and will betray anyone to save myself.",
+      "I secretly admire the Tears of Virulence and their methods."
+    ]
+  },
+  {
+    "name": "Boros Legionnaire",
+    "personality_traits": [
+      "I see everything in clear-cut black and white.",
+      "I'm just a little fascinated by the ways of the Gruul.",
+      "I'm slow to trust members of other guilds.",
+      "I've been known to turn a blind eye to injustice, with the help of a modest bribe.",
+      "I approach every task with the same high degree of military precision.",
+      "I am always the first to volunteer for dangerous missions.",
+      "I believe that the ends justify the means when it comes to justice.",
+      "I am fiercely loyal to my fellow legionnaires."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Justice. The law is the tool of justice, and I am its instrument.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Peace. The ultimate goal of the legion is to establish peace on the streets of Ravnica.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Might. The strong must rule, and the weak must obey.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Order. Without order, there is only chaos.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Zeal. I am a true believer in the Boros Legion and its cause.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I owe my life to the Boros captain who took me in when I was living on the streets.",
+      "My fellow legionnaires are my family.",
+      "I wield the same Boros weapon my grandparent did, for the honor of our family.",
+      "I am determined to bring a notorious criminal to justice.",
+      "I will prove myself worthy of the angelic leadership of the Boros Legion.",
+      "I fight for those who cannot fight for themselves."
+    ],
+    "flaws": [
+      "I am inflexible in my beliefs.",
+      "I am quick to judge others.",
+      "I am reckless and put myself in danger unnecessarily.",
+      "I have a hard time trusting anyone outside the legion.",
+      "I am haunted by a past failure.",
+      "I am blind to the flaws of my superiors."
+    ]
+  },
+  {
+    "name": "Caravan Specialist",
+    "personality_traits": [
+      "Any group is only as strong as its weakest link. Everyone has to pull their own weight.",
+      "There's always someone out there trying to take what I've got. Always be vigilant.",
+      "I have a story for every road and a song for every town.",
+      "I'm always the first to wake and the last to sleep.",
+      "I can find common ground with anyone, from the lowliest laborer to the highest lord.",
+      "I hate to be cooped up indoors.",
+      "I am always prepared for the worst.",
+      "I love the open road and the freedom it brings."
+    ],
+    "ideals": [
+      {
+        "text": "Service. Using my talents to help others is the best way of helping myself.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Selfish. What people don't know WILL hurt them, but why is that my problem?",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Wanderer. I go where the road takes me. Sometimes, that's a good thing...",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. The caravan is my family, and I will protect it.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. The open road is the only place I truly feel free.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. The road is dangerous, and only the prepared survive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I owe a debt I can never repay to the person who took pity on me.",
+      "My caravan is my family.",
+      "I am searching for a lost caravan that disappeared on the road.",
+      "I will do anything to protect my cargo.",
+      "I have a map that leads to a legendary treasure.",
+      "I am loyal to the merchant who employs me."
+    ],
+    "flaws": [
+      "I have trouble trusting people I've just met.",
+      "I enjoy the open road. Underground and tight spaces make me very nervous.",
+      "I am greedy and always looking for a better deal.",
+      "I am quick to abandon a losing proposition.",
+      "I am suspicious of strangers.",
+      "I am afraid of commitment and always keep moving."
+    ]
+  },
+  {
+    "name": "Cormanthor Refugee",
+    "personality_traits": [
+      "I long for a home that never really existed, whether in the camps, Hillsfar, or Myth Drannor.",
+      "Though I am not an elf, I am a fervent, radical worshipper of the elven gods.",
+      "I live in the moment, for the past is gone and the future is uncertain.",
+      "I believe the gods have cursed me, my family, and all of the Cormanthor refugees. We are all doomed.",
+      "I am fiercely independent and refuse to rely on anyone else.",
+      "I am deeply suspicious of anyone who offers help.",
+      "I will do anything to protect my fellow refugees.",
+      "I am always looking for a way to reclaim my lost homeland."
+    ],
+    "ideals": [
+      {
+        "text": "Patient. The elves have taught me to think and plan for the long-term.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Hope. One day, we will return to our homeland and rebuild.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will never be enslaved again.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Vengeance. I will make those who drove us from our homes pay.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. We must stick together to survive.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Survival. Nothing matters more than staying alive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the other refugees from my village.",
+      "I carry a memento of my lost home.",
+      "I seek to find a safe haven for my people.",
+      "I owe my life to the elf who rescued me.",
+      "I will not rest until my homeland is restored.",
+      "I protect those who cannot protect themselves."
+    ],
+    "flaws": [
+      "I am very uncomfortable indoors and underground.",
+      "I am haughty.",
+      "I am paranoid and see threats everywhere.",
+      "I am bitter and resentful of those who still have homes.",
+      "I am reckless and willing to die for my cause.",
+      "I am slow to trust anyone who is not a refugee."
+    ]
+  },
+  {
+    "name": "Dimir Operative",
+    "personality_traits": [
+      "I'm good at hiding my true thoughts and feelings.",
+      "When I'm in doubt about revealing something, I assume it's a secret, and I don't share it.",
+      "I'm always watching, listening, and gathering information.",
+      "I have a dry, sardonic sense of humor.",
+      "I am a master of deception and misdirection.",
+      "I trust no one completely.",
+      "I am always several steps ahead of everyone else.",
+      "I am patient and willing to wait for the right moment."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Control. I like pulling the strings.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Secrets. I collect secrets and never reveal them.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Knowledge. I want to know as much as I can about this city and how it works.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. Information is power, and I will use it to be free.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I will do whatever it takes to gain power.",
+        "alignment": "Evil"
+      }
+    ],
+    "bonds": [
+      "I have a contact in every guild.",
+      "I am loyal to House Dimir and its goals.",
+      "I have a secret that could destroy a powerful person.",
+      "I owe a debt to the Dimir operative who trained me.",
+      "I am searching for a legendary secret.",
+      "I will do anything to protect my true identity."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am ruthless and will sacrifice anyone for the mission.",
+      "I am addicted to secrets and cannot resist learning them.",
+      "I am detached and have trouble forming genuine relationships.",
+      "I have a secret that could get me killed if it is discovered."
+    ]
+  },
+  {
+    "name": "Dragon Casualty",
+    "personality_traits": [
+      "I am driven to escape my past, and rarely stay in one place long.",
+      "I know secrets of the Maimed Virulence, but fear the harm that may befall me should others learn them.",
+      "I am slow to trust, but incredibly loyal to those who have earned it.",
+      "I am haunted by the horrors I witnessed.",
+      "I am determined to rebuild my life.",
+      "I am suspicious of anyone who offers help.",
+      "I am always looking over my shoulder.",
+      "I will do anything to protect other survivors."
+    ],
+    "ideals": [
+      {
+        "text": "Survival. I will do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Independence. I rely only on myself.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Compassion. I help those who have suffered as I have.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Vengeance. I will make the Maimed Virulence pay.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Secrecy. My secrets must never be revealed.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Hope. I believe that a better future is possible.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I have sworn vengeance on the Maimed Virulence and those that follow him.",
+      "I protect my fellow survivors.",
+      "I carry a memento of my former life.",
+      "I owe my life to the person who rescued me.",
+      "I will not rest until I have rebuilt my home.",
+      "I seek to uncover the secrets of the Maimed Virulence."
+    ],
+    "flaws": [
+      "I am paranoid and overly suspicious of others.",
+      "I am haunted by nightmares.",
+      "I am quick to anger.",
+      "I am afraid of dragons and will flee from them.",
+      "I am secretive and refuse to share information.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Earthspur Miner",
+    "personality_traits": [
+      "Nothing bothers me for long.",
+      "I hate the horrors of the Underdark with a passion. They took my friends and family and almost got me.",
+      "I can party with everyone. Whether with dwarves or anyone else, I'll join in.",
+      "I'd rather be mining. This is okay, but it's not the same.",
+      "I am always looking for new mineral deposits.",
+      "I am suspicious of magic and those who use it.",
+      "I am fiercely loyal to my fellow miners.",
+      "I am always prepared for a cave-in or other disaster."
+    ],
+    "ideals": [
+      {
+        "text": "Generosity. The riches of the earth are to be shared by all.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. Gems and precious metals, I want them all for myself.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. The people of the Earthspur mines are my family. I will do anything to protect them.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Tradition. The old ways of mining must be preserved.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I go where the ore takes me.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. The mines are dangerous, and only the careful survive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "The people of the Earthspur mines are my family. I will do anything to protect them.",
+      "A deep gnome saved my life when I was injured and alone.",
+      "I am searching for a legendary vein of ore.",
+      "I owe a debt to the miner who taught me everything I know.",
+      "I will do anything to protect my mining claim.",
+      "I seek to uncover the secrets of the Underdark."
+    ],
+    "flaws": [
+      "I am greedy and will do anything for wealth.",
+      "I am suspicious of outsiders.",
+      "I am claustrophobic in wide-open spaces.",
+      "I am quick to anger.",
+      "I am superstitious.",
+      "I am afraid of the dark."
+    ]
+  },
+  {
+    "name": "Faceless",
+    "personality_traits": [
+      "I'm earnest and uncommonly direct.",
+      "I strive to have no personality—it's easier to forget what's hardly there.",
+      "I treasure a memento from my true self.",
+      "I think far ahead, a detachedness often mistaken for daydreaming.",
+      "I am ever learning how to be among others—when to stay quiet, when to laugh.",
+      "I am always watching and learning.",
+      "I am a master of disguise.",
+      "I have trouble telling who I really am."
+    ],
+    "ideals": [
+      {
+        "text": "Justice. I will see justice done, no matter the cost.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Confusion. Deception is a weapon.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Freedom. I will be free to be who I truly am.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I will use my disguises to gain power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Identity. I will discover my true self.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. I will find a place where I belong.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am exceptional.",
+      "I have a secret that I must protect.",
+      "I am searching for my true family.",
+      "I owe a debt to the person who gave me my first disguise.",
+      "I will do anything to protect my true identity.",
+      "I am loyal to those who accept me for who I am."
+    ],
+    "flaws": [
+      "I have trouble distinguishing dreams from memories.",
+      "I am indecisive.",
+      "I am detached and have trouble forming genuine relationships.",
+      "I am paranoid and trust no one.",
+      "I am afraid of being discovered.",
+      "I have no sense of my own identity."
+    ]
+  },
+  {
+    "name": "Failed Merchant",
+    "personality_traits": [
+      "I didn't have the cutthroat attitude necessary to succeed. I won't make that mistake again.",
+      "Even my competitors said I was affable and talented. Those are the qualities I have to overcome.",
+      "When I get an idea, I am single-minded in its execution.",
+      "My heart wasn't in being a merchant, so I failed.",
+      "I am always looking for a new opportunity.",
+      "I am determined to prove that I can succeed.",
+      "I am suspicious of anyone who offers a deal.",
+      "I am always prepared for the worst."
+    ],
+    "ideals": [
+      {
+        "text": "Survival. I will do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Ambition. I will rise to the top, no matter what it takes.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Honesty. I will not lie or cheat, even if it costs me.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will be my own boss.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Wealth. I will become rich, no matter what.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I help my friends and neighbors.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am determined to pay off my debts.",
+      "I have a family member in need. I consider them in everything I do.",
+      "I owe a debt to the person who gave me a second chance.",
+      "I am searching for a lost shipment.",
+      "I will not rest until I have restored my reputation.",
+      "I protect my former employees."
+    ],
+    "flaws": [
+      "I am greedy and will do anything for money.",
+      "I am reckless and take unnecessary risks.",
+      "I am suspicious of strangers.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Feylost",
+    "personality_traits": [
+      "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me.",
+      "Like a nomad, I can't settle down in one place for very long.",
+      "I frequently lose track of time.",
+      "I speak to animals and plants as though they might answer.",
+      "I delight in riddles, songs, and strange stories.",
+      "I find it difficult to distinguish dreams from memories.",
+      "I am always looking for a way back to the Feywild.",
+      "I am fascinated by the strange and the unknown."
+    ],
+    "ideals": [
+      {
+        "text": "Friendship. I never leave a friend behind.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Empathy. No creature should be made to suffer.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Wanderlust. I prefer to take the less traveled path.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Wonder. The world is full of magic and mystery.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by the rules of the mortal world.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Knowledge. I seek to understand the ways of the fey.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am searching for a way back to the Feywild.",
+      "I have a fey companion who is always with me.",
+      "I owe a debt to a fey creature who helped me escape.",
+      "I carry a token from the Feywild.",
+      "I will do anything to protect my fellow Feylost.",
+      "I am trying to remember my true family."
+    ],
+    "flaws": [
+      "I find it difficult to distinguish dreams from memories.",
+      "I am easily distracted.",
+      "I have trouble understanding mortal customs.",
+      "I am reckless and have little regard for my own safety.",
+      "I am afraid of iron and other cold-wrought metals.",
+      "I am drawn to the Feywild and will do almost anything to return."
+    ]
+  },
+  {
+    "name": "Gambler",
+    "personality_traits": [
+      "I always have a plan for what to do when things go wrong.",
+      "I am always calm, no matter what the situation. I never raise my voice or let my emotions control me.",
+      "I am incredibly slow to trust. Those who seem the fairest often have the most to hide.",
+      "I don't pay attention to the risks in a situation. Never tell me the odds.",
+      "The best way to get me to do something is to tell me I can't do it.",
+      "I blow up at the slightest insult.",
+      "I know a guy who knows a guy, who knows another guy.",
+      "My favorable regard for my friends and allies is the only thing that keeps me from being a total monster."
+    ],
+    "ideals": [
+      {
+        "text": "Honor. I only cheat when the mark deserves it.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. Chains are meant to be broken, as are those who would forge them.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Charity. I steal from the wealthy so that I can help people in need.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I will do whatever it takes to become wealthy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "People. I'm loyal to my friends, not to any ideals, and everyone else can take a trip down the Styx for all I care.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Redemption. There's a spark of good in everyone.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I'm trying to pay off an old debt I owe to a generous benefactor.",
+      "My ill-gotten gains go to support my family.",
+      "Something important was taken from me, and I aim to steal it back.",
+      "I will become the greatest gambler that ever lived.",
+      "I'm guilty of a terrible crime. I hope I can redeem myself for it.",
+      "Someone I loved died because of a mistake I made. That will never happen again."
+    ],
+    "flaws": [
+      "When I see something valuable, I can't think about anything but how to steal it.",
+      "When faced with a choice between money and my friends, I usually choose the money.",
+      "If there's a plan, I'll forget it. If I don't forget it, I'll ignore it.",
+      "I have a \"tell\" that reveals when I'm lying.",
+      "I turn tail and run when things look bad.",
+      "An innocent person is in prison for a crime that I committed. I'm okay with that."
+    ]
+  },
+  {
+    "name": "Gate Urchin",
+    "personality_traits": [
+      "I appreciate the simple things in life: a song, a warm meal, a sunny day. I don't need any more.",
+      "My problems are always caused by others. I'm never to blame.",
+      "I am afraid I could wind up back on the streets any day.",
+      "I see people as marks for a con and have difficulty feeling true empathy for them.",
+      "I have a real flair for matchmaking. I can find anyone a spouse!",
+      "I think money is the true measure of appreciation and affection. Everything else is talk or an act.",
+      "I don't like having a lot of stuff, just a few simple things I need. I don't like being tied down and tend to leave things behind when I don't need them anymore.",
+      "I am always looking for a way to make a quick coin."
+    ],
+    "ideals": [
+      {
+        "text": "Loyal. I never rat out any of my friends, even when the Red Plumes or the Rogues' Guild ask.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Ungrateful. Those who give only do it to make themselves feel better. I steal from them.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. The other urchins are my family.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Hope. One day, I will escape the streets.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the other urchins of the Gate.",
+      "I owe a debt to the person who took me in.",
+      "I am searching for a way to escape the streets.",
+      "I carry a memento of my parents.",
+      "I will do anything to protect my friends.",
+      "I dream of a better life."
+    ],
+    "flaws": [
+      "I am greedy and will do anything for money.",
+      "I am suspicious of anyone who offers help.",
+      "I am quick to anger.",
+      "I am afraid of being abandoned.",
+      "I have trouble trusting anyone.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Gate Warden",
+    "personality_traits": [
+      "Strange events and otherworldly creatures don't phase me.",
+      "I think in terms of exchange; something for something, nothing for nothing.",
+      "I pepper my speech with borrowed words or curses from planar languages.",
+      "I have a superstitious habit I picked up, such as touching iron when I'm nervous or arranging objects in a specific order.",
+      "I've seen enough to know that you can't take anyone at face value, so I scrutinize everyone I deal with.",
+      "I am always looking for a way to gain an advantage."
+    ],
+    "ideals": [
+      {
+        "text": "Exchange. Everything has a price.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Knowledge. I seek to understand the multiverse.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Power. I will gain power, no matter the cost.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow Gate Wardens.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by any power.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Order. The multiverse must be kept in balance.",
+        "alignment": "Lawful"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the community that raised me.",
+      "I carry a token from my home plane.",
+      "I am searching for a way to return home.",
+      "I owe a debt to a planar creature.",
+      "I will do anything to protect the gate I guard.",
+      "I seek to uncover the secrets of the planes."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am greedy and will do anything for money.",
+      "I am superstitious and see omens everywhere.",
+      "I am afraid of the unknown.",
+      "I am quick to anger.",
+      "I am detached and have trouble forming genuine relationships."
+    ]
+  },
+  {
+    "name": "Giant Foundling",
+    "personality_traits": [
+      "What I lack in stature, I make up for with sheer spite.",
+      "Sometimes size does matter, okay? If I see a beast bigger than me, I'm immediately running away.",
+      "Crowded spaces make me uncomfortable. I'd much rather be in an open field than a bustling tavern.",
+      "I like being small. It helps me avoid notice.",
+      "Size is just half the story. Every avalanche begins as a single pebble.",
+      "The world always feels too big, and I'm afraid I'll never find my place in it.",
+      "I insist on being taken seriously as a full-grown adult. Nobody talks down to me!",
+      "I am always looking for a way to prove myself."
+    ],
+    "ideals": [
+      {
+        "text": "Belonging. All creatures have a place in the world, so I strive to help others find theirs.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Survival. I will do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Strength. The strong survive, and the weak perish.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. My giant family is my family, and I will protect them.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Destiny. I am destined for great things.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I ache to return to my tribe and the family I left.",
+      "I carry a memento from my giant family.",
+      "I owe a debt to the giant who raised me.",
+      "I am searching for my true parents.",
+      "I will do anything to protect my giant family.",
+      "I seek to prove myself worthy of my giant heritage."
+    ],
+    "flaws": [
+      "I am insecure about my size.",
+      "I am quick to anger when someone underestimates me.",
+      "I am afraid of being abandoned.",
+      "I am reckless and have little regard for my own safety.",
+      "I am suspicious of anyone who offers help.",
+      "I am stubborn and refuse to admit when I am wrong."
+    ]
+  },
+  {
+    "name": "Golgari Agent",
+    "personality_traits": [
+      "Remember, I could kill you in your sleep. Or put centipedes in your bedroll.",
+      "I like to remind people of their inevitable demise.",
+      "I have accepted my death. Hence, I don't fear it.",
+      "I am relentless and determined in my action.",
+      "I find beauty in decay and rebirth.",
+      "I am patient and willing to wait for the right moment.",
+      "I am always looking for a way to gain an advantage.",
+      "I am fiercely loyal to my guild."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Stoicism. All of us are part of the cyclical march of nature, which will continue with or without us.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Ambition. The time of Golgari ascendance is at hand, and I intend to have a prominent place in the new world order.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Nature. The natural world is more important than civilization.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Community. We must work together to survive.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by the laws of the surface world.",
+        "alignment": "Chaotic"
+      }
+    ],
+    "bonds": [
+      "I cherish the finger of a family member who was petrified by a medusa.",
+      "I am determined to rise in the ranks of the Golgari.",
+      "I owe a debt to the Golgari agent who recruited me.",
+      "I am searching for a legendary fungus.",
+      "I will do anything to protect my fellow Golgari.",
+      "I seek to uncover the secrets of the undercity."
+    ],
+    "flaws": [
+      "I am morbid and obsessed with death.",
+      "I am ruthless and will sacrifice anyone for the guild.",
+      "I am paranoid and trust no one.",
+      "I am slow to trust members of other guilds.",
+      "I am afraid of fire.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Grinner",
+    "personality_traits": [
+      "I love the spotlight. Everyone, look at me!",
+      "Give me a drink and I'm your friend.",
+      "Talk to me about yourself. I'm a hell of a listener.",
+      "I hate to start fights, but I love to finish them.",
+      "I can't sit still.",
+      "I'm always humming an old tune from my past.",
+      "I'm a master of disguise and misdirection.",
+      "I am always looking for a way to undermine authority."
+    ],
+    "ideals": [
+      {
+        "text": "Self-Determination. I will decide my own fate.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Revolution. Tyrants must fall.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. My fellow Grinners are my family.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Hope. I believe a better world is possible.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Secrecy. My true identity must remain hidden.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Golden Grin and its goals.",
+      "I owe a debt to the Grinner who recruited me.",
+      "I carry a memento of my past.",
+      "I am searching for a way to free my homeland.",
+      "I will do anything to protect my fellow Grinners.",
+      "I seek to expose the corruption of the powerful."
+    ],
+    "flaws": [
+      "I've never lied once in my life. What?",
+      "I am reckless and have little regard for my own safety.",
+      "I am a compulsive liar.",
+      "I am quick to anger.",
+      "I am afraid of being discovered.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Gruul Anarch",
+    "personality_traits": [
+      "Unlike people, the beasts of the wild are friends who won't stab me in the back.",
+      "Go ahead and insult me - I dare you.",
+      "I scorn those who are weak and cling to civilization.",
+      "I am determined that one day I will lead my clan - or a new one.",
+      "If you question my courage, I will never back down.",
+      "I am always looking for a fight.",
+      "I am fiercely independent and refuse to rely on anyone else.",
+      "I am always looking for a way to destroy civilization."
+    ],
+    "ideals": [
+      {
+        "text": "Clan. My clan is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Anarchy. No person or law or custom can tell another what to do.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Tradition. The Old Ways must be preserved and upheld.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Strength. The strong survive, and the weak perish.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Nature. The natural world is more important than civilization.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      }
+    ],
+    "bonds": [
+      "I am determined that one day I will lead my clan - or a new one.",
+      "My clan is my family.",
+      "I owe a debt to the Gruul anarch who saved my life.",
+      "I am searching for a legendary beast.",
+      "I will do anything to protect my clan.",
+      "I seek to destroy the civilization that has encroached on my territory."
+    ],
+    "flaws": [
+      "I am reckless and have little regard for my own safety.",
+      "I am quick to anger.",
+      "I am suspicious of anyone who offers help.",
+      "I am stubborn and refuse to admit when I am wrong.",
+      "I am afraid of being weak.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Harborfolk",
+    "personality_traits": [
+      "I am curious. I want to know why things are the way they are and why people do the things that they do.",
+      "I can't sing, but that never stops me from doing it, loudly. Everyone loves a good sea chanty!",
+      "I am quite superstitious.",
+      "I am always looking for a way to make a quick coin.",
+      "I am fiercely loyal to my fellow harborfolk.",
+      "I am always ready for a fight.",
+      "I am suspicious of outsiders.",
+      "I am always looking for a way to escape the harbor."
+    ],
+    "ideals": [
+      {
+        "text": "Calm. For all things, there is a tide. I set sail when it is right, and mend my nets when it is not.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Windblown. I go where the winds blow. No man or woman tells me where or when to sail.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Salty. I want people to look to me as an expert on plying Mulmaster Harbor.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Selfless. We are all children of the sea. I help everyone in peril afloat and ashore.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Let them Drown. I refuse to risk my hide to help others. They wouldn't help me if roles were reversed.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I once lost everything but my rowboat. I'll do anything to protect it.",
+      "I am loyal to the harborfolk of Mulmaster.",
+      "I owe a debt to the fisherman who taught me everything I know.",
+      "I am searching for a legendary fish.",
+      "I will do anything to protect my family.",
+      "I seek to escape the harbor and see the world."
+    ],
+    "flaws": [
+      "I drink too much, which causes me to miss the tide.",
+      "I killed a drunk member of the City Watch in a brawl.",
+      "I am superstitious and see omens everywhere.",
+      "I am suspicious of outsiders.",
+      "I am quick to anger.",
+      "I am afraid of the open sea."
+    ]
+  },
+  {
+    "name": "Haunted One",
+    "personality_traits": [
+      "I don't run from evil. Evil runs from me.",
+      "I like to read and memorize poetry. It keeps me calm and brings me fleeting moments of happiness.",
+      "I spend money freely and live life to the fullest, knowing that tomorrow I might die.",
+      "I have a hard time trusting others, especially the Gods.",
+      "I am always looking for a way to lift my curse.",
+      "I am haunted by the horrors I have seen.",
+      "I am determined to destroy the evil that haunts me.",
+      "I am always looking for a way to help others."
+    ],
+    "ideals": [
+      {
+        "text": "I try to help those in need, no matter what the personal cost.",
+        "alignment": "Good"
+      },
+      {
+        "text": "I'll stop the spirits that haunt me or die trying.",
+        "alignment": "Any"
+      },
+      {
+        "text": "I will do whatever it takes to survive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "I will not let my curse define me.",
+        "alignment": "Any"
+      },
+      {
+        "text": "I will use my curse to fight evil.",
+        "alignment": "Good"
+      },
+      {
+        "text": "I will find a way to break my curse.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I have a family member who is also cursed.",
+      "I carry a memento of my former life.",
+      "I owe a debt to the person who helped me survive.",
+      "I am searching for a way to break my curse.",
+      "I will do anything to protect the innocent.",
+      "I am haunted by the ghost of a loved one."
+    ],
+    "flaws": [
+      "I talk to spirits that no one else can see.",
+      "I am paranoid and trust no one.",
+      "I am reckless and have little regard for my own safety.",
+      "I am afraid of the dark.",
+      "I am quick to anger.",
+      "I am drawn to evil and must constantly fight the temptation."
+    ]
+  },
+  {
+    "name": "Hillsfar Merchant",
+    "personality_traits": [
+      "I fill my evenings with wine or mead and song.",
+      "I greatly admire gladiators and enjoy the Arena.",
+      "I take my wealth for granted. It seldom occurs to me that others aren't rich themselves.",
+      "I am a braggart. I promote myself shamelessly.",
+      "I work hard and seldom make time for fun.",
+      "I am fiercely loyal to those with whom I work.",
+      "I am always looking for a way to make a profit.",
+      "I am suspicious of anyone who offers a deal."
+    ],
+    "ideals": [
+      {
+        "text": "Frugal. I spend my money very carefully.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Profligate. I spend my money freely, enjoying the finer things in life.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Generous. I have a responsibility to help and protect the less fortunate.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Loyal. My word, once given, is my bond.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Callous. I am unconcerned with any negative effects my actions may have on the lives and fortunes of others.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Isolationist. I am concerned with the fortunes of my friends and family. Others must see to themselves.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am fiercely loyal to those with whom I work.",
+      "I owe a debt to the merchant who gave me my start.",
+      "I am searching for a lost shipment.",
+      "I will do anything to protect my family.",
+      "I seek to become the richest merchant in Hillsfar.",
+      "I am always looking for a way to gain an advantage."
+    ],
+    "flaws": [
+      "I am overconfident. I overestimate my abilities.",
+      "I am greedy and will do anything for money.",
+      "I am quick to anger.",
+      "I am suspicious of strangers.",
+      "I am afraid of losing my wealth.",
+      "I am reckless and take unnecessary risks."
+    ]
+  },
+  {
+    "name": "Hillsfar Smuggler",
+    "personality_traits": [
+      "When I'm not smuggling, I gamble.",
+      "I just love halfling cooking and baking!",
+      "I party with dwarves whenever I can.",
+      "I'm a terrible singer, but that doesn't stop me.",
+      "I am always looking for a way to make a quick coin.",
+      "I am fiercely loyal to my fellow smugglers.",
+      "I am suspicious of anyone who offers help.",
+      "I am always looking for a way to escape the city."
+    ],
+    "ideals": [
+      {
+        "text": "Fair. I think everyone deserves to be treated fairly. I don't play favorites.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. My fellow smugglers are my family.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greed. I will do whatever it takes to become wealthy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Secrecy. My true identity must remain hidden.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Rogues Guild and would do anything for them.",
+      "I love the city of Hillsfar and my fellow Hillsfarians, despite the recent problems.",
+      "I owe a debt to the smuggler who taught me everything I know.",
+      "I am searching for a way to free my homeland.",
+      "I will do anything to protect my family.",
+      "I seek to become the greatest smuggler in Hillsfar."
+    ],
+    "flaws": [
+      "I am greedy and will do anything for money.",
+      "I am suspicious of anyone who offers help.",
+      "I am quick to anger.",
+      "I am afraid of being discovered.",
+      "I am reckless and have little regard for my own safety.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Initiate",
+    "personality_traits": [
+      "I always have a joke on hand when the mood gets too serious.",
+      "I use sarcasm and insults to keep a distance between myself and my crop-mates, because I have lost people in the past and do not want to experience that pain again.",
+      "I am passionate and easily excitable.",
+      "I am observant and ask a lot of questions.",
+      "I am quiet and analytical.",
+      "I am comfortable talking about nature, but very awkward interacting socially.",
+      "I am tireless when researching or learning, which I always seem to be doing.",
+      "I am always looking for a way to prove myself."
+    ],
+    "ideals": [
+      {
+        "text": "Solidarity. The thing that matters most of all is that we're there for each other.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Ambition. I will rise to the top of the trials.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Faith. I trust that the gods will guide my actions.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Knowledge. I seek to understand the trials.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Survival. I will do whatever it takes to survive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my crop-mates.",
+      "I owe a debt to the vizier who trained me.",
+      "I am searching for a way to pass the trials.",
+      "I carry a memento of my family.",
+      "I will do anything to protect my crop-mates.",
+      "I seek to prove myself worthy of the gods."
+    ],
+    "flaws": [
+      "I am afraid of dying in the trials.",
+      "I am jealous of those who are more skilled than I am.",
+      "I am quick to anger.",
+      "I am suspicious of anyone who offers help.",
+      "I am reckless and have little regard for my own safety.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Inquisitor",
+    "personality_traits": [
+      "It will all go smoothly if everyone just does as I say.",
+      "Despair has become my constant companion, but I will not let it stop me.",
+      "I am always vigilant for signs of heresy.",
+      "I am deeply suspicious of everyone.",
+      "I am haunted by self-doubt.",
+      "I am driven by zeal.",
+      "I am always looking for a way to root out evil.",
+      "I am determined to bring heretics to justice."
+    ],
+    "ideals": [
+      {
+        "text": "Honesty. The smallest deception paves the way to grievous sin.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Faith. I trust that my deity will guide my actions.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Justice. I will see justice done, no matter the cost.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Mercy. I will show mercy to those who repent.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Power. I will use my authority to root out heresy.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Purity. I will not rest until all heresy is destroyed.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the church and its teachings.",
+      "I owe a debt to the inquisitor who trained me.",
+      "I am searching for a notorious heretic.",
+      "I carry a holy symbol of my faith.",
+      "I will do anything to protect the innocent.",
+      "I seek to atone for my past sins."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am quick to judge others.",
+      "I am inflexible in my beliefs.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am haunted by self-doubt."
+    ]
+  },
+  {
+    "name": "Investigator",
+    "personality_traits": [
+      "I always seek the truth, no matter how uncomfortable it may be.",
+      "I'm observant to a fault and often notice things others overlook.",
+      "I have a knack for reading people.",
+      "I have a tendency to distrust authority, believing that most are hiding something.",
+      "I cannot abide injustice, and I will act out against it even when facing unfavorable odds.",
+      "I am always on the lookout for criminal activity.",
+      "I consider the facts carefully before I make any decision.",
+      "I have a fixation on determining the motives and psychology of others, even my closest friends."
+    ],
+    "ideals": [
+      {
+        "text": "Justice. I will see justice done, no matter the cost.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Truth. The truth must be uncovered, no matter how painful.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Knowledge is power, and I will use it.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect the innocent.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I owe a great debt to a mentor who taught me the ways of investigation.",
+      "I am searching for the person who wronged my family.",
+      "I carry a memento of a past case.",
+      "I will do anything to protect the innocent.",
+      "I seek to expose the corruption of the powerful.",
+      "I am always looking for a way to solve the next mystery."
+    ],
+    "flaws": [
+      "I can be overly suspicious, often believing that people have ulterior motives.",
+      "I am paranoid and trust no one.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am obsessed with my work."
+    ]
+  },
+  {
+    "name": "Iron Route Bandit",
+    "personality_traits": [
+      "If people leave their gear unsecured, they must not want it very much.",
+      "I feel more comfortable sleeping under the open sky.",
+      "I always pre-plan my escape should things go bad; I always like to have an exit strategy.",
+      "I tend to give animal owners breeding and care advice.",
+      "I always form a powerful, emotional bond with my mount.",
+      "I cannot leave a harmed animal behind.",
+      "I am always looking for a way to make a quick coin.",
+      "I am fiercely loyal to my fellow bandits."
+    ],
+    "ideals": [
+      {
+        "text": "Loyalty. Never bite the hand that feeds you.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Unpredictability. Keep your enemies guessing and off balance.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. The strong take what they want.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. My fellow bandits are my family.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow bandits.",
+      "I owe a debt to the bandit who saved my life.",
+      "I am searching for a legendary treasure.",
+      "I carry a memento of my former life.",
+      "I will do anything to protect my mount.",
+      "I seek to escape the bandit life."
+    ],
+    "flaws": [
+      "I talk to animals.",
+      "I am suspicious of anyone who offers help.",
+      "I am quick to anger.",
+      "I am greedy and will do anything for money.",
+      "I am afraid of being caught.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Izzet Engineer",
+    "personality_traits": [
+      "I have a hard time staying focused on … oh, and my brain tends to jump from one … did I mention focus?",
+      "I do what my gut tells me.",
+      "Life's an experiment, and I can't wait to see what happens.",
+      "Great ideas are fine, but great results are what counts.",
+      "If you can guess what I'm about to do, that means I've run out of imagination.",
+      "I am always looking for a new discovery.",
+      "I am obsessed with my work.",
+      "I am always looking for a way to improve things."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Creativity. The world needs new ideas and bold action.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Power. Knowledge is the path to power and domination.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Progress. The world can always be improved.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      }
+    ],
+    "bonds": [
+      "I have dedicated my life to finding a solution to a scientific problem.",
+      "I am loyal to the Izzet League.",
+      "I owe a debt to the Izzet engineer who recruited me.",
+      "I am searching for a legendary invention.",
+      "I carry a memento of a failed experiment.",
+      "I will do anything to protect my laboratory."
+    ],
+    "flaws": [
+      "I am easily distracted.",
+      "I am reckless and have little regard for my own safety.",
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Knight of Solamnia",
+    "personality_traits": [
+      "I pledge my sword to the greater good. If I must perish in pursuit of that good, so be it.",
+      "My comrades-in-arms are my family. I'll do whatever it takes to keep them safe.",
+      "The protection of innocent people comes first. All other concerns come second.",
+      "I joined the knights for the free meals, but their lessons grew on me over time.",
+      "I am always the first to volunteer for dangerous missions.",
+      "I believe that honor is more important than life itself.",
+      "I am fiercely loyal to my order.",
+      "I am always looking for a way to prove myself."
+    ],
+    "ideals": [
+      {
+        "text": "Honor. My honor is my life.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Duty. I will do my duty, no matter the cost.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Courage. I will face danger without fear.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Loyalty. I will never betray my comrades.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Justice. I will see justice done.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Sacrifice. I will give my life to protect the innocent.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "My comrades-in-arms are my family.",
+      "I owe a debt to the knight who trained me.",
+      "I am searching for a legendary artifact of my order.",
+      "I carry a memento of my home.",
+      "I will do anything to protect the innocent.",
+      "I seek to restore the honor of my order."
+    ],
+    "flaws": [
+      "I am inflexible in my beliefs.",
+      "I am quick to judge others.",
+      "I am reckless and have little regard for my own safety.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am haunted by a past failure."
+    ]
+  },
+  {
+    "name": "Lorehold Student",
+    "personality_traits": [
+      "I thrive on esoteric lore. The more obscure the historical references I can include in everyday conversation, the better.",
+      "By searching for these lost artifacts, I hope to find who I really am along the way.",
+      "I can barely go a minute without talking about my research. I have so much knowledge in my head, and it needs to be let out somewhere!",
+      "The spirits of the dead are so much more interesting to talk with than living classmates.",
+      "I am always looking for a new mystery to solve.",
+      "I am obsessed with history.",
+      "I am always looking for a way to uncover the past.",
+      "I am determined to make my mark on history."
+    ],
+    "ideals": [
+      {
+        "text": "Respect. My powers are a blessing and a curse, and I work diligently to show people not to fear magic.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Tradition. The past must be preserved and studied.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Discovery. I seek to uncover lost secrets.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Knowledge is the path to power.",
+        "alignment": "Evil"
+      }
+    ],
+    "bonds": [
+      "I am searching for a legendary artifact.",
+      "I owe a debt to the professor who took me under their wing.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my research.",
+      "I seek to uncover the secrets of a lost civilization.",
+      "I am determined to prove myself to my peers."
+    ],
+    "flaws": [
+      "I am easily distracted by the promise of information.",
+      "I am socially awkward.",
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am obsessed with my work."
+    ]
+  },
+  {
+    "name": "Mage of High Sorcery",
+    "personality_traits": [
+      "I wish to use my knowledge of magic to better people's lives.",
+      "My study of magic might reveal all manner of secrets.",
+      "Magic is a means to power, and I will use it to pursue my ambitions.",
+      "I learned magic so I'd be able to protect those I care about.",
+      "I am always looking for a new spell to learn.",
+      "I am obsessed with magic.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest mage of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Power. Knowledge is the path to power and domination.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Tradition. The old ways of magic must be preserved.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow mages.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Balance. Magic must be kept in balance.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Mages of High Sorcery.",
+      "I owe a debt to the mage who trained me.",
+      "I am searching for a legendary spellbook.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my tower.",
+      "I seek to uncover the secrets of magic."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am obsessed with magic.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Mulmaster Aristocrat",
+    "personality_traits": [
+      "My ambitions are boundless. I will be a Zor or Zora one day!",
+      "I must always look my best.",
+      "Beauty is everywhere. I can find it in even the homeliest person and the most horrible tragedy.",
+      "I am always the center of attention.",
+      "I am fiercely proud of my family and its history.",
+      "I am always looking for a way to gain an advantage.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to rise in the ranks of Mulmaster society."
+    ],
+    "ideals": [
+      {
+        "text": "Generous. I have a responsibility to help and protect the less fortunate.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Loyal. My word, once given, is my bond.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Callous. I am unconcerned with any negative effects my actions may have on the lives and fortunes of others.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Impulsive. I follow my heart.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Ignorant. I am unaware of the struggles of the common people.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Isolationist. I am concerned with the fortunes of my friends and family. Others must see to themselves.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I have dedicated my wealth and my talents to the service of one of the city's many temples.",
+      "My family is my life.",
+      "I owe a debt to the aristocrat who took me under their wing.",
+      "I am searching for a legendary treasure.",
+      "I will do anything to protect my family's honor.",
+      "I seek to become the most powerful person in Mulmaster."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am better than everyone else.",
+      "I am greedy and will do anything for money.",
+      "I am quick to anger.",
+      "I am suspicious of strangers.",
+      "I am afraid of losing my wealth.",
+      "I am reckless and take unnecessary risks."
+    ]
+  },
+  {
+    "name": "Orzhov Representative",
+    "personality_traits": [
+      "I am always willing to act in accordance with the financial incentive offered.",
+      "Debts are never meant to be forgiven.",
+      "I am always looking for a way to gain an advantage.",
+      "I am fiercely loyal to the Orzhov Syndicate.",
+      "I am always looking for a way to make a profit.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to rise in the ranks of the Orzhov.",
+      "I am always looking for a way to acquire more wealth."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Wealth. I will do whatever it takes to become as rich as the oligarchs.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Power. One day, I will be the one giving orders.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Prestige. I want to be admired, respected, feared, or even hated for my position and wealth.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Eternity. I want to live forever—in person the longest time possible and after as spirit.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. I protect my fellow Orzhov.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Orzhov Syndicate.",
+      "I owe a debt to the Orzhov representative who recruited me.",
+      "I am searching for a legendary treasure.",
+      "I carry a memento of my family.",
+      "I will do anything to protect my wealth.",
+      "I seek to become the most powerful person in the syndicate."
+    ],
+    "flaws": [
+      "I am greedy and will do anything for money.",
+      "I am ruthless and will sacrifice anyone for the guild.",
+      "I am paranoid and trust no one.",
+      "I am quick to anger.",
+      "I am afraid of losing my wealth.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Phlan Insurgent",
+    "personality_traits": [
+      "My patience knows no bounds, so long as my goal is in sight.",
+      "My eloquence and sophistication are tools I use to avoid arousing suspicion myself.",
+      "I am a thrill-seeker, excited by covert and dangerous missions.",
+      "I live by my wits and always check every lock twice.",
+      "I never admit to my mistakes lest they be used against me.",
+      "I am always looking for a way to free Phlan.",
+      "I am fiercely loyal to my fellow insurgents.",
+      "I am always looking for a way to gain an advantage."
+    ],
+    "ideals": [
+      {
+        "text": "Leadership. The oppressed need someone to inspire them to courageous acts.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Unity. Working together, we can overcome all obstacles, even the most seemingly insurmountable ones.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I bow to no one I don't respect.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Resourcefulness. Our wits are our most valuable resource in troubled times.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Vengeance. I will make the Tears of Virulence pay.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Hope. One day, Phlan will be free.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the other insurgents.",
+      "I owe a debt to the person who saved my life.",
+      "I am searching for a way to free Phlan.",
+      "I carry a memento of my former life.",
+      "I will do anything to protect my fellow insurgents.",
+      "I seek to liberate Phlan from its oppressors."
+    ],
+    "flaws": [
+      "I have no respect for those who flee. I harbor a deep grudge against the citizens who abandoned Phlan.",
+      "Being an insurgent means doing things that aren't always ethical.",
+      "My desire to liberate Phlan oftentimes clouds my judgment.",
+      "I am paranoid and trust no one.",
+      "I am quick to anger.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Phlan Refugee",
+    "personality_traits": [
+      "I may have lost everything I worked for most of my life, but there's work to be done. No time to linger on the past.",
+      "I worked hard to get where I am and I refuse to let a little hardship stop me from succeeding.",
+      "I prepare for everything.",
+      "I am always willing to volunteer my services, just as long as I don't have to do anything.",
+      "I am always looking for a way to reclaim my home.",
+      "I am suspicious of anyone who offers help.",
+      "I am fiercely loyal to my fellow refugees.",
+      "I am determined to rebuild my life."
+    ],
+    "ideals": [
+      {
+        "text": "Justice. Corruption brought Phlan down, and I will not tolerate that any longer.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Strength. As shown in Phlan, the strong survive. If you are weak you deserve what you get.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Openness. I am always willing to share my life story with anyone who will listen.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Hope. One day, I will return to my home.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Community. We must stick together to survive.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I will reclaim my home. Though the path may be long, I will never give up hope.",
+      "I am loyal to my fellow refugees.",
+      "I owe a debt to the person who helped me escape.",
+      "I carry a memento of my former life.",
+      "I will do anything to protect my family.",
+      "I seek to rebuild my life."
+    ],
+    "flaws": [
+      "I used the lives of children to facilitate my escape from Phlan.",
+      "I am a sucker for the underdog.",
+      "I am paranoid and trust no one.",
+      "I am quick to anger.",
+      "I am afraid of being caught.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Planar Philosopher",
+    "personality_traits": [
+      "I don't venerate any gods; we can be as powerful or greater than them.",
+      "Experience is everything, live in the moment.",
+      "When things crumble, I find meaning in the dust.",
+      "Life thrives through order; I won't tolerate disruptions.",
+      "When others make plans, the multiverse laughs and so do I.",
+      "I know what's right, and no one will stand in my way."
+    ],
+    "ideals": [
+      {
+        "text": "Belief. I have a philosophy that guides my actions.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Knowledge. I seek to understand the multiverse.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Order. The multiverse must be kept in balance.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Power. I will gain power, no matter the cost.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow philosophers.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my faction.",
+      "I owe a debt to the philosopher who taught me everything I know.",
+      "I am searching for a legendary truth.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my faction.",
+      "I seek to uncover the secrets of the multiverse."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am stubborn and refuse to admit when I am wrong.",
+      "I am quick to anger.",
+      "I am afraid of being wrong.",
+      "I am overconfident and underestimate my opponents.",
+      "I am obsessed with my philosophy."
+    ]
+  },
+  {
+    "name": "Prismari Student",
+    "personality_traits": [
+      "I'm the life of the party, and I expect everyone's attention when I walk into a room.",
+      "I believe everyone has the ability to express their truest selves through art, and I'm happy to quietly push them in the right direction.",
+      "I'm beset with such an overwhelming sense of ennui regarding my art. Nothing quite captures my attention anymore.",
+      "I love the spotlight and crave attention.",
+      "I am always looking for a new way to express myself.",
+      "I am obsessed with my art.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest artist of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Beauty. When I perform, I make the world better.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Creativity. The world is in dire need of new ideas and bold action.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Art is a means to power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow artists.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Truth. Art should reflect the soul.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow Prismari students.",
+      "I owe a debt to the professor who took me under their wing.",
+      "I am searching for a legendary work of art.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my art.",
+      "I seek to become the greatest artist of my age."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am better than everyone else.",
+      "I am obsessed with my art.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Quandrix Student",
+    "personality_traits": [
+      "When I find a subject I'm interested in, I won't stop studying until I know everything about it. It keeps me up at night.",
+      "Equations and patterns come naturally to my mind. I wish friendship came just as easily.",
+      "I believe I'm always the smartest person in the room. And I'll prove it, even if no one asks me to.",
+      "If these classes have taught me anything, it's that reality is a lie, and nothing matters. So why bother?",
+      "I am always looking for a new problem to solve.",
+      "I am obsessed with math and logic.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest mathematician of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Beauty. What is beautiful points us beyond itself toward what is true.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Logic. Emotions must not cloud our logical thinking.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "No Limits. Nothing should fetter the infinite possibility inherent in all existence.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Knowledge is the path to power and domination.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Self-Improvement. The goal of a life of study is the betterment of oneself.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow Quandrix students.",
+      "I owe a debt to the professor who took me under their wing.",
+      "I am searching for a legendary theorem.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my research.",
+      "I seek to uncover the secrets of the multiverse."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am smarter than everyone else.",
+      "I am socially awkward.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am obsessed with my work."
+    ]
+  },
+  {
+    "name": "Rakdos Cultist",
+    "personality_traits": [
+      "I revel in mayhem, the more destructive the better.",
+      "When violence breaks out, I lose myself in rage, and it's sometimes hard to stop.",
+      "I am always looking for a good time.",
+      "I love the spotlight.",
+      "I am always looking for a way to shock and awe.",
+      "I am fiercely loyal to the Cult of Rakdos.",
+      "I am always looking for a way to gain an advantage.",
+      "I am determined to become the greatest performer of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Creativity. I express myself through violence and mayhem.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Fear is a tool, and I will use it.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow cultists.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Thrills. Life is a show, and I am the star.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Cult of Rakdos.",
+      "I owe a debt to the cultist who recruited me.",
+      "I am searching for a legendary performance.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my fellow cultists.",
+      "I seek to become the greatest performer of my age."
+    ],
+    "flaws": [
+      "My family is prominent in another guild. I enjoy my wild life, but I don't want to embarrass them.",
+      "I am reckless and have little regard for my own safety.",
+      "I am quick to anger.",
+      "I am afraid of being bored.",
+      "I am overconfident and underestimate my opponents.",
+      "I am obsessed with mayhem."
+    ]
+  },
+  {
+    "name": "Rival Intern",
+    "personality_traits": [
+      "My previous employer didn't respect me, and now I'll do whatever I can to gain respect.",
+      "The job is important, but the relationships I forge with my coworkers are even more so.",
+      "The job is everything to me. Who needs relaxation, hobbies, and a social life?",
+      "I am always looking for a way to get ahead.",
+      "I am fiercely competitive.",
+      "I am always looking for a way to prove myself.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to succeed."
+    ],
+    "ideals": [
+      {
+        "text": "Power. Money is fine, but real power means never having to say you're sorry.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Advancement. I will rise to the top, no matter what it takes.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Loyalty. I am loyal to my coworkers.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Knowledge. I seek to learn everything I can.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow interns.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I have a family member in need. I consider them in everything I do.",
+      "I am loyal to my coworkers.",
+      "I owe a debt to the person who gave me a second chance.",
+      "I am searching for a way to get ahead.",
+      "I will do anything to protect my family.",
+      "I seek to prove myself to my employer."
+    ],
+    "flaws": [
+      "I know what's best. Trust me.",
+      "I have no flaws. I'm perfect.",
+      "I am arrogant and believe I am better than everyone else.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Rune Carver",
+    "personality_traits": [
+      "Is it practical to learn an ancient language that is rarely spoken? No. But is it fun? Absolutely.",
+      "I learned one of my ancestors was a lauded rune carver whose story was lost to time. I seek to rekindle that legacy.",
+      "Life may be a whirlwind of chaos around me, but whenever I create my runes, I feel at peace.",
+      "I am always looking for a new rune to learn.",
+      "I am obsessed with runes.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest rune carver of my age.",
+      "My brain can barely produce a few words with ink, but carving runes makes my thoughts sing."
+    ],
+    "ideals": [
+      {
+        "text": "Knowledge. The path to power and self-improvement is through knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Tradition. The old ways of rune carving must be preserved.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Creativity. I express myself through my runes.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Runes are a means to power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow rune carvers.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Discovery. I seek to uncover lost runes.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow rune carvers.",
+      "I owe a debt to the rune carver who taught me everything I know.",
+      "I am searching for a legendary rune.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my runes.",
+      "I seek to uncover the secrets of the past."
+    ],
+    "flaws": [
+      "I am obsessed with runes.",
+      "I am socially awkward.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Secret Identity",
+    "personality_traits": [
+      "Despite its problems, I love Hillsfar. It's the greatest city in the world, the only one for me.",
+      "I move from place to place, never staying anywhere long and leaving nothing behind.",
+      "I think flattery is the best way to direct attention away from me.",
+      "I don't make friends easily. They're a liability I cannot afford.",
+      "I am always looking for a way to blend in.",
+      "I am always looking for a way to avoid attention.",
+      "I am fiercely independent.",
+      "I am determined to protect my true identity."
+    ],
+    "ideals": [
+      {
+        "text": "Quisling. Supporting the rulers of the land and following the laws is the road to salvation.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Heroic. I do everything I can to help non-humans, regardless of the personal cost to me.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. I protect my fellow non-humans.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Secrecy. My true identity must remain hidden.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the non-humans of Hillsfar.",
+      "I owe a debt to the person who helped me create my secret identity.",
+      "I am searching for a way to escape Hillsfar.",
+      "I carry a memento of my true self.",
+      "I will do anything to protect my true identity.",
+      "I seek to help other non-humans."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am suspicious of anyone who offers help.",
+      "I am quick to anger.",
+      "I am afraid of being discovered.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Selesnya Initiate",
+    "personality_traits": [
+      "I never raise my voice or lose my temper.",
+      "I feel the pains and joys of everyone around me, friend or foe.",
+      "I love beasts and plants of all kinds, and am loath to harm them.",
+      "I am always looking for a way to bring harmony.",
+      "I am fiercely loyal to the Selesnya Conclave.",
+      "I am always looking for a way to help others.",
+      "I am deeply spiritual.",
+      "I am determined to protect the natural world."
+    ],
+    "ideals": [
+      {
+        "text": "Guild. My guild is all that really matters.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Nature. The natural world is more important than civilization.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Harmony. We must all work together to create a better world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Community. My fellow Selesnya are my family.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I will use my magic to protect the natural world.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Selesnya Conclave.",
+      "I owe a debt to the dryad who taught me everything I know.",
+      "I am searching for a legendary grove.",
+      "I carry a memento of my home.",
+      "I will do anything to protect the natural world.",
+      "I seek to bring harmony to the world."
+    ],
+    "flaws": [
+      "I am naive and believe the best in everyone.",
+      "I am slow to anger, but when I do, I am terrifying.",
+      "I am quick to trust others.",
+      "I am afraid of conflict.",
+      "I am overconfident and underestimate my opponents.",
+      "I am detached from the struggles of the mortal world."
+    ]
+  },
+  {
+    "name": "Shade Fanatic",
+    "personality_traits": [
+      "I am a bully; I try to hide it though.",
+      "I let my actions speak for themselves.",
+      "I am important; I will not let anyone forget that.",
+      "I am always looking for a way to gain power.",
+      "I am fiercely loyal to the Shadovar.",
+      "I am always looking for a way to spread the truth of the Shadovar.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to restore Netheril."
+    ],
+    "ideals": [
+      {
+        "text": "Hope. I know even if I need to do evil acts, history will be my redemption.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Dedicated. I can do anything I put my mind to.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Exciting. I have found the truth of the Shadovar and want to share it with everyone.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Power. I will gain power, no matter the cost.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow Shadovar.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      }
+    ],
+    "bonds": [
+      "They say the Shade broke the bonds of mortality; I want to find out how.",
+      "I am loyal to the Shadovar.",
+      "I owe a debt to the Shadovar who recruited me.",
+      "I am searching for a legendary artifact of Netheril.",
+      "I carry a memento of my home.",
+      "I seek to restore Netheril to its former glory."
+    ],
+    "flaws": [
+      "I am a bully.",
+      "I am arrogant and believe I am better than everyone else.",
+      "I am quick to anger.",
+      "I am suspicious of anyone who offers help.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Silverquill Student",
+    "personality_traits": [
+      "I'll say whatever I need to in order to maintain my high social status.",
+      "I prefer saying the blunt truth over a pretty lie, and I don't particularly care whose feelings I hurt.",
+      "I believe encouraging my classmates is the best way to succeed.",
+      "I don't like to get my hands dirty, so I use my words as my weapons.",
+      "I am always looking for a way to gain an advantage.",
+      "I am obsessed with words and language.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest wordsmith of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Pride. The most important thing is winning and bringing others low.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Respect. Respect is due to me because of my position, but all people deserve to be treated with dignity.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. Words are a means to power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect my fellow Silverquill students.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Truth. Words should reflect the truth.",
+        "alignment": "Lawful"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow Silverquill students.",
+      "I owe a debt to the professor who took me under their wing.",
+      "I am searching for a legendary tome.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my reputation.",
+      "I seek to become the greatest wordsmith of my age."
+    ],
+    "flaws": [
+      "I am arrogant and believe I am better than everyone else.",
+      "I am obsessed with my status.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am careless with my words and often hurt others."
+    ]
+  },
+  {
+    "name": "Stojanow Prisoner",
+    "personality_traits": [
+      "I am a bully; others will suffer as I have.",
+      "I always say yes even when I mean no; it's just easier.",
+      "I aim to misbehave.",
+      "I go out of my way to frustrate or anger those in power.",
+      "I strive to obey the law. I will never again make the mistake of going against authority.",
+      "I am always looking for a way to escape.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to survive."
+    ],
+    "ideals": [
+      {
+        "text": "Loss. I freely give those who offend me what was so brutally denied me, death.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Dedication. I will never again be a victim.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Vengeance. I use any means to get information I need; I have been well taught.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. I protect my fellow prisoners.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I take up arms to help establish a free Phlan.",
+      "I am loyal to my fellow prisoners.",
+      "I owe a debt to the person who helped me escape.",
+      "I carry a memento of my former life.",
+      "I will do anything to protect my family.",
+      "The horrors of my time in Stojanow haunt my dreams."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am quick to anger.",
+      "I am afraid of being caught.",
+      "I am reckless and have little regard for my own safety.",
+      "I am overconfident and underestimate my opponents.",
+      "I am haunted by my past."
+    ]
+  },
+  {
+    "name": "Ticklebelly Nomad",
+    "personality_traits": [
+      "I eagerly inject myself into the unknown.",
+      "Villages make me claustrophobic. I prefer the open sky.",
+      "I am always looking for a new adventure.",
+      "I am fiercely loyal to my tribe.",
+      "I am suspicious of anyone who offers help.",
+      "I am always looking for a way to return to my tribe.",
+      "I am determined to survive.",
+      "My word is my bond. I see a promise to completion, even if it conflicts with my beliefs."
+    ],
+    "ideals": [
+      {
+        "text": "Kinship. Family is most important in life. Though I may be far from my own, the bonds of family must be protected in others' lives as well.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Belonging. All creatures have a place in the world, so I strive to help others find theirs.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Community. My tribe is my family.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Nature. The natural world is more important than civilization.",
+        "alignment": "Neutral"
+      }
+    ],
+    "bonds": [
+      "I ache to return to my tribe and the family I left.",
+      "I carry a memento of my tribe.",
+      "I owe a debt to the nomad who saved my life.",
+      "I am searching for a legendary beast.",
+      "I will do anything to protect my tribe.",
+      "I seek to reunite with my family."
+    ],
+    "flaws": [
+      "I am claustrophobic.",
+      "I am suspicious of anyone who offers help.",
+      "I am quick to anger.",
+      "I am afraid of being trapped.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Trade Sheriff",
+    "personality_traits": [
+      "I am always polite and respectful.",
+      "I let my actions speak for themselves.",
+      "I am haunted by my past having seen the murder of a close friend or family member and it is the one case I always needed to solve but have not been able to.",
+      "I never let emotion complicate work.",
+      "My sense of humor is considered by most to be awkward.",
+      "I am always looking for a way to solve the next case.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to bring criminals to justice."
+    ],
+    "ideals": [
+      {
+        "text": "Hope. My job is to speak for the victim.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Dedicated. I will do whatever it takes to solve the case.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Justice. I will see justice done, no matter the cost.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Power. I will use my authority to root out crime.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Community. I protect the innocent.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I need to prove my worth to my fellow Sheriffs.",
+      "I am loyal to the Sheriffs.",
+      "I owe a debt to the sheriff who trained me.",
+      "I am searching for the person who murdered my friend.",
+      "I will do anything to protect the innocent.",
+      "I seek to solve the one case that haunts me."
+    ],
+    "flaws": [
+      "I always overexaggerate my abilities.",
+      "I cannot bear to let those I care for out of my sight.",
+      "I am incapable of standing up for myself.",
+      "I always enjoy a good mug of ale... or five.",
+      "I know what I do is wrong, but am afraid to speak up about it.",
+      "I took a bribe to tank an investigation and I would do anything to keep it secret."
+    ]
+  },
+  {
+    "name": "Vizier",
+    "personality_traits": [
+      "Everything I do, I do gracefully and deliberately, and with complete confidence. (Oketra)",
+      "When I am at peace, I am an oasis of perfect calm in the world. When I am roused to anger, I am an embodiment of terror. (Kefnet)",
+      "I enjoy solitude as an opportunity to plan my victory. (Bontu)",
+      "I get restless when life in the city feels too tame, too safe. (Rhonas)",
+      "I enjoy teasing acolytes and initiates with juicy tidbits of knowledge wrapped up in fiendishly difficult puzzles. (Kefnet)",
+      "I am always looking for a way to serve my god.",
+      "I am deeply spiritual.",
+      "I am determined to guide the initiates."
+    ],
+    "ideals": [
+      {
+        "text": "Solidarity. The thing that matters most of all is that we're there for each other.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Faith. I trust that my deity will guide my actions.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Power. Knowledge is the path to power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow viziers.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Knowledge. I seek to understand the trials.",
+        "alignment": "Any"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my god.",
+      "I owe a debt to the vizier who trained me.",
+      "I am searching for a legendary artifact.",
+      "I carry a memento of my home.",
+      "I will do anything to protect the initiates.",
+      "I seek to guide the initiates to victory."
+    ],
+    "flaws": [
+      "I am in love with an initiate, and I want to shield this person from death in the trials.",
+      "I secretly wish I had not been chosen as a vizier, so I could participate in the trials as an initiate.",
+      "I am arrogant and believe I am better than everyone else.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  },
+  {
+    "name": "Volstrucker Agent",
+    "personality_traits": [
+      "I prefer to keep my thoughts to myself.",
+      "I indulge vice in excess to quiet my conscience.",
+      "I've left emotion behind me. I'm now perfectly calm.",
+      "I am always looking for a way to complete my mission.",
+      "I am fiercely loyal to the Cerberus Assembly.",
+      "I am suspicious of anyone who offers help.",
+      "I am determined to survive.",
+      "I am always looking for a way to escape my past."
+    ],
+    "ideals": [
+      {
+        "text": "Escape. The Volstrucker are pure evil! I can't atone for what I've done for them, but I can escape with my life.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Loyalty. I am loyal to the Cerberus Assembly.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Power. I will gain power, no matter the cost.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Survival. I do whatever it takes to stay alive.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Redemption. I seek to atone for my past sins.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Cerberus Assembly.",
+      "I owe a debt to the Volstrucker who trained me.",
+      "I am searching for a way to escape the Volstrucker.",
+      "I carry a memento of my former life.",
+      "I will do anything to protect my fellow Volstrucker.",
+      "I seek to atone for my past sins."
+    ],
+    "flaws": [
+      "I am paranoid and trust no one.",
+      "I am ruthless and will sacrifice anyone for the mission.",
+      "I am quick to anger.",
+      "I am afraid of being discovered.",
+      "I am overconfident and underestimate my opponents.",
+      "I am haunted by my past."
+    ]
+  },
+  {
+    "name": "Witchlight Hand",
+    "personality_traits": [
+      "I'm haunted by fey laughter that only I can hear, though I know it's just my mind playing tricks on me.",
+      "I never leave a friend behind.",
+      "The Witchlight Carnival feels like home to me.",
+      "I am always looking for a way to have fun.",
+      "I am fiercely loyal to the carnival.",
+      "I am suspicious of anyone who offers help.",
+      "I am always looking for a way to escape the carnival.",
+      "I am determined to survive."
+    ],
+    "ideals": [
+      {
+        "text": "Friendship. I never leave a friend behind.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Empathy. No creature should be made to suffer.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Wanderlust. I prefer to take the less traveled path.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Wonder. The world is full of magic and mystery.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow carnival hands.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Witchlight Carnival.",
+      "I owe a debt to the person who gave me a place in the carnival.",
+      "I am searching for a way to return home.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my fellow carnival hands.",
+      "I seek to escape the carnival."
+    ],
+    "flaws": [
+      "I am haunted by fey laughter.",
+      "I am easily distracted.",
+      "I am quick to anger.",
+      "I am afraid of being abandoned.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Witherbloom Student",
+    "personality_traits": [
+      "I love brewing up a new recipe, even if some might be repulsed by my choice of ingredients. Or the final product. Or both.",
+      "My fashion sense is like my garden: withered, black, and weird.",
+      "I'm going to befriend every single monster in this swamp if it's the last thing I do.",
+      "Everything in this world dies eventually. The question is what we do with the time we have.",
+      "I am always looking for a new ingredient.",
+      "I am obsessed with nature.",
+      "I am always looking for a way to improve my skills.",
+      "I am determined to become the greatest alchemist of my age."
+    ],
+    "ideals": [
+      {
+        "text": "Life. I use my connection to nature to heal the sick and protect life.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Greater Good. I will do whatever it takes to protect the natural world.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Knowledge. I seek to understand the cycle of life and death.",
+        "alignment": "Any"
+      },
+      {
+        "text": "Power. I will use my knowledge to gain power.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow Witherbloom students.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to my fellow Witherbloom students.",
+      "I owe a debt to the professor who took me under their wing.",
+      "I am searching for a legendary ingredient.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my research.",
+      "I seek to uncover the secrets of life and death."
+    ],
+    "flaws": [
+      "I am obsessed with death.",
+      "I am socially awkward.",
+      "I am quick to anger.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents.",
+      "I am reckless and have little regard for my own safety."
+    ]
+  },
+  {
+    "name": "Simic Scientist",
+    "personality_traits": [
+      "I can't wait to see what I become next!",
+      "I am convinced that everything inclines toward constant improvement.",
+      "I am always looking for a new discovery.",
+      "I am obsessed with science.",
+      "I am always looking for a way to improve things.",
+      "I am determined to become the greatest scientist of my age.",
+      "I am always looking for a new subject to study.",
+      "I am fiercely loyal to the Simic Combine."
+    ],
+    "ideals": [
+      {
+        "text": "Understanding. Understanding the world is more important than what you do with your knowledge.",
+        "alignment": "Neutral"
+      },
+      {
+        "text": "Greater Good. I want to reshape the world into higher forms of life so that all can enjoy evolution.",
+        "alignment": "Good"
+      },
+      {
+        "text": "Logic. I will not let emotions cloud the conclusions of logic.",
+        "alignment": "Lawful"
+      },
+      {
+        "text": "Superiority. My vast intellect and strength are directed toward increasing my sway over others.",
+        "alignment": "Evil"
+      },
+      {
+        "text": "Freedom. I will not be bound by anyone.",
+        "alignment": "Chaotic"
+      },
+      {
+        "text": "Community. I protect my fellow Simic.",
+        "alignment": "Good"
+      }
+    ],
+    "bonds": [
+      "I am loyal to the Simic Combine.",
+      "I owe a debt to the scientist who recruited me.",
+      "I am searching for a legendary discovery.",
+      "I carry a memento of my home.",
+      "I will do anything to protect my research.",
+      "I seek to uncover the secrets of life."
+    ],
+    "flaws": [
+      "I have a rather embarrassing mutation that I do everything I can to keep hidden.",
+      "I'm more interested in taking notes on monstrous anatomy than in monsters.",
+      "Every social situation I'm in seems to lead to my asking rude personal questions.",
+      "I am paranoid and trust no one.",
+      "I am afraid of failure.",
+      "I am overconfident and underestimate my opponents."
+    ]
+  }
+]
