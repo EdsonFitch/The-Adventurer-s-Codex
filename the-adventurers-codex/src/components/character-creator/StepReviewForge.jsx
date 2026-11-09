@@ -1,3 +1,26 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: StepReviewForge
+ * -----------------------------------------------------------------------------
+ * Manages Step 9 of Character Creation:
+ * - Renders a parchment-styled character summary sheet.
+ * - Computes starting maximum HP (Hit Die + CON Mod).
+ * - Displays active combat resistances and passive lineage/class traits.
+ * - Executes the final Supabase relational commit via master wizard trigger.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.characterData - Master character payload state.
+ * @param {Array} props.racesList - Pre-fetched races list.
+ * @param {Array} props.subracesList - Pre-fetched subraces list.
+ * @param {Array} props.classesList - Pre-fetched classes list.
+ * @param {Array} props.subclassesList - Pre-fetched subclasses list.
+ * @param {Array} props.backgroundsList - Pre-fetched backgrounds list.
+ * @param {Array} props.activeEffects - Aggregated active effects from lineage/class/background.
+ * @param {Object} props.computedStats - Calculated attributes and modifier package.
+ * @param {Function} props.onForge - Callback function to trigger Supabase database mutation.
+ * @param {boolean} props.isSubmitting - Loading state during database insert.
+ */
+
 import React from "react";
 import { calculateModifier } from "./StepAbilityScores";
 
@@ -16,24 +39,6 @@ const ALIGNMENT_LABELS = {
   CE: "Chaotic Evil",
 };
 
-/**
- * StepReviewForge Component
- * -----------------------------------------------------------------------------
- * Manages Step 5 of Character Creation:
- * - Renders a parchment-styled character summary sheet.
- * - Computes starting maximum HP (Hit Die + CON Mod).
- * - Executes the final Supabase relational commit via master wizard trigger.
- *
- * @param {Object} props
- * @param {Object} props.characterData - Master character payload state
- * @param {Array} props.racesList - Pre-fetched races list
- * @param {Array} props.subracesList - Pre-fetched subraces list
- * @param {Array} props.classesList - Pre-fetched classes list
- * @param {Array} props.subclassesList - Pre-fetched subclasses list
- * @param {Array} props.backgroundsList - Pre-fetched backgrounds list
- * @param {Function} props.onForge - Callback function to trigger Supabase database mutation
- * @param {boolean} props.isSubmitting - Loading state during DB insert
- */
 export default function StepReviewForge({
   characterData,
   racesList = [],
@@ -41,6 +46,8 @@ export default function StepReviewForge({
   classesList = [],
   subclassesList = [],
   backgroundsList = [],
+  activeEffects = [],
+  computedStats = {},
   onForge,
   isSubmitting = false,
 }) {
@@ -58,17 +65,28 @@ export default function StepReviewForge({
   );
 
   // Compute Constitution Modifier & Starting Max HP
-  const conScore = characterData.abilityScores?.constitution || 10;
+  const conScore = characterData.abilityScores?.con || 10;
   const conModNumeric = Math.floor((conScore - 10) / 2);
   const baseHitDie = selectedClass?.hit_die || 8;
   const calculatedMaxHP = Math.max(1, baseHitDie + conModNumeric);
+
+  // Filter resistances and passive traits from activeEffects
+  const resistances = activeEffects.filter(
+    (e) => e.type === "RESISTANCE" || e.type === "DAMAGE_RESISTANCE",
+  );
+  const passiveTraits = activeEffects.filter(
+    (e) =>
+      e.type === "PASSIVE_TRAIT" ||
+      e.type === "SENSE" ||
+      e.type === "SPECIAL_TRAIT",
+  );
 
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header */}
       <div>
         <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
-          Step 5: Review & Forge
+          Step 9: Review & Forge
         </h3>
         <p className="text-xs text-[#889c9b]">
           Inspect your hero's record before binding them permanently into the
@@ -189,6 +207,61 @@ export default function StepReviewForge({
                   {selectedBg.feature_name}
                 </p>
               )}
+            </div>
+          </div>
+        </div>
+
+        {/* NEW SECTION: RESISTANCES & PASSIVE TRAITS SUMMARY CARD */}
+        <div className="p-4 bg-[#361a12]/80 border border-amber-500/40 rounded-lg space-y-3">
+          <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center space-x-1.5">
+            <span>🛡️ Resistances & Passive Traits</span>
+          </h4>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            {/* Resistances */}
+            <div>
+              <span className="text-[10px] uppercase text-[#889c9b] font-bold block mb-1">
+                Damage & Condition Resistances
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {resistances.length > 0 ? (
+                  resistances.map((res, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 rounded bg-[#4a261c] border border-amber-500/50 text-amber-300 font-bold"
+                    >
+                      🛡️ {res.target || res.name || "Resistance"} ({res.source})
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-[#889c9b] italic text-[11px]">
+                    No active resistances
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Passive Traits & Senses */}
+            <div>
+              <span className="text-[10px] uppercase text-[#889c9b] font-bold block mb-1">
+                Passive Lineage & Class Traits
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {passiveTraits.length > 0 ? (
+                  passiveTraits.map((trait, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 rounded bg-[#4a261c] border border-[#a59075]/40 text-[#f0e6d2]"
+                    >
+                      ✨ {trait.name || trait.target} ({trait.source})
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-[#889c9b] italic text-[11px]">
+                    Standard traits
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>

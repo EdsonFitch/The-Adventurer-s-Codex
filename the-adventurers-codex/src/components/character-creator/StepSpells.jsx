@@ -3,13 +3,15 @@
  * COMPONENT: StepSpells.jsx
  * -----------------------------------------------------------------------------
  * Purpose:
- * Character creation wizard step for selecting cantrips and spells.
+ * Character creation wizard step for selecting cantrips and leveled spells.
  * - Queries 'class_level_progression' for active class and level budgets.
  * - Queries the 'class_spells' relation table to restrict available spells
- *   strictly to the class list (e.g., Bard spells only).
- * - Reads `SPELL_GRANT` effects from `computedStats.bonusSpells` (populated by
- *   lineage, subraces, or feats) and automatically includes them in the character's grimoire.
- * - Separates class-budgeted spells from bonus/racial/feat spells.
+ *   strictly to the class list.
+ * - Reads `SPELL_GRANT` effects from `computedStats.bonusSpells` and automatically
+ *   includes them in the character's grimoire.
+ * - Separates Cantrips (Level 0) from Leveled Spells into distinct sections.
+ * - Features individual expand/collapse toggles for viewing spell descriptions
+ *   and casting metadata.
  * -----------------------------------------------------------------------------
  */
 
@@ -34,10 +36,26 @@ export default function StepSpells({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Local state dictionary to track which spell IDs are currently expanded (showing description)
+  const [expandedSpellIds, setExpandedSpellIds] = useState({});
+
   // Character's chosen spells structure: { classSpells: [], bonusSpells: [] }
   const selectedSpells = characterData.spells || {
     classSpells: [],
     bonusSpells: [],
+  };
+
+  /**
+   * Toggles the expand/collapse state for a specific spell card's description view.
+   * @param {string} spellId - Unique UUID of the spell card.
+   */
+  const toggleExpandSpell = (spellId, e) => {
+    // Prevent clicking the details toggle from triggering the selection handler
+    if (e) e.stopPropagation();
+    setExpandedSpellIds((prev) => ({
+      ...prev,
+      [spellId]: !prev[spellId],
+    }));
   };
 
   // -------------------------------------------------------------------------
@@ -67,7 +85,7 @@ export default function StepSpells({
         if (progErr) throw progErr;
         setProgressionRules(progData);
 
-        // B. Fetch ONLY the spells linked to this class via the 'class_spells' table
+        // B. Fetch spells linked to this class via 'class_spells' table (includes description)
         const { data: classSpellsData, error: classSpellsErr } = await supabase
           .from("class_spells")
           .select(
@@ -80,7 +98,7 @@ export default function StepSpells({
 
         if (classSpellsErr) throw classSpellsErr;
 
-        // Flatten the joined response to extract clean spell objects
+        // Flatten joined response to extract clean spell objects carrying descriptions
         const validSpells = (classSpellsData || [])
           .map((item) => item.spells)
           .filter(Boolean);
@@ -103,30 +121,26 @@ export default function StepSpells({
   // -------------------------------------------------------------------------
   // 3. SYNCHRONIZE BONUS SPELLS (SPELL_GRANT EFFECT ENGINE)
   // -------------------------------------------------------------------------
-  /**
-   * Automatically processes `computedStats.bonusSpells` derived from active
-   * lineage, subraces, or feats, and synchronizes them into master state.
-   */
   useEffect(() => {
     const rawBonusGrants = computedStats?.bonusSpells || [];
 
-    // Format granted spells into structured objects
     const resolvedBonusSpells = rawBonusGrants.map((grant) => ({
       id: grant.spell_id || grant.id || `bonus-${grant.spell || grant.target}`,
       name: grant.spell || grant.name || grant.target || "Granted Spell",
       level: grant.level !== undefined ? grant.level : 1,
       school: grant.school || "Lineage / Feat",
       origin: grant.source || "Racial Trait / Feat",
+      description:
+        grant.description ||
+        "Granted automatically through special heritage or training.",
     }));
 
-    // Extract all unique spell IDs from both class selections and bonus grants
     const classSpellIds = selectedSpells.classSpells.map((s) => s.id);
     const bonusSpellIds = resolvedBonusSpells.map((s) => s.id);
     const combinedAllIds = Array.from(
       new Set([...classSpellIds, ...bonusSpellIds]),
     );
 
-    // Update master state if bonus spells differ from current state
     const currentBonusIds = selectedSpells.bonusSpells.map((s) => s.id);
     const hasChanged =
       resolvedBonusSpells.length !== selectedSpells.bonusSpells.length ||
@@ -192,7 +206,6 @@ export default function StepSpells({
   // 5. SELECTION & BUDGET ENFORCEMENT HANDLERS
   // -------------------------------------------------------------------------
   const toggleClassSpell = (spell) => {
-    // Prevent selecting spells higher than the character's max accessible spell level
     if (spell.level > budgets.maxSpellLevel) {
       alert(
         `As a level ${characterData.level} caster, you cannot access level ${spell.level} spells yet (Max: Level ${budgets.maxSpellLevel}).`,
@@ -204,12 +217,10 @@ export default function StepSpells({
     let updatedClassSpells;
 
     if (exists) {
-      // Remove spell if already selected
       updatedClassSpells = selectedSpells.classSpells.filter(
         (s) => s.id !== spell.id,
       );
     } else {
-      // Enforce cantrip vs leveled spell limits
       if (spell.level === 0) {
         const currentCantrips = selectedSpells.classSpells.filter(
           (s) => s.level === 0,
@@ -238,7 +249,6 @@ export default function StepSpells({
       ];
     }
 
-    // Recompute total combined selected spell UUIDs for backend insertion
     const newClassIds = updatedClassSpells.map((s) => s.id);
     const bonusIds = selectedSpells.bonusSpells.map((s) => s.id);
     const combinedIds = Array.from(new Set([...newClassIds, ...bonusIds]));
@@ -249,6 +259,10 @@ export default function StepSpells({
       selectedSpellIds: combinedIds,
     });
   };
+
+  // Separate available spells into Cantrips (level 0) and Leveled Spells (level > 0)
+  const availableCantrips = availableSpells.filter((s) => s.level === 0);
+  const availableLeveledSpells = availableSpells.filter((s) => s.level > 0);
 
   // -------------------------------------------------------------------------
   // 6. RENDER UI
@@ -263,9 +277,15 @@ export default function StepSpells({
 
   return (
     <div className="space-y-6 text-[#938f71]">
-      <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
-        Step 5: Spellcasting & Grimoire
-      </h3>
+      <div className="border-b border-[#a59075]/20 pb-4">
+        <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
+          Step 7: Spellcasting & Grimoire
+        </h3>
+        <p className="text-xs text-[#889c9b]">
+          Select your cantrips and leveled spells. Click "📖 Details" on any
+          spell card to read its full description.
+        </p>
+      </div>
 
       {/* Budget Status Header */}
       <div className="bg-[#4a261c]/60 p-4 rounded-lg border border-[#a59075]/40 flex justify-between items-center shadow-inner">
@@ -294,9 +314,7 @@ export default function StepSpells({
         </div>
       </div>
 
-      {/* --------------------------------------------------------------------- */}
-      {/* BONUS / RACIAL / FEAT GRANTED SPELLS SECTION (Milestone 4)             */}
-      {/* --------------------------------------------------------------------- */}
+      {/* GRANTED SPELLS SECTION */}
       {selectedSpells.bonusSpells.length > 0 && (
         <div className="space-y-3 p-4 bg-[#361a12] border border-amber-500/40 rounded-lg shadow">
           <div className="flex justify-between items-center">
@@ -308,47 +326,75 @@ export default function StepSpells({
             </span>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {selectedSpells.bonusSpells.map((bonusSpell) => (
-              <div
-                key={bonusSpell.id}
-                className="p-2.5 rounded bg-[#4a261c] border border-amber-500/30 flex justify-between items-center shadow"
-              >
-                <div>
-                  <span className="text-xs font-bold text-[#f0e6d2]">
-                    {bonusSpell.name}
-                  </span>
-                  <p className="text-[10px] text-amber-300/80 mt-0.5">
-                    Source: {bonusSpell.origin}
-                  </p>
+            {selectedSpells.bonusSpells.map((bonusSpell) => {
+              const isExpanded = expandedSpellIds[bonusSpell.id];
+              return (
+                <div
+                  key={bonusSpell.id}
+                  className="p-2.5 rounded bg-[#4a261c] border border-amber-500/30 shadow space-y-2"
+                >
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-xs font-bold text-[#f0e6d2]">
+                        {bonusSpell.name}
+                      </span>
+                      <p className="text-[10px] text-amber-300/80 mt-0.5">
+                        Source: {bonusSpell.origin}
+                      </p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleExpandSpell(bonusSpell.id, e)}
+                        className="text-[10px] text-amber-400 hover:underline px-1.5 py-0.5 bg-[#361a12] rounded border border-amber-500/20"
+                      >
+                        {isExpanded ? "▲ Hide" : "📖 Details"}
+                      </button>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#361a12] text-amber-300 border border-amber-500/20">
+                        {bonusSpell.level === 0
+                          ? "Cantrip"
+                          : `Level ${bonusSpell.level}`}
+                      </span>
+                    </div>
+                  </div>
+                  {isExpanded && (
+                    <div className="text-[11px] text-[#938f71] bg-[#361a12]/80 p-2 rounded border border-amber-500/20 mt-2 space-y-1">
+                      <p>
+                        {bonusSpell.description || "No description provided."}
+                      </p>
+                    </div>
+                  )}
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-[#361a12] text-amber-300 border border-amber-500/20">
-                  {bonusSpell.level === 0
-                    ? "Cantrip"
-                    : `Level ${bonusSpell.level}`}
-                </span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Class-Restricted Spell Picker Grid */}
+      {/* =================================================================== */}
+      {/* SECTION A: CANTRIPS (LEVEL 0)                                       */}
+      {/* =================================================================== */}
       <div className="space-y-3">
-        <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider">
-          Available Spells for Your Class
+        <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider flex justify-between items-center">
+          <span>1. Cantrips (Level 0)</span>
+          <span className="text-[10px] text-[#889c9b]">
+            Known:{" "}
+            {selectedSpells.classSpells.filter((s) => s.level === 0).length} /{" "}
+            {budgets.cantripsLimit}
+          </span>
         </h4>
-        {availableSpells.length === 0 ? (
+        {availableCantrips.length === 0 ? (
           <p className="text-[#889c9b] text-xs italic">
-            No spells found linked to this class in the database. Make sure your
-            `class_spells` table is seeded.
+            No cantrips found for this class.
           </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2">
-            {availableSpells.map((spell) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-72 overflow-y-auto pr-2">
+            {availableCantrips.map((spell) => {
               const isSelected = selectedSpells.classSpells.some(
                 (s) => s.id === spell.id,
               );
               const isLocked = spell.level > budgets.maxSpellLevel;
+              const isExpanded = expandedSpellIds[spell.id];
 
               return (
                 <div
@@ -363,16 +409,133 @@ export default function StepSpells({
                   }`}
                 >
                   <div className="flex justify-between items-center">
-                    <span className="text-xs font-bold text-[#f0e6d2]">
-                      {spell.name}
-                    </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-[#361a12] text-amber-400 border border-[#a59075]/30">
-                      {spell.level === 0 ? "Cantrip" : `Level ${spell.level}`}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${isSelected ? "bg-amber-600 border-amber-400 text-white text-[9px]" : "bg-[#361a12] border-[#a59075]/40"}`}
+                      >
+                        {isSelected && "✓"}
+                      </div>
+                      <span className="text-xs font-bold text-[#f0e6d2]">
+                        {spell.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleExpandSpell(spell.id, e)}
+                        className="text-[10px] text-amber-400 hover:underline px-1.5 py-0.5 bg-[#361a12] rounded border border-amber-500/30"
+                      >
+                        {isExpanded ? "▲ Hide" : "📖 Details"}
+                      </button>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#361a12] text-amber-400 border border-[#a59075]/30">
+                        Cantrip
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-[10px] text-[#889c9b] mt-1">
-                    {spell.school}
-                  </p>
+                  <div className="text-[10px] text-[#889c9b] mt-1 flex justify-between">
+                    <span>School: {spell.school || "Universal"}</span>
+                    <span>Casting: {spell.casting_time || "Action"}</span>
+                  </div>
+                  {/* Expanded Description Box */}
+                  {isExpanded && (
+                    <div className="text-[11px] text-[#938f71] bg-[#361a12]/90 p-2.5 rounded border border-amber-500/30 mt-2 space-y-1.5">
+                      <p>
+                        <strong className="text-[#f0e6d2]">Range:</strong>{" "}
+                        {spell.range || "Self"}
+                      </p>
+                      <p>
+                        <strong className="text-[#f0e6d2]">Description:</strong>{" "}
+                        {spell.description ||
+                          "No description recorded in archives."}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      {/* =================================================================== */}
+      {/* SECTION B: LEVELED SPELLS (LEVEL 1+)                                */}
+      {/* =================================================================== */}
+      <div className="space-y-3 pt-2">
+        <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider flex justify-between items-center">
+          <span>2. Leveled Spells (Level 1 - {budgets.maxSpellLevel})</span>
+          <span className="text-[10px] text-[#889c9b]">
+            Selected:{" "}
+            {selectedSpells.classSpells.filter((s) => s.level > 0).length} /{" "}
+            {budgets.spellLimit}
+          </span>
+        </h4>
+        {availableLeveledSpells.length === 0 ? (
+          <p className="text-[#889c9b] text-xs italic">
+            No leveled spells found for this class.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-80 overflow-y-auto pr-2">
+            {availableLeveledSpells.map((spell) => {
+              const isSelected = selectedSpells.classSpells.some(
+                (s) => s.id === spell.id,
+              );
+              const isLocked = spell.level > budgets.maxSpellLevel;
+              const isExpanded = expandedSpellIds[spell.id];
+
+              return (
+                <div
+                  key={spell.id}
+                  onClick={() => !isLocked && toggleClassSpell(spell)}
+                  className={`p-3 rounded-lg border transition-all ${
+                    isLocked
+                      ? "bg-[#361a12]/40 border-[#a59075]/20 opacity-40 cursor-not-allowed"
+                      : isSelected
+                        ? "bg-[#937460]/40 border-amber-500 cursor-pointer shadow"
+                        : "bg-[#4a261c]/60 border-[#a59075]/40 hover:border-[#a59075] cursor-pointer"
+                  }`}
+                >
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${isSelected ? "bg-amber-600 border-amber-400 text-white text-[9px]" : "bg-[#361a12] border-[#a59075]/40"}`}
+                      >
+                        {isSelected && "✓"}
+                      </div>
+                      <span className="text-xs font-bold text-[#f0e6d2]">
+                        {spell.name}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleExpandSpell(spell.id, e)}
+                        className="text-[10px] text-amber-400 hover:underline px-1.5 py-0.5 bg-[#361a12] rounded border border-amber-500/30"
+                      >
+                        {isExpanded ? "▲ Hide" : "📖 Details"}
+                      </button>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-[#361a12] text-amber-400 border border-[#a59075]/30">
+                        Level {spell.level}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-[10px] text-[#889c9b] mt-1 flex justify-between">
+                    <span>School: {spell.school || "Universal"}</span>
+                    <span>Casting: {spell.casting_time || "Action"}</span>
+                  </div>
+                  {/* Expanded Description Box */}
+                  {isExpanded && (
+                    <div className="text-[11px] text-[#938f71] bg-[#361a12]/90 p-2.5 rounded border border-amber-500/30 mt-2 space-y-1.5">
+                      <p>
+                        <strong className="text-[#f0e6d2]">Range:</strong>{" "}
+                        {spell.range || "Self"}
+                      </p>
+                      <p>
+                        <strong className="text-[#f0e6d2]">Description:</strong>{" "}
+                        {spell.description ||
+                          "No description recorded in archives."}
+                      </p>
+                    </div>
+                  )}
                 </div>
               );
             })}

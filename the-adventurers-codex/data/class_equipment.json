@@ -1,0 +1,518 @@
+[
+  {
+    "name": "Barbarian",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "martial weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a greataxe or (b) any martial melee weapon"
+      },
+      {
+        "item": "(a) two handaxes or (b) any simple weapon"
+      },
+      {
+        "item": "An explorer’s pack and four javelins"
+      }
+    ]
+  },
+  {
+    "name": "Bard",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "hand crossbows"
+      },
+      {
+        "name": "longswords"
+      },
+      {
+        "name": "rapiers"
+      },
+      {
+        "name": "shortswords"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Three musical instruments of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "(a) a rapier, (b) a longsword, or (c) any simple weapon"
+      },
+      {
+        "item": "(a) a diplomat's pack or (b) an entertainer's pack"
+      },
+      {
+        "item": "(a) a lute or (b) any other musical instrument"
+      },
+      {
+        "item": "Leather armor, and a dagger"
+      }
+    ]
+  },
+  {
+    "name": "Cleric",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a mace or (b) a warhammer (if proficient)"
+      },
+      {
+        "item": "(a) scale mail, (b) leather armor, or (c) chain mail (if proficient)"
+      },
+      {
+        "item": "(a) a light crossbow and 20 bolts or (b) any simple weapon"
+      },
+      {
+        "item": "(a) a priest's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "A shield and a holy symbol"
+      }
+    ]
+  },
+  {
+    "name": "Druid",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "shields (druids will not wear armor or use shields made of metal)"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Clubs"
+      },
+      {
+        "name": "daggers"
+      },
+      {
+        "name": "darts"
+      },
+      {
+        "name": "javelins"
+      },
+      {
+        "name": "maces"
+      },
+      {
+        "name": "quarterstaffs"
+      },
+      {
+        "name": "scimitars"
+      },
+      {
+        "name": "sickles"
+      },
+      {
+        "name": "slings"
+      },
+      {
+        "name": "spears"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "(a) a wooden shield or (b) any simple weapon"
+      },
+      {
+        "item": "(a) a scimitar or (b) any simple melee weapon"
+      },
+      {
+        "item": "Leather armor, an explorer's pack, and a druidic focus"
+      }
+    ]
+  },
+  {
+    "name": "Fighter",
+    "armor_proficiencies": [
+      {
+        "name": "All armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "martial weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) chain mail or (b) leather armor, longbow, and 20 arrows"
+      },
+      {
+        "item": "(a) a martial weapon and a shield or (b) two martial weapons"
+      },
+      {
+        "item": "(a) a light crossbow and 20 bolts or (b) two handaxes"
+      },
+      {
+        "item": "(a) a dungeoneer's pack or (b) an explorer's pack"
+      }
+    ]
+  },
+  {
+    "name": "Monk",
+    "armor_proficiencies": [],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "shortswords"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Any one type of artisan's tools or any one musical instrument of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "(a) a shortsword or (b) any simple weapon"
+      },
+      {
+        "item": "(a) a dungeoneer's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "10 darts"
+      }
+    ]
+  },
+  {
+    "name": "Paladin",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "heavy armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "martial weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a martial weapon and a shield or (b) two martial weapons"
+      },
+      {
+        "item": "(a) five javelins or (b) any simple melee weapon"
+      },
+      {
+        "item": "(a) a priest's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "Chain mail and a holy symbol"
+      }
+    ]
+  },
+  {
+    "name": "Ranger",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "martial weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) Scale Mail or (b) leather armor"
+      },
+      {
+        "item": "(a) two shortswords or (b) two simple melee weapons"
+      },
+      {
+        "item": "(a) a dungeoneer's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "A longbow and a quiver of 20 arrows"
+      }
+    ]
+  },
+  {
+    "name": "Rogue",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      },
+      {
+        "name": "hand crossbows"
+      },
+      {
+        "name": "longswords"
+      },
+      {
+        "name": "rapiers"
+      },
+      {
+        "name": "shortswords"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "(a) a rapier or (b) a shortsword"
+      },
+      {
+        "item": "(a) a shortbow and quiver of 20 arrows or (b) a shortsword"
+      },
+      {
+        "item": "(a) a burglar's pack, (b) a dungeoneer's pack, or (c) an explorer's pack"
+      },
+      {
+        "item": "Leather armor, two daggers, and thieves' tools"
+      },
+      {
+        "item": "Alternatively, you can start with 100 GP (per the 2014 PHB \"Choose A or B\" format, the 100 GP option replaces the entire equipment package)"
+      }
+    ]
+  },
+  {
+    "name": "Sorcerer",
+    "armor_proficiencies": [],
+    "weapon_proficiencies": [
+      {
+        "name": "Daggers"
+      },
+      {
+        "name": "darts"
+      },
+      {
+        "name": "slings"
+      },
+      {
+        "name": "quarterstaffs"
+      },
+      {
+        "name": "light crossbows"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a light crossbow and 20 bolts or (b) any simple weapon"
+      },
+      {
+        "item": "(a) a component pouch or (b) an arcane focus"
+      },
+      {
+        "item": "(a) a dungeoneer's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "Two daggers"
+      },
+      {
+        "item": "Alternatively, you can start with 50 GP (as per the 2014 PHB \"Choose A or B\" format, the 50 GP option replaces the entire equipment package)"
+      }
+    ]
+  },
+  {
+    "name": "Warlock",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a light crossbow and 20 bolts or (b) any simple weapon"
+      },
+      {
+        "item": "(a) a component pouch or (b) an arcane focus"
+      },
+      {
+        "item": "(a) a scholar's pack or (b) a dungeoneer's pack"
+      },
+      {
+        "item": "Leather armor, any simple weapon, and two daggers"
+      },
+      {
+        "item": "Alternatively, you can start with 100 GP (as per the 2014 PHB \"Choose A or B\" format, the 100 GP option replaces the entire equipment package)"
+      }
+    ]
+  },
+  {
+    "name": "Wizard",
+    "armor_proficiencies": [],
+    "weapon_proficiencies": [
+      {
+        "name": "Daggers"
+      },
+      {
+        "name": "darts"
+      },
+      {
+        "name": "slings"
+      },
+      {
+        "name": "quarterstaffs"
+      },
+      {
+        "name": "light crossbows"
+      }
+    ],
+    "tool_proficiencies": [],
+    "equipment": [
+      {
+        "item": "(a) a quarterstaff or (b) a dagger"
+      },
+      {
+        "item": "(a) a component pouch or (b) an arcane focus"
+      },
+      {
+        "item": "(a) a scholar's pack or (b) an explorer's pack"
+      },
+      {
+        "item": "A spellbook"
+      }
+    ]
+  },
+  {
+    "name": "Artificer",
+    "armor_proficiencies": [
+      {
+        "name": "Light armor"
+      },
+      {
+        "name": "medium armor"
+      },
+      {
+        "name": "shields"
+      }
+    ],
+    "weapon_proficiencies": [
+      {
+        "name": "Simple weapons"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      },
+      {
+        "name": "tinker's tools"
+      },
+      {
+        "name": "one type of artisan's tools of your choice"
+      }
+    ],
+    "equipment": [
+      {
+        "item": "Any two simple weapons"
+      },
+      {
+        "item": "A light crossbow and 20 bolts"
+      },
+      {
+        "item": "(a) studded leather armor or (b) scale mail"
+      },
+      {
+        "item": "Thieves' tools and a dungeoneer's pack"
+      },
+      {
+        "item": "Alternatively, you may start with 5d4 × 10 starting gold (as per Tasha's Cauldron of Everything)"
+      }
+    ]
+  }
+]
