@@ -25,7 +25,7 @@ import StepLineageClass from "./StepLineageClass";
 import StepAbilityScores from "./StepAbilityScores";
 import StepBackgroundGear from "./StepBackgroundGear";
 import StepPersonality from "./StepPersonality";
-import StepEquipmentProficiencies from "./StepEquipmentProficiencies";
+import StepEquipmentProficiencies from "../../StepEquipmentProficiencies";
 import StepSkills from "./StepSkills";
 import StepSpells from "./StepSpells";
 import StepReviewForge from "./StepReviewForge";
