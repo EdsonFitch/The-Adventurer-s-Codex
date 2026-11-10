@@ -5,8 +5,8 @@
  * Manages Step 9 of Character Creation:
  * - Renders a parchment-styled character summary sheet.
  * - Computes starting maximum HP (Hit Die + CON Mod).
- * - Displays active combat resistances and passive lineage/class traits.
- * - Executes the final Supabase relational commit via master wizard trigger.
+ * - Displays active combat resistances, racial traits, starting gear, and languages.
+ * - Relies on the master wizard footer to trigger the final character creation submission.
  *
  * @param {Object} props - Component properties.
  * @param {Object} props.characterData - Master character payload state.
@@ -17,7 +17,7 @@
  * @param {Array} props.backgroundsList - Pre-fetched backgrounds list.
  * @param {Array} props.activeEffects - Aggregated active effects from lineage/class/background.
  * @param {Object} props.computedStats - Calculated attributes and modifier package.
- * @param {Function} props.onForge - Callback function to trigger Supabase database mutation.
+ * @param {Function} props.onForge - Callback function to trigger database mutation.
  * @param {boolean} props.isSubmitting - Loading state during database insert.
  */
 
@@ -70,16 +70,63 @@ export default function StepReviewForge({
   const baseHitDie = selectedClass?.hit_die || 8;
   const calculatedMaxHP = Math.max(1, baseHitDie + conModNumeric);
 
-  // Filter resistances and passive traits from activeEffects
-  const resistances = activeEffects.filter(
+  // ---------------------------------------------------------------------------
+  // RESISTANCE & TRAIT RESOLUTION WITH FALLBACK PARSING
+  // ---------------------------------------------------------------------------
+
+  // 1. Gather filtered resistances from activeEffects or fallback racial fields
+  let resistances = activeEffects.filter(
     (e) => e.type === "RESISTANCE" || e.type === "DAMAGE_RESISTANCE",
   );
-  const passiveTraits = activeEffects.filter(
+
+  // Fallback: If race data includes raw resistances or fire resistance traits (like Tieflings)
+  if (resistances.length === 0 && selectedRace) {
+    if (selectedRace.name?.toLowerCase().includes("tiefling")) {
+      resistances.push({
+        target: "Fire",
+        source: "Tiefling Lineage (Hellish Resistance)",
+      });
+    }
+    if (Array.isArray(selectedRace.resistances)) {
+      selectedRace.resistances.forEach((res) => {
+        resistances.push({ target: res, source: selectedRace.name });
+      });
+    }
+  }
+
+  // 2. Gather passive traits and special features
+  let passiveTraits = activeEffects.filter(
     (e) =>
       e.type === "PASSIVE_TRAIT" ||
       e.type === "SENSE" ||
       e.type === "SPECIAL_TRAIT",
   );
+
+  // Fallback: If race specifies traits array or text descriptions in the database row
+  if (selectedRace) {
+    if (selectedRace.name?.toLowerCase().includes("tiefling")) {
+      if (!passiveTraits.some((t) => t.name?.includes("Darkvision"))) {
+        passiveTraits.push({
+          name: "Darkvision (60 ft)",
+          source: "Tiefling Lineage",
+        });
+      }
+      if (!passiveTraits.some((t) => t.name?.includes("Infernal Legacy"))) {
+        passiveTraits.push({
+          name: "Infernal Legacy (Thaumatugy, Hellish Rebuke at Lvl 3)",
+          source: "Tiefling Lineage",
+        });
+      }
+    }
+    if (Array.isArray(selectedRace.traits)) {
+      selectedRace.traits.forEach((t) => {
+        passiveTraits.push({
+          name: typeof t === "string" ? t : t.name || JSON.stringify(t),
+          source: selectedRace.name,
+        });
+      });
+    }
+  }
 
   return (
     <div className="space-y-6 animate-fadeIn">
@@ -90,7 +137,7 @@ export default function StepReviewForge({
         </h3>
         <p className="text-xs text-[#889c9b]">
           Inspect your hero's record before binding them permanently into the
-          database logs.
+          chronicles.
         </p>
       </div>
 
@@ -211,7 +258,7 @@ export default function StepReviewForge({
           </div>
         </div>
 
-        {/* NEW SECTION: RESISTANCES & PASSIVE TRAITS SUMMARY CARD */}
+        {/* SECTION: RESISTANCES & PASSIVE TRAITS SUMMARY CARD */}
         <div className="p-4 bg-[#361a12]/80 border border-amber-500/40 rounded-lg space-y-3">
           <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest flex items-center space-x-1.5">
             <span>🛡️ Resistances & Passive Traits</span>
@@ -230,7 +277,8 @@ export default function StepReviewForge({
                       key={i}
                       className="px-2 py-1 rounded bg-[#4a261c] border border-amber-500/50 text-amber-300 font-bold"
                     >
-                      🛡️ {res.target || res.name || "Resistance"} ({res.source})
+                      🛡️ {res.target || res.name || "Resistance"} (
+                      {res.source || "Racial Trait"})
                     </span>
                   ))
                 ) : (
@@ -253,12 +301,70 @@ export default function StepReviewForge({
                       key={i}
                       className="px-2 py-1 rounded bg-[#4a261c] border border-[#a59075]/40 text-[#f0e6d2]"
                     >
-                      ✨ {trait.name || trait.target} ({trait.source})
+                      ✨ {trait.name || trait.target} (
+                      {trait.source || "Lineage"})
                     </span>
                   ))
                 ) : (
                   <span className="text-[#889c9b] italic text-[11px]">
                     Standard traits
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION: STARTING EQUIPMENT & LANGUAGES SUMMARY */}
+        <div className="p-4 bg-[#361a12]/80 border border-amber-500/40 rounded-lg space-y-3">
+          <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest">
+            🎒 Starting Equipment & Languages
+          </h4>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            {/* Equipment */}
+            <div>
+              <span className="text-[10px] uppercase text-[#889c9b] font-bold block mb-1">
+                Selected Gear
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {Array.isArray(characterData.equipment) &&
+                characterData.equipment.length > 0 ? (
+                  characterData.equipment.map((eq, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 rounded bg-[#4a261c] border border-[#a59075]/40 text-[#f0e6d2]"
+                    >
+                      ⚔️ {eq}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-[#889c9b] italic text-[11px]">
+                    No equipment selected
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Languages */}
+            <div>
+              <span className="text-[10px] uppercase text-[#889c9b] font-bold block mb-1">
+                Known Languages
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {Array.isArray(characterData.languages) &&
+                characterData.languages.length > 0 ? (
+                  characterData.languages.map((lang, i) => (
+                    <span
+                      key={i}
+                      className="px-2 py-1 rounded bg-[#4a261c] border border-[#a59075]/40 text-amber-300 font-bold"
+                    >
+                      🗣️ {lang}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-[#889c9b] italic text-[11px]">
+                    Common
                   </span>
                 )}
               </div>
@@ -295,25 +401,6 @@ export default function StepReviewForge({
             )}
           </div>
         </div>
-      </div>
-
-      {/* Confirmation Banner & Action */}
-      <div className="flex justify-between items-center p-4 bg-[#4a261c]/40 border border-[#a59075]/30 rounded-lg">
-        <span className="text-xs text-[#889c9b]">
-          Ready to commit your character choices to Supabase?
-        </span>
-        <button
-          type="button"
-          disabled={isSubmitting}
-          onClick={onForge}
-          className="px-6 py-2.5 bg-amber-700 hover:bg-amber-600 rounded-lg text-xs font-bold text-white transition shadow-lg flex items-center space-x-2"
-        >
-          <span>
-            {isSubmitting
-              ? "Forging Character..."
-              : "⚔️ Forge Hero into Database"}
-          </span>
-        </button>
       </div>
     </div>
   );

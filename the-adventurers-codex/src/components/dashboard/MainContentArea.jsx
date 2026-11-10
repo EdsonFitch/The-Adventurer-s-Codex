@@ -1,6 +1,3 @@
-import React, { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
-
 /**
  * -----------------------------------------------------------------------------
  * COMPONENT: MainContentArea
@@ -9,7 +6,8 @@ import { supabase } from "../../supabaseClient";
  * (like the Character Creator Wizard or Character Sheet) or defaults to
  * displaying the user's active adventurer cards roster fetched from Supabase.
  *
- * Includes optimistic roster synchronization and character deletion from Supabase.
+ * Includes optimistic roster synchronization and robust cascading character
+ * deletion from Supabase (clearing dependent relational tables first).
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onSelectCharacter - Callback triggered when clicking a character card to open their sheet.
@@ -17,6 +15,10 @@ import { supabase } from "../../supabaseClient";
  * @param {number} props.refreshTrigger - Counter prop that forces the roster effect hook to re-fetch when incremented.
  * @param {React.ReactNode} props.children - Sub-views rendered inside the container if active.
  */
+
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../supabaseClient";
+
 export default function MainContentArea({
   onSelectCharacter,
   onOpenCreator,
@@ -63,8 +65,9 @@ export default function MainContentArea({
    * ---------------------------------------------------------------------------
    * HANDLER: handleDeleteCharacter
    * ---------------------------------------------------------------------------
-   * Permanently deletes a character record from the Supabase database and
-   * optimistically removes it from local state so the card vanishes instantly.
+   * Permanently deletes a character record and all its relational dependencies
+   * (such as linked spells) from Supabase, then optimistically removes it from
+   * local state so the card vanishes instantly.
    *
    * @param {Event} e - Mouse click event object (stopped from propagating to card click).
    * @param {Object} character - The character record targeted for deletion.
@@ -83,15 +86,29 @@ export default function MainContentArea({
     try {
       setDeletingId(character.id);
 
-      // 3. Execute Supabase DELETE query targeted by primary key ID
-      const { error } = await supabase
+      // 3. Delete dependent relational records first (e.g., character_spells)
+      // to satisfy PostgreSQL foreign key constraints.
+      const { error: spellDeleteErr } = await supabase
+        .from("character_spells")
+        .delete()
+        .eq("character_id", character.id);
+
+      if (spellDeleteErr) {
+        console.error(
+          "Error clearing character spells during deletion:",
+          spellDeleteErr,
+        );
+      }
+
+      // 4. Execute Supabase DELETE query on the main characters table
+      const { error: charDeleteErr } = await supabase
         .from("characters")
         .delete()
         .eq("id", character.id);
 
-      if (error) throw error;
+      if (charDeleteErr) throw charDeleteErr;
 
-      // 4. Optimistically filter out the deleted character from local state array
+      // 5. Optimistically filter out the deleted character from local state array
       setCharacters((prevCharacters) =>
         prevCharacters.filter((c) => c.id !== character.id),
       );

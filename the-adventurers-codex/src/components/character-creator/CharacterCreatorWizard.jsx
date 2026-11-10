@@ -25,7 +25,7 @@ import StepLineageClass from "./StepLineageClass";
 import StepAbilityScores from "./StepAbilityScores";
 import StepBackgroundGear from "./StepBackgroundGear";
 import StepPersonality from "./StepPersonality";
-import StepEquipmentProficiencies from "../../StepEquipmentProficiencies";
+import StepEquipmentProficiencies from "./StepEquipmentProficiencies";
 import StepSkills from "./StepSkills";
 import StepSpells from "./StepSpells";
 import StepReviewForge from "./StepReviewForge";
@@ -300,6 +300,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       setIsSubmitting(true);
       setErrorMessage(null);
 
+      // Master character payload mapping all wizard state into Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
@@ -313,6 +314,15 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         hp_temp: 0,
         portrait_url: characterData.portraitUrl || null,
         full_body_url: characterData.fullBodyUrl || null,
+        // Persisted character creation data collections
+        equipment: characterData.equipment || [],
+        languages: characterData.languages || ["Common"],
+        ability_scores: characterData.abilityScores || {},
+        skills: characterData.skills || [],
+        personality_traits: characterData.personalityTraits || null,
+        ideals: characterData.ideals || null,
+        bonds: characterData.bonds || null,
+        flaws: characterData.flaws || null,
       };
 
       const { data: newChar, error: charError } = await supabase
@@ -323,6 +333,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (charError) throw charError;
 
+      // Link selected spells into the character_spells relational table
       if (
         characterData.selectedSpellIds &&
         characterData.selectedSpellIds.length > 0
@@ -331,6 +342,8 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           character_id: newChar.id,
           spell_id: spellId,
           is_prepared: true,
+          is_always_prepared: false,
+          origin: "class",
         }));
 
         const { error: spellInsertErr } = await supabase
@@ -471,6 +484,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 updateCharacterData={updateCharacterData}
                 selectedClass={selectedClass}
                 selectedBackground={selectedBackground}
+                selectedRace={selectedRace}
               />
             )}
             {/* STEP 7: SKILLS */}
