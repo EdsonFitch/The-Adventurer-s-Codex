@@ -79,10 +79,10 @@ function compressAndResizeImage(file, maxWidth, maxHeight, quality = 0.82) {
 
 /**
  * -----------------------------------------------------------------------------
- * MAIN UTILITY: uploadCharacterImage
+ * UTILITY: uploadCharacterImage
  * -----------------------------------------------------------------------------
  * Validates, compresses, and uploads character artwork files directly to
- * Supabase Storage using structured subfolders.
+ * Supabase Storage ('character-artwork' bucket) using structured subfolders.
  *
  * @param {File} file - Raw image file selected from device file picker.
  * @param {string} userId - Unique UUID of the authenticated user (for RLS scoping).
@@ -119,8 +119,6 @@ export async function uploadCharacterImage(
 
   try {
     // 3. Determine maximum pixel constraints based on image destination type
-    // - Portraits (Square dashboard cards): Max 400x400 px
-    // - Full-Body (Character sheet view): Max 800x1200 px
     const isPortrait = subfolder === "portraits";
     const maxWidth = isPortrait ? 400 : 800;
     const maxHeight = isPortrait ? 400 : 1200;
@@ -134,7 +132,6 @@ export async function uploadCharacterImage(
     );
 
     // 5. Construct a unique, collision-resistant storage file path:
-    // Structure: {userId}/{subfolder}/{timestamp}-{randomString}.webp
     const uniqueHash = Math.random().toString(36).substring(2, 7);
     const fileName = `${Date.now()}-${uniqueHash}.webp`;
     const filePath = `${userId || "guest"}/${subfolder}/${fileName}`;
@@ -167,6 +164,81 @@ export async function uploadCharacterImage(
   } catch (err) {
     console.error(`Error uploading artwork to folder '${subfolder}':`, err);
     alert(`Upload failed: ${err.message || "Unknown error occurred"}`);
+    return null;
+  }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * UTILITY: uploadSessionBanner
+ * -----------------------------------------------------------------------------
+ * Validates, compresses (into a panoramic aspect ratio), and uploads session
+ * journal banner images directly to the dedicated 'journal-banners' Supabase bucket.
+ *
+ * @param {File} file - Raw image file selected from device file picker.
+ * @param {string} userId - Unique UUID of the authenticated user (for RLS scoping).
+ * @param {string} characterId - Unique UUID of the character (for subfolder organization).
+ * @returns {Promise<string|null>} Returns the permanent public URL of the banner, or null on failure.
+ */
+export async function uploadSessionBanner(file, userId, characterId) {
+  const MAX_RAW_FILE_SIZE = 6 * 1024 * 1024; // 6 MB hard upload cap for banners
+  const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+
+  if (!file) return null;
+
+  // 1. Validate MIME type
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    alert(
+      "Invalid file format. Please select a valid JPEG, PNG, or WebP banner image.",
+    );
+    return null;
+  }
+
+  // 2. Validate file size
+  if (file.size > MAX_RAW_FILE_SIZE) {
+    alert(
+      `File size exceeds 6 MB (${(file.size / (1024 * 1024)).toFixed(2)} MB). Please select a smaller banner image.`,
+    );
+    return null;
+  }
+
+  try {
+    // 3. Compress and resize into a wide panoramic banner (Max 1200x500 px)
+    const compressedBlob = await compressAndResizeImage(file, 1200, 500, 0.85);
+
+    // 4. Construct unique storage path: {userId}/{characterId}/banners/{timestamp}-{hash}.webp
+    const uniqueHash = Math.random().toString(36).substring(2, 7);
+    const fileName = `${Date.now()}-${uniqueHash}.webp`;
+    const filePath = `${userId || "guest"}/${characterId || "general"}/banners/${fileName}`;
+
+    // 5. Upload to the 'journal-banners' bucket
+    const { error: uploadError } = await supabase.storage
+      .from("journal-banners")
+      .upload(filePath, compressedBlob, {
+        contentType: "image/webp",
+        cacheControl: "3600",
+        upsert: false,
+      });
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+    // 6. Retrieve public retrieval URL
+    const { data: publicURLData } = supabase.storage
+      .from("journal-banners")
+      .getPublicUrl(filePath);
+
+    if (!publicURLData?.publicUrl) {
+      throw new Error(
+        "Failed to generate public retrieval URL for session banner.",
+      );
+    }
+
+    return publicURLData.publicUrl;
+  } catch (err) {
+    console.error("Error uploading session banner:", err);
+    alert(`Banner upload failed: ${err.message || "Unknown error occurred"}`);
     return null;
   }
 }

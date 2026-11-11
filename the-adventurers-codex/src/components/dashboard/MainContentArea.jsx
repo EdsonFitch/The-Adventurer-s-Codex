@@ -7,7 +7,8 @@
  * displaying the user's active adventurer cards roster fetched from Supabase.
  *
  * Includes optimistic roster synchronization and robust cascading character
- * deletion from Supabase (clearing dependent relational tables first).
+ * deletion from Supabase (clearing relational tables, journal entries, and
+ * cleaning up Supabase Storage artwork and session banners).
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onSelectCharacter - Callback triggered when clicking a character card to open their sheet.
@@ -62,12 +63,25 @@ export default function MainContentArea({
   }, [refreshTrigger]);
 
   /**
+   * Helper utility to safely extract bucket relative path from full public Supabase URL.
+   */
+  const getStoragePathFromUrl = (url, bucketName) => {
+    if (!url) return null;
+    try {
+      const parts = url.split(`${bucketName}/`);
+      return parts.length > 1 ? parts[1] : null;
+    } catch {
+      return null;
+    }
+  };
+
+  /**
    * ---------------------------------------------------------------------------
    * HANDLER: handleDeleteCharacter
    * ---------------------------------------------------------------------------
-   * Permanently deletes a character record and all its relational dependencies
-   * (such as linked spells) from Supabase, then optimistically removes it from
-   * local state so the card vanishes instantly.
+   * Permanently deletes a character record, all dependent database rows
+   * (spells, journal entries), and cleans up all associated images in
+   * Supabase Storage ('character-artwork' and 'journal-banners' buckets).
    *
    * @param {Event} e - Mouse click event object (stopped from propagating to card click).
    * @param {Object} character - The character record targeted for deletion.
@@ -78,7 +92,7 @@ export default function MainContentArea({
 
     // 2. Prompt user confirmation to prevent accidental deletions
     const confirmed = window.confirm(
-      `Are you sure you want to banish ${character.name} to the void? This action cannot be undone.`,
+      `Are you sure you want to banish ${character.name} to the void? All journal entries, stats, and stored artwork will be permanently deleted.`,
     );
 
     if (!confirmed) return;
@@ -86,8 +100,56 @@ export default function MainContentArea({
     try {
       setDeletingId(character.id);
 
-      // 3. Delete dependent relational records first (e.g., character_spells)
-      // to satisfy PostgreSQL foreign key constraints.
+      // Get authenticated user ID for scoped storage cleanup
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      const userId = user?.id || character.user_id;
+
+      // -----------------------------------------------------------------------
+      // STEP A: Clean up Storage Bucket ('journal-banners')
+      // -----------------------------------------------------------------------
+      if (userId && character.id) {
+        const folderPath = `${userId}/${character.id}/banners`;
+        const { data: bannerFiles, error: listBannerErr } =
+          await supabase.storage.from("journal-banners").list(folderPath);
+
+        if (!listBannerErr && bannerFiles && bannerFiles.length > 0) {
+          const filesToRemove = bannerFiles.map(
+            (file) => `${folderPath}/${file.name}`,
+          );
+          const { error: removeBannersErr } = await supabase.storage
+            .from("journal-banners")
+            .remove(filesToRemove);
+
+          if (removeBannersErr) {
+            console.error(
+              "Error removing session banners from storage:",
+              removeBannersErr,
+            );
+          }
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // STEP B: Clean up Storage Bucket ('character-artwork')
+      // -----------------------------------------------------------------------
+      if (character.portrait_url) {
+        const portraitPath = getStoragePathFromUrl(
+          character.portrait_url,
+          "character-artwork",
+        );
+        if (portraitPath) {
+          await supabase.storage
+            .from("character-artwork")
+            .remove([portraitPath]);
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // STEP C: Clear Relational DB Tables
+      // -----------------------------------------------------------------------
+      // 1. Clear character spells
       const { error: spellDeleteErr } = await supabase
         .from("character_spells")
         .delete()
@@ -100,7 +162,22 @@ export default function MainContentArea({
         );
       }
 
-      // 4. Execute Supabase DELETE query on the main characters table
+      // 2. Clear journal entries
+      const { error: journalDeleteErr } = await supabase
+        .from("journal_entries")
+        .delete()
+        .eq("character_id", character.id);
+
+      if (journalDeleteErr) {
+        console.error(
+          "Error clearing journal entries during deletion:",
+          journalDeleteErr,
+        );
+      }
+
+      // -----------------------------------------------------------------------
+      // STEP D: Delete Main Character Record
+      // -----------------------------------------------------------------------
       const { error: charDeleteErr } = await supabase
         .from("characters")
         .delete()
@@ -108,12 +185,16 @@ export default function MainContentArea({
 
       if (charDeleteErr) throw charDeleteErr;
 
-      // 5. Optimistically filter out the deleted character from local state array
+      // -----------------------------------------------------------------------
+      // STEP E: Optimistic State Update
+      // -----------------------------------------------------------------------
       setCharacters((prevCharacters) =>
         prevCharacters.filter((c) => c.id !== character.id),
       );
 
-      console.log(`Character ${character.name} successfully deleted.`);
+      console.log(
+        `Character ${character.name} and all associated files wiped successfully.`,
+      );
     } catch (err) {
       console.error("Error deleting character from Supabase:", err);
       alert(`Failed to delete character: ${err.message || "Unknown error"}`);

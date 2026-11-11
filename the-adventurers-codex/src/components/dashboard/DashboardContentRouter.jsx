@@ -6,6 +6,8 @@ import TopNavbar from "./TopNavbar";
 import LeftSidebar from "./LeftSidebar";
 import MainContentArea from "./MainContentArea";
 import CharacterCreatorWizard from "../character-creator/CharacterCreatorWizard";
+// 2. Import live JournalView component for Phase 4 integration
+import JournalView from "../diary/JournalView";
 
 /**
  * DashboardContentRouter Component
@@ -168,16 +170,9 @@ export default function DashboardContentRouter() {
                 </div>
               )}
 
-              {/* VIEW: JOURNAL ENTRIES */}
+              {/* VIEW: JOURNAL ENTRIES (Integrated Live View) */}
               {activeTab === "journal" && (
-                <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
-                  <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
-                    📖 Campaign Journal
-                  </h2>
-                  <p className="text-xs text-[#a59075]">
-                    Record campaign logs and session notes.
-                  </p>
-                </div>
+                <JournalView selectedCharacter={selectedCharacter} />
               )}
 
               {/* VIEW: INVENTORY */}
