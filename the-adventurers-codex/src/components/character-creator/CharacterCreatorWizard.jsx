@@ -11,7 +11,7 @@
  * - Dynamically parses `effects`, `ability_bonuses`, and `skill_proficiencies` JSONB arrays
  *   from background, race, and subrace rows into standardized effect objects.
  * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
- * - Executes final database insertion into 'characters' and 'character_spells'.
+ * - Executes final database insertion into 'characters', 'character_skills', and 'character_spells'.
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge.
@@ -295,12 +295,16 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
+  /**
+   * Submits the complete character record to Supabase, writing basic info,
+   * linking proficient skills into character_skills, and mapping spells into character_spells.
+   */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
       setErrorMessage(null);
 
-      // Master character payload mapping all wizard state into Supabase columns
+      // 1. Master character payload mapping all wizard state into Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
@@ -314,11 +318,9 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         hp_temp: 0,
         portrait_url: characterData.portraitUrl || null,
         full_body_url: characterData.fullBodyUrl || null,
-        // Persisted character creation data collections
         equipment: characterData.equipment || [],
         languages: characterData.languages || ["Common"],
         ability_scores: characterData.abilityScores || {},
-        skills: characterData.skills || [],
         personality_traits: characterData.personalityTraits || null,
         ideals: characterData.ideals || null,
         bonds: characterData.bonds || null,
@@ -333,7 +335,49 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (charError) throw charError;
 
-      // Link selected spells into the character_spells relational table
+      // 2. LINK SKILLS INTO character_skills TABLE
+      // Gather all proficient skill names (combining user choices and auto-granted background/lineage skills)
+      const allProficientSkillNames = new Set([
+        ...(characterData.skills || []),
+        ...(computedCharacterPackage?.proficiencies || []),
+      ]);
+
+      if (allProficientSkillNames.size > 0) {
+        // Fetch master skills list to map names to their UUIDs from the 'skills' table
+        const { data: masterSkills, error: masterSkillsErr } = await supabase
+          .from("skills")
+          .select("id, name");
+
+        if (!masterSkillsErr && masterSkills) {
+          const skillPayload = [];
+
+          allProficientSkillNames.forEach((skillName) => {
+            const matchedSkill = masterSkills.find(
+              (ms) => ms.name.toLowerCase() === skillName.toLowerCase(),
+            );
+            if (matchedSkill) {
+              skillPayload.push({
+                character_id: newChar.id,
+                skill_id: matchedSkill.id,
+                is_proficient: true,
+                has_expertise: false,
+              });
+            }
+          });
+
+          if (skillPayload.length > 0) {
+            const { error: skillInsertErr } = await supabase
+              .from("character_skills")
+              .insert(skillPayload);
+
+            if (skillInsertErr) {
+              console.error("Error linking character skills:", skillInsertErr);
+            }
+          }
+        }
+      }
+
+      // 3. Link selected spells into the character_spells relational table
       if (
         characterData.selectedSpellIds &&
         characterData.selectedSpellIds.length > 0
@@ -564,6 +608,12 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 }
 
+/**
+ * Helper function to retrieve step titles based on step index.
+ *
+ * @param {number} step - Current wizard step number.
+ * @returns {string} Human-readable title of the step.
+ */
 function getStepTitle(step) {
   switch (step) {
     case 1:

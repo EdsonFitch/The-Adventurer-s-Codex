@@ -1,50 +1,54 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: DashboardContentRouter.jsx
+ * -----------------------------------------------------------------------------
+ * Description:
+ * Master view router and layout coordinator for authenticated users.
+ * Manages the active sidebar navigation tab state, holds the currently selected
+ * character object for the character sheet, coordinates roster refresh triggers,
+ * and integrates the newly built interactive CharacterSheetView component.
+ * -----------------------------------------------------------------------------
+ */
+
 import React, { useState } from "react";
-// 1. Import useAuth to provide user.id to the CharacterCreatorWizard for Supabase RLS
+// Import useAuth hook to supply user ID and metadata for RLS and display
 import { useAuth } from "../../context/AuthContext";
 import DashboardLayout from "./DashboardLayout";
 import TopNavbar from "./TopNavbar";
 import LeftSidebar from "./LeftSidebar";
 import MainContentArea from "./MainContentArea";
 import CharacterCreatorWizard from "../character-creator/CharacterCreatorWizard";
-// 2. Import live JournalView component for Phase 4 integration
 import JournalView from "../diary/JournalView";
+// Import master interactive CharacterSheetView component
+import CharacterSheetView from "../character/CharacterSheetView";
 
-/**
- * DashboardContentRouter Component
- * -----------------------------------------------------------------------------
- * Master view router for authenticated users. Manages active tab state and
- * coordinates the layout shell, sidebars, and active child content.
- *
- * @returns {JSX.Element} The rendered dashboard layout container.
- */
 export default function DashboardContentRouter() {
   // ---------------------------------------------------------------------------
-  // 1. AUTHENTICATION & STATE MANAGEMENT
+  // 1. AUTHENTICATION & MASTER STATE MANAGEMENT
   // ---------------------------------------------------------------------------
-  // Retrieve authenticated user from AuthContext
   const { user } = useAuth();
 
-  // Active navigation tab matching LeftSidebar keys ('characters', 'character-creation', etc.)
+  // Active navigation tab key matching LeftSidebar items ('characters', 'character-sheet', etc.)
   const [activeTab, setActiveTab] = useState("characters");
 
   // Controls collapsed vs expanded state for LeftSidebar
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  // Holds currently selected character object for sheet and campaign tracking
+  // Holds the active character object selected for the sheet and campaign views
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-  // Trigger state to notify MainContentArea to re-fetch roster cards when a hero is forged
+  // Trigger state counter to instruct MainContentArea to re-fetch roster cards after hero creation
   const [characterRefreshTrigger, setCharacterRefreshTrigger] = useState(0);
 
   // ---------------------------------------------------------------------------
-  // 2. VIEW TRANSITION HANDLERS
+  // 2. NAVIGATION & EVENT HANDLERS
   // ---------------------------------------------------------------------------
 
   /**
    * Triggers when a character card is clicked in the roster grid.
-   * Switches active view to the character sheet.
+   * Sets the active character and switches view to the character sheet.
    *
-   * @param {Object} character - Selected character object.
+   * @param {Object} character - The selected character record.
    */
   const handleSelectCharacter = (character) => {
     setSelectedCharacter(character);
@@ -52,26 +56,21 @@ export default function DashboardContentRouter() {
   };
 
   /**
-   * Triggers when a new character is successfully forged in the wizard.
-   * Updates state, signals roster refresh, and switches view back to roster.
+   * Triggers when a new character is successfully forged in the creation wizard.
+   * Updates selected hero state, increments refresh trigger, and returns to roster.
    *
    * @param {Object} forgedCharacter - Newly created character record from Supabase.
    */
   const handleCharacterForged = (forgedCharacter) => {
-    console.log("Hero successfully forged in Supabase:", forgedCharacter);
     setSelectedCharacter(forgedCharacter);
-
-    // Increment trigger counter so MainContentArea re-fetches the roster from Supabase
     setCharacterRefreshTrigger((prev) => prev + 1);
-
-    // Switch view back to the character roster tab
     setActiveTab("characters");
   };
 
   /**
-   * Computes top navbar subtitle dynamically based on active tab.
+   * Computes top navbar subtitle dynamically based on the currently active tab.
    *
-   * @returns {string} Dynamic header subtitle.
+   * @returns {string} Dynamic header subtitle string.
    */
   const getHeaderSubtitle = () => {
     switch (activeTab) {
@@ -92,17 +91,17 @@ export default function DashboardContentRouter() {
   };
 
   // ---------------------------------------------------------------------------
-  // 3. RENDER UI STRUCTURE
+  // 3. RENDER UI LAYOUT & ROUTED CONTENT VIEWS
   // ---------------------------------------------------------------------------
   return (
     <DashboardLayout>
-      {/* Persistent Top Navigation Bar */}
+      {/* Persistent Top Navigation Bar with dynamic subtitle */}
       <TopNavbar
         subtitle={getHeaderSubtitle()}
         selectedCharacter={selectedCharacter}
       />
 
-      {/* Main Layout Body (Sidebar + Content Area) */}
+      {/* Main Layout Body: Left Sidebar + Dynamic Content Canvas */}
       <div className="flex flex-1 overflow-hidden">
         {/* Collapsible Left Navigation Sidebar */}
         <LeftSidebar
@@ -112,11 +111,7 @@ export default function DashboardContentRouter() {
           setIsSidebarCollapsed={setIsSidebarCollapsed}
         />
 
-        {/* 
-          Main Content Canvas:
-          - Passes refreshTrigger to MainContentArea so it re-fetches when a character is created.
-          - Renders default roster grid when activeTab === 'characters'.
-        */}
+        {/* Main Content Area Canvas */}
         <MainContentArea
           onSelectCharacter={handleSelectCharacter}
           onOpenCreator={() => setActiveTab("character-creation")}
@@ -124,7 +119,7 @@ export default function DashboardContentRouter() {
         >
           {activeTab !== "characters" && (
             <>
-              {/* VIEW: CHARACTER CREATOR WIZARD */}
+              {/* VIEW 1: CHARACTER CREATOR WIZARD */}
               {activeTab === "character-creation" && (
                 <div className="space-y-4 animate-fadeIn max-w-5xl mx-auto py-2">
                   <div className="flex justify-between items-center border-b border-[#a59075]/30 pb-3">
@@ -136,8 +131,6 @@ export default function DashboardContentRouter() {
                       <span>← Return to Adventurers</span>
                     </button>
                   </div>
-
-                  {/* Character Creator Wizard receiving userId and completion handler */}
                   <CharacterCreatorWizard
                     userId={user?.id}
                     onComplete={handleCharacterForged}
@@ -145,37 +138,25 @@ export default function DashboardContentRouter() {
                 </div>
               )}
 
-              {/* VIEW: CHARACTER SHEET */}
+              {/* VIEW 2: MASTER INTERACTIVE CHARACTER SHEET */}
               {activeTab === "character-sheet" && (
-                <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto space-y-4 text-[#938f71] shadow-2xl animate-fadeIn">
-                  <div className="flex justify-between items-center border-b border-[#a59075]/30 pb-3">
-                    <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
-                      {selectedCharacter?.name || "Hero Sheet"}
-                    </h2>
-                    <button
-                      type="button"
-                      onClick={() => setActiveTab("characters")}
-                      className="px-3 py-1.5 bg-[#4a261c] hover:bg-[#5f3426] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] transition"
-                    >
-                      ← Back to Roster
-                    </button>
-                  </div>
-                  <p className="text-xs text-[#a59075]">
-                    Viewing character record for{" "}
-                    <strong className="text-[#f0e6d2]">
-                      {selectedCharacter?.name || "Selected Hero"}
-                    </strong>
-                    .
-                  </p>
-                </div>
+                <CharacterSheetView
+                  selectedCharacter={selectedCharacter}
+                  userName={
+                    user?.user_metadata?.full_name ||
+                    user?.email ||
+                    "Adventurer"
+                  }
+                  onBackToRoster={() => setActiveTab("characters")}
+                />
               )}
 
-              {/* VIEW: JOURNAL ENTRIES (Integrated Live View) */}
+              {/* VIEW 3: JOURNAL ENTRIES */}
               {activeTab === "journal" && (
                 <JournalView selectedCharacter={selectedCharacter} />
               )}
 
-              {/* VIEW: INVENTORY */}
+              {/* VIEW 4: INVENTORY VAULT */}
               {activeTab === "inventory" && (
                 <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
                   <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
@@ -187,7 +168,7 @@ export default function DashboardContentRouter() {
                 </div>
               )}
 
-              {/* VIEW: PROFILE */}
+              {/* VIEW 5: ACCOUNT PROFILE */}
               {activeTab === "profile" && (
                 <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
                   <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
