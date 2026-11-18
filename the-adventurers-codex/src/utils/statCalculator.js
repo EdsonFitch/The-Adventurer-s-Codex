@@ -6,7 +6,8 @@
  * Pure, deterministic calculation engine for D&D 5e character attributes.
  * Evaluates raw character base state against an array of active JSONB effects
  * (accumulated from lineage, subraces, classes, subclasses, and feats) to compute
- * final scores, ability modifiers, breakdown histories, and granted bonuses.
+ * final scores, ability modifiers, breakdown histories, granted bonuses, and
+ * dynamic Armor Class (AC) derived from equipped armor and shields.
  * -----------------------------------------------------------------------------
  */
 
@@ -35,12 +36,12 @@ export function calculateProficiencyBonus(level) {
 
 /**
  * Main calculation engine function.
- * Processes character base state and an array of active effect objects to compute
- * final scores, breakdown histories, proficiency totals, and granted resources.
+ * Processes character base state, active effects, and equipped inventory items
+ * to compute final scores, modifiers, AC, and granted resources.
  *
- * @param {Object} characterState - Contains baseAbilityScores, level, baseProficiencies.
+ * @param {Object} characterState - Contains baseAbilityScores, level, baseProficiencies, inventory.
  * @param {Array} activeEffects - Flattened array of effect objects extracted from active features, feats, and lineage.
- * @returns {Object} Computed package including abilityScores, abilityModifiers, abilityBreakdowns, proficiencyBonus, proficiencies, bonusSpells, and grantedResources.
+ * @returns {Object} Computed package including abilityScores, abilityModifiers, armorClass, proficiencyBonus, etc.
  */
 export function computeCharacterStats(characterState = {}, activeEffects = []) {
   // 1. Destructure base state with safe fallback defaults for standard 6 abilities
@@ -48,6 +49,7 @@ export function computeCharacterStats(characterState = {}, activeEffects = []) {
     baseAbilityScores = {},
     level = 1,
     baseProficiencies = [],
+    inventory = [],
   } = characterState;
 
   // Standardize input keys across short keys ('str') and full names ('strength')
@@ -96,7 +98,6 @@ export function computeCharacterStats(characterState = {}, activeEffects = []) {
             ? String(effect.target).toLowerCase()
             : null;
 
-          // Normalize full stat names or uppercase abbreviations to short keys
           if (targetStat === "strength" || targetStat === "str")
             targetStat = "str";
           if (targetStat === "dexterity" || targetStat === "dex")
@@ -157,14 +158,79 @@ export function computeCharacterStats(characterState = {}, activeEffects = []) {
     cha: calculateModifier(finalAbilityScores.cha),
   };
 
-  // 6. Compute standard proficiency bonus based on level
+  const dexModVal = Math.floor((finalAbilityScores.dex - 10) / 2);
+
+  // ---------------------------------------------------------------------------
+  // 6. DYNAMIC ARMOR CLASS (AC) CALCULATION FROM EQUIPPED INVENTORY
+  // ---------------------------------------------------------------------------
+  let computedAC = 10 + dexModVal; // Default unarmored AC (10 + Dex mod)
+  let equippedArmorFound = false;
+
+  if (Array.isArray(inventory)) {
+    inventory.forEach((item) => {
+      if (!item || !item.is_equipped) return;
+      const eq = item.equipment || {};
+      const category = (eq.category || "").toLowerCase();
+      const name = (eq.name || item.custom_name || "").toLowerCase();
+
+      // Check if item is a Shield
+      if (category.includes("shield") || name.includes("shield")) {
+        const shieldBonus =
+          Number(eq.base_ac || 2) + Number(eq.enchantment_bonus || 0);
+        computedAC += shieldBonus;
+        return;
+      }
+
+      // Check if item is Armor
+      if (
+        category.includes("armor") ||
+        eq.base_ac !== null ||
+        eq.base_ac !== undefined
+      ) {
+        const baseAC = Number(eq.base_ac || 10);
+        const enchantment = Number(eq.enchantment_bonus || 0);
+
+        // Determine armor weight class based on base AC or name to apply D&D 5e Dex modifier rules
+        // Light armor: adds full Dex mod (e.g. Padded 11, Leather 11, Studded Leather 12)
+        // Medium armor: adds Dex mod up to +2 max (e.g. Hide 12, Chain Shirt 13, Scale Mail 14, Breastplate 14, Half Plate 15)
+        // Heavy armor: adds NO Dex mod (e.g. Ring Mail 14, Chain Mail 16, Splint 17, Plate 18)
+        if (baseAC >= 16) {
+          // Heavy Armor (No Dex modifier)
+          computedAC = baseAC + enchantment;
+        } else if (
+          baseAC >= 13 ||
+          name.includes("hide") ||
+          name.includes("scale") ||
+          name.includes("breastplate") ||
+          name.includes("half plate")
+        ) {
+          // Medium Armor (Max +2 Dex)
+          const cappedDex = Math.min(dexModVal, 2);
+          computedAC = baseAC + cappedDex + enchantment;
+        } else {
+          // Light Armor (Full Dex mod)
+          computedAC = baseAC + dexModVal + enchantment;
+        }
+        equippedArmorFound = true;
+      }
+    });
+  }
+
+  // Fallback to manual character override AC if present and no armor equipped
+  const finalAC =
+    characterState.armor_class_override && !equippedArmorFound
+      ? characterState.armor_class_override
+      : computedAC;
+
+  // 7. Compute standard proficiency bonus based on level
   const proficiencyBonus = calculateProficiencyBonus(level);
 
-  // 7. Return comprehensive computed package for UI rendering and final review forge
+  // 8. Return comprehensive computed package for UI rendering
   return {
     abilityScores: finalAbilityScores,
     abilityModifiers: finalModifiers,
     abilityBreakdowns,
+    armorClass: finalAC,
     proficiencyBonus,
     proficiencies: Array.from(grantedProficiencies),
     bonusSpells,

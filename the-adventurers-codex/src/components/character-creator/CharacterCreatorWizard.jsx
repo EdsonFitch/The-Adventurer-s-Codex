@@ -11,7 +11,10 @@
  * - Dynamically parses `effects`, `ability_bonuses`, and `skill_proficiencies` JSONB arrays
  *   from background, race, and subrace rows into standardized effect objects.
  * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
- * - Executes final database insertion into 'characters', 'character_skills', and 'character_spells'.
+ * - Executes final database insertion into 'characters', 'character_classes',
+ *   'character_skills', 'character_spells', and relational 'character_inventory'
+ *   with strict level-based gear restriction rules (levels 1-5 limited to
+ *   non-magical, common/uncommon items with 0 enchantment).
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge.
@@ -150,8 +153,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
    * ---------------------------------------------------------------------------
    * EFFECT HOOK: Aggregate Active JSONB Effects, Ability Bonuses & Skill Grants
    * ---------------------------------------------------------------------------
-   * Parses modern `effects` arrays, `ability_bonuses` JSONB objects, and
-   * `skill_proficiencies` JSONB arrays into PROFICIENCY_GRANT effects.
    */
   useEffect(() => {
     const extractedEffects = [];
@@ -159,7 +160,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     const appendEntityData = (entity, defaultSource) => {
       if (!entity) return;
 
-      // 1. Process modern `effects` JSONB array if populated
       if (
         entity.effects &&
         Array.isArray(entity.effects) &&
@@ -173,7 +173,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         });
       }
 
-      // 2. Process database `ability_bonuses` JSONB
       if (entity.ability_bonuses) {
         const bonuses = entity.ability_bonuses;
         if (!Array.isArray(bonuses) && typeof bonuses === "object") {
@@ -201,7 +200,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 3. Process database `skill_proficiencies` JSONB arrays
       const skillGrants =
         entity.skill_proficiencies ||
         entity.skills ||
@@ -288,7 +286,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       alert("Please give your adventurer a name before proceeding.");
       return;
     }
-    setCurrentStep((prev) => Math.min(prev + 1, 9)); // Extended to 9 steps max
+    setCurrentStep((prev) => Math.min(prev + 1, 9));
   };
 
   const handlePrevStep = () => {
@@ -297,18 +295,21 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
   /**
    * Submits the complete character record to Supabase, writing basic info,
-   * linking proficient skills into character_skills, and mapping spells into character_spells.
+   * linking the class, mapping skills, mapping spells, and validating starting
+   * equipment choices against level-based restrictions before populating `character_inventory`.
    */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
       setErrorMessage(null);
 
-      // 1. Master character payload mapping all wizard state into Supabase columns
+      const characterLevel = Number(characterData.level) || 1;
+
+      // 1. Master character payload mapping wizard state into Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
-        level: characterData.level || 1,
+        level: characterLevel,
         race_id: characterData.raceId || null,
         subrace_id: characterData.subraceId || null,
         background_id: characterData.backgroundId || null,
@@ -335,15 +336,31 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (charError) throw charError;
 
-      // 2. LINK SKILLS INTO character_skills TABLE
-      // Gather all proficient skill names (combining user choices and auto-granted background/lineage skills)
+      // 2. LINK CLASS INTO character_classes TABLE
+      if (characterData.classId) {
+        const classPayload = {
+          character_id: newChar.id,
+          class_id: characterData.classId,
+          subclass_id: characterData.subclassId || null,
+          level_in_class: characterLevel,
+        };
+
+        const { error: classInsertErr } = await supabase
+          .from("character_classes")
+          .insert([classPayload]);
+
+        if (classInsertErr) {
+          console.error("Error linking character class:", classInsertErr);
+        }
+      }
+
+      // 3. LINK SKILLS INTO character_skills TABLE
       const allProficientSkillNames = new Set([
         ...(characterData.skills || []),
         ...(computedCharacterPackage?.proficiencies || []),
       ]);
 
       if (allProficientSkillNames.size > 0) {
-        // Fetch master skills list to map names to their UUIDs from the 'skills' table
         const { data: masterSkills, error: masterSkillsErr } = await supabase
           .from("skills")
           .select("id, name");
@@ -377,7 +394,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 3. Link selected spells into the character_spells relational table
+      // 4. LINK SPELLS INTO character_spells TABLE
       if (
         characterData.selectedSpellIds &&
         characterData.selectedSpellIds.length > 0
@@ -396,6 +413,103 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
         if (spellInsertErr) {
           console.error("Error linking character spells:", spellInsertErr);
+        }
+      }
+
+      // 5. MAP STARTING EQUIPMENT CHOICES INTO character_inventory TABLE WITH LEVEL RESTRICTIONS
+      if (
+        Array.isArray(characterData.equipment) &&
+        characterData.equipment.length > 0
+      ) {
+        const { data: masterEquipment, error: eqCatErr } = await supabase
+          .from("equipment")
+          .select("id, name, category, rarity, is_magical, enchantment_bonus");
+
+        if (!eqCatErr && masterEquipment) {
+          const inventoryPayload = [];
+
+          characterData.equipment.forEach((chosenText) => {
+            if (!chosenText) return;
+
+            const itemsToProcess = [];
+
+            // Parse structured JSON config from sub-selectors or plain strings
+            try {
+              const parsedConfig = JSON.parse(chosenText);
+              Object.entries(parsedConfig).forEach(([key, val]) => {
+                if (
+                  val &&
+                  typeof val === "string" &&
+                  !val.trim().startsWith("--")
+                ) {
+                  // If it's a custom text input like a holy symbol description, prefix it or treat as item name
+                  if (key === "symbol") {
+                    itemsToProcess.push(`Holy Symbol (${val.trim()})`);
+                  } else {
+                    itemsToProcess.push(val.trim());
+                  }
+                }
+              });
+            } catch {
+              itemsToProcess.push(chosenText);
+            }
+
+            itemsToProcess.forEach((rawItemText) => {
+              const cleanChoice = rawItemText
+                .replace(/^(a|an|any)\s+/i, "")
+                .trim()
+                .toLowerCase();
+
+              const matchedItem = masterEquipment.find((eq) => {
+                const dbName = eq.name.toLowerCase();
+                return (
+                  dbName === cleanChoice ||
+                  cleanChoice === dbName ||
+                  cleanChoice.includes(dbName) ||
+                  dbName.includes(cleanChoice)
+                );
+              });
+
+              if (matchedItem) {
+                if (characterLevel <= 5) {
+                  const isMagical = Boolean(matchedItem.is_magical);
+                  const enchantment = Number(
+                    matchedItem.enchantment_bonus || 0,
+                  );
+                  const rarity = (matchedItem.rarity || "common").toLowerCase();
+
+                  if (isMagical || enchantment > 0) return;
+                  if (
+                    rarity !== "common" &&
+                    rarity !== "uncommon" &&
+                    rarity !== ""
+                  )
+                    return;
+                }
+
+                inventoryPayload.push({
+                  character_id: newChar.id,
+                  equipment_id: matchedItem.id,
+                  quantity: 1,
+                  is_offsite: false,
+                  is_equipped: false,
+                });
+              }
+            });
+          });
+
+          if (inventoryPayload.length > 0) {
+            const { error: invInsertErr } = await supabase
+              .from("character_inventory")
+              .insert(inventoryPayload);
+
+            if (invInsertErr) {
+              console.error(
+                "Error populating starting inventory:",
+                invInsertErr,
+              );
+            }
+          }
         }
       }
 
@@ -521,7 +635,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 backgroundsList={backgroundsList}
               />
             )}
-            {/* STEP 6: EQUIPMENT, LANGUAGES & PROFICIENCIES */}
             {currentStep === 6 && (
               <StepEquipmentProficiencies
                 characterData={characterData}
@@ -531,7 +644,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 selectedRace={selectedRace}
               />
             )}
-            {/* STEP 7: SKILLS */}
             {currentStep === 7 && (
               <StepSkills
                 characterData={characterData}
@@ -539,7 +651,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 computedStats={computedCharacterPackage}
               />
             )}
-            {/* STEP 8: SPELLS */}
             {currentStep === 8 && (
               <StepSpells
                 characterData={characterData}
@@ -548,7 +659,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
                 computedStats={computedCharacterPackage}
               />
             )}
-            {/* STEP 9: FINAL REVIEW & FORGE */}
             {currentStep === 9 && (
               <StepReviewForge
                 characterData={characterData}

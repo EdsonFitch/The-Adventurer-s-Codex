@@ -6,6 +6,7 @@
  * Data access and business logic layer for the Character Sheet view.
  * Handles consolidated relational fetches across characters, stats, skills,
  * classes, spells, and inventory, as well as live combat updates and rest logic.
+ * Merges database-driven racial resistances with manual character resistances.
  * -----------------------------------------------------------------------------
  */
 
@@ -17,7 +18,7 @@ import { computeCharacterStats } from "../utils/statCalculator";
  * all relational dependencies (race, class, stats, skills, spells, inventory).
  *
  * @param {string} characterId - The UUID of the active character.
- * @returns {Promise<Object>} The fully assembled character object with computed stats.
+ * @returns {Promise<Object>} The fully assembled character object with computed stats and resistances.
  */
 export async function fetchFullCharacterSheet(characterId) {
   if (!characterId)
@@ -96,13 +97,34 @@ export async function fetchFullCharacterSheet(characterId) {
     cha: stats.charisma ?? character.ability_scores?.cha ?? 10,
   };
 
-  // Run through master stat calculation utility
+  // Run through master stat calculation utility (passing inventory so AC calculates dynamically)
   const computedStats = computeCharacterStats(
-    { baseAbilityScores, level, baseProficiencies: character.languages || [] },
+    {
+      baseAbilityScores,
+      level,
+      baseProficiencies: character.languages || [],
+      inventory: inventoryList,
+    },
     [],
   );
 
-  // 4. Assemble consolidated character sheet package
+  // ---------------------------------------------------------------------------
+  // 4. HYBRID RESISTANCE RESOLUTION (Database Race Array + Manual Character Array)
+  // ---------------------------------------------------------------------------
+  const racialResistances = character.races?.damage_resistances || [];
+  const subracialResistances = character.subraces?.damage_resistances || [];
+  const manualResistances = character.resistances || [];
+
+  // Combine and deduplicate sources into a single unified array
+  const consolidatedResistances = Array.from(
+    new Set([
+      ...racialResistances,
+      ...subracialResistances,
+      ...manualResistances,
+    ]),
+  );
+
+  // 5. Assemble consolidated character sheet package
   return {
     ...character,
     race: character.races,
@@ -117,11 +139,12 @@ export async function fetchFullCharacterSheet(characterId) {
     spells: spellsList,
     inventory: inventoryList,
     progressions,
+    resistances: consolidatedResistances, // Consolidated database resistances
   };
 }
 
 /**
- * Updates live combat metrics (HP, Temp HP, Inspiration, Conditions, Spell Slots)
+ * Updates live combat metrics (HP, Temp HP, Inspiration, Conditions, Spell Slots, Resistances)
  * in Supabase with debounced optimistic state support.
  *
  * @param {string} characterId - The UUID of the character.
@@ -167,7 +190,7 @@ export async function executeRest(characterId, restType, currentState) {
       spell_slots_used: {},
     };
   } else if (restType === "SHORT") {
-    // Short Rest: Keep current HP/Temp HP as is, but can be expanded for Warlock pact slots if needed
+    // Short Rest: Keep current HP/Temp HP as is
     updates = {};
   }
 

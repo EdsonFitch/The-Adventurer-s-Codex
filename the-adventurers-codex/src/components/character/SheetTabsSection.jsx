@@ -4,8 +4,8 @@
  * -----------------------------------------------------------------------------
  * Description:
  * Master interactive 5-tab workspace for the Character Sheet view.
- * Contains:
- * 1. Weapons & Attacks (Calculated To-Hit bonus, damage dice, type, properties)
+ * Contains compact, single-row tab headers for:
+ * 1. Weapons & Attacks (Calculated To-Hit bonus, damage dice, type, properties with strict weapon/armor separation)
  * 2. Spells (Cantrips, leveled spells, interactive spell slot trackers)
  * 3. Features & Traits (Class features, racial traits, feats)
  * 4. Background (Background name, personality traits, ideals, bonds, flaws)
@@ -42,20 +42,31 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   const strMod = Math.floor(((stats.str || 10) - 10) / 2);
   const dexMod = Math.floor(((stats.dex || 10) - 10) / 2);
 
-  // Inventory / Weapons filtering
+  // Inventory / Weapons filtering strictly excluding armor and shields
   const inventory = Array.isArray(character.inventory)
     ? character.inventory
     : [];
   const weapons = inventory.filter((item) => {
-    const eqName = item.equipment?.name || item.custom_name || "";
-    const eqType = item.equipment?.type || item.type || "";
+    const eqName = item?.equipment?.name || item?.custom_name || "";
+    const eqCategory = item?.equipment?.category || item?.category || "";
+
+    // Explicitly exclude armor and shields from the weapons tab
+    if (
+      eqCategory.toLowerCase().includes("armor") ||
+      eqCategory.toLowerCase().includes("shield")
+    ) {
+      return false;
+    }
+
     return (
-      eqType.toLowerCase().includes("weapon") ||
+      eqCategory.toLowerCase().includes("weapon") ||
       eqName.toLowerCase().includes("sword") ||
       eqName.toLowerCase().includes("bow") ||
       eqName.toLowerCase().includes("dagger") ||
       eqName.toLowerCase().includes("staff") ||
-      item.is_equipped
+      eqName.toLowerCase().includes("axe") ||
+      eqName.toLowerCase().includes("hammer") ||
+      eqName.toLowerCase().includes("mace")
     );
   });
 
@@ -65,28 +76,28 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
 
   return (
     <div className="bg-[#4a261c] border-2 border-amber-600/50 rounded-xl shadow-2xl overflow-hidden my-4">
-      {/* TAB NAVIGATION HEADER */}
-      <div className="flex flex-wrap border-b border-amber-600/40 bg-[#361a12]">
+      {/* TAB NAVIGATION HEADER - COMPACT SINGLE-ROW LAYOUT */}
+      <div className="flex flex-wrap sm:flex-nowrap border-b border-amber-600/40 bg-[#361a12]">
         {[
           { id: "weapons", label: "⚔️ Weapons", count: weapons.length },
           { id: "spells", label: "✨ Spells", count: spells.length },
-          { id: "features", label: "🛡️ Features & Traits" },
+          { id: "features", label: "🛡️ Features" },
           { id: "background", label: "📜 Background" },
-          { id: "notes", label: "📝 Quick Notes" },
+          { id: "notes", label: "📝 Notes" },
         ].map((tab) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-3 text-xs font-bold uppercase tracking-wider transition border-r border-amber-600/30 flex items-center space-x-1.5 ${
+            className={`flex-1 px-2 py-2 text-[10px] font-bold uppercase tracking-tight transition border-r border-amber-600/30 flex items-center justify-center space-x-1 ${
               activeTab === tab.id
                 ? "bg-[#4a261c] text-amber-300 border-b-2 border-b-amber-400 shadow-inner"
                 : "text-[#889c9b] hover:text-[#f0e6d2] hover:bg-[#4a261c]/40"
             }`}
           >
-            <span>{tab.label}</span>
+            <span className="truncate">{tab.label}</span>
             {tab.count !== undefined && (
-              <span className="px-1.5 py-0.5 bg-[#361a12] rounded-full text-[10px] text-amber-400 border border-amber-500/30">
+              <span className="px-1 py-0.5 bg-[#361a12] rounded-full text-[9px] text-amber-400 border border-amber-500/30">
                 {tab.count}
               </span>
             )}
@@ -111,13 +122,18 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
             {weapons.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {weapons.map((item, idx) => {
-                  const name =
-                    item.equipment?.name ||
-                    item.custom_name ||
-                    "Unnamed Weapon";
-                  const damage = item.equipment?.damage_dice || "1d8";
-                  const dmgType = item.equipment?.damage_type || "Slashing";
-                  const isFinesse = (item.equipment?.properties || "")
+                  const eq = item?.equipment || {};
+                  const name = eq.name || item?.custom_name || "Unnamed Weapon";
+                  const damage = eq.damage_dice || "1d8";
+                  const dmgType = eq.damage_type || "Slashing";
+
+                  const propertiesObj = eq.properties;
+                  const propertiesStr =
+                    typeof propertiesObj === "string"
+                      ? propertiesObj
+                      : JSON.stringify(propertiesObj || "");
+
+                  const isFinesse = propertiesStr
                     .toLowerCase()
                     .includes("finesse");
                   const abilityMod = isFinesse
@@ -137,7 +153,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                           {name}
                         </span>
                         <span className="px-2 py-0.5 bg-[#4a261c] border border-amber-500/30 rounded text-[10px] text-amber-300 font-bold">
-                          {item.is_equipped ? "Equipped" : "In Pack"}
+                          {item?.is_equipped ? "Equipped" : "In Pack"}
                         </span>
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-amber-500/20">

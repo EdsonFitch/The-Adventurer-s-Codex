@@ -5,7 +5,8 @@
  * Description:
  * Upper horizontal ribbon for the Character Sheet view.
  * Displays Ability Score Squares, Proficiency Bonus, Inspiration, and Vitals,
- * Armor Class, Initiative, and Passive Senses.
+ * Armor Class (reading dynamically from computed inventory stats), Initiative,
+ * and Passive Senses.
  * -----------------------------------------------------------------------------
  */
 
@@ -44,7 +45,12 @@ export default function UpperStatsRibbon({
   // Combat vitals & Senses calculations
   const dexModNum = Math.floor(((stats.dex || 10) - 10) / 2);
   const initiativeBonus = dexModNum >= 0 ? `+${dexModNum}` : `${dexModNum}`;
-  const armorClass = character.armor_class_override || 10 + dexModNum;
+
+  // FIX: Read dynamic Armor Class from computed inventory stats (or override/fallback)
+  const armorClass =
+    character.computed?.armorClass ||
+    character.armor_class_override ||
+    10 + dexModNum;
 
   const getSkillMod = (skillName, statKey) => {
     const baseMod = Math.floor(((stats[statKey] || 10) - 10) / 2);
@@ -212,7 +218,7 @@ export default function UpperStatsRibbon({
               {armorClass}
             </span>
             <span className="text-[9px] text-amber-400 block uppercase">
-              AC Shield
+              AC Equipped
             </span>
           </div>
         </div>

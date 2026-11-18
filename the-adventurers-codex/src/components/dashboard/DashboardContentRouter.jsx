@@ -6,7 +6,8 @@
  * Master view router and layout coordinator for authenticated users.
  * Manages the active sidebar navigation tab state, holds the currently selected
  * character object for the character sheet, coordinates roster refresh triggers,
- * and integrates the newly built interactive CharacterSheetView component.
+ * and integrates master feature views including the Character Creator Wizard,
+ * Character Sheet View, Journal, and the standalone Inventory & Vault View.
  * -----------------------------------------------------------------------------
  */
 
@@ -21,6 +22,8 @@ import CharacterCreatorWizard from "../character-creator/CharacterCreatorWizard"
 import JournalView from "../diary/JournalView";
 // Import master interactive CharacterSheetView component
 import CharacterSheetView from "../character/CharacterSheetView";
+// Import standalone Inventory & Vault View component
+import InventoryView from "../inventory/InventoryView";
 
 export default function DashboardContentRouter() {
   // ---------------------------------------------------------------------------
@@ -81,7 +84,7 @@ export default function DashboardContentRouter() {
       case "journal":
         return "Journal Entries";
       case "inventory":
-        return "Inventory";
+        return "Inventory & Vault";
       case "profile":
         return "Account Profile";
       case "characters":
@@ -158,14 +161,7 @@ export default function DashboardContentRouter() {
 
               {/* VIEW 4: INVENTORY VAULT */}
               {activeTab === "inventory" && (
-                <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
-                  <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
-                    🎒 Party Inventory & Vault
-                  </h2>
-                  <p className="text-xs text-[#a59075]">
-                    Track gold, equipment, and items.
-                  </p>
-                </div>
+                <InventoryView selectedCharacter={selectedCharacter} />
               )}
 
               {/* VIEW 5: ACCOUNT PROFILE */}
