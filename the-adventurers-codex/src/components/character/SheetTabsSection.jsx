@@ -5,16 +5,63 @@
  * Description:
  * Master interactive 5-tab workspace for the Character Sheet view.
  * Contains compact, single-row tab headers for:
- * 1. Weapons & Attacks (Calculated To-Hit bonus, damage dice, type, properties with strict weapon/armor separation)
- * 2. Spells (Cantrips, leveled spells, interactive spell slot trackers)
+ * 1. Weapons & Attacks (Calculated To-Hit bonus, damage dice, type, properties
+ *    with strict weapon/armor separation)
+ * 2. Spells (Grouped and ordered Cantrips -> Level 1 -> Level 2 -> ..., with
+ *    interactive spell slot trackers and collapsible full spell details)
  * 3. Features & Traits (Class features, racial traits, feats)
  * 4. Background (Background name, personality traits, ideals, bonds, flaws)
  * 5. Quick Notes (Ephemeral session scratchpad stored in local state)
  * -----------------------------------------------------------------------------
  */
 
-import React, { useState } from "react";
-import { calculateModifier } from "../../utils/statCalculator";
+import React, { useMemo, useState } from "react";
+
+/**
+ * Normalizes a spell's level value into a numeric tier where 0 = Cantrips
+ * and positive integers represent spell levels (1, 2, 3, ...).
+ *
+ * @param {number|string|undefined|null} rawLevel - Raw level from spells table.
+ * @returns {number} Normalized numeric spell level (defaults to 0).
+ */
+function normalizeSpellLevel(rawLevel) {
+  if (rawLevel === 0 || rawLevel === "0") return 0;
+  if (typeof rawLevel === "string") {
+    const trimmed = rawLevel.trim().toLowerCase();
+    if (trimmed === "cantrip" || trimmed === "cantrips") return 0;
+    const parsed = parseInt(trimmed, 10);
+    return Number.isNaN(parsed) ? 99 : parsed;
+  }
+  const numeric = Number(rawLevel);
+  return Number.isNaN(numeric) ? 99 : numeric;
+}
+
+/**
+ * Formats a numeric spell level into a section heading.
+ *
+ * @param {number} level - Normalized spell level.
+ * @returns {string} Section heading ("Cantrips" or "Level N").
+ */
+function formatSpellTierHeading(level) {
+  return level === 0 ? "Cantrips" : `Level ${level}`;
+}
+
+/**
+ * Formats the `components` JSONB column (array or string) into readable text.
+ *
+ * @param {Array|string|null|undefined} components - Components value from spells table.
+ * @returns {string} Human-readable components string.
+ */
+function formatComponents(components) {
+  if (!components) return "None";
+  if (Array.isArray(components)) {
+    return components.length > 0 ? components.join(", ") : "None";
+  }
+  if (typeof components === "string") {
+    return components.trim() || "None";
+  }
+  return String(components);
+}
 
 export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   if (!character) return null;
@@ -22,8 +69,28 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   // Active tab state: 'weapons' | 'spells' | 'features' | 'background' | 'notes'
   const [activeTab, setActiveTab] = useState("weapons");
 
+  // Tracks which individual spell entries are expanded to show full details
+  const [expandedSpellKeys, setExpandedSpellKeys] = useState(() => new Set());
+
   // Quick notes local ephemeral state (wipes when component unmounts)
   const [quickNotes, setQuickNotes] = useState("");
+
+  /**
+   * Toggles the expanded/collapsed state for a single spell card.
+   *
+   * @param {string|number} spellKey - Unique key for the spell row.
+   */
+  const toggleSpellExpanded = (spellKey) => {
+    setExpandedSpellKeys((prev) => {
+      const next = new Set(prev);
+      if (next.has(spellKey)) {
+        next.delete(spellKey);
+      } else {
+        next.add(spellKey);
+      }
+      return next;
+    });
+  };
 
   // Extract stats for weapon/spell calculations
   const stats = character.stats ||
@@ -70,9 +137,51 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
     );
   });
 
-  // Spells extraction
+  // Spells extraction and slot usage state
   const spells = Array.isArray(character.spells) ? character.spells : [];
   const spellSlotsUsed = character.spell_slots_used || {};
+
+  /**
+   * Groups character spells by spell level (Cantrips = 0 first, then Level 1,
+   * Level 2, ...) and sorts spells alphabetically within each tier.
+   */
+  const groupedSpellsByTier = useMemo(() => {
+    const tierMap = new Map();
+
+    spells.forEach((entry, idx) => {
+      const spellObj =
+        entry?.spells && typeof entry.spells === "object"
+          ? entry.spells
+          : entry;
+      if (!spellObj) return;
+
+      const level = normalizeSpellLevel(spellObj.level);
+      const rowKey =
+        entry?.id ?? spellObj?.id ?? `${spellObj?.name || "spell"}-${idx}`;
+
+      if (!tierMap.has(level)) {
+        tierMap.set(level, []);
+      }
+
+      tierMap.get(level).push({
+        key: rowKey,
+        entry,
+        spell: spellObj,
+      });
+    });
+
+    return Array.from(tierMap.entries())
+      .sort(([levelA], [levelB]) => levelA - levelB)
+      .map(([level, items]) => ({
+        level,
+        heading: formatSpellTierHeading(level),
+        items: items.sort((a, b) =>
+          String(a.spell?.name || "").localeCompare(
+            String(b.spell?.name || ""),
+          ),
+        ),
+      }));
+  }, [spells]);
 
   return (
     <div className="bg-[#4a261c] border-2 border-amber-600/50 rounded-xl shadow-2xl overflow-hidden my-4">
@@ -256,36 +365,149 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
               })}
             </div>
 
-            {/* Spells List */}
-            {spells.length > 0 ? (
-              <div className="space-y-2">
-                {spells.map((s, idx) => {
-                  const spellName = s.spells?.name || "Unknown Spell";
-                  const school = s.spells?.school || "Evocation";
-                  const level = s.spells?.level || 0;
-
-                  return (
-                    <div
-                      key={idx}
-                      className="p-2.5 bg-[#361a12] border border-amber-500/30 rounded flex justify-between items-center text-xs"
-                    >
-                      <div>
-                        <span className="font-bold text-[#f0e6d2]">
-                          {spellName}
-                        </span>
-                        <span className="text-[#889c9b] ml-2">
-                          ({level === 0 ? "Cantrip" : `Level ${level}`} •{" "}
-                          {school})
-                        </span>
-                      </div>
-                      <span
-                        className={`px-2 py-0.5 rounded text-[10px] font-bold ${s.is_prepared ? "bg-amber-600/40 text-amber-300 border border-amber-500/50" : "bg-[#4a261c] text-[#889c9b]"}`}
-                      >
-                        {s.is_prepared ? "Prepared" : "Known"}
+            {/* Spells Grouped by Tier (Cantrips -> Level 1 -> Level 2 -> ...) */}
+            {groupedSpellsByTier.length > 0 ? (
+              <div className="space-y-4">
+                {groupedSpellsByTier.map((tierGroup) => (
+                  <div key={tierGroup.level} className="space-y-2">
+                    {/* Tier Section Header */}
+                    <div className="flex items-center justify-between border-b border-amber-500/25 pb-1">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-amber-300">
+                        {tierGroup.heading}
+                      </h4>
+                      <span className="text-[10px] text-[#889c9b]">
+                        {tierGroup.items.length}{" "}
+                        {tierGroup.items.length === 1 ? "spell" : "spells"}
                       </span>
                     </div>
-                  );
-                })}
+
+                    {/* Collapsible Spell Rows Inside Tier */}
+                    <div className="space-y-2">
+                      {tierGroup.items.map(({ key, entry, spell }) => {
+                        const isExpanded = expandedSpellKeys.has(key);
+                        const spellName = spell.name || "Unknown Spell";
+                        const school = spell.school || "Evocation";
+                        const castingTime = spell.casting_time || "—";
+                        const spellRange = spell.range || "—";
+                        const duration = spell.duration || "—";
+                        const componentsText = formatComponents(
+                          spell.components,
+                        );
+                        const isConcentration = Boolean(spell.concentration);
+                        const isRitual = Boolean(spell.ritual);
+                        const isContactSpell =
+                          typeof spellRange === "string" &&
+                          spellRange.toLowerCase().includes("touch");
+                        const description =
+                          spell.description ||
+                          "No description recorded for this spell.";
+
+                        return (
+                          <div
+                            key={key}
+                            className="bg-[#361a12] border border-amber-500/30 rounded-lg overflow-hidden transition"
+                          >
+                            {/* Clickable Collapsible Header */}
+                            <button
+                              type="button"
+                              onClick={() => toggleSpellExpanded(key)}
+                              aria-expanded={isExpanded}
+                              className="w-full px-3 py-2.5 flex items-center justify-between gap-2 text-left text-xs hover:bg-[#4a261c]/50 transition"
+                            >
+                              <div className="flex items-center flex-wrap gap-1.5">
+                                <span className="font-bold text-[#f0e6d2]">
+                                  {spellName}
+                                </span>
+                                <span className="text-[#889c9b] text-[11px]">
+                                  ({school})
+                                </span>
+                                {isContactSpell && (
+                                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-900/60 text-amber-300 border border-amber-500/40">
+                                    Touch / Contact
+                                  </span>
+                                )}
+                                {isConcentration && (
+                                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#4a261c] text-amber-200 border border-amber-500/30">
+                                    Concentration
+                                  </span>
+                                )}
+                                {isRitual && (
+                                  <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#4a261c] text-[#c9b99a] border border-[#a59075]/30">
+                                    Ritual
+                                  </span>
+                                )}
+                              </div>
+
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span
+                                  className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                    entry?.is_prepared
+                                      ? "bg-amber-600/40 text-amber-300 border border-amber-500/50"
+                                      : "bg-[#4a261c] text-[#889c9b]"
+                                  }`}
+                                >
+                                  {entry?.is_prepared ? "Prepared" : "Known"}
+                                </span>
+                                <span className="text-amber-300 font-bold text-[11px]">
+                                  {isExpanded ? "▲" : "▼"}
+                                </span>
+                              </div>
+                            </button>
+
+                            {/* Collapsible Spell Mechanics & Explanation */}
+                            {isExpanded && (
+                              <div className="px-3.5 py-3 bg-[#28120c] border-t border-amber-500/25 space-y-3 text-xs text-[#e8dcc4]">
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-2.5 rounded bg-[#361a12]/90 border border-amber-500/20">
+                                  <div>
+                                    <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
+                                      Casting Time
+                                    </span>
+                                    <span className="text-[11px] text-[#f0e6d2]">
+                                      {castingTime}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
+                                      Range / Contact
+                                    </span>
+                                    <span className="text-[11px] text-[#f0e6d2]">
+                                      {spellRange}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
+                                      Components
+                                    </span>
+                                    <span className="text-[11px] text-[#f0e6d2]">
+                                      {componentsText}
+                                    </span>
+                                  </div>
+                                  <div>
+                                    <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
+                                      Duration
+                                    </span>
+                                    <span className="text-[11px] text-[#f0e6d2]">
+                                      {duration}
+                                    </span>
+                                  </div>
+                                </div>
+
+                                <div className="space-y-1 leading-relaxed whitespace-pre-line">
+                                  <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
+                                    Spell Description & Effects
+                                  </span>
+                                  <p className="text-[11px] text-[#f0e6d2]/95">
+                                    {description}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               <div className="p-6 text-center text-[#889c9b] italic text-xs bg-[#361a12] rounded-lg border border-amber-500/20">

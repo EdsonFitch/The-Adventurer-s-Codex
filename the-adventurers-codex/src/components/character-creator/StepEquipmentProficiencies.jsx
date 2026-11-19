@@ -5,8 +5,11 @@
  * Manages Step 6 of Character Creation:
  * - Displays armor, weapon, and tool proficiencies granted by class and background.
  * - Provides interactive choice selection for starting equipment packages.
- * - Dynamically resolves compound options (e.g., Chain Mail + Holy Symbol with custom text,
- *   Martial Weapon + Shield, Two Martial Weapons) into precise selectors and text inputs.
+ * - Splits compound phrases, provides a text input for open-ended/custom items
+ *   (such as "any other musical instrument"), and enforces strict category
+ *   filtering on catalog dropdowns.
+ * - Enforces level-based catalog restrictions for characters at levels 1–5
+ *   (common/uncommon, non-magical, 0 enchantment).
  * -----------------------------------------------------------------------------
  */
 
@@ -32,6 +35,90 @@ const STANDARD_LANGUAGES = [
   "Undercommon",
 ];
 
+/**
+ * Safely normalizes a slot entry from `characterData.equipment` into:
+ * `{ choiceLabel: string, selections: Record<string, string> }`.
+ */
+function parseSlotEntry(rawEntry) {
+  if (!rawEntry) {
+    return { choiceLabel: "", selections: {} };
+  }
+  if (typeof rawEntry === "object") {
+    return {
+      choiceLabel: rawEntry.choiceLabel || "",
+      selections:
+        rawEntry.selections && typeof rawEntry.selections === "object"
+          ? rawEntry.selections
+          : {},
+    };
+  }
+  if (typeof rawEntry === "string") {
+    try {
+      const parsed = JSON.parse(rawEntry);
+      if (parsed && typeof parsed === "object") {
+        return {
+          choiceLabel: parsed.choiceLabel || parsed.base || "",
+          selections:
+            parsed.selections && typeof parsed.selections === "object"
+              ? parsed.selections
+              : {},
+        };
+      }
+    } catch {
+      // Plain string choice fallback
+    }
+    return { choiceLabel: rawEntry, selections: {} };
+  }
+  return { choiceLabel: "", selections: {} };
+}
+
+/**
+ * Splits a choice string on commas, conjunctions ("and", "or"), or "with"
+ * into individual item/category clauses.
+ */
+function splitCompoundClauses(text) {
+  if (!text || typeof text !== "string") return [];
+  return text
+    .split(/,\s*(?:and\s+|or\s+)?|\s+\band\b\s+|\s+\bor\b\s+|\s+\bwith\b\s+/i)
+    .map((part) => part.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Returns true when a clause should render a free-text input rather than a
+ * strict catalog dropdown.
+ */
+function clauseUsesTextInput(clause) {
+  if (!clause) return false;
+  const lower = clause.toLowerCase();
+  return (
+    lower.includes("holy symbol") ||
+    lower.includes("any other") ||
+    lower.includes("other musical instrument") ||
+    lower.includes("musical instrument")
+  );
+}
+
+/**
+ * Determines whether a clause requires a configuration control (dropdown or text input).
+ */
+function clauseNeedsConfig(clause) {
+  if (!clause) return false;
+  const lower = clause.toLowerCase();
+  return (
+    clauseUsesTextInput(clause) ||
+    lower.includes("weapon") ||
+    lower.includes("shield") ||
+    lower.includes("armor") ||
+    lower.includes("mail") ||
+    lower.includes("martial") ||
+    lower.includes("simple") ||
+    lower.includes("tool") ||
+    lower.includes("focus") ||
+    lower.includes("pack")
+  );
+}
+
 export default function StepEquipmentProficiencies({
   characterData,
   updateCharacterData,
@@ -41,12 +128,7 @@ export default function StepEquipmentProficiencies({
 }) {
   const [equipmentCatalog, setEquipmentCatalog] = useState([]);
   const [loadingCatalog, setLoadingCatalog] = useState(true);
-
-  // Track which package row index currently has its sub-selector open
   const [activeDropdownIndex, setActiveDropdownIndex] = useState(null);
-
-  // Local state for custom text inputs (e.g. Holy Symbol description like "Cross")
-  const [customTextInputs, setCustomTextInputs] = useState({});
 
   const characterLevel = Number(characterData?.level) || 1;
 
@@ -101,22 +183,40 @@ export default function StepEquipmentProficiencies({
 
     const matches = text.match(/\([a-z]\)[^()]+/g);
     if (matches && matches.length > 0) {
-      return matches.map((m) => m.replace(/\([a-z]\)\s*/, "").trim());
+      return matches.map((m) =>
+        m
+          .replace(/\([a-z]\)\s*/, "")
+          .replace(/\s+or\s*$/i, "")
+          .trim(),
+      );
     }
-    return [text];
+    return [text.trim()];
+  };
+
+  const choiceHasConfigurableParts = (choiceText) => {
+    const clauses = splitCompoundClauses(choiceText);
+    return clauses.some((c) => clauseNeedsConfig(c));
   };
 
   const handleSelectPackageChoice = (rowIndex, choice) => {
     const currentGear = Array.isArray(characterData.equipment)
       ? [...characterData.equipment]
       : [];
-    currentGear[rowIndex] = choice;
+
+    const existing = parseSlotEntry(currentGear[rowIndex]);
+    const isSameChoice = existing.choiceLabel === choice;
+    const nextSelections = isSameChoice ? existing.selections : {};
+
+    currentGear[rowIndex] = JSON.stringify({
+      choiceLabel: choice,
+      selections: nextSelections,
+    });
+
     updateCharacterData({ equipment: currentGear });
 
-    // Toggle dropdown open if it requires configuration
-    if (isGenericCategory(choice)) {
-      setActiveDropdownIndex(
-        activeDropdownIndex === rowIndex ? null : rowIndex,
+    if (choiceHasConfigurableParts(choice)) {
+      setActiveDropdownIndex((prev) =>
+        prev === rowIndex && isSameChoice ? null : rowIndex,
       );
     } else {
       setActiveDropdownIndex(null);
@@ -128,38 +228,33 @@ export default function StepEquipmentProficiencies({
       ? [...characterData.equipment]
       : [];
 
-    // Parse existing stored sub-items or initialize object/string
-    let existingConfig = {};
-    try {
-      existingConfig = JSON.parse(currentGear[rowIndex] || "{}");
-    } catch {
-      existingConfig = { base: currentGear[rowIndex] };
+    const existing = parseSlotEntry(currentGear[rowIndex]);
+    const updatedSelections = { ...existing.selections };
+
+    if (!value || value.trim() === "" || value.trim().startsWith("--")) {
+      delete updatedSelections[subKey];
+    } else {
+      updatedSelections[subKey] = value;
     }
 
-    existingConfig[subKey] = value;
-    currentGear[rowIndex] = JSON.stringify(existingConfig);
+    currentGear[rowIndex] = JSON.stringify({
+      choiceLabel: existing.choiceLabel,
+      selections: updatedSelections,
+    });
+
     updateCharacterData({ equipment: currentGear });
   };
 
-  const isGenericCategory = (choiceText) => {
-    if (!choiceText) return false;
-    const lower = choiceText.toLowerCase();
-    return (
-      lower.includes("weapon") ||
-      lower.includes("shield") ||
-      lower.includes("armor") ||
-      lower.includes("martial") ||
-      lower.includes("simple") ||
-      lower.includes("and") ||
-      lower.includes("holy symbol")
-    );
-  };
-
-  const getFilteredCatalogForChoice = (filterType) => {
-    const lower = (filterType || "").toLowerCase();
+  /**
+   * Strictly filters `equipmentCatalog` to match the category requested by `clauseText`,
+   * and enforces level 1–5 non-magical / common-uncommon restrictions.
+   */
+  const getFilteredCatalogForClause = (clauseText) => {
+    const lower = (clauseText || "").toLowerCase();
 
     return equipmentCatalog.filter((eq) => {
       const cat = (eq.category || "").toLowerCase();
+      const nameLower = (eq.name || "").toLowerCase();
       const rarity = (eq.rarity || "common").toLowerCase();
       const isMagical = Boolean(eq.is_magical);
       const enchantment = Number(eq.enchantment_bonus || 0);
@@ -171,28 +266,42 @@ export default function StepEquipmentProficiencies({
       }
 
       if (lower.includes("shield")) {
-        return (
-          cat.includes("shield") || eq.name.toLowerCase().includes("shield")
-        );
+        return cat.includes("shield") || nameLower === "shield";
       }
-      if (lower.includes("armor") || lower.includes("mail")) {
-        return (
-          cat.includes("armor") ||
-          eq.name.toLowerCase().includes("mail") ||
-          eq.name.toLowerCase().includes("armor")
-        );
+
+      if (
+        lower.includes("armor") ||
+        lower.includes("mail") ||
+        lower.includes("leather") ||
+        lower.includes("scale") ||
+        lower.includes("plate") ||
+        lower.includes("hide")
+      ) {
+        return cat.includes("armor") && !cat.includes("shield");
       }
+
       if (
         lower.includes("weapon") ||
         lower.includes("martial") ||
-        lower.includes("simple")
+        lower.includes("simple") ||
+        lower.includes("dagger") ||
+        lower.includes("sword") ||
+        lower.includes("axe") ||
+        lower.includes("bow") ||
+        lower.includes("rapier") ||
+        lower.includes("spear") ||
+        lower.includes("mace") ||
+        lower.includes("club")
       ) {
-        return (
-          cat.includes("weapon") ||
-          cat.includes("martial") ||
-          cat.includes("simple") ||
-          cat === ""
-        );
+        return cat.includes("weapon") && !cat.includes("shield");
+      }
+
+      if (lower.includes("tool")) {
+        return cat.includes("tool");
+      }
+
+      if (lower.includes("pack")) {
+        return nameLower.includes("pack");
       }
 
       return true;
@@ -321,27 +430,37 @@ export default function StepEquipmentProficiencies({
           <div className="space-y-3">
             {classEquipment.map((eqItem, idx) => {
               const choices = parseEquipmentChoices(eqItem);
-              const rawSelected = characterData.equipment?.[idx];
+              const { choiceLabel, selections } = parseSlotEntry(
+                characterData.equipment?.[idx],
+              );
               const isOpen = activeDropdownIndex === idx;
+              const activeSubValues = Object.values(selections).filter(Boolean);
+              const clauses = splitCompoundClauses(choiceLabel);
 
               return (
                 <div
                   key={idx}
                   className="p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg space-y-2 text-xs"
                 >
-                  <div className="font-bold text-[#f0e6d2] flex justify-between">
+                  <div className="font-bold text-[#f0e6d2] flex justify-between items-center gap-2">
                     <span>Equipment Package Option {idx + 1}</span>
-                    <span className="text-[10px] text-[#889c9b] font-normal truncate max-w-[250px]">
-                      {typeof eqItem === "string" ? eqItem : eqItem?.item}
-                    </span>
+                    {activeSubValues.length > 0 ? (
+                      <span className="text-[10px] text-amber-300 font-normal truncate max-w-[320px]">
+                        Picked: {activeSubValues.join(", ")}
+                      </span>
+                    ) : (
+                      choiceLabel && (
+                        <span className="text-[10px] text-amber-300 font-normal truncate max-w-[320px]">
+                          Selected: {choiceLabel}
+                        </span>
+                      )
+                    )}
                   </div>
 
                   <div className="space-y-2">
                     {choices.map((choice, cIdx) => {
-                      const isThisChoiceSelected =
-                        rawSelected === choice ||
-                        (rawSelected && rawSelected.includes(choice));
-                      const isGeneric = isGenericCategory(choice);
+                      const isThisChoiceSelected = choiceLabel === choice;
+                      const isConfigurable = choiceHasConfigurableParts(choice);
 
                       return (
                         <div key={cIdx} className="space-y-2">
@@ -357,218 +476,94 @@ export default function StepEquipmentProficiencies({
                             }`}
                           >
                             <span>
-                              {isThisChoiceSelected && !isGeneric
+                              {isThisChoiceSelected && !isConfigurable
                                 ? `✓ ${choice}`
                                 : choice}
                             </span>
-                            {isGeneric && (
-                              <span className="text-[10px] text-amber-300 italic">
-                                {isOpen
+                            {isConfigurable && (
+                              <span className="text-[10px] text-amber-300 italic shrink-0 ml-2">
+                                {isOpen && isThisChoiceSelected
                                   ? "Close Config ▲"
                                   : "Configure Items ▼"}
                               </span>
                             )}
                           </button>
 
-                          {/* Configuration Drawer */}
-                          {isOpen && isThisChoiceSelected && (
-                            <div className="p-3 bg-[#5f3426] border border-amber-500/40 rounded-lg space-y-3 animate-fadeIn">
-                              <span className="text-[10px] uppercase font-bold text-amber-300 block">
-                                Configure option: "{choice}"
-                              </span>
+                          {isOpen &&
+                            isThisChoiceSelected &&
+                            !loadingCatalog && (
+                              <div className="p-3 bg-[#5f3426] border border-amber-500/40 rounded-lg space-y-3 animate-fadeIn">
+                                <span className="text-[10px] uppercase font-bold text-amber-300 block">
+                                  Configure option: &ldquo;{choice}&rdquo;
+                                </span>
 
-                              {/* Case A: Armor / Mail + Holy Symbol */}
-                              {choice.toLowerCase().includes("holy symbol") ? (
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      Select Armor / Chain Mail:
-                                    </label>
-                                    <select
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "armor",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    >
-                                      <option value="">
-                                        -- Choose Armor --
-                                      </option>
-                                      {getFilteredCatalogForChoice("armor").map(
-                                        (eq) => (
-                                          <option key={eq.id} value={eq.name}>
-                                            {eq.name}
-                                          </option>
-                                        ),
-                                      )}
-                                    </select>
-                                  </div>
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      Holy Symbol Description (e.g. Cross,
-                                      Locket):
-                                    </label>
-                                    <input
-                                      type="text"
-                                      placeholder="e.g., Silver Cross"
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "symbol",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    />
-                                  </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                                  {clauses.map((clause, clIdx) => {
+                                    const slotKey = `clause_${clIdx}`;
+                                    const useTextInput =
+                                      clauseUsesTextInput(clause);
+                                    const filteredOptions =
+                                      getFilteredCatalogForClause(clause);
+
+                                    return (
+                                      <div key={slotKey}>
+                                        <label className="text-[9px] uppercase text-amber-200 block mb-1">
+                                          {clause}
+                                        </label>
+
+                                        {useTextInput ? (
+                                          <input
+                                            type="text"
+                                            placeholder={
+                                              clause
+                                                .toLowerCase()
+                                                .includes("holy symbol")
+                                                ? "e.g., Silver Cross or Locket"
+                                                : "Write your custom instrument or item..."
+                                            }
+                                            value={selections[slotKey] || ""}
+                                            onChange={(e) =>
+                                              handleUpdateSubItem(
+                                                idx,
+                                                slotKey,
+                                                e.target.value,
+                                              )
+                                            }
+                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
+                                          />
+                                        ) : (
+                                          <select
+                                            value={selections[slotKey] || ""}
+                                            onChange={(e) =>
+                                              handleUpdateSubItem(
+                                                idx,
+                                                slotKey,
+                                                e.target.value,
+                                              )
+                                            }
+                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
+                                          >
+                                            <option value="">
+                                              -- Use &ldquo;{clause}&rdquo; or
+                                              pick item --
+                                            </option>
+                                            {filteredOptions.map((eq) => (
+                                              <option
+                                                key={eq.id}
+                                                value={eq.name}
+                                              >
+                                                {eq.name} (
+                                                {eq.category || "General"})
+                                              </option>
+                                            ))}
+                                          </select>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
                                 </div>
-                              ) : choice.toLowerCase().includes("and") &&
-                                choice.toLowerCase().includes("shield") ? (
-                                /* Case B: Weapon + Shield */
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      Select Weapon:
-                                    </label>
-                                    <select
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "weapon",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    >
-                                      <option value="">
-                                        -- Choose Weapon --
-                                      </option>
-                                      {getFilteredCatalogForChoice(
-                                        "weapon",
-                                      ).map((eq) => (
-                                        <option key={eq.id} value={eq.name}>
-                                          {eq.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </div>
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      Select Shield:
-                                    </label>
-                                    <select
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "shield",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    >
-                                      <option value="">
-                                        -- Choose Shield --
-                                      </option>
-                                      {getFilteredCatalogForChoice(
-                                        "shield",
-                                      ).map((eq) => (
-                                        <option key={eq.id} value={eq.name}>
-                                          {eq.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </div>
-                                </div>
-                              ) : choice.toLowerCase().includes("two") ? (
-                                /* Case C: Two Weapons */
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      First Weapon:
-                                    </label>
-                                    <select
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "weapon1",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    >
-                                      <option value="">
-                                        -- Choose Weapon 1 --
-                                      </option>
-                                      {getFilteredCatalogForChoice(
-                                        "weapon",
-                                      ).map((eq) => (
-                                        <option key={eq.id} value={eq.name}>
-                                          {eq.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </div>
-                                  <div>
-                                    <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                      Second Weapon:
-                                    </label>
-                                    <select
-                                      onChange={(e) =>
-                                        handleUpdateSubItem(
-                                          idx,
-                                          "weapon2",
-                                          e.target.value,
-                                        )
-                                      }
-                                      className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                    >
-                                      <option value="">
-                                        -- Choose Weapon 2 --
-                                      </option>
-                                      {getFilteredCatalogForChoice(
-                                        "weapon",
-                                      ).map((eq) => (
-                                        <option key={eq.id} value={eq.name}>
-                                          {eq.name}
-                                        </option>
-                                      ))}
-                                    </select>
-                                  </div>
-                                </div>
-                              ) : (
-                                /* Default Single Item Selector */
-                                <div>
-                                  <label className="text-[9px] uppercase text-amber-200 block mb-1">
-                                    Select Item:
-                                  </label>
-                                  <select
-                                    onChange={(e) =>
-                                      handleUpdateSubItem(
-                                        idx,
-                                        "item",
-                                        e.target.value,
-                                      )
-                                    }
-                                    className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
-                                  >
-                                    <option value="">
-                                      -- Select exact item from catalog --
-                                    </option>
-                                    {getFilteredCatalogForChoice(choice).map(
-                                      (eq) => (
-                                        <option key={eq.id} value={eq.name}>
-                                          {eq.name} ({eq.category || "General"})
-                                        </option>
-                                      ),
-                                    )}
-                                  </select>
-                                </div>
-                              )}
-                            </div>
-                          )}
+                              </div>
+                            )}
                         </div>
                       );
                     })}

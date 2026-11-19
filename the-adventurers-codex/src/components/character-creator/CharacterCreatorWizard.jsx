@@ -13,8 +13,9 @@
  * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
  * - Executes final database insertion into 'characters', 'character_classes',
  *   'character_skills', 'character_spells', and relational 'character_inventory'
- *   with strict level-based gear restriction rules (levels 1-5 limited to
- *   non-magical, common/uncommon items with 0 enchantment).
+ *   with pack expansion from `pack_contents`, multi-variant catalog matching
+ *   (handling plurals, comma-inverted names, and parentheticals), and level 1–5
+ *   gear restriction rules.
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge.
@@ -42,6 +43,201 @@ import { computeCharacterStats } from "../../utils/statCalculator";
 // ASSET IMPORT: Faded Background Header Asset
 // -----------------------------------------------------------------------------
 import headerBgImage from "../../assets/hero/hero-bg.png";
+
+/**
+ * Strips leading articles ("a", "an", "any", "the") and leading numeric counts.
+ *
+ * @param {string} rawText - Raw item or clause text.
+ * @returns {string} Trimmed lowercase base string.
+ */
+function stripArticlesAndCounts(rawText) {
+  return String(rawText || "")
+    .replace(/^(a|an|any|the)\s+/i, "")
+    .replace(/^\d+\s+/, "")
+    .trim()
+    .toLowerCase();
+}
+
+/**
+ * Singularizes simple English plural tokens (e.g., "costumes" -> "costume").
+ *
+ * @param {string} text - Lowercase input string.
+ * @returns {string} Singularized string.
+ */
+function singularizeTokens(text) {
+  return text
+    .split(/\s+/)
+    .map((word) => {
+      if (word.length > 3 && word.endsWith("s") && !word.endsWith("ss")) {
+        return word.slice(0, -1);
+      }
+      return word;
+    })
+    .join(" ");
+}
+
+/**
+ * Generates normalized lookup variants for an equipment name so exact strings
+ * (e.g., "Rations (1 day)"), comma-inverted catalog names (e.g., "Clothes, costume"),
+ * parenthetical-stripped names, and plural/singular forms all match reliably.
+ *
+ * @param {string} rawText - Raw item name from pack_contents, selections, or catalog.
+ * @returns {string[]} Deduplicated array of normalized candidate strings.
+ */
+function buildCandidateVariants(rawText) {
+  const base = stripArticlesAndCounts(rawText);
+  if (!base) return [];
+
+  const variants = new Set([base]);
+
+  // 1. Comma-flipped order: "clothes, costume" -> "costume clothes"
+  if (base.includes(",")) {
+    const parts = base
+      .split(",")
+      .map((p) => p.trim())
+      .filter(Boolean);
+    if (parts.length === 2) {
+      variants.add(`${parts[1]} ${parts[0]}`);
+      variants.add(parts[1]);
+    }
+  }
+
+  // 2. Parenthetical-stripped variant: "rations (1 day)" -> "rations"
+  const withoutParens = base.replace(/\(.*?\)/g, "").trim();
+  if (withoutParens) {
+    variants.add(withoutParens);
+  }
+
+  // 3. Singularized forms of every collected variant: "costumes" -> "costume"
+  Array.from(variants).forEach((v) => {
+    const singular = singularizeTokens(v);
+    if (singular) variants.add(singular);
+  });
+
+  return Array.from(variants);
+}
+
+/**
+ * Finds the best matching row from `masterEquipment` for a given item string.
+ *
+ * @param {string} rawName - Candidate item name.
+ * @param {Array<Object>} masterEquipment - Full equipment catalog rows.
+ * @returns {Object|null} Matched catalog item or null.
+ */
+function findMatchingCatalogItem(rawName, masterEquipment) {
+  const inputVariants = buildCandidateVariants(rawName);
+  if (inputVariants.length === 0) return null;
+
+  const inputVariantSet = new Set(inputVariants);
+
+  // Pass 1: Direct variant equality (catches exact "Rations (1 day)",
+  // comma-flipped "Clothes, costume" <-> "costume clothes", and singular "costume")
+  for (const eq of masterEquipment) {
+    const dbVariants = buildCandidateVariants(eq.name);
+    if (dbVariants.some((dv) => inputVariantSet.has(dv))) {
+      return eq;
+    }
+  }
+
+  // Pass 2: Token-boundary inclusion fallback for compound descriptions
+  // (e.g., "costume" matching "clothes, costume")
+  for (const eq of masterEquipment) {
+    const dbVariants = buildCandidateVariants(eq.name);
+    for (const iv of inputVariants) {
+      if (iv.length < 4) continue;
+      const escaped = iv.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const wordRegex = new RegExp(`\\b${escaped}\\b`, "i");
+      if (dbVariants.some((dv) => wordRegex.test(dv))) {
+        return eq;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Extracts `{ name, quantity }` candidates from a single starting equipment slot entry.
+ *
+ * @param {string|Object} chosenEntry - Equipment entry from `characterData.equipment`.
+ * @returns {Array<{ name: string, quantity: number }>} Item candidates to match.
+ */
+function extractSlotCandidates(chosenEntry) {
+  if (!chosenEntry) return [];
+
+  let choiceLabel = "";
+  let selections = {};
+
+  if (typeof chosenEntry === "object") {
+    choiceLabel = chosenEntry.choiceLabel || "";
+    selections =
+      chosenEntry.selections && typeof chosenEntry.selections === "object"
+        ? chosenEntry.selections
+        : {};
+  } else if (typeof chosenEntry === "string") {
+    try {
+      const parsed = JSON.parse(chosenEntry);
+      if (parsed && typeof parsed === "object") {
+        choiceLabel = parsed.choiceLabel || parsed.base || "";
+        selections =
+          parsed.selections && typeof parsed.selections === "object"
+            ? parsed.selections
+            : {};
+      } else {
+        choiceLabel = chosenEntry;
+      }
+    } catch {
+      choiceLabel = chosenEntry;
+    }
+  }
+
+  const clauses = choiceLabel
+    ? choiceLabel
+        .split(
+          /,\s*(?:and\s+|or\s+)?|\s+\band\b\s+|\s+\bor\b\s+|\s+\bwith\b\s+/i,
+        )
+        .map((c) => c.trim())
+        .filter(Boolean)
+    : [];
+
+  const selectionEntries = Object.entries(selections).filter(
+    ([, val]) => val && typeof val === "string" && !val.trim().startsWith("--"),
+  );
+
+  if (selectionEntries.length > 0) {
+    const resolved = [];
+    const usedKeys = new Set();
+
+    clauses.forEach((clause, idx) => {
+      const clauseKey = `clause_${idx}`;
+      if (selections[clauseKey]) {
+        usedKeys.add(clauseKey);
+        resolved.push({ name: selections[clauseKey].trim(), quantity: 1 });
+      } else if (clause.toLowerCase().includes("holy symbol")) {
+        resolved.push({ name: "Holy Symbol", quantity: 1 });
+      } else {
+        resolved.push({ name: clause, quantity: 1 });
+      }
+    });
+
+    Object.entries(selections).forEach(([key, val]) => {
+      if (!usedKeys.has(key) && val && typeof val === "string") {
+        resolved.push({
+          name: key === "symbol" ? "Holy Symbol" : val.trim(),
+          quantity: 1,
+        });
+      }
+    });
+
+    return resolved;
+  }
+
+  if (clauses.length > 0) {
+    return clauses.map((c) => ({ name: c, quantity: 1 }));
+  }
+
+  return [{ name: String(chosenEntry).trim(), quantity: 1 }];
+}
 
 export default function CharacterCreatorWizard({ onComplete, userId }) {
   // ---------------------------------------------------------------------------
@@ -76,15 +272,14 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       wis: 10,
       cha: 8,
     },
-    // Personality and background narrative fields (Step 5)
     personalityTraits: "",
     ideals: "",
     bonds: "",
     flaws: "",
     definingEvents: "",
-    equipment: [], // Starting gear choices (Step 6)
-    languages: ["Common"], // Known languages array (Step 6)
-    skills: [], // Selected class skill proficiencies array (Step 7)
+    equipment: [],
+    languages: ["Common"],
+    skills: [],
     spells: { classSpells: [], bonusSpells: [] },
     selectedSpellIds: [],
     hitPointsMax: 10,
@@ -99,12 +294,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   const [subclassesList, setSubclassesList] = useState([]);
   const [backgroundsList, setBackgroundsList] = useState([]);
 
-  /**
-   * ---------------------------------------------------------------------------
-   * EFFECT HOOK: fetchReferenceData
-   * ---------------------------------------------------------------------------
-   * Fetches all core relational tables from Supabase in parallel when mounting.
-   */
   useEffect(() => {
     async function fetchReferenceData() {
       try {
@@ -149,11 +338,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     fetchReferenceData();
   }, []);
 
-  /**
-   * ---------------------------------------------------------------------------
-   * EFFECT HOOK: Aggregate Active JSONB Effects, Ability Bonuses & Skill Grants
-   * ---------------------------------------------------------------------------
-   */
   useEffect(() => {
     const extractedEffects = [];
 
@@ -293,11 +477,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  /**
-   * Submits the complete character record to Supabase, writing basic info,
-   * linking the class, mapping skills, mapping spells, and validating starting
-   * equipment choices against level-based restrictions before populating `character_inventory`.
-   */
   const handleForgeCharacter = async () => {
     try {
       setIsSubmitting(true);
@@ -305,7 +484,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       const characterLevel = Number(characterData.level) || 1;
 
-      // 1. Master character payload mapping wizard state into Supabase columns
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
@@ -336,7 +514,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
 
       if (charError) throw charError;
 
-      // 2. LINK CLASS INTO character_classes TABLE
       if (characterData.classId) {
         const classPayload = {
           character_id: newChar.id,
@@ -354,7 +531,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 3. LINK SKILLS INTO character_skills TABLE
       const allProficientSkillNames = new Set([
         ...(characterData.skills || []),
         ...(computedCharacterPackage?.proficiencies || []),
@@ -394,7 +570,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 4. LINK SPELLS INTO character_spells TABLE
       if (
         characterData.selectedSpellIds &&
         characterData.selectedSpellIds.length > 0
@@ -416,87 +591,107 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 5. MAP STARTING EQUIPMENT CHOICES INTO character_inventory TABLE WITH LEVEL RESTRICTIONS
+      // 5. MAP STARTING EQUIPMENT CHOICES & EXPAND PACKS INTO character_inventory
       if (
         Array.isArray(characterData.equipment) &&
         characterData.equipment.length > 0
       ) {
-        const { data: masterEquipment, error: eqCatErr } = await supabase
-          .from("equipment")
-          .select("id, name, category, rarity, is_magical, enchantment_bonus");
+        const [
+          { data: masterEquipment, error: eqCatErr },
+          { data: packContentsRows, error: packErr },
+        ] = await Promise.all([
+          supabase
+            .from("equipment")
+            .select(
+              "id, name, category, rarity, is_magical, enchantment_bonus",
+            ),
+          supabase
+            .from("pack_contents")
+            .select("pack_name, item_name, quantity"),
+        ]);
 
         if (!eqCatErr && masterEquipment) {
-          const inventoryPayload = [];
+          const allPackRows =
+            !packErr && packContentsRows ? packContentsRows : [];
 
-          characterData.equipment.forEach((chosenText) => {
-            if (!chosenText) return;
+          // Map equipment_id -> inventory row so duplicate items combine quantities cleanly
+          const inventoryByEquipmentId = new Map();
 
-            const itemsToProcess = [];
-
-            // Parse structured JSON config from sub-selectors or plain strings
-            try {
-              const parsedConfig = JSON.parse(chosenText);
-              Object.entries(parsedConfig).forEach(([key, val]) => {
-                if (
-                  val &&
-                  typeof val === "string" &&
-                  !val.trim().startsWith("--")
-                ) {
-                  // If it's a custom text input like a holy symbol description, prefix it or treat as item name
-                  if (key === "symbol") {
-                    itemsToProcess.push(`Holy Symbol (${val.trim()})`);
-                  } else {
-                    itemsToProcess.push(val.trim());
-                  }
-                }
-              });
-            } catch {
-              itemsToProcess.push(chosenText);
+          const addCatalogItemToInventory = (rawName, qty = 1) => {
+            const matchedItem = findMatchingCatalogItem(
+              rawName,
+              masterEquipment,
+            );
+            if (!matchedItem) {
+              console.warn(
+                `[CharacterCreatorWizard] No catalog match in 'equipment' for starting item: "${rawName}"`,
+              );
+              return;
             }
 
-            itemsToProcess.forEach((rawItemText) => {
-              const cleanChoice = rawItemText
-                .replace(/^(a|an|any)\s+/i, "")
-                .trim()
-                .toLowerCase();
+            // Enforce level 1-5 restrictions: common/uncommon, non-magical, 0 enchantment
+            if (characterLevel <= 5) {
+              const isMagical = Boolean(matchedItem.is_magical);
+              const enchantment = Number(matchedItem.enchantment_bonus || 0);
+              const rarity = (matchedItem.rarity || "common").toLowerCase();
 
-              const matchedItem = masterEquipment.find((eq) => {
-                const dbName = eq.name.toLowerCase();
+              if (isMagical || enchantment > 0) return;
+              if (
+                rarity !== "common" &&
+                rarity !== "uncommon" &&
+                rarity !== ""
+              ) {
+                return;
+              }
+            }
+
+            const existingRow = inventoryByEquipmentId.get(matchedItem.id);
+            const safeQty = Math.max(1, Number(qty) || 1);
+
+            if (existingRow) {
+              existingRow.quantity += safeQty;
+            } else {
+              inventoryByEquipmentId.set(matchedItem.id, {
+                character_id: newChar.id,
+                equipment_id: matchedItem.id,
+                quantity: safeQty,
+                is_offsite: false,
+                is_equipped: false,
+              });
+            }
+          };
+
+          characterData.equipment.forEach((chosenEntry) => {
+            const slotCandidates = extractSlotCandidates(chosenEntry);
+
+            slotCandidates.forEach(({ name: rawItemText, quantity }) => {
+              const cleanCandidate = stripArticlesAndCounts(rawItemText);
+              if (!cleanCandidate) return;
+
+              // Check if this candidate matches a pack in `pack_contents`
+              const matchingPackItems = allPackRows.filter((row) => {
+                const packKey = stripArticlesAndCounts(row.pack_name);
                 return (
-                  dbName === cleanChoice ||
-                  cleanChoice === dbName ||
-                  cleanChoice.includes(dbName) ||
-                  dbName.includes(cleanChoice)
+                  packKey === cleanCandidate ||
+                  cleanCandidate.includes(packKey) ||
+                  packKey.includes(cleanCandidate)
                 );
               });
 
-              if (matchedItem) {
-                if (characterLevel <= 5) {
-                  const isMagical = Boolean(matchedItem.is_magical);
-                  const enchantment = Number(
-                    matchedItem.enchantment_bonus || 0,
+              if (matchingPackItems.length > 0) {
+                matchingPackItems.forEach((packRow) => {
+                  addCatalogItemToInventory(
+                    packRow.item_name,
+                    (packRow.quantity || 1) * (quantity || 1),
                   );
-                  const rarity = (matchedItem.rarity || "common").toLowerCase();
-
-                  if (isMagical || enchantment > 0) return;
-                  if (
-                    rarity !== "common" &&
-                    rarity !== "uncommon" &&
-                    rarity !== ""
-                  )
-                    return;
-                }
-
-                inventoryPayload.push({
-                  character_id: newChar.id,
-                  equipment_id: matchedItem.id,
-                  quantity: 1,
-                  is_offsite: false,
-                  is_equipped: false,
                 });
+              } else {
+                addCatalogItemToInventory(rawItemText, quantity);
               }
             });
           });
+
+          const inventoryPayload = Array.from(inventoryByEquipmentId.values());
 
           if (inventoryPayload.length > 0) {
             const { error: invInsertErr } = await supabase
@@ -540,7 +735,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   // ---------------------------------------------------------------------------
   return (
     <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl overflow-hidden text-[#938f71] shadow-2xl font-antiqua">
-      {/* HEADER SECTION */}
       <div className="relative p-6 pb-5 overflow-hidden border-b border-[#a59075]/30">
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <img
@@ -584,7 +778,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         </div>
       )}
 
-      {/* MAIN CONTENT VIEWPORT */}
       <div className="p-6 min-h-[400px]">
         {loadingData ? (
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
@@ -677,7 +870,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         )}
       </div>
 
-      {/* FOOTER NAVIGATION CONTROLS */}
       <div className="p-6 pt-4 border-t border-[#a59075]/30 flex justify-between items-center bg-[#5f3426]">
         {currentStep > 1 ? (
           <button
@@ -718,12 +910,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 }
 
-/**
- * Helper function to retrieve step titles based on step index.
- *
- * @param {number} step - Current wizard step number.
- * @returns {string} Human-readable title of the step.
- */
 function getStepTitle(step) {
   switch (step) {
     case 1:
