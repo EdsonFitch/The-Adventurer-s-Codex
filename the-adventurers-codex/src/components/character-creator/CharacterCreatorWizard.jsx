@@ -11,11 +11,11 @@
  * - Dynamically parses `effects`, `ability_bonuses`, and `skill_proficiencies` JSONB arrays
  *   from background, race, and subrace rows into standardized effect objects.
  * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
- * - Executes final database insertion into 'characters', 'character_classes',
- *   'character_skills', 'character_spells', and relational 'character_inventory'
- *   with pack expansion from `pack_contents`, multi-variant catalog matching
- *   (handling plurals, comma-inverted names, and parentheticals), and level 1–5
- *   gear restriction rules.
+ * - Executes final database insertion into 'characters' (including `campaign_name`),
+ *   'character_classes', 'character_skills', 'character_spells', and relational
+ *   'character_inventory' with pack expansion from `pack_contents`, multi-variant
+ *   catalog matching (handling plurals, comma-inverted names, and parentheticals),
+ *   and level 1–5 gear restriction rules.
  *
  * @param {Object} props - Component properties.
  * @param {Function} props.onComplete - Callback fired after a successful character forge.
@@ -483,11 +483,16 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       setErrorMessage(null);
 
       const characterLevel = Number(characterData.level) || 1;
+      const cleanCampaignName =
+        typeof characterData.campaignName === "string"
+          ? characterData.campaignName.trim()
+          : "";
 
       const newCharacterRecord = {
         user_id: userId,
         name: characterData.name,
         level: characterLevel,
+        campaign_name: cleanCampaignName || null,
         race_id: characterData.raceId || null,
         subrace_id: characterData.subraceId || null,
         background_id: characterData.backgroundId || null,

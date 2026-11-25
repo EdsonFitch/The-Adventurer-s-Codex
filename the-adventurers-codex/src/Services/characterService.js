@@ -81,7 +81,7 @@ export async function fetchFullCharacterSheet(characterId) {
   const inventoryList = inventoryRes.data || [];
   const progressions = progressionRes.data || [];
 
-  // Determine primary class and level
+  // Determine primary class and level (exposes primaryClass.hit_die for Hit Dice display)
   const primaryClassRelation = classesList[0] || {};
   const primaryClass = primaryClassRelation.classes || {};
   const subClass = primaryClassRelation.subclasses || null;
@@ -144,20 +144,22 @@ export async function fetchFullCharacterSheet(characterId) {
 }
 
 /**
- * Updates live combat metrics (HP, Temp HP, Inspiration, Conditions, Spell Slots, Resistances)
- * in Supabase with debounced optimistic state support.
+ * Updates live combat metrics (HP, Temp HP, Hit Dice Used, Inspiration,
+ * Conditions, Spell Slots, Resistances) in Supabase.
  *
  * @param {string} characterId - The UUID of the character.
  * @param {Object} updates - Key-value pair of columns to update.
  * @returns {Promise<Object>} The updated character record.
  */
 export async function updateCharacterLiveStats(characterId, updates) {
+  const payload = {
+    ...updates,
+    updated_at: new Date().toISOString(),
+  };
+
   const { data, error } = await supabase
     .from("characters")
-    .update({
-      ...updates,
-      updated_at: new Date().toISOString(),
-    })
+    .update(payload)
     .eq("id", characterId)
     .select()
     .single();
@@ -171,26 +173,28 @@ export async function updateCharacterLiveStats(characterId, updates) {
 }
 
 /**
- * Executes Short Rest or Long Rest rules, updating HP recovery, resetting expended
- * spell slots, and syncing changes back to Supabase.
+ * Executes Short Rest or Long Rest rules, updating HP recovery, resetting
+ * hit_dice_used to 0 and clearing expended spell slots on a Long Rest, and
+ * syncing changes back to Supabase.
  *
  * @param {string} characterId - The UUID of the character.
  * @param {string} restType - "SHORT" or "LONG".
- * @param {Object} currentState - Current character state (HP, Max HP, Spell Slots Used, etc.).
+ * @param {Object} currentState - Current character state (HP, Max HP, Hit Dice Used, Spell Slots Used, etc.).
  * @returns {Promise<Object>} The updated character record after resting.
  */
 export async function executeRest(characterId, restType, currentState) {
   let updates = {};
 
   if (restType === "LONG") {
-    // Long Rest: Restore full HP, clear temp HP, reset all expended spell slots
+    // Long Rest: Restore full HP, clear temp HP, reset hit_dice_used to 0, and reset spell slots
     updates = {
       hp_current: currentState.hp_max,
       hp_temp: 0,
+      hit_dice_used: 0,
       spell_slots_used: {},
     };
   } else if (restType === "SHORT") {
-    // Short Rest: Keep current HP/Temp HP as is
+    // Short Rest: Keep current HP/Temp HP and hit_dice_used as is
     updates = {};
   }
 

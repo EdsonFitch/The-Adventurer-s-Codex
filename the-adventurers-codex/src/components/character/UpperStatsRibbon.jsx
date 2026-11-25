@@ -4,9 +4,10 @@
  * -----------------------------------------------------------------------------
  * Description:
  * Upper horizontal ribbon for the Character Sheet view.
- * Displays Ability Score Squares, Proficiency Bonus, Inspiration, and Vitals,
- * Armor Class (reading dynamically from computed inventory stats), Initiative,
- * and Passive Senses.
+ * Displays Ability Score Squares, Proficiency Bonus, Inspiration, and Vitals
+ * (including Current/Max HP, Temp HP, and a compact Hit Dice strip), Armor Class
+ * (reading dynamically from computed inventory stats), Initiative, and Passive
+ * Senses.
  * -----------------------------------------------------------------------------
  */
 
@@ -42,16 +43,28 @@ export default function UpperStatsRibbon({
   const hpMax = character.hp_max ?? 10;
   const hpTemp = character.hp_temp ?? 0;
 
+  // Hit Dice values derived from character level, primaryClass.hit_die, and characters.hit_dice_used
+  const totalHitDice = Math.max(1, Number(character.level) || 1);
+  const hitDieSize = Number(character.primaryClass?.hit_die) || 8;
+  const hitDiceUsed = Math.min(
+    totalHitDice,
+    Math.max(0, Number(character.hit_dice_used) || 0),
+  );
+  const hitDiceRemaining = Math.max(0, totalHitDice - hitDiceUsed);
+
   // Combat vitals & Senses calculations
   const dexModNum = Math.floor(((stats.dex || 10) - 10) / 2);
   const initiativeBonus = dexModNum >= 0 ? `+${dexModNum}` : `${dexModNum}`;
 
-  // FIX: Read dynamic Armor Class from computed inventory stats (or override/fallback)
+  // Read dynamic Armor Class from computed inventory stats (or override/fallback)
   const armorClass =
     character.computed?.armorClass ||
     character.armor_class_override ||
     10 + dexModNum;
 
+  /**
+   * Computes a skill modifier including proficiency and expertise bonuses.
+   */
   const getSkillMod = (skillName, statKey) => {
     const baseMod = Math.floor(((stats[statKey] || 10) - 10) / 2);
     const foundSkill = (character.skills || []).find(
@@ -144,62 +157,122 @@ export default function UpperStatsRibbon({
 
       {/* ROW 2: VITALS, ARMOR CLASS, INITIATIVE & PASSIVE SENSES SIDE-BY-SIDE */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-3">
-        {/* Health / Vitals Box */}
-        <div className="lg:col-span-3 flex flex-col items-center relative pt-3">
-          <span className="absolute top-0 text-[10px] font-bold uppercase text-red-400 tracking-wider bg-[#361a12] px-1.5 rounded border border-red-500/30">
+        {/* Health / Vitals Box: Current/Max + Temp HP on top, compact Hit Dice strip below */}
+        <div className="lg:col-span-4 min-w-0 flex flex-col items-center relative pt-3">
+          <span className="absolute top-0 text-[10px] font-bold uppercase text-red-400 tracking-wider bg-[#361a12] px-1.5 rounded border border-red-500/30 z-10">
             Vitals / Health
           </span>
-          <div className="w-full h-full p-2.5 bg-[#4a261c] border-2 border-red-600/50 rounded-lg flex items-center justify-between gap-2 shadow-md">
-            <div className="flex flex-col items-center flex-1">
-              <span className="text-[9px] uppercase text-[#889c9b]">
-                Current / Max
-              </span>
-              <div className="flex items-center space-x-1">
-                <button
-                  type="button"
-                  onClick={() =>
-                    onUpdateHp({ hp_current: Math.max(0, hpCurrent - 1) })
-                  }
-                  className="w-5 h-5 bg-[#361a12] hover:bg-red-900/50 text-red-400 rounded border border-red-500/40 flex items-center justify-center text-xs font-bold"
-                >
-                  -
-                </button>
-                <span className="text-base font-bold text-red-400 min-w-[2.5rem] text-center">
-                  {hpCurrent}/{hpMax}
+          <div className="w-full h-full min-w-0 px-2 py-2 bg-[#4a261c] border-2 border-red-600/50 rounded-lg flex flex-col justify-between gap-1.5 shadow-md overflow-hidden">
+            {/* Top Row: Current / Max HP & Temp HP */}
+            <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-1.5">
+              {/* Left Half: Current / Max HP */}
+              <div className="min-w-0 flex flex-col items-center justify-center gap-0.5">
+                <span className="text-[9px] uppercase text-[#889c9b] whitespace-nowrap">
+                  Current / Max
                 </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    onUpdateHp({ hp_current: Math.min(hpMax, hpCurrent + 1) })
-                  }
-                  className="w-5 h-5 bg-[#361a12] hover:bg-green-900/50 text-green-400 rounded border border-green-500/40 flex items-center justify-center text-xs font-bold"
-                >
-                  +
-                </button>
+                <div className="flex items-center justify-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onUpdateHp({ hp_current: Math.max(0, hpCurrent - 1) })
+                    }
+                    className="w-5 h-5 shrink-0 bg-[#361a12] hover:bg-red-900/50 text-red-400 rounded border border-red-500/40 flex items-center justify-center text-xs font-bold"
+                    aria-label="Decrease Current HP"
+                  >
+                    -
+                  </button>
+                  <span className="text-sm xl:text-base font-bold text-red-400 whitespace-nowrap text-center px-0.5">
+                    {hpCurrent}/{hpMax}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onUpdateHp({
+                        hp_current: Math.min(hpMax, hpCurrent + 1),
+                      })
+                    }
+                    className="w-5 h-5 shrink-0 bg-[#361a12] hover:bg-green-900/50 text-green-400 rounded border border-green-500/40 flex items-center justify-center text-xs font-bold"
+                    aria-label="Increase Current HP"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Center Divider */}
+              <div className="w-[1px] h-7 bg-red-500/30 shrink-0" />
+
+              {/* Right Half: Temporary HP */}
+              <div className="min-w-0 flex flex-col items-center justify-center gap-0.5">
+                <span className="text-[9px] uppercase text-[#889c9b] whitespace-nowrap">
+                  Temp HP
+                </span>
+                <div className="flex items-center justify-center gap-1">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      onUpdateHp({ hp_temp: Math.max(0, hpTemp - 1) })
+                    }
+                    className="w-5 h-5 shrink-0 bg-[#361a12] hover:bg-amber-900/50 text-amber-400 rounded border border-amber-500/40 flex items-center justify-center text-xs font-bold"
+                    aria-label="Decrease Temp HP"
+                  >
+                    -
+                  </button>
+                  <span className="text-sm xl:text-base font-bold text-amber-300 min-w-[1.5rem] whitespace-nowrap text-center px-0.5">
+                    {hpTemp}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => onUpdateHp({ hp_temp: hpTemp + 1 })}
+                    className="w-5 h-5 shrink-0 bg-[#361a12] hover:bg-amber-900/50 text-amber-400 rounded border border-amber-500/40 flex items-center justify-center text-xs font-bold"
+                    aria-label="Increase Temp HP"
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
-            <div className="w-[1px] h-8 bg-red-500/30"></div>
-            <div className="flex flex-col items-center flex-1">
-              <span className="text-[9px] uppercase text-[#889c9b]">
-                Temp HP
-              </span>
-              <div className="flex items-center space-x-1">
+
+            {/* Bottom Compact Strip: Hit Dice (Remaining / Total & Die Face) */}
+            <div className="pt-1.5 border-t border-red-500/30 flex items-center justify-between gap-2 px-1">
+              <div className="flex items-center gap-1.5 min-w-0">
+                <span className="text-[9px] uppercase tracking-wider text-[#889c9b] font-bold whitespace-nowrap">
+                  Hit Dice
+                </span>
+                <span className="px-1.5 py-0.2 bg-[#361a12] border border-amber-500/30 rounded text-[10px] font-bold text-amber-300 whitespace-nowrap">
+                  d{hitDieSize}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1 shrink-0">
                 <button
                   type="button"
                   onClick={() =>
-                    onUpdateHp({ hp_temp: Math.max(0, hpTemp - 1) })
+                    onUpdateHp({
+                      hit_dice_used: Math.min(totalHitDice, hitDiceUsed + 1),
+                    })
                   }
-                  className="w-5 h-5 bg-[#361a12] hover:bg-amber-900/50 text-amber-400 rounded border border-amber-500/40 flex items-center justify-center text-xs font-bold"
+                  disabled={hitDiceRemaining <= 0}
+                  className="w-4 h-4 shrink-0 bg-[#361a12] hover:bg-red-900/50 disabled:opacity-40 text-red-400 rounded border border-red-500/40 flex items-center justify-center text-[11px] font-bold"
+                  aria-label="Spend Hit Die"
+                  title="Spend 1 Hit Die"
                 >
                   -
                 </button>
-                <span className="text-base font-bold text-amber-300 min-w-[2rem] text-center">
-                  {hpTemp}
+                <span className="text-xs font-bold text-[#f0e6d2] whitespace-nowrap px-0.5">
+                  {hitDiceRemaining}/{totalHitDice}
                 </span>
                 <button
                   type="button"
-                  onClick={() => onUpdateHp({ hp_temp: hpTemp + 1 })}
-                  className="w-5 h-5 bg-[#361a12] hover:bg-amber-900/50 text-amber-400 rounded border border-amber-500/40 flex items-center justify-center text-xs font-bold"
+                  onClick={() =>
+                    onUpdateHp({
+                      hit_dice_used: Math.max(0, hitDiceUsed - 1),
+                    })
+                  }
+                  disabled={hitDiceUsed <= 0}
+                  className="w-4 h-4 shrink-0 bg-[#361a12] hover:bg-green-900/50 disabled:opacity-40 text-green-400 rounded border border-green-500/40 flex items-center justify-center text-[11px] font-bold"
+                  aria-label="Recover Hit Die"
+                  title="Recover 1 Hit Die"
                 >
                   +
                 </button>
@@ -209,8 +282,8 @@ export default function UpperStatsRibbon({
         </div>
 
         {/* Armor Class Box */}
-        <div className="lg:col-span-2 flex flex-col items-center relative pt-3">
-          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30">
+        <div className="lg:col-span-2 min-w-0 flex flex-col items-center relative pt-3">
+          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30 z-10">
             Armor Class
           </span>
           <div className="w-full h-full p-2.5 bg-[#4a261c] border-2 border-amber-600/50 rounded-lg text-center flex flex-col justify-center shadow-md">
@@ -224,8 +297,8 @@ export default function UpperStatsRibbon({
         </div>
 
         {/* Initiative Box */}
-        <div className="lg:col-span-2 flex flex-col items-center relative pt-3">
-          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30">
+        <div className="lg:col-span-1 min-w-0 flex flex-col items-center relative pt-3">
+          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30 z-10">
             Initiative
           </span>
           <div className="w-full h-full p-2.5 bg-[#4a261c] border-2 border-amber-600/50 rounded-lg text-center flex flex-col justify-center shadow-md">
@@ -233,14 +306,14 @@ export default function UpperStatsRibbon({
               {initiativeBonus}
             </span>
             <span className="text-[9px] text-[#889c9b] block uppercase">
-              DEX Modifier
+              DEX
             </span>
           </div>
         </div>
 
         {/* Passive Senses Box */}
-        <div className="lg:col-span-5 flex flex-col items-center relative pt-3">
-          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30">
+        <div className="lg:col-span-5 min-w-0 flex flex-col items-center relative pt-3">
+          <span className="absolute top-0 text-[10px] font-bold uppercase text-amber-300 tracking-wider bg-[#361a12] px-1.5 rounded border border-amber-500/30 z-10">
             Passive Senses
           </span>
           <div className="w-full h-full p-2.5 bg-[#4a261c] border-2 border-amber-600/50 rounded-lg flex items-center justify-around text-center text-xs shadow-md">
@@ -252,7 +325,7 @@ export default function UpperStatsRibbon({
                 {passivePerception}
               </span>
             </div>
-            <div className="w-[1px] h-6 bg-amber-500/30"></div>
+            <div className="w-[1px] h-6 bg-amber-500/30" />
             <div>
               <span className="text-[9px] uppercase text-[#889c9b] block">
                 Investigation
@@ -261,7 +334,7 @@ export default function UpperStatsRibbon({
                 {passiveInvestigation}
               </span>
             </div>
-            <div className="w-[1px] h-6 bg-amber-500/30"></div>
+            <div className="w-[1px] h-6 bg-amber-500/30" />
             <div>
               <span className="text-[9px] uppercase text-[#889c9b] block">
                 Insight
