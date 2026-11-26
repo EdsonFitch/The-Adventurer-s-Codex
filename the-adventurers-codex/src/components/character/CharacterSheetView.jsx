@@ -7,6 +7,8 @@
  * Layout & Responsibilities:
  * - Fetches consolidated character sheet data via `fetchFullCharacterSheet`.
  * - Recomputes character stats and Armor Class dynamically upon state changes.
+ * - Renders an optional, faded full-body artwork watermark clipped strictly
+ *   inside the character sheet container when `character.full_body_url` exists.
  * - Left Column (Span 4): Slimmer Character Skills box.
  * - Right Column (Span 8): Saving Throws, Conditions, Resistances,
  *   and the multi-tab workspace (`SheetTabsSection`) placed underneath.
@@ -82,7 +84,7 @@ function SlimmerCharacterSkills({ character }) {
   };
 
   return (
-    <div className="p-3 bg-[#4a261c] border-2 border-amber-600/50 rounded-xl shadow-md space-y-2">
+    <div className="p-3 bg-[#4a261c]/90 backdrop-blur-[1px] border-2 border-amber-600/50 rounded-xl shadow-md space-y-2">
       <h3 className="text-xs font-bold text-amber-300 uppercase tracking-widest border-b border-amber-500/30 pb-1">
         ✨ Character Skills ({SKILL_DEFINITIONS.length})
       </h3>
@@ -104,7 +106,7 @@ function SlimmerCharacterSkills({ character }) {
           return (
             <div
               key={name}
-              className="flex items-center justify-between text-[11px] px-2 py-0.5 bg-[#361a12] rounded border border-amber-500/20"
+              className="flex items-center justify-between text-[11px] px-2 py-0.5 bg-[#361a12]/85 rounded border border-amber-500/20"
             >
               <div className="flex items-center space-x-1.5">
                 <span
@@ -136,7 +138,7 @@ export default function CharacterSheetView({
   const [error, setError] = useState(null);
 
   /**
-   * Effect Hook: Fetches full character sheet and logs relational payload for debugging
+   * Effect Hook: Fetches full character sheet record from Supabase
    */
   useEffect(() => {
     async function loadSheet() {
@@ -145,12 +147,6 @@ export default function CharacterSheetView({
         setLoading(true);
         setError(null);
         const data = await fetchFullCharacterSheet(selectedCharacter.id);
-
-        // 🔍 DEBUG LOGS: Check what data Supabase returned for this character
-        console.log("🔍 [Debug] Fully Fetched Character Record:", data);
-        console.log("🔍 [Debug] Race Data:", data?.race);
-        console.log("🔍 [Debug] Computed Resistances:", data?.resistances);
-
         setCharacter(data);
       } catch (err) {
         console.error("Failed to load full character sheet:", err);
@@ -228,49 +224,79 @@ export default function CharacterSheetView({
   }
 
   return (
-    <div className="space-y-4 animate-fadeIn max-w-7xl mx-auto pb-12">
-      {/* 1. TOP BANNER */}
-      <CharacterSheetBanner
-        character={computedCharacter}
-        userName={userName}
-        onShortRest={() => handleRest("SHORT")}
-        onLongRest={() => handleRest("LONG")}
-        onLevelUp={() => alert("Level Up Wizard coming soon!")}
-        onBackToRoster={onBackToRoster}
-      />
-
-      {/* 2. UPPER STATS & HEALTH RIBBON */}
-      <UpperStatsRibbon
-        character={computedCharacter}
-        onUpdateHp={(hpUpdates) => handleLiveUpdate(hpUpdates)}
-        onToggleInspiration={(val) => handleLiveUpdate({ inspiration: val })}
-      />
-
-      {/* 3. MASTER 12-COLUMN WORKSPACE GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-        {/* LEFT COLUMN (Span 4): Slimmer Character Skills Box */}
-        <div className="lg:col-span-4">
-          <SlimmerCharacterSkills character={computedCharacter} />
+    <div className="relative overflow-hidden rounded-2xl max-w-7xl mx-auto pb-12 animate-fadeIn">
+      {/* =================================================================== */}
+      {/* FULL-BODY CHARACTER ARTWORK WATERMARK LAYER (CENTERED IN SHEET)     */}
+      {/* =================================================================== */}
+      {computedCharacter.full_body_url && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden flex items-center justify-center"
+        >
+          <img
+            src={computedCharacter.full_body_url}
+            alt=""
+            className="h-full max-h-[900px] w-auto max-w-full object-contain opacity-[0.16] mix-blend-luminosity filter contrast-125"
+            style={{
+              maskImage:
+                "radial-gradient(ellipse 70% 80% at 50% 50%, black 45%, transparent 100%)",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 80% at 50% 50%, black 45%, transparent 100%)",
+            }}
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
         </div>
+      )}
 
-        {/* RIGHT COLUMN (Span 8): Saving Throws/Conditions on top, Multi-Tab Workspace directly below */}
-        <div className="lg:col-span-8 space-y-4">
-          <MainStatsGrid
-            character={computedCharacter}
-            onUpdateConditions={(conds) =>
-              handleLiveUpdate({ active_conditions: conds })
-            }
-            onUpdateResistances={(res) =>
-              handleLiveUpdate({ resistances: res })
-            }
-          />
+      {/* =================================================================== */}
+      {/* FOREGROUND CHARACTER SHEET CONTENT                                  */}
+      {/* =================================================================== */}
+      <div className="relative z-10 space-y-4">
+        {/* 1. TOP BANNER */}
+        <CharacterSheetBanner
+          character={computedCharacter}
+          userName={userName}
+          onShortRest={() => handleRest("SHORT")}
+          onLongRest={() => handleRest("LONG")}
+          onLevelUp={() => alert("Level Up Wizard coming soon!")}
+          onBackToRoster={onBackToRoster}
+        />
 
-          <SheetTabsSection
-            character={computedCharacter}
-            onUpdateSpellSlots={(slots) =>
-              handleLiveUpdate({ spell_slots_used: slots })
-            }
-          />
+        {/* 2. UPPER STATS & HEALTH RIBBON */}
+        <UpperStatsRibbon
+          character={computedCharacter}
+          onUpdateHp={(hpUpdates) => handleLiveUpdate(hpUpdates)}
+          onToggleInspiration={(val) => handleLiveUpdate({ inspiration: val })}
+        />
+
+        {/* 3. MASTER 12-COLUMN WORKSPACE GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+          {/* LEFT COLUMN (Span 4): Slimmer Character Skills Box */}
+          <div className="lg:col-span-4">
+            <SlimmerCharacterSkills character={computedCharacter} />
+          </div>
+
+          {/* RIGHT COLUMN (Span 8): Saving Throws/Conditions on top, Multi-Tab Workspace directly below */}
+          <div className="lg:col-span-8 space-y-4">
+            <MainStatsGrid
+              character={computedCharacter}
+              onUpdateConditions={(conds) =>
+                handleLiveUpdate({ active_conditions: conds })
+              }
+              onUpdateResistances={(res) =>
+                handleLiveUpdate({ resistances: res })
+              }
+            />
+
+            <SheetTabsSection
+              character={computedCharacter}
+              onUpdateSpellSlots={(slots) =>
+                handleLiveUpdate({ spell_slots_used: slots })
+              }
+            />
+          </div>
         </div>
       </div>
     </div>
