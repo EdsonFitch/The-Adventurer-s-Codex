@@ -1,0 +1,1543 @@
+[
+  {
+    "name": "Acolyte (Player's Handbook)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Anthropologist (Tomb of Annihilation)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Archaeologist (Tomb of Annihilation)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Cartographer's tools or navigator's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Azorius Functionary (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Black Fist Double Agent (Adventurers League)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise Kit"
+      },
+      {
+        "name": "one type of artisan's tools or gaming set"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Boros Legionnaire (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Choose one of Celestial, Draconic, Goblin, or Minotaur"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Cartographer's tools or navigator's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Caravan Specialist (Mulmaster Bonds and Backgrounds)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Land Vehicles"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Celebrity Adventurer's Scion (Acquisitions Incorporated)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d10",
+        "title": "Claim to Fame (Accomplishment)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I was born into a wealthy family."
+          },
+          {
+            "roll": "2",
+            "description": "I was the sole survivor of a terrible disaster."
+          },
+          {
+            "roll": "3",
+            "description": "I broke into a haunted house at 3am."
+          },
+          {
+            "roll": "4",
+            "description": "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
+          },
+          {
+            "roll": "5",
+            "description": "I saved a town from a monster."
+          },
+          {
+            "roll": "6",
+            "description": "I won a prestigious tournament."
+          },
+          {
+            "roll": "7",
+            "description": "I discovered a lost ruin."
+          },
+          {
+            "roll": "8",
+            "description": "I was the subject of a popular ballad."
+          },
+          {
+            "roll": "9",
+            "description": "I was knighted for my services to a noble."
+          },
+          {
+            "roll": "10",
+            "description": "I was the first to map a dangerous frontier."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "City Watch (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Charlatan (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "Favorite Scheme (Defining Event)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I cheat at games of chance."
+          },
+          {
+            "roll": "2",
+            "description": "I shave coins or forge documents."
+          },
+          {
+            "roll": "3",
+            "description": "I insinuate myself into people's lives to prey on their weakness and secure their fortunes."
+          },
+          {
+            "roll": "4",
+            "description": "I put on new identities like clothes."
+          },
+          {
+            "roll": "5",
+            "description": "I run sleight-of-hand cons on street corners."
+          },
+          {
+            "roll": "6",
+            "description": "I convince people that worthless junk is worth their hard-earned money."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Clan Crafter (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Dwarvish, or one other of your choice if you already speak Dwarvish"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Cloistered Scholar (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Cormanthor Refugee (Princes of the Apocalypse)",
+    "languages": [
+      {
+        "name": "Elvish"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Courtier (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Criminal (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "I Became a Criminal Because... (Defining Event)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I resented authority in my younger days and saw a life of crime as the best way to fight against tyranny and oppression."
+          },
+          {
+            "roll": "2",
+            "description": "Necessity forced me to take up the life, since it was the only way I could survive."
+          },
+          {
+            "roll": "3",
+            "description": "I fell in with a gang of reprobates and ne'er-do-wells, and I learned my specialty from them."
+          },
+          {
+            "roll": "4",
+            "description": "A parent or relative taught me my criminal specialty to prepare me for the family business."
+          },
+          {
+            "roll": "5",
+            "description": "I left home and found a place in a thieves' guild or some other criminal organization."
+          },
+          {
+            "roll": "6",
+            "description": "I was always bored, so I turned to crime to pass the time and discovered I was quite good at it."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Earthspur Miner (Mulmaster Bonds and Backgrounds)",
+    "languages": [
+      {
+        "name": "Dwarven, Undercommon"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Entertainer (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "I Became an Entertainer Because... (Defining Event)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Members of my family made ends meet by performing, so it was fitting for me to follow their example."
+          },
+          {
+            "roll": "2",
+            "description": "I always had a keen insight into other people, enough so that I could make them laugh or cry with my stories or songs."
+          },
+          {
+            "roll": "3",
+            "description": "I ran away from home to follow a minstrel troupe."
+          },
+          {
+            "roll": "4",
+            "description": "I saw a bard perform once, and I knew from that moment on what I was born to do."
+          },
+          {
+            "roll": "5",
+            "description": "I earned coin by performing on street corners and eventually made a name for myself."
+          },
+          {
+            "roll": "6",
+            "description": "A traveling entertainer took me in and taught me the trade."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Faction Agent (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Failed Merchant (Acquisitions Incorporated)",
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Far Traveler (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument or gaming set"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d8",
+        "title": "Origin",
+        "options": [
+          {
+            "roll": "1",
+            "description": "You ran away from home to join a circus."
+          },
+          {
+            "roll": "2",
+            "description": "You were shipwrecked on a strange shore."
+          },
+          {
+            "roll": "3",
+            "description": "You were exiled from your homeland for a crime you did not commit."
+          },
+          {
+            "roll": "4",
+            "description": "You fled your home to escape a war or natural disaster."
+          },
+          {
+            "roll": "5",
+            "description": "You left home in search of a lost loved one."
+          },
+          {
+            "roll": "6",
+            "description": "You were cast out of your community for a transgression."
+          },
+          {
+            "roll": "7",
+            "description": "You set out to explore the world beyond your isolated homeland."
+          },
+          {
+            "roll": "8",
+            "description": "You were sent on a diplomatic mission to a distant land."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Fisher (Ghosts of Saltmarsh)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Fishing tackle"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Folk Hero (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d10",
+        "title": "Defining Event",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I stood up to a tyrant's agents."
+          },
+          {
+            "roll": "2",
+            "description": "I saved people during a natural disaster."
+          },
+          {
+            "roll": "3",
+            "description": "I stood alone against a terrible monster."
+          },
+          {
+            "roll": "4",
+            "description": "I stole from a corrupt merchant to help the poor."
+          },
+          {
+            "roll": "5",
+            "description": "I led a militia to fight off an invading army."
+          },
+          {
+            "roll": "6",
+            "description": "I broke into a tyrant's castle and stole weapons to arm the people."
+          },
+          {
+            "roll": "7",
+            "description": "I trained the peasantry to use farm implements as weapons against a tyrant's soldiers."
+          },
+          {
+            "roll": "8",
+            "description": "A lord rescinded an unpopular decree after I led a symbolic act of protest against it."
+          },
+          {
+            "roll": "9",
+            "description": "A celestial, fey, or similar creature gave me a blessing or revealed my secret origin."
+          },
+          {
+            "roll": "10",
+            "description": "Recruited into a lord's army, I rose to leadership and was commended for my heroism."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Gambler (Acquisitions Incorporated)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Gate Urchin (State of Hillsfar)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Gate Warden (Plane Shift: Amonkhet)",
+    "languages": [
+      {
+        "name": "Two of your choice (Abyssal, Celestial, or Infernal recommended)"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Giant Foundling (Bigby Presents: Glory of the Giants)",
+    "languages": [
+      {
+        "name": "Giant and one other language of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Golgari Agent (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Choose one of Elvish, Giant, or Kraul"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Poisoner's kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Grinner (Explorer's Guide to Wildemount)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Gruul Anarch (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Choose one of Draconic, Giant, Goblin, or Sylvan"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Harborfolk (Mulmaster Bonds and Backgrounds)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Haunted One (Curse of Strahd)",
+    "languages": [
+      {
+        "name": "Choose two languages, one of which must be an exotic language (Abyssal, Celestial, Deep Speech, Draconic, Infernal, Primordial, Sylvan, or Undercommon)"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": [
+      {
+        "die": "d10",
+        "title": "Harrowing Event",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A monster that slaughtered dozens of innocent people spared your life, and you don’t know why."
+          },
+          {
+            "roll": "2",
+            "description": "You were born under a dark star. You can feel it watching you, coldly and distantly. Sometimes it beckons you in the dead of night."
+          },
+          {
+            "roll": "3",
+            "description": "An apparition that has haunted your family for generations now haunts you. You don’t know what it wants, and it won’t leave you alone."
+          },
+          {
+            "roll": "4",
+            "description": "Your family has a history of practicing the dark arts. You dabbled once and felt something horrible clutch at your soul, whereupon you fled in terror."
+          },
+          {
+            "roll": "5",
+            "description": "An oni took your sibling one cold, dark night, and you were unable to stop it."
+          },
+          {
+            "roll": "6",
+            "description": "You were cursed with lycanthropy and later cured. You are now haunted by the innocents you slaughtered."
+          },
+          {
+            "roll": "7",
+            "description": "A hag kidnapped and raised you. You escaped, but the hag still has a magical hold over you and fills your mind with evil thoughts."
+          },
+          {
+            "roll": "8",
+            "description": "You opened an eldritch tome and saw things unfit for a sane mind. You burned the book, but its words and images are burned into your psyche."
+          },
+          {
+            "roll": "9",
+            "description": "A fiend possessed you as a child. You were locked away but escaped. The fiend is still inside you, but now you try to keep it locked away."
+          },
+          {
+            "roll": "10",
+            "description": "You did terrible things to avenge the murder of someone you loved. You became a monster, and it haunts your waking dreams."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Hillsfar Merchant (State of Hillsfar)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (land)"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Hillsfar Smuggler (State of Hillsfar)",
+    "languages": [
+      {
+        "name": "One racial language (or one language of your choice)"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "House Agent (Eberron: Rising from the Last War)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Two proficiencies from the House Tool Proficiencies table (e.g."
+      },
+      {
+        "name": "Cannith — alchemist's supplies"
+      },
+      {
+        "name": "tinker's tools; Deneith — one gaming set"
+      },
+      {
+        "name": "vehicles (land); etc.)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d8",
+        "title": "House Agent Role",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Acquisition"
+          },
+          {
+            "roll": "2",
+            "description": "Investigation"
+          },
+          {
+            "roll": "3",
+            "description": "Research and Development"
+          },
+          {
+            "roll": "4",
+            "description": "Security"
+          },
+          {
+            "roll": "5",
+            "description": "Intimidation"
+          },
+          {
+            "roll": "6",
+            "description": "Exploration"
+          },
+          {
+            "roll": "7",
+            "description": "Negotiation"
+          },
+          {
+            "roll": "8",
+            "description": "Covert Operations"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Inheritor (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "A gaming set or a musical instrument (your choice)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d8",
+        "title": "Inheritance",
+        "options": [
+          {
+            "roll": "1",
+            "description": "A document, such as a map, letter, or journal"
+          },
+          {
+            "roll": "2",
+            "description": "A trinket"
+          },
+          {
+            "roll": "3",
+            "description": "A trinket"
+          },
+          {
+            "roll": "4",
+            "description": "An article of clothing"
+          },
+          {
+            "roll": "5",
+            "description": "A piece of jewelry"
+          },
+          {
+            "roll": "6",
+            "description": "A book or tome of lore"
+          },
+          {
+            "roll": "7",
+            "description": "A manuscript of history, song, poem, or cipher"
+          },
+          {
+            "roll": "8",
+            "description": "A tattoo or other body marking"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Initiate (Plane Shift: Amonkhet)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Inquisitor (Plane Shift: Innistrad)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      },
+      {
+        "name": "one set of artisan's tools of your choice"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Investigator (Steinhardt's Guide to the Eldritch Hunt) — not an official 2014 source; omitted",
+    "languages": [],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Iron Route Bandit (Curse of Strahd: Optional Backgrounds / Adventurers League)",
+    "languages": [
+      {
+        "name": "None specified in the official background entry"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Izzet Engineer (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Choose one of Draconic, Goblin, or Vedalken"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Knight of Solamnia (Dragonlance: Shadow of the Dragon Queen)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Knight of the Order (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set or musical instrument"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d10",
+        "title": "Soldier Defining Events (use the Soldier background table)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I joined the army to escape my family."
+          },
+          {
+            "roll": "2",
+            "description": "I joined the army to defend my homeland."
+          },
+          {
+            "roll": "3",
+            "description": "I joined the army to see the world."
+          },
+          {
+            "roll": "4",
+            "description": "I joined the army to follow a loved one."
+          },
+          {
+            "roll": "5",
+            "description": "I joined the army to seek vengeance."
+          },
+          {
+            "roll": "6",
+            "description": "I joined the army for the steady pay."
+          },
+          {
+            "roll": "7",
+            "description": "I joined the army to escape the law."
+          },
+          {
+            "roll": "8",
+            "description": "I joined the army to prove myself."
+          },
+          {
+            "roll": "9",
+            "description": "I joined the army out of a sense of duty."
+          },
+          {
+            "roll": "10",
+            "description": "I was drafted into the army."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Lorehold Student (Strixhaven: A Curriculum of Chaos)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Mage of High Sorcery (Dragonlance: Shadow of the Dragon Queen)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Marine (Ghosts of Saltmarsh)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (land"
+      },
+      {
+        "name": "water)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "Hardship Endured",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Nearly Drowned: You hid underwater to avoid detection by enemies and held your breath for an extremely long time. Just before you would have died, you had a revelation about your existence."
+          },
+          {
+            "roll": "2",
+            "description": "Captured: You spent months enduring thirst, starvation, and torture at the hands of your enemy, but you never broke."
+          },
+          {
+            "roll": "3",
+            "description": "Sacrifice: You enabled the escape of your fellow soldiers, but at great cost to yourself. Some of your past comrades may think you're dead."
+          },
+          {
+            "roll": "4",
+            "description": "Juggernaut: No reasonable explanation can explain how you survived a particular battle. Every arrow and bolt missed you. You slew scores of enemies single-handedly and led your comrades to victory."
+          },
+          {
+            "roll": "5",
+            "description": "Stowaway: For days, you hid in the bilge of an enemy ship, surviving on brackish water and foolhardy rats. At the right moment, you crept up to the deck and took over the ship on your own."
+          },
+          {
+            "roll": "6",
+            "description": "Leave None Behind: You carried an injured marine for miles to avoid capture and death."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mercenary Veteran (Sword Coast Adventurer's Guide)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Mulmaster Aristocrat (Mulmaster Bonds and Backgrounds)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artistic artisan's tools"
+      },
+      {
+        "name": "one musical instrument"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Noble (Player's Handbook)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "I Became a Noble Because... (Defining Event)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "I come from an old and storied family, and it fell to me to preserve the family name."
+          },
+          {
+            "roll": "2",
+            "description": "My family has been disgraced, and I intend to clear our name."
+          },
+          {
+            "roll": "3",
+            "description": "My family recently came by its title, and that elevation thrust us into a new and strange world."
+          },
+          {
+            "roll": "4",
+            "description": "My family has a title, but none of us know how we came by it."
+          },
+          {
+            "roll": "5",
+            "description": "I was adopted into a noble family and must prove myself worthy of the name."
+          },
+          {
+            "roll": "6",
+            "description": "My family has lost its title and fortune, and I seek to reclaim them."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Orzhov Representative (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Phlan Insurgent (Curse of Strahd: Optional Backgrounds)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Phlan Refugee (Mulmaster Bonds and Backgrounds)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Planar Philosopher (Planescape: Adventures in the Multiverse)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Prismari Student (Strixhaven: A Curriculum of Chaos)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument or artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Quandrix Student (Strixhaven: A Curriculum of Chaos)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Rival Intern (Acquisitions Incorporated)",
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Sage (Player's Handbook)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Sailor (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Navigator's tools"
+      },
+      {
+        "name": "vehicles (water)"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Secret Identity (State of Hillsfar)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Selesnya Initiate (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Choose one of Elvish, Loxodon, or Sylvan"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools or one musical instrument"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Shade Fanatic (State of Hillsfar)",
+    "languages": [
+      {
+        "name": "Netherese"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Forgery kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Shipwright (Ghosts of Saltmarsh)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Carpenter's tools"
+      },
+      {
+        "name": "Vehicles (water)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "Life at Sea (Sea's Influence)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Grand Designs: You are working on plans and schematics for a new, very fast ship. You must examine as many different kinds of vessels as possible to help ensure the success of your design."
+          },
+          {
+            "roll": "2",
+            "description": "Solid and Sound: You patched up a war galley and prevented it from sinking. The local navy regards you as a friend."
+          },
+          {
+            "roll": "3",
+            "description": "Favored: You insisted on thicker planking for a merchant vessel's hull, which saved it from sinking when it smashed against a reef. You have a standing invitation to visit the merchant's distant mansion."
+          },
+          {
+            "roll": "4",
+            "description": "Master of Armaments: You specialized in designing and mounting defenses for the navy. You easily recognize and determine the quality of such items."
+          },
+          {
+            "roll": "5",
+            "description": "Low Places: You have contacts in the smuggling outfits along the coast; you occasionally repair the criminals' ships in exchange for coin and favors."
+          },
+          {
+            "roll": "6",
+            "description": "Mysteries of the Deep: You experienced an encounter with a possibly divine being while sailing alone. Work with your DM to determine the secret about the deep waters of the sea that this entity revealed to you."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Silverquill Student (Strixhaven: A Curriculum of Chaos)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Simic Scientist (Guildmasters' Guide to Ravnica)",
+    "languages": [
+      {
+        "name": "Two of your choice"
+      }
+    ],
+    "tool_proficiencies": [],
+    "defining_events": []
+  },
+  {
+    "name": "Smuggler (Ghosts of Saltmarsh)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Vehicles (water)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "Claim to Fame (Accomplishment)",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Spirit of the Whale. You smuggled stolen dwarven spirits in the body of a dead whale being pulled behind a fishing boat. When you delivered the goods, the corpse suddenly exploded, sending whale meat and whiskey bottles for half a mile."
+          },
+          {
+            "roll": "2",
+            "description": "Cart and Sword. You drove a cart filled with stolen art through the middle of a battlefield while singing sea shanties to confuse the combatants."
+          },
+          {
+            "roll": "3",
+            "description": "The Recruit. You enlisted in another nation's navy for the purpose of smuggling stolen jewels to a distant port. You attained a minor rank before disappearing from the navy and making your way here."
+          },
+          {
+            "roll": "4",
+            "description": "River of Shadows. Your riverboat accidentally slipped through the veil into the Shadowfell for several hours. While you were there, you sold some stolen dragonborn artifacts before returning to this plane and paddling home."
+          },
+          {
+            "roll": "5",
+            "description": "Gold-Hearted. You agreed to transport a family escaping a war. The baby began to cry at a checkpoint, and you gave the guards all your gold to let you pass. The family never found out about this gesture."
+          },
+          {
+            "roll": "6",
+            "description": "Playing Both Sides. You once smuggled crates of crossbow bolts and bundles of arrows, each destined for an opposing side in a regional war, at the same time. The buyers arrived within moments of each other but did not discover your trickery."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Soldier (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "vehicles (land)"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d8",
+        "title": "Specialty",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Officer"
+          },
+          {
+            "roll": "2",
+            "description": "Scout"
+          },
+          {
+            "roll": "3",
+            "description": "Infantry"
+          },
+          {
+            "roll": "4",
+            "description": "Cavalry"
+          },
+          {
+            "roll": "5",
+            "description": "Healer"
+          },
+          {
+            "roll": "6",
+            "description": "Quartermaster"
+          },
+          {
+            "roll": "7",
+            "description": "Standard Bearer"
+          },
+          {
+            "roll": "8",
+            "description": "Support Staff"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Stojanow Prisoner (Curse of Strahd: Optional Backgrounds)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Ticklebelly Nomad (Curse of Strahd: Optional Backgrounds)",
+    "languages": [
+      {
+        "name": "Giant"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Trade Sheriff (State of Hillsfar)",
+    "languages": [
+      {
+        "name": "Elvish"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Thieves' tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Urban Bounty Hunter (Sword Coast Adventurer's Guide)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Choose two from among one type of gaming set"
+      },
+      {
+        "name": "one musical instrument"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Urchin (Player's Handbook)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "Disguise kit"
+      },
+      {
+        "name": "thieves' tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Uthgardt Tribe Member (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of musical instrument or artisan's tools"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Vizier (Plane Shift: Amonkhet)",
+    "languages": [],
+    "tool_proficiencies": [
+      {
+        "name": "One type of artisan's tools"
+      },
+      {
+        "name": "one type of musical instrument"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Volstrucker Agent (Explorer's Guide to Wildemount)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Poisoner's kit"
+      }
+    ],
+    "defining_events": [
+      {
+        "die": "d6",
+        "title": "Tragedies",
+        "options": [
+          {
+            "roll": "1",
+            "description": "Familicide. Through deceit or manipulation, the Volstrucker convinced you to slaughter your own family."
+          },
+          {
+            "roll": "2",
+            "description": "Amnesia. You were forced to study magic so potent that it strained your mind beyond its mortal limits, stealing away the memories of your past."
+          },
+          {
+            "roll": "3",
+            "description": "Capture. You were captured and tortured by agents of the Kryn Dynasty, and barely escaped."
+          },
+          {
+            "roll": "4",
+            "description": "Starvation. A terrible blight afflicted your rural village, and many of your friends and family members starved to death. You survived, but only barely."
+          },
+          {
+            "roll": "5",
+            "description": "Disfigurement. One of your arcane experiments went wrong and scarred or dismembered you so gravely that others now shun you. Only the Volstrucker showed you kindness after that day."
+          },
+          {
+            "roll": "6",
+            "description": "Vicissitude. You were once the scion of a wealthy family who lost their entire fortune in the blink of an eye."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Waterdhavian Noble (Sword Coast Adventurer's Guide)",
+    "languages": [
+      {
+        "name": "Any one of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "One type of gaming set or musical instrument"
+      }
+    ],
+    "defining_events": []
+  },
+  {
+    "name": "Witherbloom Student (Strixhaven: A Curriculum of Chaos)",
+    "languages": [
+      {
+        "name": "One of your choice"
+      }
+    ],
+    "tool_proficiencies": [
+      {
+        "name": "Herbalism kit"
+      }
+    ],
+    "defining_events": []
+  }
+]

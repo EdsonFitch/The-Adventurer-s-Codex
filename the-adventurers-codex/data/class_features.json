@@ -1,0 +1,3339 @@
+{
+  "Barbarian": [
+    {
+      "name": "Rage",
+      "level": 1,
+      "description": "In battle, you fight with primal ferocity. As a bonus action, you enter a rage that grants increased melee damage, resistance to certain damage types, and advantage on Strength checks and saving throws.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "rage",
+          "count": "2",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "STAT_BONUS",
+          "target": "melee_damage",
+          "value": "+2"
+        },
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "strength_checks_and_saving_throws",
+          "value": "while_raging"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "damage_resistance",
+          "value": "resistance_to_bludgeoning_piercing_and_slashing_damage_while_raging"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Defense",
+      "level": 1,
+      "description": "While not wearing armor, your AC equals 10 + your Dexterity modifier + your Constitution modifier. You can still use a shield and gain this benefit.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "armor_class",
+          "value": "10_plus_dexterity_modifier_plus_constitution_modifier"
+        }
+      ]
+    },
+    {
+      "name": "Reckless Attack",
+      "level": 2,
+      "description": "When you make your first attack on your turn, you can choose to attack recklessly, gaining advantage on Strength-based melee weapon attack rolls during that turn. Attack rolls against you have advantage until your next turn.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "melee_weapon_attack_rolls",
+          "value": "strength_based_attacks_on_your_turn"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "incoming_attack_rolls",
+          "value": "attacks_against_you_have_advantage_until_your_next_turn"
+        }
+      ]
+    },
+    {
+      "name": "Danger Sense",
+      "level": 2,
+      "description": "You gain an uncanny sense of danger, giving you advantage on Dexterity saving throws against effects you can see, such as traps and spells. You cannot benefit while blinded, deafened, or incapacitated.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "dexterity_saving_throw",
+          "value": "against_visible_effects_unless_blinded_deafened_or_incapacitated"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 5,
+      "description": "You can attack twice instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Fast Movement",
+      "level": 5,
+      "description": "Your speed increases by 10 feet while you are not wearing heavy armor.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+10_feet"
+        }
+      ]
+    },
+    {
+      "name": "Feral Instinct",
+      "level": 7,
+      "description": "Your instincts are so honed that you have advantage on initiative rolls. If you are surprised, you can act normally on your first turn if you enter your rage before doing anything else.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "initiative",
+          "value": "always"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "surprise_response",
+          "value": "may_act_on_first_turn_if_rage_before_other_actions"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Brutal Critical",
+      "level": 9,
+      "description": "When you score a critical hit with a melee weapon attack, you roll one additional weapon damage die.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "+1_weapon_damage_die_on_melee_critical_hit"
+        }
+      ]
+    },
+    {
+      "name": "Relentless Rage",
+      "level": 11,
+      "description": "While raging, if you drop to 0 hit points but are not killed outright, you can make a DC 10 Constitution saving throw to drop to 1 hit point instead. The DC increases by 5 each time you use this feature until you finish a short or long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "relentless_rage_recharge",
+          "count": "1",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "avoid_dropping_to_zero_hp",
+          "value": "constitution_save_dc_10_increasing_by_5_each_use_to_remain_at_1_hp_while_raging"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Brutal Critical",
+      "level": 13,
+      "description": "When you score a critical hit with a melee weapon attack, you roll two additional weapon damage dice.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "+2_weapon_damage_dice_on_melee_critical_hit"
+        }
+      ]
+    },
+    {
+      "name": "Persistent Rage",
+      "level": 15,
+      "description": "Your rage lasts until you fall unconscious or choose to end it. It no longer ends early because you have not attacked a hostile creature or taken damage since your previous turn.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "rage_duration",
+          "value": "rage_ends_only_when_unconscious_or_voluntarily_ended"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Brutal Critical",
+      "level": 17,
+      "description": "When you score a critical hit with a melee weapon attack, you roll three additional weapon damage dice.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "+3_weapon_damage_dice_on_melee_critical_hit"
+        }
+      ]
+    },
+    {
+      "name": "Indomitable Might",
+      "level": 18,
+      "description": "If your total for a Strength check is less than your Strength score, you can use your Strength score in place of the total.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "strength_checks",
+          "value": "minimum_result_equals_strength_score"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Primal Champion",
+      "level": 20,
+      "description": "Your Strength and Constitution scores each increase by 4, and their maximums also increase to 24.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "strength",
+          "value": "+4_maximum_24"
+        },
+        {
+          "type": "STAT_BONUS",
+          "target": "constitution",
+          "value": "+4_maximum_24"
+        }
+      ]
+    }
+  ],
+  "Bard": [
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You learn and cast bard spells using Charisma as your spellcasting ability. You know a limited number of spells and can cast them using your available spell slots.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "charisma_based_known_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Bardic Inspiration",
+      "level": 1,
+      "description": "You can inspire another creature with words or music, granting one Bardic Inspiration die (d6) that it can add to an ability check, attack roll, or saving throw. You can use this feature a number of times equal to your Charisma modifier, regaining all expended uses after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "bardic_inspiration",
+          "count": "charisma_modifier_minimum_1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "inspiration_die",
+          "value": "d6_added_to_ability_check_attack_roll_or_saving_throw"
+        }
+      ]
+    },
+    {
+      "name": "Jack of All Trades",
+      "level": 2,
+      "description": "You can add half your proficiency bonus, rounded down, to any ability check that does not already include your proficiency bonus.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "unproficient_ability_checks",
+          "value": "half_proficiency_bonus_rounded_down"
+        }
+      ]
+    },
+    {
+      "name": "Song of Rest",
+      "level": 2,
+      "description": "You can use soothing music or oration during a short rest to help your allies regain additional hit points when they spend Hit Dice.",
+      "effects": [
+        {
+          "type": "HEAL_DICE",
+          "dice": "1d6",
+          "bonus": "none",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Expertise",
+      "level": 3,
+      "description": "Choose two skill proficiencies. Your proficiency bonus is doubled for ability checks using either chosen proficiency.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "selected_skill_checks",
+          "value": "double_proficiency_bonus"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Font of Inspiration",
+      "level": 5,
+      "description": "You regain all expended uses of Bardic Inspiration when you finish a short or long rest.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "bardic_inspiration_recharge",
+          "value": "short_rest_or_long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Countercharm",
+      "level": 6,
+      "description": "You can use music or words of power to give yourself and friendly creatures within 30 feet advantage on saving throws against being frightened or charmed.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "saving_throws",
+          "value": "against_charmed_or_frightened_while_within_30_feet_during_performance"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Expertise",
+      "level": 10,
+      "description": "Choose two additional skill proficiencies. Your proficiency bonus is doubled for ability checks using either chosen proficiency.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "selected_skill_checks",
+          "value": "double_proficiency_bonus"
+        }
+      ]
+    },
+    {
+      "name": "Magical Secrets",
+      "level": 10,
+      "description": "Choose two spells from any class's spell list. The chosen spells count as bard spells and are included in your spells known.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "magical_secrets",
+          "value": "learn_two_spells_from_any_class_list"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Magical Secrets",
+      "level": 14,
+      "description": "Choose two additional spells from any class's spell list. The chosen spells count as bard spells and are included in your spells known.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "magical_secrets",
+          "value": "learn_two_additional_spells_from_any_class_list"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Superior Inspiration",
+      "level": 20,
+      "description": "When you roll initiative and have no uses of Bardic Inspiration left, you regain one use.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "bardic_inspiration",
+          "count": "1_if_zero_uses_on_initiative",
+          "recharge": "initiative"
+        }
+      ]
+    }
+  ],
+  "Cleric": [
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You prepare and cast cleric spells using Wisdom as your spellcasting ability. You prepare a number of spells equal to your Wisdom modifier plus your cleric level, with a minimum of one, and use spell slots to cast them.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "wisdom_based_prepared_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Divine Domain",
+      "level": 1,
+      "description": "Choose a divine domain that grants domain spells and additional features at specified cleric levels. Domain features are documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "divine_domain",
+          "value": "choose_one_domain_gain_domain_spells_and_domain_features"
+        }
+      ]
+    },
+    {
+      "name": "Channel Divinity",
+      "level": 2,
+      "description": "You can channel divine energy to fuel magical effects. You gain one use between rests, regaining expended uses after a short or long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "channel_divinity",
+          "count": "1",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Turn Undead",
+      "level": 2,
+      "description": "As an action, you present your holy symbol and speak a prayer. Each undead within 30 feet that can see or hear you must make a Wisdom saving throw or be turned for 1 minute or until it takes damage.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "turn_undead",
+          "value": "undead_within_30_feet_make_wisdom_save_or_frightened_and_turned_for_1_minute"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Destroy Undead",
+      "level": 5,
+      "description": "When an undead fails its saving throw against your Turn Undead feature, it is instantly destroyed if its challenge rating is at or below the threshold for your cleric level.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "destroy_undead",
+          "value": "destroys_undead_on_failed_turn_save_cr_threshold_1_2"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Destroy Undead",
+      "level": 8,
+      "description": "Your Turn Undead feature instantly destroys undead with a challenge rating of 1 or lower that fail their saving throw.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "destroy_undead",
+          "value": "destroys_undead_on_failed_turn_save_cr_1_or_lower"
+        }
+      ]
+    },
+    {
+      "name": "Divine Intervention",
+      "level": 10,
+      "description": "You can call on your deity to intervene on your behalf. Roll percentile dice; if the result is equal to or lower than your cleric level, your deity intervenes. On success, the DM chooses the nature of the intervention.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "divine_intervention",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "divine_intervention_success",
+          "value": "percentile_roll_equal_to_or_below_cleric_level_requests_dm_defined_divine_intervention"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Destroy Undead",
+      "level": 11,
+      "description": "Your Turn Undead feature instantly destroys undead with a challenge rating of 2 or lower that fail their saving throw.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "destroy_undead",
+          "value": "destroys_undead_on_failed_turn_save_cr_2_or_lower"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Destroy Undead",
+      "level": 14,
+      "description": "Your Turn Undead feature instantly destroys undead with a challenge rating of 3 or lower that fail their saving throw.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "destroy_undead",
+          "value": "destroys_undead_on_failed_turn_save_cr_3_or_lower"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Destroy Undead",
+      "level": 17,
+      "description": "Your Turn Undead feature instantly destroys undead with a challenge rating of 4 or lower that fail their saving throw.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "destroy_undead",
+          "value": "destroys_undead_on_failed_turn_save_cr_4_or_lower"
+        }
+      ]
+    },
+    {
+      "name": "Divine Intervention Improvement",
+      "level": 20,
+      "description": "Your Divine Intervention automatically succeeds, and after using it, you cannot use it again for 7 days.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "divine_intervention",
+          "value": "automatically_succeeds_recharge_7_days"
+        }
+      ]
+    }
+  ],
+  "Druid": [
+    {
+      "name": "Druidic",
+      "level": 1,
+      "description": "You know Druidic, the secret language of druids. You can use it to leave hidden messages, which other druids recognize automatically.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "druidic_language",
+          "value": "learn_secret_language_and_leave_hidden_messages"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You prepare and cast druid spells using Wisdom as your spellcasting ability. You prepare a number of spells equal to your Wisdom modifier plus your druid level, with a minimum of one, and use spell slots to cast them.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "wisdom_based_prepared_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Wild Shape",
+      "level": 2,
+      "description": "You can magically assume the shape of a beast you have seen before. You can transform twice between short or long rests, with restrictions on creature challenge rating and movement types based on your druid level.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "wild_shape",
+          "count": "2",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "wild_shape",
+          "value": "transform_into_beast_seen_before_max_cr_1_4_no_swim_or_fly_speed"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Wild Shape Improvement",
+      "level": 4,
+      "description": "Your Wild Shape improves, allowing you to transform into beasts with a challenge rating of 1 or lower. You can also transform into creatures with a swimming speed.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "wild_shape",
+          "value": "maximum_cr_1_and_swimming_speed_allowed"
+        }
+      ]
+    },
+    {
+      "name": "Wild Shape Improvement",
+      "level": 8,
+      "description": "Your Wild Shape improves again, allowing you to transform into beasts with a challenge rating of 2 or lower. You can also transform into creatures with a flying speed.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "wild_shape",
+          "value": "maximum_cr_2_and_flying_speed_allowed"
+        }
+      ]
+    },
+    {
+      "name": "Land's Stride",
+      "level": 8,
+      "description": "Moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed or damaged by their thorns, spines, or similar hazards.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "movement",
+          "value": "ignore_nonmagical_difficult_terrain_and_nonmagical_plant_hazards"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Timeless Body",
+      "level": 18,
+      "description": "The primal magic you wield causes you to age more slowly. For every 10 years that pass, your body ages only 1 year.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "aging",
+          "value": "age_1_year_for_every_10_years_that_pass"
+        }
+      ]
+    },
+    {
+      "name": "Beast Spells",
+      "level": 18,
+      "description": "You can cast many of your druid spells while using Wild Shape. You can perform the somatic and verbal components of spells while in beast form, but cannot provide material components.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting_in_wild_shape",
+          "value": "cast_druid_spells_in_beast_form_without_material_components"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Archdruid",
+      "level": 20,
+      "description": "You can use Wild Shape an unlimited number of times. You can also ignore the verbal, somatic, and noncostly material components of your druid spells, even while in Wild Shape.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "wild_shape",
+          "count": "unlimited",
+          "recharge": "none"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "componentless_spellcasting",
+          "value": "ignore_verbal_somatic_and_noncostly_material_components_of_druid_spells"
+        }
+      ]
+    }
+  ],
+  "Fighter": [
+    {
+      "name": "Fighting Style",
+      "level": 1,
+      "description": "You adopt a particular style of fighting as your specialty. Choose one Fighting Style option from those available to fighters.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "fighting_style",
+          "value": "choose_one_fighter_fighting_style"
+        }
+      ]
+    },
+    {
+      "name": "Second Wind",
+      "level": 1,
+      "description": "You have a limited well of stamina that you can draw on to protect yourself from harm. On your turn, you can use a bonus action to regain hit points.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "second_wind",
+          "count": "1",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "HEAL_DICE",
+          "dice": "1d10",
+          "bonus": "fighter_level",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Action Surge",
+      "level": 2,
+      "description": "You can push yourself beyond your normal limits for a moment. On your turn, you can take one additional action, in addition to your regular action and possible bonus action.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "action_surge",
+          "count": "1",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 5,
+      "description": "You can attack twice instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 6,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Indomitable",
+      "level": 9,
+      "description": "You can reroll a failed saving throw. You must use the new roll, and you cannot use this feature again until you finish a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "indomitable",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "saving_throw_reroll",
+          "value": "reroll_failed_saving_throw_and_use_new_result"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 11,
+      "description": "You can attack three times instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "3"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Indomitable Improvement",
+      "level": 13,
+      "description": "You can use Indomitable twice between long rests.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "indomitable",
+          "count": "2",
+          "recharge": "long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 14,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Indomitable Improvement",
+      "level": 17,
+      "description": "You can use Indomitable three times between long rests.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "indomitable",
+          "count": "3",
+          "recharge": "long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Action Surge Improvement",
+      "level": 17,
+      "description": "You can use Action Surge twice before a rest, but you can still use it only once on the same turn.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "action_surge",
+          "count": "2",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 20,
+      "description": "You can attack four times instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "4"
+        }
+      ]
+    }
+  ],
+  "Monk": [
+    {
+      "name": "Unarmored Defense",
+      "level": 1,
+      "description": "While you are not wearing armor or wielding a shield, your AC equals 10 + your Dexterity modifier + your Wisdom modifier.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "armor_class",
+          "value": "10_plus_dexterity_modifier_plus_wisdom_modifier"
+        }
+      ]
+    },
+    {
+      "name": "Martial Arts",
+      "level": 1,
+      "description": "Your practice of martial arts allows you to use Dexterity instead of Strength for unarmed strikes and monk weapons. You can also roll a martial arts die instead of the normal damage die and make an unarmed strike as a bonus action after taking the Attack action with an unarmed strike or monk weapon.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "unarmed_strike_and_monk_weapon_attack_rolls",
+          "value": "may_use_dexterity_instead_of_strength"
+        },
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "martial_arts_die_1d4"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "bonus_action_attack",
+          "value": "one_unarmed_strike_after_attack_action_with_unarmed_strike_or_monk_weapon"
+        }
+      ]
+    },
+    {
+      "name": "Ki",
+      "level": 2,
+      "description": "You gain access to mystical energy called ki, represented by ki points equal to your monk level. You can spend these points to fuel special abilities and regain all expended points after a short or long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "ki_points",
+          "count": "monk_level",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ki_save_dc",
+          "value": "8_plus_proficiency_bonus_plus_wisdom_modifier"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Movement",
+      "level": 2,
+      "description": "Your speed increases by 10 feet while you are not wearing armor or wielding a shield.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+10_feet"
+        }
+      ]
+    },
+    {
+      "name": "Deflect Missiles",
+      "level": 3,
+      "description": "You can use your reaction to deflect or catch a ranged weapon attack that hits you, reducing its damage by 1d10 + your Dexterity modifier + your monk level. If you reduce the damage to 0, you can spend 1 ki point to catch and throw the missile.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "deflect_missiles",
+          "value": "reaction_reduce_ranged_weapon_damage_by_1d10_plus_dexterity_modifier_plus_monk_level"
+        },
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "deflect_missiles_throw",
+          "count": "1_ki_point",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "ranged_attack",
+          "value": "catch_and_throw_deflected_missile_as_part_of_same_reaction"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Slow Fall",
+      "level": 4,
+      "description": "You can use your reaction when falling to reduce the fall damage you take by an amount equal to five times your monk level.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "falling_damage_reduction",
+          "value": "reduce_falling_damage_by_5_times_monk_level_using_reaction"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 5,
+      "description": "You can attack twice instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Stunning Strike",
+      "level": 5,
+      "description": "When you hit another creature with a melee weapon attack, you can spend 1 ki point to attempt to stun it. The target must succeed on a Constitution saving throw or be stunned until the end of your next turn.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "stunning_strike",
+          "count": "1_ki_point_per_attempt",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "stunning_strike",
+          "value": "target_makes_constitution_save_or_becomes_stunned_until_end_of_your_next_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ki-Empowered Strikes",
+      "level": 6,
+      "description": "Your unarmed strikes count as magical for the purpose of overcoming resistance and immunity to nonmagical attacks and damage.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "magical_unarmed_strikes",
+          "value": "unarmed_strikes_count_as_magical_for_resistance_and_immunity"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Movement Improvement",
+      "level": 6,
+      "description": "Your unarmored movement speed bonus increases to 15 feet while you are not wearing armor or wielding a shield.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+15_feet"
+        }
+      ]
+    },
+    {
+      "name": "Evasion",
+      "level": 7,
+      "description": "Your agility allows you to dodge certain area effects. When subjected to an effect that allows a Dexterity saving throw for half damage, you take no damage on a success and half damage on a failure.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "evasion",
+          "value": "dexterity_save_for_half_damage_becomes_no_damage_on_success_and_half_damage_on_failure"
+        }
+      ]
+    },
+    {
+      "name": "Stillness of Mind",
+      "level": 7,
+      "description": "You can use your action to end one effect on yourself that is causing you to be charmed or frightened.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "end_charmed_or_frightened",
+          "value": "use_action_to_end_charmed_or_frightened_condition"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Movement Improvement",
+      "level": 10,
+      "description": "Your unarmored movement speed bonus increases to 20 feet while you are not wearing armor or wielding a shield.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+20_feet"
+        }
+      ]
+    },
+    {
+      "name": "Purity of Body",
+      "level": 10,
+      "description": "Your mastery of ki makes you immune to disease and poison.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "disease_and_poison_immunity",
+          "value": "immune_to_disease_and_poison"
+        }
+      ]
+    },
+    {
+      "name": "Martial Arts Improvement",
+      "level": 11,
+      "description": "Your martial arts damage die increases to 1d8 for unarmed strikes and monk weapons.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "martial_arts_die_1d8"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Tongue of the Sun and Moon",
+      "level": 13,
+      "description": "You learn to touch the ki of other minds, allowing you to understand all spoken languages. Any creature that understands at least one language can understand your speech.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "universal_communication",
+          "value": "understand_all_spoken_languages_and_be_understood_by_any_creature_that_knows_a_language"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Movement Improvement",
+      "level": 14,
+      "description": "Your unarmored movement speed bonus increases to 25 feet while you are not wearing armor or wielding a shield.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+25_feet"
+        }
+      ]
+    },
+    {
+      "name": "Diamond Soul",
+      "level": 14,
+      "description": "Your mastery of ki grants proficiency in all saving throws. Additionally, when you fail a saving throw, you can spend 1 ki point to reroll it and must use the new result.",
+      "effects": [
+        {
+          "type": "PROFICIENCY_GRANT",
+          "target": "saving_throw",
+          "value": "all_saving_throws"
+        },
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "diamond_soul_reroll",
+          "count": "1_ki_point_per_reroll",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "saving_throw_reroll",
+          "value": "reroll_failed_saving_throw_and_use_new_result"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Martial Arts Improvement",
+      "level": 17,
+      "description": "Your martial arts damage die increases to 1d10 for unarmed strikes and monk weapons.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "martial_arts_die_1d10"
+        }
+      ]
+    },
+    {
+      "name": "Empty Body",
+      "level": 18,
+      "description": "You can spend 4 ki points to become invisible for 1 minute and gain resistance to all damage except force damage. You can also spend 8 ki points to cast Astral Projection without material components, targeting only yourself.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "empty_body_invisibility",
+          "count": "4_ki_points",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "empty_body_invisibility",
+          "value": "become_invisible_and_gain_resistance_to_all_damage_except_force_for_1_minute"
+        },
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "astral_projection",
+          "count": "8_ki_points",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "astral_projection",
+          "value": "cast_astral_projection_without_material_components_targeting_self_only"
+        }
+      ]
+    },
+    {
+      "name": "Unarmored Movement Improvement",
+      "level": 18,
+      "description": "Your unarmored movement speed bonus increases to 30 feet while you are not wearing armor or wielding a shield.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "movement_speed",
+          "value": "+30_feet"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Perfect Self",
+      "level": 20,
+      "description": "When you roll initiative and have no ki points remaining, you regain 4 ki points.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "ki_points",
+          "count": "4_if_zero_ki_on_initiative",
+          "recharge": "initiative"
+        }
+      ]
+    }
+  ],
+  "Paladin": [
+    {
+      "name": "Divine Sense",
+      "level": 1,
+      "description": "You can open your awareness to detect celestials, fiends, and undead within 60 feet that are not behind total cover. You can also detect the presence of consecrated or desecrated places or objects.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "divine_sense",
+          "count": "1_plus_charisma_modifier_minimum_1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "divine_sense",
+          "value": "detect_celestials_fiends_undead_and_consecrated_or_desecrated_places_or_objects_within_60_feet"
+        }
+      ]
+    },
+    {
+      "name": "Lay on Hands",
+      "level": 1,
+      "description": "You have a pool of healing power equal to five times your paladin level. As an action, you can restore hit points from this pool or spend 5 points to cure one disease or neutralize one poison.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "lay_on_hands_pool",
+          "count": "5_times_paladin_level_hp",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "lay_on_hands",
+          "value": "spend_pool_points_to_heal_or_spend_5_points_to_cure_one_disease_or_neutralize_one_poison"
+        }
+      ]
+    },
+    {
+      "name": "Fighting Style",
+      "level": 2,
+      "description": "You adopt a particular style of fighting as your specialty. Choose one Fighting Style option available to paladins.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "fighting_style",
+          "value": "choose_one_paladin_fighting_style"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "level": 2,
+      "description": "You learn to cast paladin spells using Charisma as your spellcasting ability. You prepare a number of paladin spells equal to your Charisma modifier plus half your paladin level, rounded down, with a minimum of one.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "charisma_based_prepared_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Divine Smite",
+      "level": 2,
+      "description": "When you hit a creature with a melee weapon attack, you can expend a spell slot to deal additional radiant damage. The damage increases with the slot level, with extra damage against undead and fiends.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "2d8_radiant_plus_1d8_per_spell_slot_level_above_1st_maximum_5d8_plus_1d8_against_undead_or_fiend_maximum_6d8"
+        }
+      ]
+    },
+    {
+      "name": "Divine Health",
+      "level": 3,
+      "description": "The divine magic flowing through you makes you immune to disease.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "disease_immunity",
+          "value": "immune_to_disease"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 5,
+      "description": "You can attack twice instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Aura of Protection",
+      "level": 6,
+      "description": "Whenever you or a friendly creature within 10 feet of you makes a saving throw, the creature gains a bonus equal to your Charisma modifier, with a minimum bonus of +1. You must be conscious to grant this benefit.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "saving_throws",
+          "value": "charisma_modifier_minimum_1_within_10_feet_while_conscious"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Aura of Courage",
+      "level": 10,
+      "description": "You and friendly creatures within 10 feet of you cannot be frightened while you are conscious.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "frightened_immunity",
+          "value": "you_and_friendly_creatures_within_10_feet_are_immune_to_frightened_while_you_are_conscious"
+        }
+      ]
+    },
+    {
+      "name": "Improved Divine Smite",
+      "level": 11,
+      "description": "Whenever you hit a creature with a melee weapon, the creature takes an extra 1d8 radiant damage.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "+1d8_radiant_damage_on_melee_weapon_hits"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Cleansing Touch",
+      "level": 14,
+      "description": "You can use your action to end one spell on yourself or on a willing creature you touch. You can use this feature a number of times equal to your Charisma modifier, regaining all uses after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "cleansing_touch",
+          "count": "charisma_modifier_minimum_1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "end_spell",
+          "value": "use_action_to_end_one_spell_on_self_or_willing_touched_creature"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Aura Improvements",
+      "level": 18,
+      "description": "The range of your Aura of Protection and any other paladin auras you have increases to 30 feet.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "paladin_aura_range",
+          "value": "30_feet"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sacred Oath",
+      "level": 3,
+      "description": "You swear an oath that grants additional features at specified paladin levels. Sacred Oath features are documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sacred_oath",
+          "value": "choose_one_sacred_oath_gain_oath_features_and_oath_spells"
+        }
+      ]
+    },
+    {
+      "name": "Channel Divinity",
+      "level": 3,
+      "description": "Your Sacred Oath grants you the ability to channel divine energy to fuel magical effects. You regain expended uses after a short or long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "channel_divinity",
+          "count": "1",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Aura of Protection Improvement",
+      "level": 18,
+      "description": "Your Aura of Protection and any other paladin auras you have increase their range to 30 feet.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "aura_of_protection_range",
+          "value": "30_feet"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sacred Oath Feature",
+      "level": 7,
+      "description": "Your Sacred Oath grants a feature at this level. The specific feature depends on the oath you selected and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sacred_oath_feature",
+          "value": "gain_oath_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Sacred Oath Feature",
+      "level": 15,
+      "description": "Your Sacred Oath grants another feature at this level. The specific feature depends on the oath you selected and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sacred_oath_feature",
+          "value": "gain_oath_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Sacred Oath Feature",
+      "level": 20,
+      "description": "Your Sacred Oath grants its capstone feature at this level. The specific feature depends on the oath you selected and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sacred_oath_feature",
+          "value": "gain_oath_capstone_feature"
+        }
+      ]
+    }
+  ],
+  "Ranger": [
+    {
+      "name": "Favored Enemy",
+      "level": 1,
+      "description": "You have significant experience studying, tracking, hunting, and interacting with a certain type of enemy. You gain advantage on Wisdom (Survival) checks to track your favored enemies and on Intelligence checks to recall information about them. You also learn one language spoken by your favored enemies, if they speak one.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "survival_checks_and_intelligence_checks",
+          "value": "tracking_and_recalling_information_about_favored_enemies"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_enemy_language",
+          "value": "learn_one_language_spoken_by_favored_enemy_if_applicable"
+        }
+      ]
+    },
+    {
+      "name": "Natural Explorer",
+      "level": 1,
+      "description": "You are particularly familiar with one type of natural environment. You gain benefits while traveling in your favored terrain, including advantages to certain checks and improved travel capabilities.",
+      "effects": [
+        {
+          "type": "ADVANTAGE_GRANT",
+          "target": "intelligence_and_wisdom_checks",
+          "value": "checks_related_to_favored_terrain_when_applicable"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "natural_explorer",
+          "value": "favored_terrain_benefits_to_tracking_navigation_and_travel"
+        }
+      ]
+    },
+    {
+      "name": "Fighting Style",
+      "level": 2,
+      "description": "You adopt a particular style of fighting as your specialty. Choose one Fighting Style option available to rangers.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "fighting_style",
+          "value": "choose_one_ranger_fighting_style"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "level": 2,
+      "description": "You learn to cast ranger spells using Wisdom as your spellcasting ability. You know a limited number of ranger spells and use spell slots to cast them.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "wisdom_based_known_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Ranger Archetype",
+      "level": 3,
+      "description": "You choose a ranger archetype that grants additional features at specified ranger levels. Archetype features are documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ranger_archetype",
+          "value": "choose_one_ranger_archetype_gain_archetype_features"
+        }
+      ]
+    },
+    {
+      "name": "Primeval Awareness",
+      "level": 3,
+      "description": "You can expend a spell slot to focus your awareness and sense whether certain creature types are present within 1 mile, or within 6 miles in your favored terrain. This feature does not reveal their number or location.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "primeval_awareness",
+          "value": "expend_spell_slot_to_detect_presence_of_aberrations_celestials_dragons_elementals_fey_fiends_and_undead_within_1_mile_or_6_miles_in_favored_terrain"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Extra Attack",
+      "level": 5,
+      "description": "You can attack twice instead of once whenever you take the Attack action on your turn.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "attacks_per_attack_action",
+          "value": "2"
+        }
+      ]
+    },
+    {
+      "name": "Favored Enemy Improvement",
+      "level": 6,
+      "description": "You choose one additional favored enemy and learn one additional language if applicable.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_enemy",
+          "value": "choose_one_additional_favored_enemy_and_learn_one_language"
+        }
+      ]
+    },
+    {
+      "name": "Natural Explorer Improvement",
+      "level": 6,
+      "description": "You choose one additional favored terrain and gain its associated benefits.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_terrain",
+          "value": "choose_one_additional_favored_terrain"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Land's Stride",
+      "level": 8,
+      "description": "Moving through nonmagical difficult terrain costs you no extra movement. You can also pass through nonmagical plants without being slowed or damaged by their thorns, spines, or similar hazards.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "movement",
+          "value": "ignore_nonmagical_difficult_terrain_and_nonmagical_plant_hazards"
+        }
+      ]
+    },
+    {
+      "name": "Hide in Plain Sight",
+      "level": 10,
+      "description": "You can spend 1 minute creating camouflage that grants you a +10 bonus to Dexterity (Stealth) checks while remaining motionless against a solid surface. The camouflage is lost if you move or take an action or reaction.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "stealth_checks",
+          "value": "+10_while_motionless_and_camouflaged_against_solid_surface"
+        }
+      ]
+    },
+    {
+      "name": "Natural Explorer Improvement",
+      "level": 10,
+      "description": "You choose one additional favored terrain and gain its associated benefits.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_terrain",
+          "value": "choose_one_additional_favored_terrain"
+        }
+      ]
+    },
+    {
+      "name": "Favored Enemy Improvement",
+      "level": 14,
+      "description": "You choose one additional favored enemy and learn one additional language if applicable.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_enemy",
+          "value": "choose_one_additional_favored_enemy_and_learn_one_language"
+        }
+      ]
+    },
+    {
+      "name": "Vanish",
+      "level": 14,
+      "description": "You can use the Hide action as a bonus action. You also cannot be tracked by nonmagical means unless you choose to leave a trail.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "bonus_action_hide",
+          "value": "use_hide_action_as_bonus_action"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "tracking",
+          "value": "cannot_be_tracked_by_nonmagical_means_unless_leaving_trail"
+        }
+      ]
+    },
+    {
+      "name": "Natural Explorer Improvement",
+      "level": 14,
+      "description": "You choose one additional favored terrain and gain its associated benefits.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "favored_terrain",
+          "value": "choose_one_additional_favored_terrain"
+        }
+      ]
+    },
+    {
+      "name": "Feral Senses",
+      "level": 18,
+      "description": "You gain preternatural senses that help you fight invisible creatures. When attacking a creature you cannot see, your inability to see it does not impose disadvantage on your attack rolls against it, provided it is not hidden from you.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "unseen_attackers",
+          "value": "no_disadvantage_on_attacks_against_unseen_creatures_not_hidden_from_you"
+        }
+      ]
+    },
+    {
+      "name": "Foe Slayer",
+      "level": 20,
+      "description": "Once on each of your turns, you can add your Wisdom modifier to an attack roll or damage roll against one of your favored enemies.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "attack_roll_or_damage",
+          "value": "add_wisdom_modifier_once_per_turn_against_favored_enemy"
+        }
+      ]
+    }
+  ],
+  "Rogue": [
+    {
+      "name": "Expertise",
+      "level": 1,
+      "description": "Choose two of your skill proficiencies or one skill proficiency and your proficiency with thieves' tools. Your proficiency bonus is doubled for ability checks using either chosen proficiency.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "selected_skill_checks_or_thieves_tools_checks",
+          "value": "double_proficiency_bonus"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack",
+      "level": 1,
+      "description": "Once per turn, you can deal extra damage to one creature you hit with an attack if you have advantage or another enemy of the target is within 5 feet of it, provided you do not have disadvantage and the attack uses a finesse or ranged weapon.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "1d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Thieves' Cant",
+      "level": 1,
+      "description": "You learn the secret mix of dialect, jargon, and code used by rogues. You can communicate hidden messages and understand similar messages from others who know Thieves' Cant.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "thieves_cant",
+          "value": "learn_secret_rogue_language_and_concealed_messages"
+        }
+      ]
+    },
+    {
+      "name": "Cunning Action",
+      "level": 2,
+      "description": "Your quick thinking and agility allow you to take a bonus action on each of your turns to Dash, Disengage, or Hide.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "cunning_action",
+          "value": "bonus_action_dash_disengage_or_hide"
+        }
+      ]
+    },
+    {
+      "name": "Roguish Archetype",
+      "level": 3,
+      "description": "You choose a roguish archetype that grants additional features at specified rogue levels. Archetype features are documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "roguish_archetype",
+          "value": "choose_one_roguish_archetype_gain_archetype_features"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 3,
+      "description": "Your Sneak Attack damage increases as your rogue level rises, reaching 2d6 at this level.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "2d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Uncanny Dodge",
+      "level": 5,
+      "description": "When an attacker you can see hits you with an attack, you can use your reaction to halve the attack's damage against you.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "damage_reduction",
+          "value": "halve_damage_from_one_attack_by_visible_attacker_using_reaction"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 5,
+      "description": "Your Sneak Attack damage increases to 3d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "3d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Expertise",
+      "level": 6,
+      "description": "Choose two additional skill proficiencies or tool proficiencies. Your proficiency bonus is doubled for ability checks using either chosen proficiency.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "selected_skill_or_tool_checks",
+          "value": "double_proficiency_bonus"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 7,
+      "description": "Your Sneak Attack damage increases to 4d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "4d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Evasion",
+      "level": 7,
+      "description": "Your agility allows you to dodge certain area effects. When subjected to an effect that allows a Dexterity saving throw for half damage, you take no damage on a success and half damage on a failure.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "evasion",
+          "value": "dexterity_save_for_half_damage_becomes_no_damage_on_success_and_half_damage_on_failure"
+        }
+      ]
+    },
+    {
+      "name": "Reliable Talent",
+      "level": 11,
+      "description": "Whenever you make an ability check that lets you add your proficiency bonus, you can treat a d20 roll of 9 or lower as a 10.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "target": "proficient_ability_checks",
+          "value": "minimum_d20_roll_10"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 9,
+      "description": "Your Sneak Attack damage increases to 5d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "5d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 11,
+      "description": "Your Sneak Attack damage increases to 6d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "6d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 10,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Blindsense",
+      "level": 14,
+      "description": "If you can hear, you are aware of the location of any hidden or invisible creature within 10 feet of you.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "blindsense",
+          "value": "detect_location_of_hidden_or_invisible_creatures_within_10_feet_if_you_can_hear"
+        }
+      ]
+    },
+    {
+      "name": "Slippery Mind",
+      "level": 15,
+      "description": "You gain proficiency in Wisdom saving throws.",
+      "effects": [
+        {
+          "type": "PROFICIENCY_GRANT",
+          "target": "saving_throw",
+          "value": "wisdom"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 13,
+      "description": "Your Sneak Attack damage increases to 7d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "7d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 15,
+      "description": "Your Sneak Attack damage increases to 8d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "8d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 17,
+      "description": "Your Sneak Attack damage increases to 9d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "9d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sneak Attack Improvement",
+      "level": 19,
+      "description": "Your Sneak Attack damage increases to 10d6.",
+      "effects": [
+        {
+          "type": "ATTACK_MODIFIER",
+          "target": "damage",
+          "value": "10d6_extra_damage_once_per_turn"
+        }
+      ]
+    },
+    {
+      "name": "Elusive",
+      "level": 18,
+      "description": "No attack roll has advantage against you while you are not incapacitated.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "attack_rolls_against_you",
+          "value": "attackers_cannot_gain_advantage_while_you_are_not_incapacitated"
+        }
+      ]
+    },
+    {
+      "name": "Stroke of Luck",
+      "level": 20,
+      "description": "Once per short or long rest, you can turn a missed attack into a hit or treat a failed ability check as a 20.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "stroke_of_luck",
+          "count": "1",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "stroke_of_luck",
+          "value": "turn_missed_attack_into_hit_or_failed_ability_check_into_natural_20"
+        }
+      ]
+    }
+  ],
+  "Sorcerer": [
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You cast sorcerer spells using Charisma as your spellcasting ability. You know a limited number of spells and use spell slots to cast them.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "charisma_based_known_spells_and_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Sorcerous Origin",
+      "level": 1,
+      "description": "You choose the source of your innate magical power. Your origin grants additional features at specified sorcerer levels, documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sorcerous_origin",
+          "value": "choose_one_sorcerous_origin_gain_origin_features"
+        }
+      ]
+    },
+    {
+      "name": "Font of Magic",
+      "level": 2,
+      "description": "You gain a pool of sorcery points equal to your sorcerer level. You can expend these points to create spell slots or use other magical abilities, and regain all expended points after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "sorcery_points",
+          "count": "sorcerer_level",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "flexible_spellcasting",
+          "value": "convert_sorcery_points_into_spell_slots_and_spell_slots_into_sorcery_points"
+        }
+      ]
+    },
+    {
+      "name": "Metamagic",
+      "level": 3,
+      "description": "You gain the ability to twist your spells to suit your needs. Choose two Metamagic options, which allow you to modify spells by spending sorcery points.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "metamagic",
+          "value": "choose_two_metamagic_options_modify_spells_by_spending_sorcery_points"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Metamagic Improvement",
+      "level": 10,
+      "description": "You learn one additional Metamagic option, increasing the number of options you know to three.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "metamagic",
+          "value": "learn_one_additional_metamagic_option"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Metamagic Improvement",
+      "level": 17,
+      "description": "You learn one additional Metamagic option, increasing the number of options you know to four.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "metamagic",
+          "value": "learn_one_additional_metamagic_option"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sorcerous Restoration",
+      "level": 20,
+      "description": "You regain 4 expended sorcery points whenever you finish a short rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "sorcery_points",
+          "count": "4",
+          "recharge": "short_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Sorcerous Origin Feature",
+      "level": 14,
+      "description": "Your Sorcerous Origin grants another feature at this level. The specific feature depends on your chosen origin and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sorcerous_origin_feature",
+          "value": "gain_origin_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Sorcerous Origin Feature",
+      "level": 18,
+      "description": "Your Sorcerous Origin grants its final feature at this level. The specific feature depends on your chosen origin and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "sorcerous_origin_feature",
+          "value": "gain_origin_specific_feature"
+        }
+      ]
+    }
+  ],
+  "Warlock": [
+    {
+      "name": "Otherworldly Patron",
+      "level": 1,
+      "description": "You make a pact with an otherworldly being that grants you magical abilities. Your patron grants additional features at specified warlock levels, documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "otherworldly_patron",
+          "value": "choose_one_patron_gain_patron_features_and_expanded_spell_list"
+        }
+      ]
+    },
+    {
+      "name": "Pact Magic",
+      "level": 1,
+      "description": "You gain the ability to cast warlock spells using Charisma as your spellcasting ability. Your limited spell slots are regained after a short or long rest.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "pact_magic",
+          "value": "charisma_based_known_spells_and_spell_slots_recharged_on_short_or_long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocations",
+      "level": 2,
+      "description": "You learn two eldritch invocations, fragments of forbidden knowledge that grant magical or other special abilities. You learn additional invocations as you gain warlock levels.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_two_invocations_and_additional_invocations_at_higher_levels"
+        }
+      ]
+    },
+    {
+      "name": "Pact Boon",
+      "level": 3,
+      "description": "Your otherworldly patron grants you a gift for your loyal service. Choose Pact of the Chain, Pact of the Blade, or Pact of the Tome.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "pact_boon",
+          "value": "choose_pact_of_the_chain_blade_or_tome"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 5,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_one_additional_invocation"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Arcanum (6th Level)",
+      "level": 11,
+      "description": "You choose one 6th-level spell from the warlock spell list. You can cast this spell once without expending a spell slot, regaining the ability to do so after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "mystic_arcanum_6th_level",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "mystic_arcanum",
+          "value": "learn_and_cast_one_6th_level_warlock_spell_once_per_long_rest_without_spell_slot"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Arcanum (7th Level)",
+      "level": 13,
+      "description": "You choose one 7th-level spell from the warlock spell list. You can cast this spell once without expending a spell slot, regaining the ability to do so after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "mystic_arcanum_7th_level",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "mystic_arcanum",
+          "value": "learn_and_cast_one_7th_level_warlock_spell_once_per_long_rest_without_spell_slot"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Arcanum (8th Level)",
+      "level": 15,
+      "description": "You choose one 8th-level spell from the warlock spell list. You can cast this spell once without expending a spell slot, regaining the ability to do so after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "mystic_arcanum_8th_level",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "mystic_arcanum",
+          "value": "learn_and_cast_one_8th_level_warlock_spell_once_per_long_rest_without_spell_slot"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Mystic Arcanum (9th Level)",
+      "level": 17,
+      "description": "You choose one 9th-level spell from the warlock spell list. You can cast this spell once without expending a spell slot, regaining the ability to do so after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "mystic_arcanum_9th_level",
+          "count": "1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "mystic_arcanum",
+          "value": "learn_and_cast_one_9th_level_warlock_spell_once_per_long_rest_without_spell_slot"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Master",
+      "level": 20,
+      "description": "You can spend 1 minute entreating your patron for aid to regain all your expended Pact Magic spell slots. Once you regain slots this way, you cannot do so again until you finish a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "pact_magic_spell_slots",
+          "count": "all_expended_slots",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_master",
+          "value": "spend_1_minute_to_regain_all_pact_magic_slots_once_per_long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 7,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know to four.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_four_invocations_total"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 9,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know to five.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_five_invocations_total"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 12,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know to six.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_six_invocations_total"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 15,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know to seven.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_seven_invocations_total"
+        }
+      ]
+    },
+    {
+      "name": "Eldritch Invocation Improvement",
+      "level": 18,
+      "description": "You learn one additional eldritch invocation, increasing the number of invocations you know to eight.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "eldritch_invocations",
+          "value": "learn_eight_invocations_total"
+        }
+      ]
+    },
+    {
+      "name": "Otherworldly Patron Feature",
+      "level": 6,
+      "description": "Your Otherworldly Patron grants an additional feature at this level. The specific feature depends on your chosen patron and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "otherworldly_patron_feature",
+          "value": "gain_patron_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Otherworldly Patron Feature",
+      "level": 10,
+      "description": "Your Otherworldly Patron grants another feature at this level. The specific feature depends on your chosen patron and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "otherworldly_patron_feature",
+          "value": "gain_patron_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Otherworldly Patron Feature",
+      "level": 14,
+      "description": "Your Otherworldly Patron grants its final feature at this level. The specific feature depends on your chosen patron and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "otherworldly_patron_feature",
+          "value": "gain_patron_specific_feature"
+        }
+      ]
+    }
+  ],
+  "Wizard": [
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You cast wizard spells using Intelligence as your spellcasting ability. You prepare spells from your spellbook and can cast prepared spells using your available spell slots.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spellcasting",
+          "value": "intelligence_based_spellbook_and_prepared_spells_with_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Arcane Recovery",
+      "level": 1,
+      "description": "Once per day when you finish a short rest, you can recover expended spell slots. The combined levels of the recovered slots cannot exceed half your wizard level, rounded up, and none can be 6th level or higher.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "spell_slots",
+          "count": "spell_levels_equal_to_half_wizard_level_rounded_up_maximum_5th_level",
+          "recharge": "long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Arcane Tradition",
+      "level": 2,
+      "description": "You choose an arcane tradition that represents your particular area of magical study. Your tradition grants additional features at specified wizard levels, documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "arcane_tradition",
+          "value": "choose_one_arcane_tradition_gain_tradition_features"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Spell Mastery",
+      "level": 18,
+      "description": "You choose one 1st-level wizard spell and one 2nd-level wizard spell in your spellbook. You can cast those spells at their lowest level without expending a spell slot, provided they are prepared.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "spell_mastery",
+          "value": "cast_one_prepared_1st_level_and_one_prepared_2nd_level_wizard_spell_at_lowest_level_without_spell_slots"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2 or two ability scores by 1, or choose a feat if your DM allows it.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "ability_score_improvement",
+          "value": "increase_one_score_by_2_or_two_scores_by_1_or_take_feat"
+        }
+      ]
+    },
+    {
+      "name": "Signature Spells",
+      "level": 20,
+      "description": "You choose two 3rd-level wizard spells in your spellbook as signature spells. You always have them prepared and can cast each once at 3rd level without expending a spell slot, regaining this ability after a short or long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "resource": "signature_spells",
+          "count": "2_casts_one_per_spell",
+          "recharge": "short_rest"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "signature_spells",
+          "value": "two_3rd_level_wizard_spells_always_prepared_each_castable_once_without_spell_slot"
+        }
+      ]
+    },
+    {
+      "name": "Arcane Tradition Feature",
+      "level": 6,
+      "description": "Your Arcane Tradition grants an additional feature at this level. The specific feature depends on your chosen tradition and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "arcane_tradition_feature",
+          "value": "gain_tradition_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Arcane Tradition Feature",
+      "level": 10,
+      "description": "Your Arcane Tradition grants another feature at this level. The specific feature depends on your chosen tradition and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "arcane_tradition_feature",
+          "value": "gain_tradition_specific_feature"
+        }
+      ]
+    },
+    {
+      "name": "Arcane Tradition Feature",
+      "level": 14,
+      "description": "Your Arcane Tradition grants its final feature at this level. The specific feature depends on your chosen tradition and is documented separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "target": "arcane_tradition_feature",
+          "value": "gain_tradition_specific_feature"
+        }
+      ]
+    }
+  ],
+  "Artificer": [
+    {
+      "name": "Magical Tinkering",
+      "level": 1,
+      "description": "You learn to imbue Tiny nonmagical objects with minor magical properties. You can have a maximum number of objects affected at one time equal to your Intelligence modifier (minimum 1).",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "properties": "light, sound, static_image_or_text, odor_or_nonverbal_sound",
+          "light_radius": "5_ft_bright_5_ft_dim",
+          "maximum_text": "25_words",
+          "maximum_sound_duration": "10_seconds",
+          "active_objects": "Intelligence_modifier_minimum_1",
+          "duration": "until_dispersed_or_dismantled",
+          "properties_per_object": "1"
+        }
+      ]
+    },
+    {
+      "name": "Spellcasting",
+      "level": 1,
+      "description": "You cast spells using Intelligence and prepare spells from the Artificer spell list. You can use thieves' tools or artisan's tools with which you are proficient as a spellcasting focus.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "spellcasting_ability": "Intelligence",
+          "prepared_spells": "Intelligence_modifier_plus_half_artificer_level_rounded_down_minimum_1",
+          "spell_list": "Artificer",
+          "spellcasting_focus": "thieves_tools_or_proficient_artisan_tools",
+          "spell_slot_progression": "half_caster_rounded_up"
+        }
+      ]
+    },
+    {
+      "name": "Infuse Item",
+      "level": 2,
+      "description": "You learn four artificer infusions and can imbue mundane items with magical properties. You can maintain two infused items at a time; the number of known infusions and active infused items increases as you gain artificer levels.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "infusions_known": "4",
+          "active_infused_items": "2",
+          "infusion_duration": "until_replaced_or_until_you_die"
+        }
+      ]
+    },
+    {
+      "name": "The Right Tool for the Job",
+      "level": 3,
+      "description": "You can magically create one set of artisan's tools in an unoccupied space within 5 feet of you by working with thieves' tools or artisan's tools in hand for 1 hour.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "creation_time": "1_hour",
+          "tools_created": "1_set_of_artisans_tools",
+          "range": "5_ft",
+          "duration": "until_next_long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Artificer Specialist",
+      "level": 3,
+      "description": "You choose an Artificer Specialist, gaining subclass features at the levels specified by that subclass. Subclass-specific features are recorded separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "subclass_selection": "Artificer_Specialist",
+          "subclass_feature_levels": "3,5,9,15"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 4,
+      "description": "You can increase one ability score by 2, or two ability scores by 1 each. You cannot increase an ability score above 20 using this feature.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "ability_score_increase": "+2_one_score_or_+1_two_scores",
+          "maximum_score": "20"
+        }
+      ]
+    },
+    {
+      "name": "Artificer Specialist Feature",
+      "level": 5,
+      "description": "You gain a feature from your chosen Artificer Specialist. Subclass-specific features are recorded separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "feature_source": "Artificer_Specialist"
+        }
+      ]
+    },
+    {
+      "name": "Tool Expertise",
+      "level": 6,
+      "description": "Your proficiency bonus is doubled for any ability check you make that uses a tool proficiency.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "proficiency_bonus_multiplier": "2",
+          "applicable_checks": "ability_checks_using_tool_proficiency"
+        }
+      ]
+    },
+    {
+      "name": "Infuse Item Improvement",
+      "level": 6,
+      "description": "Your ability to maintain infused items and learn infusions improves.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "infusions_known": "6",
+          "active_infused_items": "3"
+        }
+      ]
+    },
+    {
+      "name": "Flash of Genius",
+      "level": 7,
+      "description": "When you or another creature you can see within 30 feet makes an ability check or saving throw, you can use your reaction to add your Intelligence modifier to the roll. You can use this feature a number of times equal to your Intelligence modifier (minimum once), regaining all uses after a long rest.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "uses": "Intelligence_modifier_minimum_1",
+          "recharge": "long_rest"
+        },
+        {
+          "type": "STAT_BONUS",
+          "bonus": "Intelligence_modifier",
+          "applies_to": "ability_check_or_saving_throw",
+          "range": "30_ft",
+          "action": "reaction"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 8,
+      "description": "You can increase one ability score by 2, or two ability scores by 1 each. You cannot increase an ability score above 20 using this feature.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "ability_score_increase": "+2_one_score_or_+1_two_scores",
+          "maximum_score": "20"
+        }
+      ]
+    },
+    {
+      "name": "Artificer Specialist Feature",
+      "level": 9,
+      "description": "You gain a feature from your chosen Artificer Specialist. Subclass-specific features are recorded separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "feature_source": "Artificer_Specialist"
+        }
+      ]
+    },
+    {
+      "name": "Infuse Item Improvement",
+      "level": 10,
+      "description": "Your ability to maintain infused items and learn infusions improves.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "infusions_known": "8",
+          "active_infused_items": "4"
+        }
+      ]
+    },
+    {
+      "name": "Magic Item Adept",
+      "level": 10,
+      "description": "You can attune to up to four magic items at once. Crafting common or uncommon magic items takes one-quarter the normal time and costs half as much gold.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "maximum_attuned_items": "4",
+          "common_and_uncommon_item_crafting_time": "one_quarter",
+          "common_and_uncommon_item_crafting_cost": "one_half"
+        }
+      ]
+    },
+    {
+      "name": "Spell-Storing Item",
+      "level": 11,
+      "description": "After a long rest, you can store an eligible 1st- or 2nd-level Artificer spell in a simple or martial weapon, or an item usable as a spellcasting focus. A creature holding the item can use an action to produce the spell's effect, using your spellcasting ability modifier and spell save DC.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "spell_level": "1_or_2",
+          "spell_source": "Artificer_spell_list",
+          "casting_time": "1_action",
+          "stored_spell_uses": "Intelligence_modifier_minimum_2",
+          "activation": "action",
+          "spell_attack_and_save_dc": "your_own",
+          "duration": "until_uses_expended_or_next_long_rest"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 12,
+      "description": "You can increase one ability score by 2, or two ability scores by 1 each. You cannot increase an ability score above 20 using this feature.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "ability_score_increase": "+2_one_score_or_+1_two_scores",
+          "maximum_score": "20"
+        }
+      ]
+    },
+    {
+      "name": "Artificer Specialist Feature",
+      "level": 13,
+      "description": "No base Artificer feature is gained at this level; this entry is reserved for subclass-specific material and is not part of the base class feature progression.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "feature_source": "Artificer_Specialist"
+        }
+      ]
+    },
+    {
+      "name": "Infuse Item Improvement",
+      "level": 14,
+      "description": "Your ability to maintain infused items and learn infusions improves.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "infusions_known": "10",
+          "active_infused_items": "5"
+        }
+      ]
+    },
+    {
+      "name": "Magic Item Savant",
+      "level": 14,
+      "description": "You can attune to up to five magic items at once and ignore all class, race, spell, and level requirements when attuning to or using magic items.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "maximum_attuned_items": "5",
+          "ignore_item_requirements": "class_race_spell_level"
+        }
+      ]
+    },
+    {
+      "name": "Artificer Specialist Feature",
+      "level": 15,
+      "description": "You gain a feature from your chosen Artificer Specialist. Subclass-specific features are recorded separately.",
+      "effects": [
+        {
+          "type": "SPECIAL_ABILITY",
+          "feature_source": "Artificer_Specialist"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 16,
+      "description": "You can increase one ability score by 2, or two ability scores by 1 each. You cannot increase an ability score above 20 using this feature.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "ability_score_increase": "+2_one_score_or_+1_two_scores",
+          "maximum_score": "20"
+        }
+      ]
+    },
+    {
+      "name": "Infuse Item Improvement",
+      "level": 18,
+      "description": "Your ability to maintain infused items and learn infusions improves.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "infusions_known": "12",
+          "active_infused_items": "6"
+        }
+      ]
+    },
+    {
+      "name": "Magic Item Master",
+      "level": 18,
+      "description": "You can attune to up to six magic items at once.",
+      "effects": [
+        {
+          "type": "RESOURCE_GRANT",
+          "maximum_attuned_items": "6"
+        }
+      ]
+    },
+    {
+      "name": "Ability Score Improvement",
+      "level": 19,
+      "description": "You can increase one ability score by 2, or two ability scores by 1 each. You cannot increase an ability score above 20 using this feature.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "ability_score_increase": "+2_one_score_or_+1_two_scores",
+          "maximum_score": "20"
+        }
+      ]
+    },
+    {
+      "name": "Soul of Artifice",
+      "level": 20,
+      "description": "You gain a +1 bonus to all saving throws for each magic item you are attuned to. If you are reduced to 0 hit points but not killed outright, you can end one of your artificer infusions to drop to 1 hit point instead.",
+      "effects": [
+        {
+          "type": "STAT_BONUS",
+          "saving_throw_bonus": "+1_per_attuned_magic_item"
+        },
+        {
+          "type": "SPECIAL_ABILITY",
+          "trigger": "reduced_to_0_hit_points_without_being_killed",
+          "cost": "end_one_artificer_infusion",
+          "result": "remain_at_1_hit_point"
+        }
+      ]
+    }
+  ]
+}

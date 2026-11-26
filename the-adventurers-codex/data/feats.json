@@ -1,0 +1,2248 @@
+[
+  {
+    "name": "Actor",
+    "prerequisite": "None",
+    "description": "Gain Charisma and improve your ability to imitate voices, sounds, and mannerisms.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CHA",
+        "value": "1"
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "deception_check",
+        "value": "impersonating_another_person"
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "performance_check",
+        "value": "mimicking_sounds_made_by_other_creatures"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mimicry",
+        "value": "Imitate speech or sounds after hearing them for at least 1 minute; listeners can detect the imitation with a successful Insight check contested by your Deception check."
+      }
+    ]
+  },
+  {
+    "name": "Alert",
+    "prerequisite": "None",
+    "description": "Gain exceptional awareness, improving initiative and preventing surprise.",
+    "effects": [
+      {
+        "type": "STAT_BONUS",
+        "target": "initiative",
+        "value": "5"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "surprise",
+        "value": "You cannot be surprised while conscious."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hidden_attackers",
+        "value": "Other creatures do not gain advantage on attack rolls against you as a result of being unseen by you."
+      }
+    ]
+  },
+  {
+    "name": "Athlete",
+    "prerequisite": "None",
+    "description": "Improve physical conditioning and gain greater climbing, jumping, and movement capabilities.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "standing_up",
+        "value": "Standing from prone costs only 5 feet of movement."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "climbing",
+        "value": "Climbing does not cost you extra movement."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "running_jump",
+        "value": "When you make a running long jump or high jump, you need only 5 feet of movement before jumping."
+      }
+    ]
+  },
+  {
+    "name": "Charger",
+    "prerequisite": "None",
+    "description": "Improve the effectiveness of attacks made immediately after moving toward an enemy.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "charge_attack",
+        "value": "When you use the Dash action, you can use a bonus action to make one melee weapon attack or shove a creature."
+      },
+      {
+        "type": "STAT_BONUS",
+        "target": "charge_damage",
+        "value": "5"
+      }
+    ]
+  },
+  {
+    "name": "Crossbow Expert",
+    "prerequisite": "None",
+    "description": "Master crossbow use, eliminating loading limitations and improving close-range attacks.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "loading",
+        "value": "Ignore the loading property of crossbows with which you are proficient."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ranged_attack",
+        "value": "Being within 5 feet of a hostile creature does not impose disadvantage on your ranged attack rolls."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bonus_attack",
+        "value": "When you use the Attack action and attack with a one-handed weapon, you can use a bonus action to attack with a hand crossbow you are holding."
+      }
+    ]
+  },
+  {
+    "name": "Defensive Duelist",
+    "prerequisite": "Dexterity 13 or higher",
+    "description": "Use a finesse weapon to defend yourself against melee attacks.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "parry",
+        "value": "When wielding a finesse weapon with which you are proficient and another creature hits you with a melee attack, use your reaction to add your proficiency bonus to your AC against that attack, potentially causing it to miss."
+      }
+    ]
+  },
+  {
+    "name": "Dual Wielder",
+    "prerequisite": "None",
+    "description": "Improve your ability to fight with two weapons simultaneously.",
+    "effects": [
+      {
+        "type": "STAT_BONUS",
+        "target": "AC",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "dual_wielding",
+        "value": "You can engage in two-weapon fighting with one-handed melee weapons that are not light."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "weapon_drawing",
+        "value": "You can draw or stow two one-handed weapons when you would normally be able to draw or stow only one."
+      }
+    ]
+  },
+  {
+    "name": "Dungeon Delver",
+    "prerequisite": "None",
+    "description": "Improve your ability to detect and avoid traps and hidden dangers in dungeons.",
+    "effects": [
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "perception_check",
+        "value": "detecting_secret_doors"
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "saving_throw",
+        "value": "avoiding_or_resisting_traps"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "trap_damage",
+        "value": "You have resistance to damage dealt by traps."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "trap_search",
+        "value": "Searching for traps while traveling at a normal pace does not impose the normal penalty to passive Perception."
+      }
+    ]
+  },
+  {
+    "name": "Durable",
+    "prerequisite": "None",
+    "description": "Improve Constitution and recover more effectively when spending Hit Dice.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hit_dice_recovery",
+        "value": "When you roll a Hit Die to regain hit points, the minimum number of hit points you regain equals twice your Constitution modifier, minimum 2."
+      }
+    ]
+  },
+  {
+    "name": "Elemental Adept",
+    "prerequisite": "The ability to cast at least one spell",
+    "description": "Specialize in one damage type and make your spells more effective against resistant creatures.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "elemental_damage",
+        "value": "Choose acid, cold, fire, lightning, or thunder; spells you cast ignore resistance to the chosen damage type."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "damage_roll",
+        "value": "When rolling damage for a spell that deals the chosen damage type, treat any 1 on a damage die as a 2."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "repeatable",
+        "value": "You can take this feat multiple times, choosing a different damage type each time."
+      }
+    ]
+  },
+  {
+    "name": "Grappler",
+    "prerequisite": "Strength 13 or higher",
+    "description": "Improve your ability to grapple opponents and restrain creatures in close combat.",
+    "effects": [
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "attack_roll",
+        "value": "Against a creature you are grappling."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "restrain",
+        "value": "You can use your action to try to pin a creature grappled by you; if successful, both you and the creature are restrained until the grapple ends."
+      }
+    ]
+  },
+  {
+    "name": "Great Weapon Master",
+    "prerequisite": "None",
+    "description": "Use the momentum of heavy weapons to deliver powerful attacks and additional strikes.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "heavy_weapon_attack",
+        "value": "Before making a melee attack with a heavy weapon with which you are proficient, you can take a -5 penalty to the attack roll to gain a +10 bonus to the damage roll if the attack hits."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bonus_attack",
+        "value": "When you score a critical hit with a melee weapon or reduce a creature to 0 hit points with one, you can make one melee weapon attack as a bonus action."
+      }
+    ]
+  },
+  {
+    "name": "Healer",
+    "prerequisite": "None",
+    "description": "Use medical supplies to restore hit points and stabilize dying creatures.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "healer_kit",
+        "value": "When you use a healer's kit to stabilize a creature, it also regains 1 hit point."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "healing",
+        "value": "As an action, expend one use of a healer's kit to restore 1d6 + 4 + the creature's maximum number of Hit Dice hit points to a creature; a creature can benefit once per short or long rest."
+      }
+    ]
+  },
+  {
+    "name": "Heavily Armored",
+    "prerequisite": "Proficiency with medium armor",
+    "description": "Improve Strength and gain proficiency with heavy armor.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "armor",
+        "value": "heavy"
+      }
+    ]
+  },
+  {
+    "name": "Heavy Armor Master",
+    "prerequisite": "Proficiency with heavy armor",
+    "description": "Improve physical resilience and reduce damage from nonmagical weapons while wearing heavy armor.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "STAT_BONUS",
+        "target": "damage_reduction",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "name": "Inspiring Leader",
+    "prerequisite": "Charisma 13 or higher",
+    "description": "Inspire allies with a motivating speech that grants temporary hit points.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "temporary_hit_points",
+        "value": "Spend 10 minutes inspiring up to six friendly creatures within 30 feet; each creature gains temporary hit points equal to your level + your Charisma modifier."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "A creature cannot benefit from this feat again until it finishes a short or long rest."
+      }
+    ]
+  },
+  {
+    "name": "Keen Mind",
+    "prerequisite": "None",
+    "description": "Improve Intelligence and develop exceptional memory and orientation.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "time_awareness",
+        "value": "You always know which way is north."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "time_awareness",
+        "value": "You always know the number of hours left before the next sunrise or sunset."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "memory",
+        "value": "You can accurately recall anything you have seen or heard within the past month."
+      }
+    ]
+  },
+  {
+    "name": "Lightly Armored",
+    "prerequisite": "None",
+    "description": "Improve physical ability and gain proficiency with light armor.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "armor",
+        "value": "light"
+      }
+    ]
+  },
+  {
+    "name": "Linguist",
+    "prerequisite": "None",
+    "description": "Improve Intelligence, learn additional languages, and create written ciphers.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "language",
+        "value": "three_languages_of_choice"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cipher",
+        "value": "You can create written ciphers that others cannot decipher unless you teach them, they succeed on an Intelligence check against your Intelligence score, or they use magic."
+      }
+    ]
+  },
+  {
+    "name": "Lucky",
+    "prerequisite": "None",
+    "description": "Gain luck points that can alter the outcome of attack rolls, ability checks, and saving throws.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "luck_points",
+        "value": "You have 3 luck points, regained when you finish a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "reroll",
+        "value": "Spend one luck point to roll an additional d20 when making an attack roll, ability check, or saving throw; choose which result to use."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "disadvantage",
+        "value": "Spend one luck point when an attack roll is made against you to roll an additional d20; choose which result the attacker uses."
+      }
+    ]
+  },
+  {
+    "name": "Mage Slayer",
+    "prerequisite": "None",
+    "description": "Develop techniques for fighting spellcasters in close combat.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "concentration",
+        "value": "When a creature within 5 feet of you casts a spell, you can use your reaction to make a melee weapon attack against it."
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "saving_throw",
+        "value": "Against spells cast by creatures within 5 feet of you."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "concentration_checks",
+        "value": "When you damage a creature concentrating on a spell, that creature has disadvantage on the saving throw it makes to maintain concentration."
+      }
+    ]
+  },
+  {
+    "name": "Magic Initiate",
+    "prerequisite": "None",
+    "description": "Learn two cantrips and one 1st-level spell from a chosen spellcasting class.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cantrips",
+        "value": "Learn two cantrips from the Bard, Cleric, Druid, Sorcerer, Warlock, or Wizard spell list."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level spell from the same class list and cast it at its lowest level once per long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Use the spellcasting ability associated with the chosen class."
+      }
+    ]
+  },
+  {
+    "name": "Martial Adept",
+    "prerequisite": "None",
+    "description": "Learn combat maneuvers from the Battle Master martial archetype.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "superiority_dice",
+        "value": "You learn two maneuvers of your choice from the Battle Master archetype and gain one superiority die, a d6, which is regained after a short or long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "maneuver_save_dc",
+        "value": "Your maneuver saving throw DC equals 8 + your proficiency bonus + your Strength or Dexterity modifier, your choice."
+      }
+    ]
+  },
+  {
+    "name": "Medium Armor Master",
+    "prerequisite": "Proficiency with medium armor",
+    "description": "Improve mobility and stealth while wearing medium armor.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "dexterity_ac",
+        "value": "When wearing medium armor, you can add up to 3, rather than 2, to your AC from your Dexterity modifier."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "stealth",
+        "value": "Wearing medium armor does not impose disadvantage on your Dexterity (Stealth) checks."
+      }
+    ]
+  },
+  {
+    "name": "Mobile",
+    "prerequisite": "None",
+    "description": "Increase movement speed and move freely through difficult terrain and around enemies.",
+    "effects": [
+      {
+        "type": "STAT_BONUS",
+        "target": "movement_speed",
+        "value": "10"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "difficult_terrain",
+        "value": "When you use the Dash action, difficult terrain does not cost you extra movement on that turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "opportunity_attacks",
+        "value": "When you make a melee attack against a creature, you do not provoke opportunity attacks from that creature for the rest of the turn, whether the attack hits or misses."
+      }
+    ]
+  },
+  {
+    "name": "Moderately Armored",
+    "prerequisite": "Proficiency with light armor",
+    "description": "Improve physical ability and gain proficiency with medium armor and shields.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "armor",
+        "value": "medium"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "armor",
+        "value": "shields"
+      }
+    ]
+  },
+  {
+    "name": "Mounted Combatant",
+    "prerequisite": "None",
+    "description": "Improve your ability to fight while mounted and protect your mount.",
+    "effects": [
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "attack_roll",
+        "value": "Against unmounted creatures smaller than your mount."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mount_protection",
+        "value": "You can force an attack targeting your mount to target you instead."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mount_saving_throw",
+        "value": "If your mount is subjected to an effect that allows a Dexterity saving throw to take only half damage, it instead takes no damage on a success and half damage on a failure."
+      }
+    ]
+  },
+  {
+    "name": "Observant",
+    "prerequisite": "None",
+    "description": "Improve Intelligence or Wisdom and become exceptionally perceptive and attentive to details.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "STAT_BONUS",
+        "target": "passive_perception",
+        "value": "5"
+      },
+      {
+        "type": "STAT_BONUS",
+        "target": "passive_investigation",
+        "value": "5"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "lip_reading",
+        "value": "You can read the lips of creatures you can see that speak a language you understand."
+      }
+    ]
+  },
+  {
+    "name": "Polearm Master",
+    "prerequisite": "None",
+    "description": "Use the reach and versatility of polearms to make additional attacks and control enemy movement.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bonus_attack",
+        "value": "When you take the Attack action and attack with a glaive, halberd, quarterstaff, or spear, you can use a bonus action to make a melee attack with the opposite end of the weapon, dealing 1d4 bludgeoning damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "opportunity_attack",
+        "value": "While wielding a glaive, halberd, pike, quarterstaff, or spear, creatures provoke an opportunity attack from you when they enter your reach."
+      }
+    ]
+  },
+  {
+    "name": "Resilient",
+    "prerequisite": "None",
+    "description": "Improve one ability score and gain proficiency in its associated saving throws.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "choice",
+        "value": "STR"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "saving_throw",
+        "value": "saving_throw_corresponding_to_chosen_ability"
+      }
+    ]
+  },
+  {
+    "name": "Ritual Caster",
+    "prerequisite": "Intelligence or Wisdom 13 or higher",
+    "description": "Learn ritual spells and gain the ability to cast them without expending spell slots.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ritual_spellbook",
+        "value": "Acquire a ritual book containing two 1st-level ritual spells from the Bard, Cleric, Druid, Sorcerer, Warlock, or Wizard spell list; the chosen class must have the ritual tag."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ritual_learning",
+        "value": "You can add additional ritual spells to your book when you find them and meet the requirements for copying them."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ritual_casting",
+        "value": "You can cast spells in your ritual book as rituals."
+      }
+    ]
+  },
+  {
+    "name": "Savage Attacker",
+    "prerequisite": "None",
+    "description": "Improve the damage potential of melee weapon attacks.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "damage_reroll",
+        "value": "Once per turn when you roll damage for a melee weapon attack, you can reroll the weapon's damage dice and use either total."
+      }
+    ]
+  },
+  {
+    "name": "Sentinel",
+    "prerequisite": "None",
+    "description": "Punish enemies that attack your allies or attempt to move away from you.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "opportunity_attack",
+        "value": "When you hit a creature with an opportunity attack, its speed becomes 0 for the rest of the turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "disengage",
+        "value": "Creatures provoke opportunity attacks from you even if they take the Disengage action before leaving your reach."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ally_protection",
+        "value": "When a creature within 5 feet of you makes an attack against a target other than you, you can use your reaction to make a melee weapon attack against the attacking creature."
+      }
+    ]
+  },
+  {
+    "name": "Sharpshooter",
+    "prerequisite": "None",
+    "description": "Master ranged weapons and make accurate attacks despite cover, distance, or nearby enemies.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cover",
+        "value": "Your ranged weapon attacks ignore half cover and three-quarters cover."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ranged_attack",
+        "value": "Attacking at long range does not impose disadvantage on your ranged weapon attack rolls."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "damage",
+        "value": "Before making an attack with a ranged weapon with which you are proficient, you can take a -5 penalty to the attack roll to gain a +10 bonus to the damage roll if the attack hits."
+      }
+    ]
+  },
+  {
+    "name": "Shield Master",
+    "prerequisite": "None",
+    "description": "Use a shield to improve defense, resist certain effects, and shove opponents.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bonus_shove",
+        "value": "If you take the Attack action on your turn, you can use a bonus action to try to shove a creature within 5 feet of you with your shield."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "dexterity_saving_throw",
+        "value": "If you are not incapacitated, you can add your shield's AC bonus to Dexterity saving throws against effects that target only you."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "evasion",
+        "value": "If you are subjected to an effect that allows a Dexterity saving throw to take only half damage, you can use your reaction to take no damage on a success, provided you are not incapacitated."
+      }
+    ]
+  },
+  {
+    "name": "Skilled",
+    "prerequisite": "None",
+    "description": "Gain proficiency in three additional skills or tools of your choice.",
+    "effects": [
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "skill_or_tool",
+        "value": "three_choices"
+      }
+    ]
+  },
+  {
+    "name": "Skulker",
+    "prerequisite": "Dexterity 13 or higher",
+    "description": "Improve your ability to hide and attack while lightly obscured.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hiding",
+        "value": "You can try to hide when lightly obscured from the creature you are hiding from."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ranged_attack",
+        "value": "When you are hidden from a creature and miss it with a ranged weapon attack, making the attack does not reveal your position."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "perception",
+        "value": "Dim light does not impose disadvantage on your Wisdom (Perception) checks relying on sight."
+      }
+    ]
+  },
+  {
+    "name": "Spell Sniper",
+    "prerequisite": "The ability to cast at least one spell",
+    "description": "Improve the range and accuracy of spell attacks.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spell_attack_range",
+        "value": "When you cast a spell that requires you to make an attack roll, the spell's range is doubled."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cover",
+        "value": "Your ranged spell attacks ignore half cover and three-quarters cover."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting",
+        "value": "You learn one cantrip that requires an attack roll from the Bard, Cleric, Druid, Sorcerer, Warlock, or Wizard spell list."
+      }
+    ]
+  },
+  {
+    "name": "Tough",
+    "prerequisite": "None",
+    "description": "Increase your maximum hit points and improve your durability.",
+    "effects": [
+      {
+        "type": "STAT_BONUS",
+        "target": "maximum_hit_points",
+        "value": "2_per_character_level"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hit_point_increase",
+        "value": "Whenever you gain a level, your maximum hit points increase by an additional 2."
+      }
+    ]
+  },
+  {
+    "name": "War Caster",
+    "prerequisite": "The ability to cast at least one spell",
+    "description": "Improve concentration and spellcasting capabilities during combat.",
+    "effects": [
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "constitution_saving_throw",
+        "value": "maintaining_concentration_on_spells_when_taking_damage"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "opportunity_spell",
+        "value": "When a hostile creature provokes an opportunity attack from you, you can use your reaction to cast a spell at it instead of making an opportunity attack; the spell must have a casting time of 1 action and target only that creature."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "somatic_components",
+        "value": "You can perform the somatic components of spells even when you have weapons or a shield in one or both hands."
+      }
+    ]
+  },
+  {
+    "name": "Weapon Master",
+    "prerequisite": "None",
+    "description": "Improve physical ability and gain proficiency with additional weapons.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "weapon",
+        "value": "four_weapons_of_your_choice"
+      }
+    ]
+  },
+  {
+    "name": "Bountiful Luck",
+    "prerequisite": "Halfling",
+    "description": "Share your natural luck with nearby allies by allowing them to reroll natural 1s.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ally_luck",
+        "value": "When an ally you can see within 30 feet rolls a 1 on an attack roll, ability check, or saving throw, you can use your reaction to let that ally reroll the die."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "halfling_luck",
+        "value": "You cannot use this feat while you have the incapacitated condition."
+      }
+    ]
+  },
+  {
+    "name": "Dragon Fear",
+    "prerequisite": "Dragonborn",
+    "description": "Awaken your draconic presence to frighten nearby enemies.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "frightening_presence",
+        "value": "Instead of exhaling destructive energy with your breath weapon, you can roar; creatures of your choice within 30 feet must make a Wisdom saving throw or become frightened for 1 minute, repeating the save at the end of each turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "breath_weapon_replacement",
+        "value": "The DC equals 8 + your proficiency bonus + your Charisma modifier."
+      }
+    ]
+  },
+  {
+    "name": "Dragon Hide",
+    "prerequisite": "Dragonborn",
+    "description": "Develop protective scales and natural weapons through your draconic heritage.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "natural_armor",
+        "value": "When not wearing armor, you can calculate your AC as 13 + your Dexterity modifier."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "natural_weapons",
+        "value": "You grow retractable claws that can be used as natural weapons, dealing 1d4 slashing damage on a hit."
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "skill",
+        "value": "You gain proficiency with your choice of the Acrobatics or Athletics skill."
+      }
+    ]
+  },
+  {
+    "name": "Drow High Magic",
+    "prerequisite": "Elf (Drow)",
+    "description": "Develop additional innate spellcasting abilities associated with drow magic.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "detect_magic",
+        "value": "You can cast detect magic at will without expending a spell slot."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "levitate",
+        "value": "You can cast levitate once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "dispel_magic",
+        "value": "You can cast dispel magic once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Charisma is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Dwarven Fortitude",
+    "prerequisite": "Dwarf",
+    "description": "Improve Constitution and recover hit points by spending Hit Dice while defending yourself.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "dodge_healing",
+        "value": "Whenever you take the Dodge action in combat, you can spend one Hit Die to heal yourself, rolling the die and adding your Constitution modifier."
+      }
+    ]
+  },
+  {
+    "name": "Elven Accuracy",
+    "prerequisite": "Elf or Half-Elf",
+    "description": "Improve accuracy when attacking with advantage using Dexterity, Intelligence, Wisdom, or Charisma.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "DEX",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "advantage_reroll",
+        "value": "Whenever you have advantage on an attack roll using Dexterity, Intelligence, Wisdom, or Charisma, you can reroll one of the dice once."
+      }
+    ]
+  },
+  {
+    "name": "Fade Away",
+    "prerequisite": "Gnome",
+    "description": "Improve Dexterity or Intelligence and briefly turn invisible after suffering damage.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "DEX",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "invisibility",
+        "value": "Immediately after taking damage, you can use your reaction to magically become invisible until the end of your next turn or until you attack, deal damage, or force someone to make a saving throw."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You regain this ability after a short or long rest."
+      }
+    ]
+  },
+  {
+    "name": "Fey Teleportation",
+    "prerequisite": "Elf (High Elf)",
+    "description": "Improve Intelligence or Charisma and learn to teleport using fey magic.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "misty_step",
+        "value": "You learn the misty step spell and can cast it once without expending a spell slot; you regain this ability after a short or long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence is your spellcasting ability for the spell if you are a high elf; otherwise, Charisma."
+      }
+    ]
+  },
+  {
+    "name": "Flames of Phlegethos",
+    "prerequisite": "Tiefling",
+    "description": "Improve Intelligence or Charisma and surround yourself with protective hellish flames when casting fire spells.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fire_reroll",
+        "value": "When you roll fire damage for a spell you cast, you can reroll any roll of 1 on the fire damage dice, but you must use the new roll."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fiery_aura",
+        "value": "After casting a spell that deals fire damage, you can cause flames to surround you for 1 minute; creatures within 5 feet that hit you with a melee attack take 1d4 fire damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fire_resistance",
+        "value": "You gain resistance to fire damage while the flames are active."
+      }
+    ]
+  },
+  {
+    "name": "Infernal Constitution",
+    "prerequisite": "Tiefling",
+    "description": "Improve Constitution and gain resistance to additional elemental and poisonous damage.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "RESISTANCE_GRANT",
+        "target": "damage_type",
+        "value": "cold"
+      },
+      {
+        "type": "RESISTANCE_GRANT",
+        "target": "damage_type",
+        "value": "poison"
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "saving_throw",
+        "value": "Against being poisoned."
+      }
+    ]
+  },
+  {
+    "name": "Orcish Fury",
+    "prerequisite": "Half-Orc",
+    "description": "Improve physical resilience and unleash additional damage through your orcish fury.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "additional_damage",
+        "value": "Once per short or long rest, when you hit with a weapon attack using a simple or martial weapon, you can roll one of the weapon's damage dice an additional time and add it to the damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "reaction_attack",
+        "value": "Immediately after using your Relentless Endurance trait, you can use your reaction to make one weapon attack."
+      }
+    ]
+  },
+  {
+    "name": "Prodigy",
+    "prerequisite": "Half-Elf, Half-Orc, or Human",
+    "description": "Develop exceptional versatility by gaining a skill, tool, language, and expertise.",
+    "effects": [
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "skill",
+        "value": "one_skill_of_your_choice"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "tool",
+        "value": "one_tool_of_your_choice"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "language",
+        "value": "one_language_of_your_choice"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "expertise",
+        "value": "Choose one skill in which you have proficiency; your proficiency bonus is doubled for ability checks using that skill."
+      }
+    ]
+  },
+  {
+    "name": "Second Chance",
+    "prerequisite": "Halfling",
+    "description": "Use your halfling luck to force an attacker to reroll a successful attack.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "DEX",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "attack_reroll",
+        "value": "When a creature you can see hits you with an attack roll, you can use your reaction to force it to reroll the attack; it must use the new roll."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You regain this ability after a short or long rest."
+      }
+    ]
+  },
+  {
+    "name": "Squat Nimbleness",
+    "prerequisite": "Dwarf or a Small race",
+    "description": "Improve physical agility, movement speed, and proficiency in an athletic skill.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "STAT_BONUS",
+        "target": "movement_speed",
+        "value": "5"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "skill",
+        "value": "Acrobatics_or_Athletics"
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "saving_throw",
+        "value": "escaping_a_grapple"
+      }
+    ]
+  },
+  {
+    "name": "Svirfneblin Magic",
+    "prerequisite": "Gnome (Deep Gnome)",
+    "description": "Develop additional innate spellcasting abilities through deep gnome heritage.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "nondetection",
+        "value": "You can cast nondetection on yourself at will without material components."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "blindness_deafness",
+        "value": "You can cast blindness/deafness once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "blur",
+        "value": "You can cast blur once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "disguise_self",
+        "value": "You can cast disguise self once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Aberrant Dragonmark",
+    "prerequisite": "No other dragonmark",
+    "description": "Manifest an aberrant dragonmark that grants a cantrip, a 1st-level spell, and enhanced vitality.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cantrip",
+        "value": "Learn one sorcerer cantrip of your choice."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level sorcerer spell and cast it once per short or long rest without expending a spell slot."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Constitution is your spellcasting ability for these spells."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "aberrant_surge",
+        "value": "When you cast the 1st-level spell, you can expend one Hit Die; roll it and gain temporary hit points equal to the number rolled."
+      }
+    ]
+  },
+  {
+    "name": "Revenant Blade",
+    "prerequisite": "Elf",
+    "description": "Improve physical ability and master the double-bladed scimitar.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "double_bladed_scimitar",
+        "value": "While wielding a double-bladed scimitar, you gain +1 AC."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "finesse",
+        "value": "A double-bladed scimitar has the finesse property when you wield it."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bonus_attack",
+        "value": "The weapon's special bonus-action attack deals 2d4 damage instead of 1d4."
+      }
+    ]
+  },
+  {
+    "name": "Artificer Initiate",
+    "prerequisite": "None",
+    "description": "Learn basic artificer spellcasting and gain proficiency with an artisan's tool.",
+    "effects": [
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "tool",
+        "value": "one_type_of_artisans_tools"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cantrip",
+        "value": "Learn one cantrip from the artificer spell list."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Choose one 1st-level artificer spell and always have it prepared; cast it once without a spell slot and regain this ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence is your spellcasting ability for these spells."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "material_components",
+        "value": "You can use the chosen tool as a spellcasting focus for any spell you cast using Intelligence."
+      }
+    ]
+  },
+  {
+    "name": "Chef",
+    "prerequisite": "None",
+    "description": "Improve Constitution or Wisdom and gain the ability to prepare restorative food and treats.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "tool",
+        "value": "cook's_utensils"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "short_rest_food",
+        "value": "As part of a short rest, prepare special food for a number of creatures equal to your proficiency bonus; each creature that spends one or more Hit Dice to regain hit points regains an additional 1d8 hit points."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "temporary_hit_points",
+        "value": "With 1 hour of work or when you finish a long rest, prepare treats equal to your proficiency bonus; a creature can eat one as a bonus action to gain temporary hit points equal to your proficiency bonus."
+      }
+    ]
+  },
+  {
+    "name": "Crusher",
+    "prerequisite": "None",
+    "description": "Improve physical ability and manipulate enemies with bludgeoning weapon attacks.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "forced_movement",
+        "value": "Once per turn when you hit a creature with an attack that deals bludgeoning damage, you can move it 5 feet to an unoccupied space if it is no more than one size larger than you."
+      },
+      {
+        "type": "ADVANTAGE_GRANT",
+        "target": "attack_roll",
+        "value": "Against a creature you critically hit with bludgeoning damage until the start of your next turn."
+      }
+    ]
+  },
+  {
+    "name": "Eldritch Adept",
+    "prerequisite": "Spellcasting or Pact Magic feature",
+    "description": "Learn one eldritch invocation from the warlock class.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "eldritch_invocation",
+        "value": "Learn one eldritch invocation of your choice from the warlock class; if the invocation has a prerequisite, you must meet it."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "invocation_replacement",
+        "value": "Whenever you gain a level, you can replace the invocation with another one you meet the prerequisites for."
+      }
+    ]
+  },
+  {
+    "name": "Fey Touched",
+    "prerequisite": "None",
+    "description": "Improve mental ability and gain limited access to fey magic.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "misty_step",
+        "value": "Learn misty step and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level divination or enchantment spell of your choice; cast it once without a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "The ability increased by this feat is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Fighting Initiate",
+    "prerequisite": "Proficiency with a martial weapon",
+    "description": "Learn one fighting style option from the fighter class.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fighting_style",
+        "value": "Learn one fighting style option available to the fighter class; you cannot choose a style you already have."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fighting_style_replacement",
+        "value": "Whenever you gain a level, you can replace the chosen fighting style with another fighter fighting style."
+      }
+    ]
+  },
+  {
+    "name": "Gunner",
+    "prerequisite": "None",
+    "description": "Improve Dexterity and become proficient with firearms while eliminating their close-range disadvantages.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "DEX",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "weapon",
+        "value": "firearms"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "loading",
+        "value": "Ignore the loading property of firearms."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "ranged_attack",
+        "value": "Being within 5 feet of a hostile creature does not impose disadvantage on your ranged attack rolls."
+      }
+    ]
+  },
+  {
+    "name": "Metamagic Adept",
+    "prerequisite": "Spellcasting or Pact Magic feature",
+    "description": "Learn two Metamagic options and gain sorcery points to modify spells.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "metamagic",
+        "value": "Learn two Metamagic options from the sorcerer class."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "sorcery_points",
+        "value": "Gain 2 sorcery points to spend on Metamagic; regain them after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "metamagic_cost",
+        "value": "If you already have sorcery points, the points granted by this feat are added to them."
+      }
+    ]
+  },
+  {
+    "name": "Piercer",
+    "prerequisite": "None",
+    "description": "Improve physical ability and increase the damage potential of piercing attacks.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "damage_reroll",
+        "value": "Once per turn when you hit a creature with an attack that deals piercing damage, you can reroll one of the attack's damage dice and use either result."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "critical_damage",
+        "value": "When you score a critical hit that deals piercing damage, you can roll one additional damage die when determining the extra piercing damage."
+      }
+    ]
+  },
+  {
+    "name": "Poisoner",
+    "prerequisite": "None",
+    "description": "Improve your ability to create and apply poisons, making them more effective against enemies.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "DEX",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "poison_resistance",
+        "value": "You ignore resistance to poison damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "poison_creation",
+        "value": "You can apply poison to a weapon or piece of ammunition as a bonus action instead of an action."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "poison_creation",
+        "value": "You gain proficiency with the poisoner's kit; using it, you can create a number of doses of potent poison equal to your proficiency bonus after a long rest, each dose dealing 2d8 poison damage on a failed DC 14 Constitution saving throw."
+      }
+    ]
+  },
+  {
+    "name": "Shadow Touched",
+    "prerequisite": "None",
+    "description": "Improve mental ability and gain access to illusion and necromancy magic.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "invisibility",
+        "value": "Learn invisibility and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level illusion or necromancy spell of your choice; cast it once without a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "The ability increased by this feat is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Skill Expert",
+    "prerequisite": "None",
+    "description": "Improve an ability score and gain additional skill proficiency and expertise.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "PROFICIENCY_GRANT",
+        "target": "skill",
+        "value": "one_skill_of_your_choice"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "expertise",
+        "value": "Choose one skill in which you have proficiency; your proficiency bonus is doubled for ability checks using that skill."
+      }
+    ]
+  },
+  {
+    "name": "Slasher",
+    "prerequisite": "None",
+    "description": "Improve physical ability and hinder enemies with slashing weapon attacks.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "movement_reduction",
+        "value": "When you hit a creature with an attack that deals slashing damage, its speed is reduced by 10 feet until the start of your next turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "critical_effect",
+        "value": "When you score a critical hit that deals slashing damage, the target has disadvantage on all attack rolls until the start of your next turn."
+      }
+    ]
+  },
+  {
+    "name": "Telekinetic",
+    "prerequisite": "None",
+    "description": "Improve mental ability and develop the power to manipulate objects and creatures with your mind.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mage_hand",
+        "value": "Learn the mage hand cantrip; its range increases by 30 feet, it can be invisible, and you can cast it without verbal or somatic components if you know it already."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "telekinetic_shove",
+        "value": "As a bonus action, move one willing creature or force one unwilling creature within 30 feet to make a Strength saving throw or be moved 5 feet toward or away from you."
+      }
+    ]
+  },
+  {
+    "name": "Telepathic",
+    "prerequisite": "None",
+    "description": "Improve mental ability and communicate telepathically with nearby creatures.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "telepathy",
+        "value": "You can speak telepathically to a creature you can see within 60 feet; the creature must understand at least one language, but it does not need to share a language with you."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "detect_thoughts",
+        "value": "Learn detect thoughts and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "The ability increased by this feat is your spellcasting ability for detect thoughts."
+      }
+    ]
+  },
+  {
+    "name": "Wood Elf Magic",
+    "prerequisite": "Elf (Wood Elf)",
+    "description": "Develop additional innate spellcasting abilities associated with the magic of the primeval woods.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cantrip",
+        "value": "Learn one druid cantrip of your choice."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "longstrider",
+        "value": "Learn longstrider and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "pass_without_trace",
+        "value": "Learn pass without trace and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Wisdom is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Gift of the Chromatic Dragon",
+    "prerequisite": "None",
+    "description": "Harness chromatic dragon magic to empower your weapons and protect yourself against elemental damage.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "elemental_weapon",
+        "value": "As a bonus action, touch one simple or martial weapon and infuse it with elemental energy for 1 minute; once per turn when you hit with it, deal an additional 1d4 damage of your chosen acid, cold, fire, lightning, or poison type."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "elemental_resistance",
+        "value": "When you take acid, cold, fire, lightning, or poison damage, you can use your reaction to gain resistance to that instance of damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use the weapon infusion once per long rest; you can use the resistance reaction a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Gift of the Gem Dragon",
+    "prerequisite": "None",
+    "description": "Develop telekinetic powers associated with gem dragons and retaliate against nearby attackers.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "telekinetic_reaction",
+        "value": "When a creature within 10 feet of you deals damage to you, you can use your reaction to force it to make a Strength saving throw; on a failure, it takes 2d8 force damage and is pushed up to 10 feet away from you."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this reaction a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Gift of the Metallic Dragon",
+    "prerequisite": "None",
+    "description": "Channel metallic dragon magic to heal allies and protect creatures with spectral wings.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cure_wounds",
+        "value": "Learn cure wounds and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "protective_wings",
+        "value": "When you or another creature within 5 feet is hit by an attack roll, you can use your reaction to manifest spectral wings and grant a bonus to AC equal to your proficiency bonus against that attack, potentially causing it to miss."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence, Wisdom, or Charisma is your spellcasting ability for cure wounds, chosen when you gain the feat."
+      }
+    ]
+  },
+  {
+    "name": "Strike of the Giants",
+    "prerequisite": "Strength 13 or higher or Constitution 13 or higher",
+    "description": "Awaken the elemental power of giants and imbue weapon attacks with additional effects.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "giant_strike"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "giant_ancestry",
+        "value": "Your chosen ancestry determines the damage type and special effect of your giant strike."
+      }
+    ]
+  },
+  {
+    "name": "Ember of the Fire Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop fire giant abilities that protect you and burn nearby enemies.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fire_shield",
+        "value": "When a creature within 5 feet hits you with an attack roll, you can use your reaction to deal 1d8 fire damage to it."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "fiery_burst",
+        "value": "Creatures of your choice within 15 feet must make a Dexterity saving throw or take 1d8 fire damage and become blinded until the start of your next turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use the fiery burst a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Fury of the Frost Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop frost giant abilities that protect you with freezing energy and retaliate against attackers.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "frost_shield",
+        "value": "When a creature within 30 feet hits you with an attack roll, you can use your reaction to grant yourself 1d4 temporary hit points and force the attacker to make a Constitution saving throw or have its speed reduced to 0 until the start of your next turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this reaction a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Guile of the Cloud Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop cloud giant abilities that allow you to avoid attacks and manipulate your position.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cloud_ruse",
+        "value": "When a creature hits you with an attack roll, you can use your reaction to impose disadvantage on that attack and teleport up to 30 feet to an unoccupied space you can see."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this reaction a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Keenness of the Stone Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop stone giant abilities that improve perception and allow you to retaliate with magical force.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "stone_throw",
+        "value": "When a creature you can see within 60 feet ends its turn, you can use your reaction to force it to make a Strength saving throw; on a failure, it takes 1d10 force damage and is knocked prone."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this reaction a number of times equal to your proficiency bonus per long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "darkvision",
+        "value": "You gain darkvision out to 60 feet, or increase your existing darkvision range by 60 feet."
+      }
+    ]
+  },
+  {
+    "name": "Soul of the Storm Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop storm giant abilities that protect you with lightning and thunder energy.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "stormy_aura",
+        "value": "As a bonus action, you emanate a magical aura extending 10 feet from you for 1 minute; creatures of your choice in the aura have disadvantage on opportunity attacks."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "thunderous_burst",
+        "value": "When a creature enters the aura or starts its turn there, you can force it to make a Constitution saving throw or take 1d6 thunder damage."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use the aura a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Vigor of the Hill Giant",
+    "prerequisite": "Strike of the Giants feat",
+    "description": "Develop hill giant resilience and the ability to recover from injuries.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hill_resilience",
+        "value": "You gain proficiency in Strength saving throws; if you already have this proficiency, choose another saving throw proficiency."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mighty_impel",
+        "value": "As a bonus action, move a willing creature or an unwilling creature that fails a Strength saving throw up to 30 feet to an unoccupied space you can see."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use mighty impel a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Rune Shaper",
+    "prerequisite": "None",
+    "description": "Learn to inscribe giant runes and use their magical properties to cast spells.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "comprehend_languages",
+        "value": "Learn comprehend languages and cast it as a ritual."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "giant_runes",
+        "value": "Learn two runes of your choice from the runes presented in the feat; each rune grants access to a spell associated with it."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "rune_spells",
+        "value": "You can cast each rune spell once without expending a spell slot and regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "rune_replacement",
+        "value": "Whenever you gain a level, you can replace one rune you know with another available rune."
+      }
+    ]
+  },
+  {
+    "name": "Squire of Solamnia",
+    "prerequisite": "None",
+    "description": "Receive training in the traditions of the Knights of Solamnia and improve your mounted combat abilities.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "precision_strike",
+        "value": "When you make an attack roll against a creature, you can expend one use of this feat to gain advantage on the roll."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You have a number of uses equal to your proficiency bonus and regain all expended uses after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mounted_combat",
+        "value": "You can mount or dismount a creature using only 5 feet of movement rather than half your speed."
+      }
+    ]
+  },
+  {
+    "name": "Knight of the Crown",
+    "prerequisite": "4th level or higher; Squire of Solamnia feat",
+    "description": "Develop the leadership abilities of the Knights of the Crown and coordinate allied attacks.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "commander's_strike",
+        "value": "When you take the Attack action, you can replace one attack with a command to an ally within 30 feet; the ally can use its reaction to make one weapon attack."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this ability a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Knight of the Sword",
+    "prerequisite": "4th level or higher; Squire of Solamnia feat",
+    "description": "Develop the courage and resolve of the Knights of the Sword to weaken enemies through fear.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "demoralizing_strike",
+        "value": "When you hit a creature with a weapon attack, you can expend one use of this feat to force it to make a Wisdom saving throw or become frightened of you until the start of your next turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this ability a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Knight of the Rose",
+    "prerequisite": "4th level or higher; Squire of Solamnia feat",
+    "description": "Develop the leadership and protective qualities of the Knights of the Rose to strengthen nearby allies.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "CON",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "bolster_allies",
+        "value": "As a bonus action, choose a number of creatures up to your proficiency bonus within 30 feet; each gains temporary hit points equal to 1d8 + your proficiency bonus."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this ability a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Initiate of High Sorcery",
+    "prerequisite": "1st level or higher; Sorcerer or Wizard class",
+    "description": "Join one of the Orders of High Sorcery and gain access to its magical traditions.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "arcane_spell",
+        "value": "Learn two cantrips from the Sorcerer or Wizard spell list."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level spell from the Sorcerer or Wizard spell list and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "order",
+        "value": "Choose the Order of the Red Robes, White Robes, or Black Robes and gain its associated benefits."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence or Charisma is your spellcasting ability for these spells, chosen when you gain the feat."
+      }
+    ]
+  },
+  {
+    "name": "Adept of the Black Robes",
+    "prerequisite": "4th level or higher; Initiate of High Sorcery (Order of the Black Robes)",
+    "description": "Embrace the dark magical traditions of the Black Robes and drain life from enemies.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "life_drain",
+        "value": "When you deal damage to a creature with a spell, you can expend one Hit Die to deal additional necrotic damage equal to the number rolled plus your spellcasting ability modifier."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this ability once per turn."
+      }
+    ]
+  },
+  {
+    "name": "Divinely Favored",
+    "prerequisite": "4th level or higher",
+    "description": "Gain a divine connection that grants spellcasting and a special supernatural benefit.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "divine_spell",
+        "value": "Learn one cantrip and one 1st-level spell from the Cleric spell list."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "divine_favor",
+        "value": "Choose a divine benefit associated with your alignment and deity, granting an additional supernatural capability."
+      }
+    ]
+  },
+  {
+    "name": "Cartomancer",
+    "prerequisite": "4th level or higher; Spellcasting feature",
+    "description": "Channel magical energy through playing cards to conceal and rapidly cast spells.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "card_trick",
+        "value": "Learn the prestidigitation cantrip and can use a deck of cards as a spellcasting focus."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "card_spell",
+        "value": "After finishing a long rest, imbue one spell of 1st level or higher from your spell list into a card; the spell must have a casting time of 1 action."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "hidden_spell",
+        "value": "As a bonus action, you can flourish the imbued card and cast the stored spell without expending a spell slot; the spell must be cast before the end of your next turn."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "Once you cast the stored spell, you cannot use this feature again until you finish a long rest."
+      }
+    ]
+  },
+  {
+    "name": "Strixhaven Initiate",
+    "prerequisite": "None",
+    "description": "Study the magical traditions of a Strixhaven college and learn spells associated with its curriculum.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "cantrips",
+        "value": "Learn two cantrips from the spell lists associated with your chosen Strixhaven college."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "first_level_spell",
+        "value": "Learn one 1st-level spell from the spell lists associated with your chosen college and cast it once without expending a spell slot; regain the ability after a long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "Intelligence, Wisdom, or Charisma is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Strixhaven Mascot",
+    "prerequisite": "4th level or higher; Strixhaven Initiate feat",
+    "description": "Develop the ability to summon a magical Strixhaven mascot to assist you.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mascot_summoning",
+        "value": "You can cast find familiar as a ritual without material components, summoning a special Strixhaven mascot instead of a normal familiar."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "mascot_teleportation",
+        "value": "As an action, you can teleport yourself and a willing creature within 5 feet to an unoccupied space within 5 feet of your mascot, provided it is within 60 feet."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this teleportation feature a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Scion of the Outer Planes",
+    "prerequisite": "None",
+    "description": "Establish a connection with an Outer Plane and gain a supernatural ability associated with its energy.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "planar_cantrip",
+        "value": "Learn one cantrip associated with your chosen Outer Plane."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "planar_resistance",
+        "value": "Gain resistance to a damage type associated with your chosen Outer Plane."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "planar_connection",
+        "value": "Choose an Outer Plane and gain its associated supernatural benefit."
+      }
+    ]
+  },
+  {
+    "name": "Outlands Envoy",
+    "prerequisite": "4th level or higher; Scion of the Outer Planes feat",
+    "description": "Develop an enhanced connection to the Outlands and gain additional planar magic.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "INT",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "misty_step",
+        "value": "Learn misty step and cast it without expending a spell slot once per long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "tongues",
+        "value": "Learn tongues and cast it without expending a spell slot once per long rest."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "spellcasting_ability",
+        "value": "The ability increased by this feat is your spellcasting ability for these spells."
+      }
+    ]
+  },
+  {
+    "name": "Baleful Scion",
+    "prerequisite": "4th level or higher; Scion of the Outer Planes (Evil-aligned Outer Plane)",
+    "description": "Channel the destructive power of an evil-aligned Outer Plane to drain vitality from enemies.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "life_drain",
+        "value": "Once per turn when you deal damage to a creature within 30 feet, you can deal additional necrotic damage equal to your proficiency bonus and regain hit points equal to the necrotic damage dealt."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this feature a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Cohort of Chaos",
+    "prerequisite": "4th level or higher; Scion of the Outer Planes (Chaotic Outer Plane)",
+    "description": "Channel chaotic planar energy to create unpredictable magical effects.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "chaotic_surge",
+        "value": "When you make an attack roll or ability check and roll a 1 or 20 on the d20, you can trigger a chaotic magical effect determined by the feat."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this feature once per turn."
+      }
+    ]
+  },
+  {
+    "name": "Righteous Heritor",
+    "prerequisite": "4th level or higher; Scion of the Outer Planes (Good-aligned Outer Plane)",
+    "description": "Channel the protective power of a good-aligned Outer Plane to defend nearby creatures.",
+    "effects": [
+      {
+        "type": "ABILITY_SCORE_INCREASE",
+        "target": "STR",
+        "value": "1"
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "damage_reduction",
+        "value": "When a creature you can see within 30 feet takes damage, you can use your reaction to reduce that damage by 1d10 + your proficiency bonus."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "usage",
+        "value": "You can use this feature a number of times equal to your proficiency bonus per long rest."
+      }
+    ]
+  },
+  {
+    "name": "Planar Wanderer",
+    "prerequisite": "4th level or higher; Scion of the Outer Planes feat",
+    "description": "Develop an enhanced understanding of planar travel and gain resistance to planar hazards.",
+    "effects": [
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "planar_resistance",
+        "value": "Gain resistance to one damage type associated with your chosen Outer Plane."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "portal_sense",
+        "value": "You can sense the presence of portals within 30 feet of you."
+      },
+      {
+        "type": "SPECIAL_ABILITY",
+        "target": "portal_manipulation",
+        "value": "You can use your knowledge of planar portals to manipulate their operation under the conditions described by the feat."
+      }
+    ]
+  }
+]
