@@ -1,0 +1,446 @@
+[
+  {
+    "name": "Hill Dwarf",
+    "parent_race": "Dwarf",
+    "ability_bonuses": {
+      "WIS": 1
+    },
+    "traits": [
+      {
+        "name": "Dwarven Toughness"
+      }
+    ],
+    "description": "Dwarves with keen senses, deep intuition and remarkable resilience; gain +1 hit point per level."
+  },
+  {
+    "name": "Mountain Dwarf",
+    "parent_race": "Dwarf",
+    "ability_bonuses": {
+      "STR": 2
+    },
+    "traits": [
+      {
+        "name": "Dwarven Armor Training"
+      }
+    ],
+    "description": "Strong, hardy dwarves used to rugged terrain, proficient with light and medium armor."
+  },
+  {
+    "name": "Duergar",
+    "parent_race": "Dwarf",
+    "ability_bonuses": {
+      "STR": 1
+    },
+    "traits": [
+      {
+        "name": "Superior Darkvision"
+      },
+      {
+        "name": "Duergar Resilience"
+      },
+      {
+        "name": "Duergar Magic"
+      },
+      {
+        "name": "Sunlight Sensitivity"
+      }
+    ],
+    "description": "Underdark dwarves with advantage on saves against illusions, charm and paralysis, who can cast enlarge (3rd level) and invisibility (5th level) on themselves once per rest, but suffer in direct sunlight."
+  },
+  {
+    "name": "High Elf",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Elf Weapon Training"
+      },
+      {
+        "name": "Cantrip"
+      },
+      {
+        "name": "Extra Language"
+      }
+    ],
+    "description": "Elves with a sharp mind who know one wizard cantrip and train with traditional elven weapons."
+  },
+  {
+    "name": "Wood Elf",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "WIS": 1
+    },
+    "traits": [
+      {
+        "name": "Elf Weapon Training"
+      },
+      {
+        "name": "Fleet of Foot"
+      },
+      {
+        "name": "Mask of the Wild"
+      }
+    ],
+    "description": "Forest elves with a 35 ft walking speed who can hide in light natural cover such as foliage, rain, snow or mist."
+  },
+  {
+    "name": "Drow",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "CHA": 1
+    },
+    "traits": [
+      {
+        "name": "Superior Darkvision"
+      },
+      {
+        "name": "Sunlight Sensitivity"
+      },
+      {
+        "name": "Drow Magic"
+      },
+      {
+        "name": "Drow Weapon Training"
+      }
+    ],
+    "description": "Dark elves of the Underdark with 120 ft darkvision and innate spellcasting, but with a penalty in direct sunlight."
+  },
+  {
+    "name": "Eladrin",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "CHA": 1
+    },
+    "traits": [
+      {
+        "name": "Fey Step"
+      },
+      {
+        "name": "Shifting Seasons"
+      }
+    ],
+    "description": "Feywild elves with a bonus-action 30 ft teleport once per short rest. At higher levels it gains an effect that depends on the season of their mood (autumn charms, winter frightens, spring teleports an ally, summer deals fire damage)."
+  },
+  {
+    "name": "Sea Elf",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "CON": 1
+    },
+    "traits": [
+      {
+        "name": "Sea Elf Training"
+      },
+      {
+        "name": "Child of the Sea"
+      },
+      {
+        "name": "Friend of the Sea"
+      }
+    ],
+    "description": "Elves of the ocean with spear, trident, light crossbow and net training, a 30 ft swim speed, air and water breathing, and the ability to communicate with Small and Tiny sea beasts."
+  },
+  {
+    "name": "Shadar-kai",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "CON": 1
+    },
+    "traits": [
+      {
+        "name": "Necrotic Resistance"
+      },
+      {
+        "name": "Blessing of the Raven Queen"
+      }
+    ],
+    "description": "Shadowfell elves with necrotic resistance who can teleport as a bonus action and gain damage resistance until the start of their next turn, once per short rest."
+  },
+  {
+    "name": "Moon Elf",
+    "parent_race": "Elf",
+    "ability_bonuses": {},
+    "traits": [
+      {
+        "name": "No traits of its own - uses High Elf traits"
+      }
+    ],
+    "description": "Forgotten Realms name for a kind of high elf. The Sword Coast Adventurer's Guide covers it as setting flavor, with no separate stat block."
+  },
+  {
+    "name": "Sun Elf",
+    "parent_race": "Elf",
+    "ability_bonuses": {},
+    "traits": [
+      {
+        "name": "No traits of its own - uses High Elf traits"
+      }
+    ],
+    "description": "Forgotten Realms name for a kind of high elf, covered the same way as the moon elf, with no separate stat block."
+  },
+  {
+    "name": "Avariel",
+    "parent_race": "Elf",
+    "ability_bonuses": {},
+    "traits": [
+      {
+        "name": "Flight"
+      },
+      {
+        "name": "Languages (Auran)"
+      }
+    ],
+    "description": "Winged elves with a 30 ft flying speed while wearing light or no armor and no ability score bonus. Unearthed Arcana playtest material, not a published book."
+  },
+  {
+    "name": "Grugach",
+    "parent_race": "Elf",
+    "ability_bonuses": {
+      "STR": 1
+    },
+    "traits": [
+      {
+        "name": "Grugach Weapon Training"
+      },
+      {
+        "name": "Cantrip"
+      },
+      {
+        "name": "Languages (Sylvan)"
+      }
+    ],
+    "description": "Reclusive wild elves proficient with spear, shortbow, longbow and net, who know one druid cantrip (Wisdom) and speak Sylvan. Unearthed Arcana playtest material, not a published book."
+  },
+  {
+    "name": "Lightfoot",
+    "parent_race": "Halfling",
+    "ability_bonuses": {
+      "CHA": 1
+    },
+    "traits": [
+      {
+        "name": "Naturally Stealthy"
+      }
+    ],
+    "description": "Affable, wandering halflings who can hide behind a creature at least one size larger than themselves."
+  },
+  {
+    "name": "Stout",
+    "parent_race": "Halfling",
+    "ability_bonuses": {
+      "CON": 1
+    },
+    "traits": [
+      {
+        "name": "Stout Resilience"
+      }
+    ],
+    "description": "Hardier halflings (said to have dwarven blood) with advantage on saves against poison and resistance to poison damage."
+  },
+  {
+    "name": "Ghostwise",
+    "parent_race": "Halfling",
+    "ability_bonuses": {
+      "WIS": 1
+    },
+    "traits": [
+      {
+        "name": "Silent Speech"
+      }
+    ],
+    "description": "Rare, clannish forest halflings who can speak telepathically to a creature within 30 ft."
+  },
+  {
+    "name": "Forest Gnome",
+    "parent_race": "Gnome",
+    "ability_bonuses": {
+      "DEX": 1
+    },
+    "traits": [
+      {
+        "name": "Natural Illusionist"
+      },
+      {
+        "name": "Speak with Small Beasts"
+      }
+    ],
+    "description": "Secretive woodland gnomes who know minor illusion and can communicate simple ideas with Small or smaller beasts."
+  },
+  {
+    "name": "Rock Gnome",
+    "parent_race": "Gnome",
+    "ability_bonuses": {
+      "CON": 1
+    },
+    "traits": [
+      {
+        "name": "Artificer's Lore"
+      },
+      {
+        "name": "Tinker"
+      }
+    ],
+    "description": "Inventive, hardy gnomes who can build tiny clockwork devices and add double their proficiency bonus to History checks about magical, alchemical or technological items."
+  },
+  {
+    "name": "Deep Gnome",
+    "parent_race": "Gnome",
+    "ability_bonuses": {
+      "DEX": 1
+    },
+    "traits": [
+      {
+        "name": "Superior Darkvision"
+      },
+      {
+        "name": "Stone Camouflage"
+      }
+    ],
+    "description": "Svirfneblin, secretive Underdark gnomes who blend into rocky surroundings."
+  },
+  {
+    "name": "Asmodeus",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Infernal Legacy"
+      }
+    ],
+    "description": "The default tiefling bloodline: thaumaturgy, then hellish rebuke (3rd level) and darkness (5th level)."
+  },
+  {
+    "name": "Baalzebul",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Maladomini"
+      }
+    ],
+    "description": "Thaumaturgy, ray of sickness (3rd level) and crown of madness (5th level)."
+  },
+  {
+    "name": "Dispater",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "DEX": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Dis"
+      }
+    ],
+    "description": "Tieflings suited to spying and infiltration: thaumaturgy, disguise self (3rd level) and detect thoughts (5th level)."
+  },
+  {
+    "name": "Fierna",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "WIS": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Phlegethos"
+      }
+    ],
+    "description": "Forceful, persuasive tieflings: friends, charm person (3rd level) and suggestion (5th level)."
+  },
+  {
+    "name": "Glasya",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "DEX": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Malbolge"
+      }
+    ],
+    "description": "Tieflings with heist-friendly magic: minor illusion, disguise self (3rd level) and invisibility (5th level)."
+  },
+  {
+    "name": "Levistus",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "CON": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Stygia"
+      }
+    ],
+    "description": "Cold-themed tieflings: ray of frost, armor of Agathys (3rd level) and darkness (5th level)."
+  },
+  {
+    "name": "Mammon",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Minauros"
+      }
+    ],
+    "description": "Tieflings gifted at gathering and guarding wealth: mage hand, Tenser's floating disk (3rd level) and arcane lock (5th level)."
+  },
+  {
+    "name": "Mephistopheles",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Cania"
+      }
+    ],
+    "description": "Tieflings with arcane and fire magic: mage hand, burning hands (3rd level) and flame blade (5th level)."
+  },
+  {
+    "name": "Zariel",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "STR": 1
+    },
+    "traits": [
+      {
+        "name": "Legacy of Avernus"
+      }
+    ],
+    "description": "Stronger, battle-ready tieflings: thaumaturgy, searing smite (3rd level) and branding smite (5th level)."
+  },
+  {
+    "name": "Feral",
+    "parent_race": "Tiefling",
+    "ability_bonuses": {
+      "DEX": 2,
+      "INT": 1
+    },
+    "traits": [
+      {
+        "name": "Feral"
+      },
+      {
+        "name": "Appearance (variant)"
+      },
+      {
+        "name": "Devil's Tongue (optional)"
+      },
+      {
+        "name": "Hellfire (optional)"
+      },
+      {
+        "name": "Winged (optional)"
+      }
+    ],
+    "description": "A Sword Coast Adventurer's Guide variant for tieflings not descended from Asmodeus. Its ability scores replace the base increase, and it has a free-form appearance and three mutually exclusive trait swaps: Devil's Tongue, Hellfire or Winged."
+  }
+]

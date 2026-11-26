@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+
+# Large binaries and temporary raw text data
+pdf-source/
+data/raw/
