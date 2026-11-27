@@ -3,18 +3,22 @@
  * COMPONENT: StepPersonality.jsx
  * -----------------------------------------------------------------------------
  * Description:
- * Manages Step 5 of the Character Creator Wizard.
- * - Extracts structured background JSONB fields (personality_traits, ideals,
- *   bonds, flaws, defining_events) from the background selected in Step 4.
- * - Displays interactive "Dice Roll" buttons (e.g. 🎲 Roll d6 / d8) that randomly
- *   pick options directly from the background's official tables.
- * - Allows full manual text input/editing for custom backstory creation.
- * - Synchronizes choices continuously back into the master `characterData` payload.
- * -----------------------------------------------------------------------------
+ * Manages Step 5 of the Character Creator Wizard:
+ * - Extracts structured background JSONB tables (personality_traits, ideals,
+ *   bonds, flaws, defining_events) from the selected background.
+ * - Provides interactive `🎲 Roll` buttons to draw randomly from official
+ *   background tables alongside manual text editing.
+ *
+ * Responsive & Touch Behavior:
+ * - Card Header Rows: Uses `flex-wrap gap-2` so dice-roll buttons wrap cleanly
+ *   on narrow 375px screens without squeezing section labels.
+ * - Touch-Sized Dice Buttons: Increases tap padding (`px-3 py-1.5 sm:px-2.5 sm:py-1`)
+ *   for reliable mobile taps.
+ * - Mobile Textareas: Uses `text-sm sm:text-xs` so mobile browsers do not auto-zoom
+ *   when tapping into personality fields.
+ *
  * @param {Object} props - Component props.
- * @param {Object} props.characterData - Master character payload state from wizard.
- * @param {Function} props.updateCharacterData - Function to update master state.
- * @param {Array} props.backgroundsList - List of pre-fetched Supabase background rows.
+ * -----------------------------------------------------------------------------
  */
 
 import React, { useState } from "react";
@@ -24,18 +28,10 @@ export default function StepPersonality({
   updateCharacterData,
   backgroundsList = [],
 }) {
-  // ---------------------------------------------------------------------------
-  // 1. BACKGROUND LOOKUP & RECOVERABLE SELECTION
-  // ---------------------------------------------------------------------------
-  // Locate the selected background object from reference list matching backgroundId
   const selectedBackground = Array.isArray(backgroundsList)
     ? backgroundsList.find((bg) => bg && bg.id === characterData.backgroundId)
     : null;
 
-  // ---------------------------------------------------------------------------
-  // 2. LOCAL FORM STATE
-  // ---------------------------------------------------------------------------
-  // Initialize local state with values already saved in characterData or fall back to empty strings
   const [personality, setPersonality] = useState({
     personalityTraits: characterData.personalityTraits || "",
     ideals: characterData.ideals || "",
@@ -44,33 +40,16 @@ export default function StepPersonality({
     definingEvents: characterData.definingEvents || "",
   });
 
-  /**
-   * Helper function to mutate local state and update master wizard state simultaneously.
-   *
-   * @param {string} fieldKey - Field property name in characterData state.
-   * @param {string} value - New text content.
-   */
   const handleFieldChange = (fieldKey, value) => {
     const updated = { ...personality, [fieldKey]: value };
     setPersonality(updated);
     updateCharacterData({ [fieldKey]: value });
   };
 
-  // ---------------------------------------------------------------------------
-  // 3. INTERACTIVE DICE ROLLER HELPER
-  // ---------------------------------------------------------------------------
-  /**
-   * Randomly selects an entry from a background's table and writes it to state.
-   * Handles both flat array tables and nested option structures.
-   *
-   * @param {string} fieldKey - Target state field ('personalityTraits', 'ideals', etc.)
-   * @param {Array} tableData - Table options array from database row.
-   */
   const handleRollRandom = (fieldKey, tableData) => {
     if (!tableData || !Array.isArray(tableData) || tableData.length === 0)
       return;
 
-    // Check if table contains nested tables (e.g. defining_events: [{ title: '...', options: [...] }])
     let optionsList = tableData;
     if (tableData[0] && Array.isArray(tableData[0].options)) {
       optionsList = tableData[0].options;
@@ -78,11 +57,9 @@ export default function StepPersonality({
 
     if (optionsList.length === 0) return;
 
-    // Roll random index across available options
     const randomIndex = Math.floor(Math.random() * optionsList.length);
     const chosenOption = optionsList[randomIndex];
 
-    // Format output string cleanly: "(Roll X) Description text"
     const rollNumber =
       chosenOption.roll ||
       chosenOption.d6 ||
@@ -99,12 +76,6 @@ export default function StepPersonality({
     handleFieldChange(fieldKey, formattedOutput);
   };
 
-  // ---------------------------------------------------------------------------
-  // 4. SAFE JSONB TABLE EXTRACTION
-  // ---------------------------------------------------------------------------
-  /**
-   * Safely parses JSONB fields if stored as raw JSON strings or returns native arrays.
-   */
   const safelyExtractTable = (fieldData) => {
     if (!fieldData) return [];
     if (Array.isArray(fieldData)) return fieldData;
@@ -119,7 +90,6 @@ export default function StepPersonality({
     return [];
   };
 
-  // Extract structured background tables
   const traitsTable = safelyExtractTable(
     selectedBackground?.personality_traits,
   );
@@ -130,11 +100,8 @@ export default function StepPersonality({
     selectedBackground?.defining_events,
   );
 
-  // ---------------------------------------------------------------------------
-  // 5. RENDER UI STRUCTURE
-  // ---------------------------------------------------------------------------
   return (
-    <div className="space-y-6 animate-fadeIn">
+    <div className="space-y-5 sm:space-y-6 animate-fadeIn">
       {/* Header Info Banner */}
       <div className="border-b border-[#a59075]/20 pb-4">
         <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
@@ -153,7 +120,7 @@ export default function StepPersonality({
           details below or go back to select one.
         </div>
       ) : (
-        <div className="p-3 bg-[#4a261c]/40 border border-[#a59075]/30 rounded-lg text-xs text-[#889c9b] flex justify-between items-center">
+        <div className="p-3 bg-[#4a261c]/40 border border-[#a59075]/30 rounded-lg text-xs text-[#889c9b] flex flex-wrap justify-between items-center gap-2">
           <span>
             Active Background Archives:{" "}
             <strong className="text-[#f0e6d2]">
@@ -166,11 +133,9 @@ export default function StepPersonality({
         </div>
       )}
 
-      {/* =================================================================== */}
-      {/* 1. PERSONALITY TRAITS SECTION                                       */}
-      {/* =================================================================== */}
-      <div className="space-y-2 p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
-        <div className="flex justify-between items-center">
+      {/* 1. PERSONALITY TRAITS */}
+      <div className="space-y-2 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             1. Personality Traits
           </label>
@@ -178,7 +143,7 @@ export default function StepPersonality({
             <button
               type="button"
               onClick={() => handleRollRandom("personalityTraits", traitsTable)}
-              className="px-2.5 py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-[10px] font-bold border border-amber-500/40 transition shadow"
+              className="px-3 py-1.5 sm:px-2.5 sm:py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-xs sm:text-[10px] font-bold border border-amber-500/40 transition shadow cursor-pointer"
             >
               🎲 Roll Random Trait
             </button>
@@ -191,15 +156,13 @@ export default function StepPersonality({
             handleFieldChange("personalityTraits", e.target.value)
           }
           placeholder="Describe quirks, mannerisms, or habits (e.g. 'I always use big words to sound smart')..."
-          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
+          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-sm sm:text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
         />
       </div>
 
-      {/* =================================================================== */}
-      {/* 2. IDEALS SECTION                                                   */}
-      {/* =================================================================== */}
-      <div className="space-y-2 p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
-        <div className="flex justify-between items-center">
+      {/* 2. IDEALS */}
+      <div className="space-y-2 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             2. Ideals
           </label>
@@ -207,7 +170,7 @@ export default function StepPersonality({
             <button
               type="button"
               onClick={() => handleRollRandom("ideals", idealsTable)}
-              className="px-2.5 py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-[10px] font-bold border border-amber-500/40 transition shadow"
+              className="px-3 py-1.5 sm:px-2.5 sm:py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-xs sm:text-[10px] font-bold border border-amber-500/40 transition shadow cursor-pointer"
             >
               🎲 Roll Random Ideal
             </button>
@@ -218,15 +181,13 @@ export default function StepPersonality({
           value={personality.ideals}
           onChange={(e) => handleFieldChange("ideals", e.target.value)}
           placeholder="What core moral principle drives you? (e.g. Respect, Freedom, Greater Good)..."
-          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
+          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-sm sm:text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
         />
       </div>
 
-      {/* =================================================================== */}
-      {/* 3. BONDS SECTION                                                    */}
-      {/* =================================================================== */}
-      <div className="space-y-2 p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
-        <div className="flex justify-between items-center">
+      {/* 3. BONDS */}
+      <div className="space-y-2 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             3. Bonds
           </label>
@@ -234,7 +195,7 @@ export default function StepPersonality({
             <button
               type="button"
               onClick={() => handleRollRandom("bonds", bondsTable)}
-              className="px-2.5 py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-[10px] font-bold border border-amber-500/40 transition shadow"
+              className="px-3 py-1.5 sm:px-2.5 sm:py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-xs sm:text-[10px] font-bold border border-amber-500/40 transition shadow cursor-pointer"
             >
               🎲 Roll Random Bond
             </button>
@@ -245,15 +206,13 @@ export default function StepPersonality({
           value={personality.bonds}
           onChange={(e) => handleFieldChange("bonds", e.target.value)}
           placeholder="What person, place, or artifact holds your deepest loyalty?..."
-          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
+          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-sm sm:text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
         />
       </div>
 
-      {/* =================================================================== */}
-      {/* 4. FLAWS SECTION                                                    */}
-      {/* =================================================================== */}
-      <div className="space-y-2 p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
-        <div className="flex justify-between items-center">
+      {/* 4. FLAWS */}
+      <div className="space-y-2 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             4. Flaws
           </label>
@@ -261,7 +220,7 @@ export default function StepPersonality({
             <button
               type="button"
               onClick={() => handleRollRandom("flaws", flawsTable)}
-              className="px-2.5 py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-[10px] font-bold border border-amber-500/40 transition shadow"
+              className="px-3 py-1.5 sm:px-2.5 sm:py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-xs sm:text-[10px] font-bold border border-amber-500/40 transition shadow cursor-pointer"
             >
               🎲 Roll Random Flaw
             </button>
@@ -272,15 +231,13 @@ export default function StepPersonality({
           value={personality.flaws}
           onChange={(e) => handleFieldChange("flaws", e.target.value)}
           placeholder="What fatal weakness or addiction threatens your downfall?..."
-          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
+          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-sm sm:text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
         />
       </div>
 
-      {/* =================================================================== */}
-      {/* 5. DEFINING EVENTS SECTION                                          */}
-      {/* =================================================================== */}
-      <div className="space-y-2 p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
-        <div className="flex justify-between items-center">
+      {/* 5. DEFINING EVENTS */}
+      <div className="space-y-2 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl shadow-inner">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             5. Defining Events
           </label>
@@ -290,7 +247,7 @@ export default function StepPersonality({
               onClick={() =>
                 handleRollRandom("definingEvents", definingEventsTable)
               }
-              className="px-2.5 py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-[10px] font-bold border border-amber-500/40 transition shadow"
+              className="px-3 py-1.5 sm:px-2.5 sm:py-1 bg-amber-800/80 hover:bg-amber-700 text-amber-200 rounded text-xs sm:text-[10px] font-bold border border-amber-500/40 transition shadow cursor-pointer"
             >
               🎲 Roll Defining Event
             </button>
@@ -301,7 +258,7 @@ export default function StepPersonality({
           value={personality.definingEvents}
           onChange={(e) => handleFieldChange("definingEvents", e.target.value)}
           placeholder="What specific historic event or turning point pushed you onto the path of adventure?..."
-          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
+          className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 text-sm sm:text-xs text-[#f0e6d2] focus:border-amber-500 outline-none transition"
         />
       </div>
     </div>

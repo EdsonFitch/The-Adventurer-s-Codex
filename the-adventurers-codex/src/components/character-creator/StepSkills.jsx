@@ -3,22 +3,24 @@
  * COMPONENT: StepSkills.jsx
  * -----------------------------------------------------------------------------
  * Description:
- * Manages Step 5 of the character creation wizard:
- * - Renders the standard D&D 5e list of 18 skills paired with their governing attributes.
- * - Automatically reads and locks skill proficiencies granted by Backgrounds and Lineage
- *   via `computedStats.proficiencies`.
- * - Enforces D&D 5e player-chosen skill selection limits for remaining class slots.
- * - Calculates live skill modifiers factoring in ability modifiers, proficiency bonus,
- *   and derived passive traits (such as Bardic Jack of All Trades).
- * - Synchronizes selected skill choices back into the master character payload state.
+ * Manages Step 7 of the character creation wizard:
+ * - Renders all 18 D&D 5e skills paired with governing ability modifiers.
+ * - Automatically locks skill proficiencies granted by Background/Lineage.
+ * - Enforces player-chosen class skill limits and factors in passive perks
+ *   (such as Bardic Jack of All Trades).
+ *
+ * Responsive & Touch Behavior:
+ * - Budget Summary Banner: Stacks cleanly on narrow phones (`flex-col sm:flex-row`)
+ *   so the skill counter badge never crushes the left-side text.
+ * - Skill Toggle Cards: Uses `p-3.5 sm:p-3` and `min-w-0` with a larger
+ *   checkbox indicator (`w-5 h-5 sm:w-4 sm:h-4`) for easy mobile tapping.
+ *
+ * @param {Object} props - Component properties.
  * -----------------------------------------------------------------------------
  */
 
 import React from "react";
 
-/**
- * Standard D&D 5e Skills configuration metadata mapping skill names to ability short keys.
- */
 const SKILLS_METADATA = [
   { name: "Acrobatics", ability: "dex", label: "Acrobatics (Dex)" },
   { name: "Animal Handling", ability: "wis", label: "Animal Handling (Wis)" },
@@ -40,30 +42,17 @@ const SKILLS_METADATA = [
   { name: "Survival", ability: "wis", label: "Survival (Wis)" },
 ];
 
-/**
- * StepSkills Component definition.
- *
- * @param {Object} props - Component properties.
- * @param {Object} props.characterData - Master character payload state.
- * @param {Function} props.updateCharacterData - Callback function to update master state.
- * @param {Object} props.computedStats - Computed stats package returned by statCalculator.js.
- */
 export default function StepSkills({
   characterData,
   updateCharacterData,
   computedStats,
 }) {
-  // Extract proficiency bonus and granted proficiency list from computed stats
   const proficiencyBonus = computedStats?.proficiencyBonus || 2;
   const grantedProficiencies = computedStats?.proficiencies || [];
-
-  // Local state for user-chosen skill proficiencies (array of skill name strings)
   const selectedSkills = characterData.skills || [];
 
-  // Define standard player-chosen skill budget limit (e.g., 2 class choices)
   const MAX_USER_SKILL_CHOICES = 2;
 
-  // Check if character has Jack of All Trades active
   const hasJackOfAllTrades =
     characterData.classId &&
     (characterData.isBard ||
@@ -71,19 +60,11 @@ export default function StepSkills({
         (r) => r.type === "JACK_OF_ALL_TRADES",
       ));
 
-  /**
-   * Toggles an individual skill proficiency on or off with budget enforcement.
-   * Prevents toggling off skills automatically granted by background or lineage.
-   *
-   * @param {string} skillName - Name of the skill being toggled.
-   */
   const handleToggleSkill = (skillName) => {
-    // Check case-insensitive match against auto-granted skills
     const isAutoGranted = grantedProficiencies.some(
       (p) => p.toLowerCase() === skillName.toLowerCase(),
     );
 
-    // 1. Prevent modifying skills automatically granted by background or lineage
     if (isAutoGranted) {
       return;
     }
@@ -92,10 +73,8 @@ export default function StepSkills({
     let updatedSkills;
 
     if (exists) {
-      // Allow unchecking an already selected user choice
       updatedSkills = selectedSkills.filter((s) => s !== skillName);
     } else {
-      // 2. Enforce maximum player choice budget limit before adding a new skill
       if (selectedSkills.length >= MAX_USER_SKILL_CHOICES) {
         alert(
           `You can only choose up to ${MAX_USER_SKILL_CHOICES} skill proficiencies from your class. Background skills are granted automatically.`,
@@ -113,7 +92,7 @@ export default function StepSkills({
       {/* Header Info */}
       <div className="border-b border-[#a59075]/20 pb-4">
         <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
-          Step 5: Skill Proficiencies & Passive Perks
+          Step 7: Skill Proficiencies & Passive Perks
         </h3>
         <p className="text-xs text-[#889c9b]">
           Background and lineage proficiencies are automatically locked. Choose
@@ -123,8 +102,8 @@ export default function StepSkills({
       </div>
 
       {/* Passive Perks & Skill Budget Summary Banner */}
-      <div className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl flex justify-between items-center shadow-inner">
-        <div>
+      <div className="p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2.5 shadow-inner">
+        <div className="min-w-0">
           <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider">
             Active Passive Perks & Budget
           </h4>
@@ -134,27 +113,24 @@ export default function StepSkills({
             {hasJackOfAllTrades && " • Jack of All Trades Active"}
           </p>
         </div>
-        <div className="text-xs px-2.5 py-1 rounded bg-[#361a12] text-amber-400 font-bold border border-[#a59075]/30">
+        <div className="text-xs px-2.5 py-1 rounded bg-[#361a12] text-amber-400 font-bold border border-[#a59075]/30 shrink-0">
           {selectedSkills.length} / {MAX_USER_SKILL_CHOICES} Class Choices (
           {grantedProficiencies.length} Auto-Granted)
         </div>
       </div>
 
       {/* Skills Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        {SKILLS_METADATA.map(({ name, ability, label }) => {
-          // 1. Get ability modifier as a clean integer
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3">
+        {SKILLS_METADATA.map(({ name, ability }) => {
           const rawMod = computedStats?.abilityModifiers?.[ability] ?? 0;
           const modValue = parseInt(rawMod, 10) || 0;
 
-          // 2. Determine if proficiency is active (user selected OR automatically granted)
           const isAutoGranted = grantedProficiencies.some(
             (p) => p.toLowerCase() === name.toLowerCase(),
           );
           const isUserSelected = selectedSkills.includes(name);
           const isProficient = isAutoGranted || isUserSelected;
 
-          // 3. Calculate final skill modifier integer
           let finalSkillMod = modValue;
           if (isProficient) {
             finalSkillMod += proficiencyBonus;
@@ -162,7 +138,6 @@ export default function StepSkills({
             finalSkillMod += Math.floor(proficiencyBonus / 2);
           }
 
-          // 4. Format with a single explicit sign (e.g., "+2" or "-1")
           const formattedMod =
             finalSkillMod >= 0 ? `+${finalSkillMod}` : `${finalSkillMod}`;
 
@@ -170,7 +145,7 @@ export default function StepSkills({
             <div
               key={name}
               onClick={() => handleToggleSkill(name)}
-              className={`p-3 rounded-xl border transition-all flex items-center justify-between ${
+              className={`min-w-0 p-3.5 sm:p-3 rounded-xl border transition-all flex items-center justify-between gap-2 ${
                 isAutoGranted
                   ? "bg-[#361a12] border-amber-500/50 cursor-not-allowed opacity-90 shadow"
                   : isUserSelected
@@ -178,10 +153,9 @@ export default function StepSkills({
                     : "bg-[#4a261c]/60 border-[#a59075]/40 hover:border-[#a59075] cursor-pointer"
               }`}
             >
-              <div className="flex items-center space-x-3">
-                {/* Checkbox / Indicator dot */}
+              <div className="flex items-center gap-3 min-w-0">
                 <div
-                  className={`w-4 h-4 rounded flex items-center justify-center border transition ${
+                  className={`w-5 h-5 sm:w-4 sm:h-4 rounded flex items-center justify-center border transition shrink-0 ${
                     isProficient
                       ? "bg-amber-600 border-amber-400 text-white font-bold text-[10px]"
                       : "bg-[#361a12] border-[#a59075]/40"
@@ -189,18 +163,17 @@ export default function StepSkills({
                 >
                   {isProficient && "✓"}
                 </div>
-                <div>
-                  <span className="text-xs font-bold text-[#f0e6d2] block">
+                <div className="min-w-0">
+                  <span className="text-xs font-bold text-[#f0e6d2] block truncate">
                     {name}
                   </span>
-                  <span className="text-[10px] text-[#889c9b] uppercase tracking-wide">
+                  <span className="text-[10px] text-[#889c9b] uppercase tracking-wide block truncate">
                     {ability} {isAutoGranted && "(Background/Lineage)"}
                   </span>
                 </div>
               </div>
 
-              {/* Skill Modifier Badge */}
-              <span className="text-xs px-2 py-0.5 rounded bg-[#361a12] text-amber-300 font-bold border border-[#a59075]/30">
+              <span className="text-xs px-2 py-0.5 rounded bg-[#361a12] text-amber-300 font-bold border border-[#a59075]/30 shrink-0">
                 {formattedMod}
               </span>
             </div>

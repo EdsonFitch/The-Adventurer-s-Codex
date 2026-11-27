@@ -1,21 +1,27 @@
 /**
  * -----------------------------------------------------------------------------
- * COMPONENT: StepAbilityScores
+ * COMPONENT: StepAbilityScores.jsx
  * -----------------------------------------------------------------------------
  * Description:
  * Manages Step 3 of the character creation wizard:
- * - Allocates character ability scores using Standard Array, Point Buy, or 4d6 Roller.
- * - Displays live calculation of ability modifiers.
- * - Integrates computed results from `statCalculator.js` to render active JSONB effect
- *   breakdown badges and mathematically accurate equation displays (`Base + Bonuses = Total`).
+ * - Allocates ability scores using Standard Array, Point Buy, or 4d6 Drop Lowest.
+ * - Renders live computed modifiers and JSONB lineage/feat bonus breakdowns
+ *   (`Base + Bonuses = Total`).
+ *
+ * Responsive & Touch Behavior:
+ * - Method Switcher Group: Expands full-width on mobile (`w-full md:w-auto`)
+ *   with taller touch buttons (`py-2 sm:py-1`) so Standard Array, Point Buy,
+ *   and 4d6 Roller are effortless to tap on phones.
+ * - 4d6 Dice Pool Grid: Uses `grid-cols-3 sm:grid-cols-6` so the 6 rolled dice
+ *   pools arrange neatly into two balanced rows of 3 on mobile screens.
+ * - Score Inputs: Uses `text-base sm:text-sm` to prevent mobile browser focus zoom.
+ *
+ * @param {Object} props - Component properties.
  * -----------------------------------------------------------------------------
  */
 
 import React, { useState } from "react";
 
-/**
- * Standard D&D 5e Ability Scores configuration metadata mapping long and short keys.
- */
 const ABILITY_KEYS = [
   { key: "strength", abbrKey: "str", label: "Strength", abbr: "STR" },
   { key: "dexterity", abbrKey: "dex", label: "Dexterity", abbr: "DEX" },
@@ -25,42 +31,25 @@ const ABILITY_KEYS = [
   { key: "charisma", abbrKey: "cha", label: "Charisma", abbr: "CHA" },
 ];
 
-// Pre-defined Standard Array values for D&D 5e
 const STANDARD_ARRAY = [15, 14, 13, 12, 10, 8];
 
 /**
- * Calculates the D&D ability modifier from a raw score.
- * Formula: Math.floor((score - 10) / 2)
- *
- * @param {number} score - Raw ability score value.
- * @returns {string} Formatted modifier string with explicit sign (e.g., "+3", "-1").
+ * Calculates the D&D ability modifier string from a raw score.
  */
 export function calculateModifier(score) {
   const mod = Math.floor((score - 10) / 2);
   return mod >= 0 ? `+${mod}` : `${mod}`;
 }
 
-/**
- * StepAbilityScores Component definition.
- *
- * @param {Object} props - Component properties.
- * @param {Object} props.characterData - Master character payload state.
- * @param {Function} props.updateCharacterData - Callback function to update master state.
- * @param {Object} props.computedStats - Computed stats package returned by statCalculator.js.
- */
 export default function StepAbilityScores({
   characterData,
   updateCharacterData,
   computedStats,
 }) {
-  // Generation mode state: 'standard', 'pointBuy', or 'roll'
   const [method, setMethod] = useState("standard");
-
-  // 4d6 Roller state: stores objects containing the final sum + the 4 raw dice rolls
   const [rolledScores, setRolledScores] = useState([]);
   const [isRolling, setIsRolling] = useState(false);
 
-  // Normalize raw scores object keys from master state with robust fallbacks
   const rawScores = characterData.abilityScores || {};
   const scores = {
     strength: rawScores.strength ?? rawScores.str ?? 15,
@@ -71,15 +60,9 @@ export default function StepAbilityScores({
     charisma: rawScores.charisma ?? rawScores.cha ?? 8,
   };
 
-  /**
-   * Safely updates an individual ability score value in master state.
-   * @param {string} abilityKey - Key of the ability score (e.g., 'strength').
-   * @param {string|number} value - New numeric value.
-   */
   const handleScoreChange = (abilityKey, value) => {
     const numValue = parseInt(value, 10) || 8;
 
-    // Map long component keys to unified short state keys
     const shortKeyMap = {
       strength: "str",
       dexterity: "dex",
@@ -104,9 +87,6 @@ export default function StepAbilityScores({
     updateCharacterData({ abilityScores: updated });
   };
 
-  /**
-   * Simulates rolling 4d6 drop lowest for all 6 ability score slots.
-   */
   const handleRoll4d6 = () => {
     setIsRolling(true);
     setTimeout(() => {
@@ -138,8 +118,8 @@ export default function StepAbilityScores({
   return (
     <div className="space-y-6 animate-fadeIn">
       {/* Header & Method Switcher Tabs */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#a59075]/20 pb-4">
-        <div>
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 sm:gap-4 border-b border-[#a59075]/20 pb-4">
+        <div className="min-w-0">
           <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
             Step 3: Ability Scores & Lineage Modifiers
           </h3>
@@ -149,12 +129,12 @@ export default function StepAbilityScores({
           </p>
         </div>
 
-        {/* Method Switcher Button Group */}
-        <div className="flex bg-[#4a261c] border border-[#a59075]/40 rounded-lg p-1 space-x-1">
+        {/* Full-Width Mobile Method Switcher Button Group */}
+        <div className="w-full md:w-auto flex bg-[#4a261c] border border-[#a59075]/40 rounded-lg p-1 gap-1">
           <button
             type="button"
             onClick={() => setMethod("standard")}
-            className={`px-3 py-1 rounded text-xs transition ${
+            className={`flex-1 md:flex-initial px-3 py-2 sm:py-1 rounded text-xs transition cursor-pointer ${
               method === "standard"
                 ? "bg-[#937460] text-white font-bold"
                 : "text-[#889c9b] hover:text-[#f0e6d2]"
@@ -165,7 +145,7 @@ export default function StepAbilityScores({
           <button
             type="button"
             onClick={() => setMethod("pointBuy")}
-            className={`px-3 py-1 rounded text-xs transition ${
+            className={`flex-1 md:flex-initial px-3 py-2 sm:py-1 rounded text-xs transition cursor-pointer ${
               method === "pointBuy"
                 ? "bg-[#937460] text-white font-bold"
                 : "text-[#889c9b] hover:text-[#f0e6d2]"
@@ -176,7 +156,7 @@ export default function StepAbilityScores({
           <button
             type="button"
             onClick={() => setMethod("roll")}
-            className={`px-3 py-1 rounded text-xs transition ${
+            className={`flex-1 md:flex-initial px-3 py-2 sm:py-1 rounded text-xs transition cursor-pointer ${
               method === "roll"
                 ? "bg-[#937460] text-white font-bold"
                 : "text-[#889c9b] hover:text-[#f0e6d2]"
@@ -189,8 +169,8 @@ export default function StepAbilityScores({
 
       {/* 4d6 Roller Engine Sub-Panel */}
       {method === "roll" && (
-        <div className="p-4 bg-[#4a261c]/50 border border-amber-500/30 rounded-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div>
+        <div className="p-3.5 sm:p-4 bg-[#4a261c]/50 border border-amber-500/30 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="min-w-0">
             <h4 className="text-xs font-bold text-amber-300 uppercase">
               4d6 Drop Lowest Engine (6 Stat Generation)
             </h4>
@@ -203,7 +183,7 @@ export default function StepAbilityScores({
             type="button"
             disabled={isRolling}
             onClick={handleRoll4d6}
-            className="px-4 py-2 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition shadow whitespace-nowrap"
+            className="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition shadow whitespace-nowrap cursor-pointer"
           >
             {isRolling ? "Rolling Dice..." : "🎲 Roll 6 Stats"}
           </button>
@@ -216,20 +196,20 @@ export default function StepAbilityScores({
           <span className="text-xs text-[#889c9b] font-bold uppercase tracking-wider">
             Generated Stat Pool:
           </span>
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
             {rolledScores.map((item, idx) => (
               <div
                 key={idx}
-                className="p-2 bg-[#4a261c] border border-amber-500/50 rounded text-center shadow"
+                className="p-2 bg-[#4a261c] border border-amber-500/50 rounded text-center shadow min-w-0"
               >
                 <div className="text-base font-bold text-amber-300">
                   {item.total}
                 </div>
                 <div className="text-[9px] text-[#889c9b] mt-1">
-                  Rolls: [{item.rolls.join(", ")}]
+                  [{item.rolls.join(", ")}]
                 </div>
                 <div className="text-[8px] text-red-300">
-                  Dropped: {item.dropped}
+                  Drop: {item.dropped}
                 </div>
               </div>
             ))}
@@ -238,11 +218,10 @@ export default function StepAbilityScores({
       )}
 
       {/* Ability Scores Grid Inputs & Calculation Breakdown Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {ABILITY_KEYS.map(({ key, abbrKey, label, abbr }) => {
           const baseScore = scores[key] || 10;
 
-          // Pull computed breakdown package from statCalculator results
           const breakdown = computedStats?.abilityBreakdowns?.[abbrKey] || {
             base: baseScore,
             bonuses: [],
@@ -258,24 +237,24 @@ export default function StepAbilityScores({
           return (
             <div
               key={key}
-              className="p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl space-y-3 shadow-inner"
+              className="min-w-0 p-3.5 sm:p-4 bg-[#4a261c]/60 border border-[#a59075]/40 rounded-xl space-y-3 shadow-inner"
             >
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center gap-2">
                 <span className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
                   {label} ({abbr})
                 </span>
-                <span className="text-xs px-2 py-0.5 rounded bg-[#361a12] text-amber-400 font-bold border border-[#a59075]/30">
+                <span className="text-xs px-2 py-0.5 rounded bg-[#361a12] text-amber-400 font-bold border border-[#a59075]/30 shrink-0">
                   Total: {finalScore} ({modifierStr})
                 </span>
               </div>
 
-              {/* Base Score Input Control */}
-              <div className="flex items-center space-x-3">
+              {/* Base Score Input Control (`text-base sm:text-sm` prevents mobile zoom) */}
+              <div className="flex items-center">
                 {method === "standard" ? (
                   <select
                     value={baseScore}
                     onChange={(e) => handleScoreChange(key, e.target.value)}
-                    className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm text-[#f0e6d2] focus:outline-none"
+                    className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 sm:p-2 text-base sm:text-sm text-[#f0e6d2] focus:outline-none"
                   >
                     {STANDARD_ARRAY.map((val) => (
                       <option key={val} value={val}>
@@ -290,7 +269,7 @@ export default function StepAbilityScores({
                     max={20}
                     value={baseScore}
                     onChange={(e) => handleScoreChange(key, e.target.value)}
-                    className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm text-[#f0e6d2] focus:outline-none"
+                    className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2.5 sm:p-2 text-base sm:text-sm text-[#f0e6d2] focus:outline-none"
                   />
                 )}
               </div>

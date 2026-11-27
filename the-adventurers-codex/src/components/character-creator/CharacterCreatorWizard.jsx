@@ -1,25 +1,33 @@
 /**
  * -----------------------------------------------------------------------------
- * COMPONENT: CharacterCreatorWizard
+ * COMPONENT: CharacterCreatorWizard.jsx
  * -----------------------------------------------------------------------------
- * Master container and state manager for the multi-step D&D character creator.
+ * Description:
+ * Master container and state manager for the 9-step D&D 5e character creator.
  *
- * Architecture & Responsibilities:
- * - Manages active wizard step progression across 9 distinct steps.
- * - Centralizes master character payload state (`characterData`) shared across all steps.
- * - Pre-fetches relational reference data from Supabase in parallel.
- * - Dynamically parses `effects`, `ability_bonuses`, and `skill_proficiencies` JSONB arrays
- *   from background, race, and subrace rows into standardized effect objects.
- * - Invokes `statCalculator.js` (`computeCharacterStats`) to calculate stats and skill grants.
- * - Executes final database insertion into 'characters' (including `campaign_name`),
- *   'character_classes', 'character_skills', 'character_spells', and relational
- *   'character_inventory' with pack expansion from `pack_contents`, multi-variant
- *   catalog matching (handling plurals, comma-inverted names, and parentheticals),
- *   and level 1–5 gear restriction rules.
+ * Responsibilities:
+ * - Coordinates step progression across all 9 creator steps (`StepBasics` through
+ *   `StepReviewForge`) and centralizes `characterData` state.
+ * - Pre-fetches races, subraces, classes, subclasses, and backgrounds from
+ *   Supabase and computes dynamic `STAT_MOD` and `PROFICIENCY_GRANT` effects.
+ * - Executes final multi-table character insertion (`characters`,
+ *   `character_classes`, `character_skills`, `character_spells`, and pack-expanded
+ *   `character_inventory` with level 1-5 gear rules).
+ *
+ * Responsive & Touch Behavior:
+ * - Wizard Header Stack: Switches to `flex-col sm:flex-row` on phones so the
+ *   9-pill progress indicator sits cleanly below the step title instead of
+ *   cramping long step headings on 375px viewports.
+ * - Adaptive Step Padding: Uses `p-3.5 sm:p-6` inside the wizard body so
+ *   complex steps (Ability Scores, Equipment, Spells) keep maximum width on
+ *   mobile screens.
+ * - Touch-Friendly Footer Navigation: Increases vertical tap padding
+ *   (`py-2.5 sm:py-2`) on `Previous Step`, `Next Step`, and `Forge Hero`.
  *
  * @param {Object} props - Component properties.
- * @param {Function} props.onComplete - Callback fired after a successful character forge.
+ * @param {Function} props.onComplete - Callback fired after successful hero forge.
  * @param {string} props.userId - Active authenticated user UUID.
+ * -----------------------------------------------------------------------------
  */
 
 import React, { useState, useEffect, useMemo } from "react";
@@ -33,22 +41,11 @@ import StepEquipmentProficiencies from "./StepEquipmentProficiencies";
 import StepSkills from "./StepSkills";
 import StepSpells from "./StepSpells";
 import StepReviewForge from "./StepReviewForge";
-
-// -----------------------------------------------------------------------------
-// ENGINE IMPORT: Dynamic Stat & Effect Calculator
-// -----------------------------------------------------------------------------
 import { computeCharacterStats } from "../../utils/statCalculator";
-
-// -----------------------------------------------------------------------------
-// ASSET IMPORT: Faded Background Header Asset
-// -----------------------------------------------------------------------------
 import headerBgImage from "../../assets/hero/hero-bg.png";
 
 /**
  * Strips leading articles ("a", "an", "any", "the") and leading numeric counts.
- *
- * @param {string} rawText - Raw item or clause text.
- * @returns {string} Trimmed lowercase base string.
  */
 function stripArticlesAndCounts(rawText) {
   return String(rawText || "")
@@ -60,9 +57,6 @@ function stripArticlesAndCounts(rawText) {
 
 /**
  * Singularizes simple English plural tokens (e.g., "costumes" -> "costume").
- *
- * @param {string} text - Lowercase input string.
- * @returns {string} Singularized string.
  */
 function singularizeTokens(text) {
   return text
@@ -77,12 +71,9 @@ function singularizeTokens(text) {
 }
 
 /**
- * Generates normalized lookup variants for an equipment name so exact strings
- * (e.g., "Rations (1 day)"), comma-inverted catalog names (e.g., "Clothes, costume"),
- * parenthetical-stripped names, and plural/singular forms all match reliably.
- *
- * @param {string} rawText - Raw item name from pack_contents, selections, or catalog.
- * @returns {string[]} Deduplicated array of normalized candidate strings.
+ * Generates normalized lookup variants for an equipment name so exact strings,
+ * comma-inverted catalog names, parenthetical-stripped names, and singular forms
+ * match reliably.
  */
 function buildCandidateVariants(rawText) {
   const base = stripArticlesAndCounts(rawText);
@@ -90,7 +81,6 @@ function buildCandidateVariants(rawText) {
 
   const variants = new Set([base]);
 
-  // 1. Comma-flipped order: "clothes, costume" -> "costume clothes"
   if (base.includes(",")) {
     const parts = base
       .split(",")
@@ -102,13 +92,11 @@ function buildCandidateVariants(rawText) {
     }
   }
 
-  // 2. Parenthetical-stripped variant: "rations (1 day)" -> "rations"
   const withoutParens = base.replace(/\(.*?\)/g, "").trim();
   if (withoutParens) {
     variants.add(withoutParens);
   }
 
-  // 3. Singularized forms of every collected variant: "costumes" -> "costume"
   Array.from(variants).forEach((v) => {
     const singular = singularizeTokens(v);
     if (singular) variants.add(singular);
@@ -119,10 +107,6 @@ function buildCandidateVariants(rawText) {
 
 /**
  * Finds the best matching row from `masterEquipment` for a given item string.
- *
- * @param {string} rawName - Candidate item name.
- * @param {Array<Object>} masterEquipment - Full equipment catalog rows.
- * @returns {Object|null} Matched catalog item or null.
  */
 function findMatchingCatalogItem(rawName, masterEquipment) {
   const inputVariants = buildCandidateVariants(rawName);
@@ -130,8 +114,6 @@ function findMatchingCatalogItem(rawName, masterEquipment) {
 
   const inputVariantSet = new Set(inputVariants);
 
-  // Pass 1: Direct variant equality (catches exact "Rations (1 day)",
-  // comma-flipped "Clothes, costume" <-> "costume clothes", and singular "costume")
   for (const eq of masterEquipment) {
     const dbVariants = buildCandidateVariants(eq.name);
     if (dbVariants.some((dv) => inputVariantSet.has(dv))) {
@@ -139,8 +121,6 @@ function findMatchingCatalogItem(rawName, masterEquipment) {
     }
   }
 
-  // Pass 2: Token-boundary inclusion fallback for compound descriptions
-  // (e.g., "costume" matching "clothes, costume")
   for (const eq of masterEquipment) {
     const dbVariants = buildCandidateVariants(eq.name);
     for (const iv of inputVariants) {
@@ -158,9 +138,6 @@ function findMatchingCatalogItem(rawName, masterEquipment) {
 
 /**
  * Extracts `{ name, quantity }` candidates from a single starting equipment slot entry.
- *
- * @param {string|Object} chosenEntry - Equipment entry from `characterData.equipment`.
- * @returns {Array<{ name: string, quantity: number }>} Item candidates to match.
  */
 function extractSlotCandidates(chosenEntry) {
   if (!chosenEntry) return [];
@@ -248,10 +225,8 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Active effect array populated dynamically from selected entity JSONB columns
   const [activeEffects, setActiveEffects] = useState([]);
 
-  // Master character data payload object matching the Supabase schema requirements
   const [characterData, setCharacterData] = useState({
     name: "",
     level: 1,
@@ -596,7 +571,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         }
       }
 
-      // 5. MAP STARTING EQUIPMENT CHOICES & EXPAND PACKS INTO character_inventory
       if (
         Array.isArray(characterData.equipment) &&
         characterData.equipment.length > 0
@@ -619,7 +593,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           const allPackRows =
             !packErr && packContentsRows ? packContentsRows : [];
 
-          // Map equipment_id -> inventory row so duplicate items combine quantities cleanly
           const inventoryByEquipmentId = new Map();
 
           const addCatalogItemToInventory = (rawName, qty = 1) => {
@@ -634,7 +607,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
               return;
             }
 
-            // Enforce level 1-5 restrictions: common/uncommon, non-magical, 0 enchantment
             if (characterLevel <= 5) {
               const isMagical = Boolean(matchedItem.is_magical);
               const enchantment = Number(matchedItem.enchantment_bonus || 0);
@@ -673,7 +645,6 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
               const cleanCandidate = stripArticlesAndCounts(rawItemText);
               if (!cleanCandidate) return;
 
-              // Check if this candidate matches a pack in `pack_contents`
               const matchingPackItems = allPackRows.filter((row) => {
                 const packKey = stripArticlesAndCounts(row.pack_name);
                 return (
@@ -736,12 +707,20 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
   );
 
   // ---------------------------------------------------------------------------
-  // 6. RENDER UI STRUCTURE
+  // 6. RENDER RESPONSIVE WIZARD CONTAINER
   // ---------------------------------------------------------------------------
   return (
     <div className="max-w-4xl mx-auto bg-[#5f3426] border-2 border-[#a59075]/60 rounded-xl overflow-hidden text-[#938f71] shadow-2xl font-antiqua">
-      <div className="relative p-6 pb-5 overflow-hidden border-b border-[#a59075]/30">
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* =====================================================================
+        WIZARD HEADER & 9-STEP PROGRESS INDICATOR
+        - Stacks vertically on mobile (`flex-col sm:flex-row`) so long step
+          titles never squeeze or collide with the 9 progress pills.
+        ===================================================================== */}
+      <div className="relative p-4 sm:p-6 pb-4 sm:pb-5 overflow-hidden border-b border-[#a59075]/30">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
+        >
           <img
             src={headerBgImage}
             alt=""
@@ -750,9 +729,9 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#5f3426] via-transparent to-[#5f3426] opacity-80" />
         </div>
 
-        <div className="relative z-10 flex justify-between items-center">
-          <div>
-            <h2 className="text-xl font-medieval font-bold text-[#f0e6d2]">
+        <div className="relative z-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+          <div className="min-w-0">
+            <h2 className="text-lg sm:text-xl font-medieval font-bold text-[#f0e6d2]">
               Forge a New Hero
             </h2>
             <p className="text-xs text-[#889c9b]">
@@ -760,11 +739,12 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
             </p>
           </div>
 
-          <div className="flex space-x-1">
+          {/* 9-Step Progress Indicator Bar */}
+          <div className="flex items-center gap-1.5 sm:gap-1 shrink-0">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((step) => (
               <div
                 key={step}
-                className={`w-4 h-2 rounded-full transition-all ${
+                className={`w-5 sm:w-4 h-2 rounded-full transition-all ${
                   step === currentStep
                     ? "bg-[#937460] shadow-md"
                     : step < currentStep
@@ -778,12 +758,15 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
       </div>
 
       {errorMessage && (
-        <div className="m-6 mb-0 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
+        <div className="m-3.5 sm:m-6 mb-0 p-3 bg-red-900/40 border border-red-500/50 rounded-lg text-xs text-red-200">
           {errorMessage}
         </div>
       )}
 
-      <div className="p-6 min-h-[400px]">
+      {/* =====================================================================
+        ACTIVE STEP CONTENT CANVAS (`p-3.5 sm:p-6`)
+        ===================================================================== */}
+      <div className="p-3.5 sm:p-6 min-h-[340px] sm:min-h-[400px]">
         {loadingData ? (
           <div className="flex flex-col items-center justify-center h-64 space-y-3 text-[#889c9b]">
             <span className="text-2xl animate-spin">⏳</span>
@@ -792,7 +775,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
             </p>
           </div>
         ) : (
-          <div>
+          <div className="min-w-0">
             {currentStep === 1 && (
               <StepBasics
                 characterData={characterData}
@@ -875,13 +858,16 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
         )}
       </div>
 
-      <div className="p-6 pt-4 border-t border-[#a59075]/30 flex justify-between items-center bg-[#5f3426]">
+      {/* =====================================================================
+        WIZARD FOOTER NAVIGATION CONTROLS (TOUCH-SIZED BUTTONS)
+        ===================================================================== */}
+      <div className="p-4 sm:p-6 pt-3 sm:pt-4 border-t border-[#a59075]/30 flex justify-between items-center gap-3 bg-[#5f3426]">
         {currentStep > 1 ? (
           <button
             type="button"
             onClick={handlePrevStep}
             disabled={isSubmitting}
-            className="px-4 py-2 rounded bg-[#937460]/20 hover:bg-[#937460]/40 border border-[#a59075]/40 text-xs transition"
+            className="px-4 py-2.5 sm:py-2 rounded bg-[#937460]/20 hover:bg-[#937460]/40 border border-[#a59075]/40 text-xs transition cursor-pointer"
           >
             ← Previous Step
           </button>
@@ -894,7 +880,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
             type="button"
             onClick={handleNextStep}
             disabled={loadingData}
-            className="px-5 py-2 rounded bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 font-bold text-xs text-[#f0e6d2] transition shadow-md"
+            className="px-5 py-2.5 sm:py-2 rounded bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 font-bold text-xs text-[#f0e6d2] transition shadow-md cursor-pointer"
           >
             Next Step →
           </button>
@@ -903,7 +889,7 @@ export default function CharacterCreatorWizard({ onComplete, userId }) {
             type="button"
             onClick={handleForgeCharacter}
             disabled={isSubmitting}
-            className="px-6 py-2.5 rounded bg-amber-700 hover:bg-amber-600 border border-amber-500 font-bold text-xs text-white transition shadow-lg flex items-center space-x-2"
+            className="px-6 py-2.5 rounded bg-amber-700 hover:bg-amber-600 border border-amber-500 font-bold text-xs text-white transition shadow-lg flex items-center space-x-2 cursor-pointer"
           >
             <span>
               {isSubmitting ? "Forging in the Flames..." : "⚔️ Forge Hero"}

@@ -2,14 +2,23 @@
  * -----------------------------------------------------------------------------
  * COMPONENT: StepEquipmentProficiencies.jsx
  * -----------------------------------------------------------------------------
+ * Description:
  * Manages Step 6 of Character Creation:
- * - Displays armor, weapon, and tool proficiencies granted by class and background.
- * - Provides interactive choice selection for starting equipment packages.
- * - Splits compound phrases, provides a text input for open-ended/custom items
- *   (such as "any other musical instrument"), and enforces strict category
- *   filtering on catalog dropdowns.
- * - Enforces level-based catalog restrictions for characters at levels 1–5
- *   (common/uncommon, non-magical, 0 enchantment).
+ * - Displays armor, weapon, and tool proficiencies granted by class & background.
+ * - Interactive starting equipment choice packages with compound-clause sub-item
+ *   configurators and level 1-5 non-magical / common-uncommon catalog rules.
+ * - Interactive language selector with slot limit enforcement.
+ *
+ * Responsive & Touch Behavior:
+ * - Package Header & Choice Buttons: Replaces fixed `max-w-[320px]` truncation
+ *   with `flex-wrap gap-1` and `break-words` so long equipment choices wrap
+ *   cleanly on 375px screens without horizontal clipping.
+ * - Sub-Item Inputs & Dropdowns: Uses `text-sm sm:text-xs` to prevent mobile
+ *   browser zoom on focus.
+ * - Language Selection Pills: Enlarges tap padding (`px-3 py-1.5 sm:px-2.5 sm:py-1`)
+ *   for reliable thumb selection on mobile devices.
+ *
+ * @param {Object} props - Component properties.
  * -----------------------------------------------------------------------------
  */
 
@@ -35,10 +44,6 @@ const STANDARD_LANGUAGES = [
   "Undercommon",
 ];
 
-/**
- * Safely normalizes a slot entry from `characterData.equipment` into:
- * `{ choiceLabel: string, selections: Record<string, string> }`.
- */
 function parseSlotEntry(rawEntry) {
   if (!rawEntry) {
     return { choiceLabel: "", selections: {} };
@@ -72,10 +77,6 @@ function parseSlotEntry(rawEntry) {
   return { choiceLabel: "", selections: {} };
 }
 
-/**
- * Splits a choice string on commas, conjunctions ("and", "or"), or "with"
- * into individual item/category clauses.
- */
 function splitCompoundClauses(text) {
   if (!text || typeof text !== "string") return [];
   return text
@@ -84,10 +85,6 @@ function splitCompoundClauses(text) {
     .filter(Boolean);
 }
 
-/**
- * Returns true when a clause should render a free-text input rather than a
- * strict catalog dropdown.
- */
 function clauseUsesTextInput(clause) {
   if (!clause) return false;
   const lower = clause.toLowerCase();
@@ -99,9 +96,6 @@ function clauseUsesTextInput(clause) {
   );
 }
 
-/**
- * Determines whether a clause requires a configuration control (dropdown or text input).
- */
 function clauseNeedsConfig(clause) {
   if (!clause) return false;
   const lower = clause.toLowerCase();
@@ -245,10 +239,6 @@ export default function StepEquipmentProficiencies({
     updateCharacterData({ equipment: currentGear });
   };
 
-  /**
-   * Strictly filters `equipmentCatalog` to match the category requested by `clauseText`,
-   * and enforces level 1–5 non-magical / common-uncommon restrictions.
-   */
   const getFilteredCatalogForClause = (clauseText) => {
     const lower = (clauseText || "").toLowerCase();
 
@@ -355,22 +345,22 @@ export default function StepEquipmentProficiencies({
       </div>
 
       {/* COMBAT & TOOL PROFICIENCIES */}
-      <div className="p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-4">
+      <div className="p-3.5 sm:p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-4">
         <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest">
           Combat & Tool Proficiencies (
           {selectedClass?.name || "Unassigned Class"})
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] uppercase text-[#889c9b] font-bold block">
               Armor
             </span>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1.5">
               {armorProfs.length > 0 ? (
                 armorProfs.map((arm, i) => (
                   <span
                     key={i}
-                    className="px-2 py-0.5 rounded bg-[#361a12] border border-[#a59075]/30 text-[#f0e6d2]"
+                    className="px-2 py-0.5 rounded bg-[#361a12] border border-[#a59075]/30 text-[#f0e6d2] break-words"
                   >
                     {arm}
                   </span>
@@ -380,16 +370,16 @@ export default function StepEquipmentProficiencies({
               )}
             </div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] uppercase text-[#889c9b] font-bold block">
               Weapons
             </span>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1.5">
               {weaponProfs.length > 0 ? (
                 weaponProfs.map((wep, i) => (
                   <span
                     key={i}
-                    className="px-2 py-0.5 rounded bg-[#361a12] border border-[#a59075]/30 text-[#f0e6d2]"
+                    className="px-2 py-0.5 rounded bg-[#361a12] border border-[#a59075]/30 text-[#f0e6d2] break-words"
                   >
                     {wep}
                   </span>
@@ -399,16 +389,16 @@ export default function StepEquipmentProficiencies({
               )}
             </div>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 min-w-0">
             <span className="text-[10px] uppercase text-[#889c9b] font-bold block">
               Tools & Instruments
             </span>
-            <div className="flex flex-wrap gap-1">
+            <div className="flex flex-wrap gap-1.5">
               {toolProfs.length > 0 ? (
                 toolProfs.map((tool, i) => (
                   <span
                     key={i}
-                    className="px-2 py-0.5 rounded bg-[#361a12] border border-amber-500/40 text-amber-300 font-bold"
+                    className="px-2 py-0.5 rounded bg-[#361a12] border border-amber-500/40 text-amber-300 font-bold break-words"
                   >
                     🛠️ {tool}
                   </span>
@@ -422,7 +412,7 @@ export default function StepEquipmentProficiencies({
       </div>
 
       {/* STARTING EQUIPMENT OPTIONS */}
-      <div className="p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-4">
+      <div className="p-3.5 sm:p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-4">
         <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest">
           Starting Equipment Options
         </h4>
@@ -440,17 +430,17 @@ export default function StepEquipmentProficiencies({
               return (
                 <div
                   key={idx}
-                  className="p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg space-y-2 text-xs"
+                  className="min-w-0 p-3 bg-[#361a12] border border-[#a59075]/30 rounded-lg space-y-2 text-xs"
                 >
-                  <div className="font-bold text-[#f0e6d2] flex justify-between items-center gap-2">
+                  <div className="font-bold text-[#f0e6d2] flex flex-wrap justify-between items-center gap-1">
                     <span>Equipment Package Option {idx + 1}</span>
                     {activeSubValues.length > 0 ? (
-                      <span className="text-[10px] text-amber-300 font-normal truncate max-w-[320px]">
+                      <span className="text-[10px] text-amber-300 font-normal break-words">
                         Picked: {activeSubValues.join(", ")}
                       </span>
                     ) : (
                       choiceLabel && (
-                        <span className="text-[10px] text-amber-300 font-normal truncate max-w-[320px]">
+                        <span className="text-[10px] text-amber-300 font-normal break-words">
                           Selected: {choiceLabel}
                         </span>
                       )
@@ -469,22 +459,22 @@ export default function StepEquipmentProficiencies({
                             onClick={() =>
                               handleSelectPackageChoice(idx, choice)
                             }
-                            className={`w-full px-3 py-2 rounded text-xs border transition text-left flex justify-between items-center ${
+                            className={`w-full px-3 py-2.5 sm:py-2 rounded text-xs border transition text-left flex justify-between items-start sm:items-center gap-2 cursor-pointer ${
                               isThisChoiceSelected
                                 ? "bg-amber-800 border-amber-500 text-white font-bold shadow-md"
                                 : "bg-[#4a261c]/60 border-[#a59075]/40 text-[#938f71] hover:text-[#f0e6d2] hover:border-amber-500/50"
                             }`}
                           >
-                            <span>
+                            <span className="min-w-0 break-words">
                               {isThisChoiceSelected && !isConfigurable
                                 ? `✓ ${choice}`
                                 : choice}
                             </span>
                             {isConfigurable && (
-                              <span className="text-[10px] text-amber-300 italic shrink-0 ml-2">
+                              <span className="text-[10px] text-amber-300 italic shrink-0">
                                 {isOpen && isThisChoiceSelected
-                                  ? "Close Config ▲"
-                                  : "Configure Items ▼"}
+                                  ? "Close ▲"
+                                  : "Configure ▼"}
                               </span>
                             )}
                           </button>
@@ -493,7 +483,7 @@ export default function StepEquipmentProficiencies({
                             isThisChoiceSelected &&
                             !loadingCatalog && (
                               <div className="p-3 bg-[#5f3426] border border-amber-500/40 rounded-lg space-y-3 animate-fadeIn">
-                                <span className="text-[10px] uppercase font-bold text-amber-300 block">
+                                <span className="text-[10px] uppercase font-bold text-amber-300 block break-words">
                                   Configure option: &ldquo;{choice}&rdquo;
                                 </span>
 
@@ -506,8 +496,8 @@ export default function StepEquipmentProficiencies({
                                       getFilteredCatalogForClause(clause);
 
                                     return (
-                                      <div key={slotKey}>
-                                        <label className="text-[9px] uppercase text-amber-200 block mb-1">
+                                      <div key={slotKey} className="min-w-0">
+                                        <label className="text-[9px] uppercase text-amber-200 block mb-1 break-words">
                                           {clause}
                                         </label>
 
@@ -529,7 +519,7 @@ export default function StepEquipmentProficiencies({
                                                 e.target.value,
                                               )
                                             }
-                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
+                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-sm sm:text-xs text-[#f0e6d2]"
                                           />
                                         ) : (
                                           <select
@@ -541,7 +531,7 @@ export default function StepEquipmentProficiencies({
                                                 e.target.value,
                                               )
                                             }
-                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-xs text-[#f0e6d2]"
+                                            className="w-full p-2 bg-[#361a12] border border-amber-500/50 rounded text-sm sm:text-xs text-[#f0e6d2]"
                                           >
                                             <option value="">
                                               -- Use &ldquo;{clause}&rdquo; or
@@ -580,8 +570,8 @@ export default function StepEquipmentProficiencies({
       </div>
 
       {/* LANGUAGE SELECTION GRID */}
-      <div className="p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-3">
-        <div className="flex justify-between items-center">
+      <div className="p-3.5 sm:p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-3">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <h4 className="text-xs font-bold text-amber-300 uppercase tracking-widest">
             Known Languages
           </h4>
@@ -599,7 +589,7 @@ export default function StepEquipmentProficiencies({
                 key={lang}
                 type="button"
                 onClick={() => toggleLanguage(lang)}
-                className={`px-2.5 py-1 rounded text-xs border transition ${
+                className={`px-3 py-1.5 sm:px-2.5 sm:py-1 rounded text-xs border transition cursor-pointer ${
                   isSelected
                     ? "bg-amber-800 border-amber-500 text-white font-bold shadow-md"
                     : "bg-[#361a12] border-[#a59075]/30 text-[#889c9b] hover:text-[#f0e6d2]"

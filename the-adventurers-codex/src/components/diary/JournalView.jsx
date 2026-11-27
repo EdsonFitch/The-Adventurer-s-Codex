@@ -1,10 +1,29 @@
 /**
  * -----------------------------------------------------------------------------
- * COMPONENT: JournalView
+ * COMPONENT: JournalView.jsx
  * -----------------------------------------------------------------------------
- * Provides a multi-session campaign journal interface for the active hero,
- * featuring dual-stage viewing (Read Reference Mode vs. Edit Mode), full
- * 8-field tracking, and custom session banner image uploads.
+ * Description:
+ * Multi-session campaign journal interface for the active hero, featuring
+ * dual-stage viewing (Read Reference Mode vs. Edit Mode), 8 structured session
+ * chronicle fields, and panoramic session banner uploads.
+ *
+ * Responsive & Touch Behavior:
+ * - Sessions Sidebar Height Cap: Uses `max-h-48 sm:max-h-60 lg:max-h-[75vh]`
+ *   so phones and tablets display a compact scrollable session selector at the
+ *   top without pushing the active session entry far below the fold.
+ * - Touch-Accessible Banner Controls: Replaces hover-only banner edit/remove
+ *   buttons (`opacity-0 group-hover:opacity-100`) with always-reachable mobile
+ *   controls (`opacity-95 sm:opacity-0 sm:group-hover:opacity-100`) so phone and
+ *   tablet users can replace or remove banners easily.
+ * - Mobile Form Ergonomics: Applies `text-sm sm:text-xs` on inputs and
+ *   textareas to prevent mobile browsers from zooming in on focus, and stacks
+ *   action bars cleanly (`flex-wrap gap-2`) on 375px viewports.
+ * - Overflow Protection: Adds `min-w-0` and `break-words` across read-only
+ *   cards so long URLs, loot lists, or NPC notes wrap inside the container.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.selectedCharacter - Active character record from router.
+ * -----------------------------------------------------------------------------
  */
 
 import React, { useState, useEffect } from "react";
@@ -21,7 +40,7 @@ export default function JournalView({ selectedCharacter }) {
   const { user } = useAuth();
 
   // ---------------------------------------------------------------------------
-  // STATE MANAGEMENT
+  // 1. STATE MANAGEMENT
   // ---------------------------------------------------------------------------
   const [entries, setEntries] = useState([]);
   const [activeEntry, setActiveEntry] = useState(null);
@@ -30,10 +49,10 @@ export default function JournalView({ selectedCharacter }) {
   const [uploadingBanner, setUploadingBanner] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
 
-  // Mode toggle state: false = Read/Reference Mode, true = Edit Mode
+  // Mode toggle: false = Read Reference Mode, true = Edit Mode
   const [isEditing, setIsEditing] = useState(false);
 
-  // Local form state including banner_url
+  // Editable form state for all 8 chronicle sections + metadata
   const [formData, setFormData] = useState({
     title: "",
     session_number: 1,
@@ -50,7 +69,7 @@ export default function JournalView({ selectedCharacter }) {
   });
 
   // ---------------------------------------------------------------------------
-  // LIFECYCLE: FETCH ENTRIES
+  // 2. LIFECYCLE: FETCH JOURNAL ENTRIES FOR SELECTED CHARACTER
   // ---------------------------------------------------------------------------
   useEffect(() => {
     let isMounted = true;
@@ -71,7 +90,7 @@ export default function JournalView({ selectedCharacter }) {
             const latest = data[data.length - 1];
             setActiveEntry(latest);
             populateForm(latest);
-            setIsEditing(false); // Default to Read Mode on load
+            setIsEditing(false);
           } else {
             setActiveEntry(null);
           }
@@ -105,12 +124,12 @@ export default function JournalView({ selectedCharacter }) {
   };
 
   // ---------------------------------------------------------------------------
-  // EVENT HANDLERS
+  // 3. EVENT HANDLERS
   // ---------------------------------------------------------------------------
   const handleSelectEntry = (entry) => {
     setActiveEntry(entry);
     populateForm(entry);
-    setIsEditing(false); // Switch to Read Mode when selecting an entry
+    setIsEditing(false);
     setSaveMessage("");
   };
 
@@ -123,7 +142,7 @@ export default function JournalView({ selectedCharacter }) {
   };
 
   /**
-   * Handles session banner image file selection and Supabase storage upload.
+   * Uploads and compresses a session banner image to Supabase Storage.
    */
   const handleBannerUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -166,7 +185,7 @@ export default function JournalView({ selectedCharacter }) {
       setEntries(updatedList);
       setActiveEntry(data);
       populateForm(data);
-      setIsEditing(true); // Open newly created sessions directly in Edit Mode
+      setIsEditing(true);
       setSaveMessage("New session created!");
       setTimeout(() => setSaveMessage(""), 3000);
     }
@@ -188,7 +207,7 @@ export default function JournalView({ selectedCharacter }) {
       );
       setActiveEntry(data);
       setSaveMessage("Changes saved successfully!");
-      setIsEditing(false); // Return to Read Mode after saving
+      setIsEditing(false);
       setTimeout(() => setSaveMessage(""), 3000);
     } else {
       setSaveMessage("Failed to save changes.");
@@ -225,11 +244,11 @@ export default function JournalView({ selectedCharacter }) {
 
   if (!selectedCharacter) {
     return (
-      <div className="p-8 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-center space-y-4 animate-fadeIn">
+      <div className="p-6 sm:p-8 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-center space-y-3 animate-fadeIn">
         <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
           📖 Campaign Journal
         </h2>
-        <p className="text-sm text-[#a59075]">
+        <p className="text-xs sm:text-sm text-[#a59075]">
           Please select a hero from the Adventurers Roster to view or write
           session journals.
         </p>
@@ -238,12 +257,14 @@ export default function JournalView({ selectedCharacter }) {
   }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto py-2 animate-fadeIn">
-      {/* HEADER BAR */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#a59075]/30 pb-4">
-        <div>
-          <h1 className="text-2xl font-bold font-medieval text-[#f0e6d2] flex items-center space-x-2">
-            <span>📖</span>
+    <div className="space-y-4 sm:space-y-6 max-w-6xl mx-auto py-1 sm:py-2 animate-fadeIn">
+      {/* =====================================================================
+        HEADER BAR
+        ===================================================================== */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-[#a59075]/30 pb-3 sm:pb-4">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl font-bold font-medieval text-[#f0e6d2] flex items-center gap-2 break-words">
+            <span className="shrink-0">📖</span>
             <span>{selectedCharacter.name}'s Campaign Journal</span>
           </h1>
           <p className="text-xs text-[#a59075] mt-1">
@@ -256,19 +277,19 @@ export default function JournalView({ selectedCharacter }) {
           type="button"
           onClick={handleCreateNewSession}
           disabled={saving}
-          className="px-4 py-2 bg-[#937460]/30 hover:bg-[#937460]/50 border border-[#a59075]/50 text-[#f0e6d2] rounded-lg text-xs font-semibold transition flex items-center justify-center space-x-2 shadow cursor-pointer disabled:opacity-50"
+          className="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-[#937460]/30 hover:bg-[#937460]/50 border border-[#a59075]/50 text-[#f0e6d2] rounded-lg text-xs font-semibold transition flex items-center justify-center space-x-2 shadow cursor-pointer disabled:opacity-50 shrink-0"
         >
           <span>➕ New Session</span>
         </button>
       </div>
 
       {loading ? (
-        <div className="p-12 text-center text-[#a59075] text-sm italic">
+        <div className="p-10 sm:p-12 text-center text-[#a59075] text-sm italic">
           Loading chronicle entries from Supabase...
         </div>
       ) : entries.length === 0 ? (
-        <div className="p-10 bg-[#5f3426]/80 border-2 border-dashed border-[#a59075]/40 rounded-xl text-center space-y-4">
-          <p className="text-base text-[#f0e6d2]">
+        <div className="p-8 sm:p-10 bg-[#5f3426]/80 border-2 border-dashed border-[#a59075]/40 rounded-xl text-center space-y-4">
+          <p className="text-sm sm:text-base text-[#f0e6d2]">
             No journal entries recorded for {selectedCharacter.name} yet.
           </p>
           <button
@@ -280,9 +301,14 @@ export default function JournalView({ selectedCharacter }) {
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* LEFT SUB-SIDEBAR */}
-          <div className="lg:col-span-1 bg-[#5f3426]/90 border border-[#a59075]/40 rounded-xl p-3 space-y-2 h-fit max-h-[75vh] overflow-y-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
+          {/* =================================================================
+            LEFT SUB-SIDEBAR: SESSION LIST
+            - Capped at `max-h-48 sm:max-h-60` on phones/tablets so the active
+              session entry below remains immediately accessible without heavy
+              scrolling; expands to `lg:max-h-[75vh]` on desktop.
+            ================================================================= */}
+          <div className="lg:col-span-1 min-w-0 bg-[#5f3426]/90 border border-[#a59075]/40 rounded-xl p-3 space-y-2 h-fit max-h-48 sm:max-h-60 lg:max-h-[75vh] overflow-y-auto">
             <h3 className="text-xs font-bold uppercase tracking-widest text-[#889c9b] px-2 py-1 border-b border-[#a59075]/20">
               Sessions ({entries.length})
             </h3>
@@ -292,8 +318,9 @@ export default function JournalView({ selectedCharacter }) {
                 return (
                   <button
                     key={entry.id}
+                    type="button"
                     onClick={() => handleSelectEntry(entry)}
-                    className={`w-full text-left px-3 py-2 rounded-lg transition text-xs flex flex-col space-y-0.5 border ${
+                    className={`w-full text-left px-3 py-2.5 sm:py-2 rounded-lg transition text-xs flex flex-col space-y-0.5 border cursor-pointer ${
                       isSelected
                         ? "bg-[#937460]/40 border-[#a59075] text-[#f0e6d2] font-semibold shadow"
                         : "border-transparent text-[#a59075] hover:bg-[#937460]/20 hover:text-[#938f71]"
@@ -311,28 +338,34 @@ export default function JournalView({ selectedCharacter }) {
             </div>
           </div>
 
-          {/* RIGHT CANVAS: DUAL-STAGE (READ REFERENCE MODE vs. EDIT MODE) */}
+          {/* =================================================================
+            RIGHT CANVAS: DUAL-STAGE (READ REFERENCE MODE vs. EDIT MODE)
+            ================================================================= */}
           {activeEntry && (
-            <div className="lg:col-span-3 bg-[#5f3426]/90 border-2 border-[#a59075]/40 rounded-xl p-6 space-y-6 shadow-2xl">
+            <div className="lg:col-span-3 min-w-0 bg-[#5f3426]/90 border-2 border-[#a59075]/40 rounded-xl p-3.5 sm:p-6 space-y-5 sm:space-y-6 shadow-2xl">
               {/* MODE SWITCHER ACTION BAR */}
-              <div className="flex items-center justify-between border-b border-[#a59075]/30 pb-4">
-                <div className="flex items-center space-x-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#a59075]/30 pb-3 sm:pb-4">
+                <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#889c9b]">
                     Mode:
                   </span>
                   <span
-                    className={`px-2.5 py-1 rounded text-xs font-semibold ${isEditing ? "bg-amber-900/60 text-amber-200 border border-amber-700/50" : "bg-emerald-950/60 text-emerald-300 border border-emerald-800/50"}`}
+                    className={`px-2.5 py-1 rounded text-xs font-semibold ${
+                      isEditing
+                        ? "bg-amber-900/60 text-amber-200 border border-amber-700/50"
+                        : "bg-emerald-950/60 text-emerald-300 border border-emerald-800/50"
+                    }`}
                   >
                     {isEditing ? "✏️ Edit Mode" : "📖 Read Reference Mode"}
                   </span>
                 </div>
 
-                <div className="flex items-center space-x-3">
+                <div className="flex items-center gap-2">
                   {isEditing ? (
                     <button
                       type="button"
                       onClick={() => setIsEditing(false)}
-                      className="px-3 py-1.5 bg-[#937460]/30 hover:bg-[#937460]/50 border border-[#a59075]/50 text-[#f0e6d2] rounded text-xs font-semibold transition flex items-center space-x-1.5 shadow cursor-pointer"
+                      className="px-3 py-2 sm:py-1.5 bg-[#937460]/30 hover:bg-[#937460]/50 border border-[#a59075]/50 text-[#f0e6d2] rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow cursor-pointer"
                     >
                       <span>📖 Switch to Read Mode</span>
                     </button>
@@ -340,7 +373,7 @@ export default function JournalView({ selectedCharacter }) {
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
-                      className="px-3 py-1.5 bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 text-[#f0e6d2] rounded text-xs font-semibold transition flex items-center space-x-1.5 shadow cursor-pointer"
+                      className="px-3 py-2 sm:py-1.5 bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 text-[#f0e6d2] rounded-lg text-xs font-semibold transition flex items-center space-x-1.5 shadow cursor-pointer"
                     >
                       <span>✏️ Edit Session</span>
                     </button>
@@ -355,14 +388,14 @@ export default function JournalView({ selectedCharacter }) {
                 </div>
               )}
 
-              {/* ========================================================= */}
-              {/* STAGE 1: READ REFERENCE MODE                              */}
-              {/* ========================================================= */}
+              {/* =============================================================
+                STAGE 1: READ REFERENCE MODE
+                ============================================================= */}
               {!isEditing ? (
-                <div className="space-y-6 animate-fadeIn">
-                  {/* BANNER DISPLAY (IF PRESENT) */}
+                <div className="space-y-5 sm:space-y-6 animate-fadeIn">
+                  {/* Panoramic Session Banner (scaled height for mobile vs desktop) */}
                   {activeEntry.banner_url && (
-                    <div className="w-full h-44 bg-[#3d1c14] border border-[#a59075]/40 rounded-xl overflow-hidden shadow-inner">
+                    <div className="w-full h-32 sm:h-44 bg-[#3d1c14] border border-[#a59075]/40 rounded-xl overflow-hidden shadow-inner">
                       <img
                         src={activeEntry.banner_url}
                         alt={activeEntry.title}
@@ -371,30 +404,30 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
                   )}
 
-                  {/* SESSION TITLE & METADATA HEADER */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#a59075]/30 pb-4">
-                    <div>
+                  {/* Session Title & Date Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#a59075]/30 pb-3 sm:pb-4">
+                    <div className="min-w-0">
                       <span className="text-[11px] font-bold uppercase tracking-widest text-[#889c9b]">
                         Session #{activeEntry.session_number}
                       </span>
-                      <h2 className="text-xl font-bold font-medieval text-[#f0e6d2] mt-0.5">
+                      <h2 className="text-lg sm:text-xl font-bold font-medieval text-[#f0e6d2] mt-0.5 break-words">
                         {activeEntry.title || "Untitled Session"}
                       </h2>
                     </div>
-                    <div className="text-xs text-[#a59075] bg-[#3d1c14]/60 px-3 py-1.5 rounded border border-[#a59075]/30 w-fit">
+                    <div className="text-xs text-[#a59075] bg-[#3d1c14]/60 px-3 py-1.5 rounded border border-[#a59075]/30 w-fit shrink-0">
                       📅 {activeEntry.entry_date || "No Date Recorded"}
                     </div>
                   </div>
 
-                  {/* READ-ONLY 8 CORE FIELDS */}
-                  <div className="space-y-4 pt-2">
+                  {/* Read-Only 8 Core Chronicle Fields */}
+                  <div className="space-y-3 sm:space-y-4 pt-1">
                     {/* 1. RECAP */}
-                    <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                    <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                       <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                         <span>📜</span>
                         <span>1. Session Recap</span>
                       </h3>
-                      <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                      <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                         {activeEntry.recap || (
                           <span className="italic text-[#a59075]">
                             No recap recorded for this session.
@@ -404,13 +437,13 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
 
                     {/* 2 & 3: LOCATIONS & NPCS */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>🗺️</span>
                           <span>2. Locations Discovered</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.locations || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -419,12 +452,12 @@ export default function JournalView({ selectedCharacter }) {
                         </p>
                       </div>
 
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>👤</span>
                           <span>3. NPCs Met & Notes</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.npcs || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -435,13 +468,13 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
 
                     {/* 4 & 5: LOOT & CLUES */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>💎</span>
                           <span>4. Loot & Magic Items</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.loot_magical || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -450,12 +483,12 @@ export default function JournalView({ selectedCharacter }) {
                         </p>
                       </div>
 
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>🔍</span>
                           <span>5. Clues & Mysteries</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.clues_mysteries || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -466,13 +499,13 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
 
                     {/* 6 & 7: DECISIONS & TO-DO */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>⚡</span>
                           <span>6. Decisions & Quest Updates</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.decisions_quests || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -481,12 +514,12 @@ export default function JournalView({ selectedCharacter }) {
                         </p>
                       </div>
 
-                      <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                      <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                         <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                           <span>📌</span>
                           <span>7. To Do Next Time</span>
                         </h3>
-                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                        <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                           {activeEntry.todo_next || (
                             <span className="italic text-[#a59075]">
                               None recorded.
@@ -497,12 +530,12 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
 
                     {/* 8. PARTY WATCH */}
-                    <div className="bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-4 space-y-2">
+                    <div className="min-w-0 bg-[#3d1c14]/60 border border-[#a59075]/30 rounded-xl p-3.5 sm:p-4 space-y-2">
                       <h3 className="text-xs font-bold uppercase tracking-wider text-[#889c9b] flex items-center space-x-2">
                         <span>🛡️</span>
                         <span>8. Party Members Watch</span>
                       </h3>
-                      <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed">
+                      <p className="text-xs text-[#f0e6d2] whitespace-pre-wrap leading-relaxed break-words">
                         {activeEntry.party_watch || (
                           <span className="italic text-[#a59075]">
                             None recorded.
@@ -513,14 +546,15 @@ export default function JournalView({ selectedCharacter }) {
                   </div>
                 </div>
               ) : (
-                /* ========================================================= */
-                /* STAGE 2: EDIT MODE FORM                                   */
-                /* ========================================================= */
+                /* ===========================================================
+                  STAGE 2: EDIT MODE FORM
+                  =========================================================== */
                 <form
                   onSubmit={handleSaveEntry}
-                  className="space-y-6 animate-fadeIn"
+                  className="space-y-5 sm:space-y-6 animate-fadeIn"
                 >
-                  {/* SESSION BANNER IMAGE UPLOAD BOX */}
+                  {/* SESSION BANNER UPLOAD BOX
+                      - Controls stay visible on touch devices (`opacity-95 sm:opacity-0 sm:group-hover:opacity-100`). */}
                   <div className="space-y-2">
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#889c9b]">
                       🖼️ Session Banner Image
@@ -533,8 +567,8 @@ export default function JournalView({ selectedCharacter }) {
                             alt="Session Banner"
                             className="w-full h-full object-cover"
                           />
-                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center space-x-3">
-                            <label className="px-3 py-1.5 bg-[#937460]/80 hover:bg-[#937460] text-[#f0e6d2] text-xs font-bold rounded cursor-pointer transition shadow">
+                          <div className="absolute inset-0 bg-black/50 opacity-95 sm:opacity-0 sm:group-hover:opacity-100 transition flex items-center justify-center gap-3 p-3">
+                            <label className="px-3 py-2 bg-[#937460]/90 hover:bg-[#937460] text-[#f0e6d2] text-xs font-bold rounded-lg cursor-pointer transition shadow">
                               Change Banner
                               <input
                                 type="file"
@@ -551,7 +585,7 @@ export default function JournalView({ selectedCharacter }) {
                                   banner_url: "",
                                 }))
                               }
-                              className="px-3 py-1.5 bg-red-950/80 hover:bg-red-900 text-red-200 text-xs font-bold rounded transition shadow"
+                              className="px-3 py-2 bg-red-950/90 hover:bg-red-900 text-red-200 text-xs font-bold rounded-lg transition shadow cursor-pointer"
                             >
                               Remove
                             </button>
@@ -563,7 +597,7 @@ export default function JournalView({ selectedCharacter }) {
                           <span className="text-xs text-[#f0e6d2] font-semibold">
                             {uploadingBanner
                               ? "Uploading & Compressing..."
-                              : "Click to upload session banner image"}
+                              : "Tap or click to upload session banner image"}
                           </span>
                           <span className="text-[10px] text-[#a59075]">
                             Supports JPEG, PNG, WebP (Optimized as 1200x500
@@ -581,8 +615,8 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
                   </div>
 
-                  {/* SESSION META CONTROLS */}
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#a59075]/30 pb-4">
+                  {/* SESSION METADATA INPUTS (Session #, Title, Date & Delete) */}
+                  <div className="flex flex-col sm:flex-row items-stretch sm:items-end justify-between gap-3 sm:gap-4 border-b border-[#a59075]/30 pb-4">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full sm:w-auto flex-1">
                       <div>
                         <label className="block text-[10px] uppercase tracking-wider text-[#889c9b] font-bold mb-1">
@@ -593,7 +627,7 @@ export default function JournalView({ selectedCharacter }) {
                           name="session_number"
                           value={formData.session_number}
                           onChange={handleInputChange}
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-3 py-1.5 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-3 py-2 sm:py-1.5 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
 
@@ -607,13 +641,13 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.title}
                           onChange={handleInputChange}
                           placeholder="e.g., The Goblin Ambush"
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-3 py-1.5 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-3 py-2 sm:py-1.5 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-end">
-                      <div>
+                    <div className="flex items-end gap-2 sm:gap-3 w-full sm:w-auto">
+                      <div className="flex-1 sm:flex-initial">
                         <label className="block text-[10px] uppercase tracking-wider text-[#889c9b] font-bold mb-1">
                           Date
                         </label>
@@ -622,7 +656,7 @@ export default function JournalView({ selectedCharacter }) {
                           name="entry_date"
                           value={formData.entry_date}
                           onChange={handleInputChange}
-                          className="bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-2 py-1.5 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full sm:w-auto bg-[#3d1c14]/80 border border-[#a59075]/40 rounded px-2.5 py-2 sm:py-1.5 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
 
@@ -630,7 +664,7 @@ export default function JournalView({ selectedCharacter }) {
                         type="button"
                         onClick={handleDeleteEntry}
                         disabled={saving}
-                        className="mt-4 p-2 text-xs text-red-400 hover:text-red-300 hover:bg-red-950/40 border border-red-900/40 rounded transition cursor-pointer"
+                        className="p-2.5 sm:p-2 text-xs text-red-400 hover:text-red-300 hover:bg-red-950/40 border border-red-900/40 rounded transition cursor-pointer shrink-0"
                         title="Delete Session Log"
                       >
                         🗑️
@@ -638,27 +672,28 @@ export default function JournalView({ selectedCharacter }) {
                     </div>
                   </div>
 
-                  {/* SAVE ACTIONS BAR */}
-                  <div className="flex items-center justify-between">
+                  {/* SAVE / CANCEL ACTIONS BAR */}
+                  <div className="flex flex-wrap items-center justify-between gap-2">
                     <button
                       type="button"
                       onClick={() => setIsEditing(false)}
-                      className="px-4 py-2 bg-[#3d1c14] hover:bg-[#4a241b] border border-[#a59075]/40 text-[#f0e6d2] text-xs font-semibold rounded-lg transition shadow cursor-pointer"
+                      className="px-4 py-2.5 sm:py-2 bg-[#3d1c14] hover:bg-[#4a241b] border border-[#a59075]/40 text-[#f0e6d2] text-xs font-semibold rounded-lg transition shadow cursor-pointer"
                     >
-                      Cancel / Back to Read Mode
+                      Cancel / Read Mode
                     </button>
 
                     <button
                       type="submit"
                       disabled={saving}
-                      className="px-5 py-2 bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 text-[#f0e6d2] font-semibold text-xs rounded-lg transition shadow cursor-pointer disabled:opacity-50"
+                      className="px-5 py-2.5 sm:py-2 bg-[#937460]/40 hover:bg-[#937460]/60 border border-[#a59075]/60 text-[#f0e6d2] font-semibold text-xs rounded-lg transition shadow cursor-pointer disabled:opacity-50"
                     >
                       {saving ? "Saving to Supabase..." : "💾 Save Session Log"}
                     </button>
                   </div>
 
-                  {/* 8 CORE EDITABLE FIELDS */}
-                  <div className="space-y-5 pt-2">
+                  {/* 8 CORE EDITABLE CHRONICLE FIELDS
+                      - `text-sm sm:text-xs` prevents mobile browser focus zoom. */}
+                  <div className="space-y-4 sm:space-y-5 pt-1">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#889c9b] mb-1.5 flex items-center space-x-2">
                         <span>📜</span>
@@ -670,7 +705,7 @@ export default function JournalView({ selectedCharacter }) {
                         value={formData.recap}
                         onChange={handleInputChange}
                         placeholder="Summary of events that transpired..."
-                        className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                        className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                       />
                     </div>
 
@@ -686,7 +721,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.locations}
                           onChange={handleInputChange}
                           placeholder="Towns, dungeons, landmarks visited..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
 
@@ -701,7 +736,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.npcs}
                           onChange={handleInputChange}
                           placeholder="Names, descriptions, dispositions..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
                     </div>
@@ -718,7 +753,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.loot_magical}
                           onChange={handleInputChange}
                           placeholder="Gold acquired, magic weapons, items..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
 
@@ -733,7 +768,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.clues_mysteries}
                           onChange={handleInputChange}
                           placeholder="Riddles, strange occurrences, leads..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
                     </div>
@@ -750,7 +785,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.decisions_quests}
                           onChange={handleInputChange}
                           placeholder="Key choices made and active objectives..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
 
@@ -765,7 +800,7 @@ export default function JournalView({ selectedCharacter }) {
                           value={formData.todo_next}
                           onChange={handleInputChange}
                           placeholder="Immediate goals for starting next session..."
-                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                          className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                         />
                       </div>
                     </div>
@@ -781,7 +816,7 @@ export default function JournalView({ selectedCharacter }) {
                         value={formData.party_watch}
                         onChange={handleInputChange}
                         placeholder="Camp watch shifts and security orders..."
-                        className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
+                        className="w-full bg-[#3d1c14]/80 border border-[#a59075]/40 rounded-lg p-3 text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#889c9b]"
                       />
                     </div>
                   </div>

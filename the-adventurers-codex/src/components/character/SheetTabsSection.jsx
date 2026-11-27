@@ -3,15 +3,30 @@
  * COMPONENT: SheetTabsSection.jsx
  * -----------------------------------------------------------------------------
  * Description:
- * Master interactive 5-tab workspace for the Character Sheet view.
- * Contains compact, single-row tab headers for:
- * 1. Weapons & Attacks (Calculated To-Hit bonus, damage dice, type, properties
- *    with strict weapon/armor separation)
- * 2. Spells (Grouped and ordered Cantrips -> Level 1 -> Level 2 -> ..., with
- *    interactive spell slot trackers and collapsible full spell details)
- * 3. Features & Traits (Class features, racial traits, feats)
- * 4. Background (Background name, personality traits, ideals, bonds, flaws)
- * 5. Quick Notes (Ephemeral session scratchpad stored in local state)
+ * Master interactive 5-tab workspace for the Character Sheet view:
+ * 1. Weapons & Attacks (To-Hit bonus, damage dice, damage type, equipped status)
+ * 2. Spells (Grouped Cantrips -> Level 1 -> Level 2 -> ..., interactive spell
+ *    slot steppers, and collapsible spell mechanics/descriptions)
+ * 3. Features & Traits (Racial lineage traits, core class features)
+ * 4. Background (Background title, alignment, personality traits, ideals/bonds)
+ * 5. Quick Notes (Ephemeral session scratchpad stored in component state)
+ *
+ * Responsive & Touch Behavior:
+ * - Scrollable Single-Row Tab Strip: Uses `overflow-x-auto flex-nowrap` with
+ *   `min-w-max sm:flex-1` and `py-2.5 px-3` so phones can swipe smoothly across
+ *   all 5 tabs on a single row without awkward two-line wrapping, while tablets
+ *   and desktops stretch the 5 tabs evenly across 100% width.
+ * - Adaptive Content Padding: Uses `p-3 sm:p-5` so mobile cards and spell
+ *   details keep wide readable text blocks.
+ * - Touch-Friendly Spell Slot Steppers: Enlarges `-` and `+` slot buttons to
+ *   `w-7 h-7 sm:w-6 sm:h-6` for reliable thumb taps during live table play.
+ * - Overflow Protection: Applies `min-w-0` and `break-words` to weapon cards,
+ *   spell headers, and expanded mechanics grids so long titles never stretch
+ *   the container horizontally.
+ *
+ * @param {Object} props - Component properties.
+ * @param {Object} props.character - Computed character sheet record.
+ * @param {Function} props.onUpdateSpellSlots - Persists updated `spell_slots_used` map.
  * -----------------------------------------------------------------------------
  */
 
@@ -22,7 +37,7 @@ import React, { useMemo, useState } from "react";
  * and positive integers represent spell levels (1, 2, 3, ...).
  *
  * @param {number|string|undefined|null} rawLevel - Raw level from spells table.
- * @returns {number} Normalized numeric spell level (defaults to 0).
+ * @returns {number} Normalized numeric spell level (defaults to 0 / 99 if unparseable).
  */
 function normalizeSpellLevel(rawLevel) {
   if (rawLevel === 0 || rawLevel === "0") return 0;
@@ -37,7 +52,7 @@ function normalizeSpellLevel(rawLevel) {
 }
 
 /**
- * Formats a numeric spell level into a section heading.
+ * Formats a numeric spell level into a human-readable section heading.
  *
  * @param {number} level - Normalized spell level.
  * @returns {string} Section heading ("Cantrips" or "Level N").
@@ -50,7 +65,7 @@ function formatSpellTierHeading(level) {
  * Formats the `components` JSONB column (array or string) into readable text.
  *
  * @param {Array|string|null|undefined} components - Components value from spells table.
- * @returns {string} Human-readable components string.
+ * @returns {string} Human-readable components string (e.g., "V, S, M").
  */
 function formatComponents(components) {
   if (!components) return "None";
@@ -69,16 +84,14 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   // Active tab state: 'weapons' | 'spells' | 'features' | 'background' | 'notes'
   const [activeTab, setActiveTab] = useState("weapons");
 
-  // Tracks which individual spell entries are expanded to show full details
+  // Tracks which individual spell entries are expanded to reveal full mechanics
   const [expandedSpellKeys, setExpandedSpellKeys] = useState(() => new Set());
 
-  // Quick notes local ephemeral state (wipes when component unmounts)
+  // Ephemeral local scratchpad text (cleared on unmount)
   const [quickNotes, setQuickNotes] = useState("");
 
   /**
    * Toggles the expanded/collapsed state for a single spell card.
-   *
-   * @param {string|number} spellKey - Unique key for the spell row.
    */
   const toggleSpellExpanded = (spellKey) => {
     setExpandedSpellKeys((prev) => {
@@ -92,7 +105,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
     });
   };
 
-  // Extract stats for weapon/spell calculations
+  // Extract base ability scores and proficiency bonus for attack/damage math
   const stats = character.stats ||
     character.computed?.abilityScores || {
       str: 10,
@@ -102,6 +115,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
       wis: 10,
       cha: 10,
     };
+
   const proficiencyBonus =
     character.computed?.proficiencyBonus ||
     Math.floor(((character.level || 1) - 1) / 4) + 2;
@@ -109,15 +123,15 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   const strMod = Math.floor(((stats.str || 10) - 10) / 2);
   const dexMod = Math.floor(((stats.dex || 10) - 10) / 2);
 
-  // Inventory / Weapons filtering strictly excluding armor and shields
+  // Filter inventory items for weapons while strictly excluding armor and shields
   const inventory = Array.isArray(character.inventory)
     ? character.inventory
     : [];
+
   const weapons = inventory.filter((item) => {
     const eqName = item?.equipment?.name || item?.custom_name || "";
     const eqCategory = item?.equipment?.category || item?.category || "";
 
-    // Explicitly exclude armor and shields from the weapons tab
     if (
       eqCategory.toLowerCase().includes("armor") ||
       eqCategory.toLowerCase().includes("shield")
@@ -184,9 +198,19 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
   }, [spells]);
 
   return (
-    <div className="bg-[#4a261c] border-2 border-amber-600/50 rounded-xl shadow-2xl overflow-hidden my-4">
-      {/* TAB NAVIGATION HEADER - COMPACT SINGLE-ROW LAYOUT */}
-      <div className="flex flex-wrap sm:flex-nowrap border-b border-amber-600/40 bg-[#361a12]">
+    <div className="bg-[#4a261c] border-2 border-amber-600/50 rounded-xl shadow-2xl overflow-hidden my-3 sm:my-4">
+      {/* =====================================================================
+        TAB NAVIGATION HEADER — SINGLE-ROW HORIZONTALLY SCROLLABLE ON MOBILE
+        - `overflow-x-auto flex-nowrap` keeps all 5 tabs on one clean horizontal
+          strip on phones (swipeable) instead of wrapping into uneven rows.
+        - `min-w-max sm:flex-1` lets tabs size naturally on phones and expand
+          to fill equal widths from `sm` (640px) upward.
+        ===================================================================== */}
+      <div
+        role="tablist"
+        aria-label="Character sheet sections"
+        className="flex flex-nowrap overflow-x-auto border-b border-amber-600/40 bg-[#361a12]"
+      >
         {[
           { id: "weapons", label: "⚔️ Weapons", count: weapons.length },
           { id: "spells", label: "✨ Spells", count: spells.length },
@@ -197,16 +221,18 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
           <button
             key={tab.id}
             type="button"
+            role="tab"
+            aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex-1 px-2 py-2 text-[10px] font-bold uppercase tracking-tight transition border-r border-amber-600/30 flex items-center justify-center space-x-1 ${
+            className={`min-w-max sm:flex-1 px-3 sm:px-2 py-2.5 sm:py-2 text-[11px] sm:text-[10px] font-bold uppercase tracking-tight transition border-r border-amber-600/30 last:border-r-0 flex items-center justify-center gap-1.5 cursor-pointer ${
               activeTab === tab.id
                 ? "bg-[#4a261c] text-amber-300 border-b-2 border-b-amber-400 shadow-inner"
                 : "text-[#889c9b] hover:text-[#f0e6d2] hover:bg-[#4a261c]/40"
             }`}
           >
-            <span className="truncate">{tab.label}</span>
+            <span className="whitespace-nowrap">{tab.label}</span>
             {tab.count !== undefined && (
-              <span className="px-1 py-0.5 bg-[#361a12] rounded-full text-[9px] text-amber-400 border border-amber-500/30">
+              <span className="px-1.5 py-0.5 bg-[#361a12] rounded-full text-[9px] text-amber-400 border border-amber-500/30">
                 {tab.count}
               </span>
             )}
@@ -214,12 +240,16 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
         ))}
       </div>
 
-      {/* TAB CONTENT AREA */}
-      <div className="p-5">
-        {/* TAB 1: WEAPONS & ATTACKS */}
+      {/* =====================================================================
+        ACTIVE TAB PANEL CONTENT AREA (`p-3 sm:p-5`)
+        ===================================================================== */}
+      <div className="p-3 sm:p-5">
+        {/* -------------------------------------------------------------------
+          TAB 1: WEAPONS & COMBAT ATTACKS
+          ------------------------------------------------------------------- */}
         {activeTab === "weapons" && (
           <div className="space-y-4 animate-fadeIn">
-            <div className="flex justify-between items-center border-b border-amber-500/30 pb-2">
+            <div className="flex flex-wrap justify-between items-center gap-1 border-b border-amber-500/30 pb-2">
               <h3 className="text-sm font-bold text-amber-300 uppercase tracking-widest">
                 Weapons & Combat Attacks
               </h3>
@@ -250,23 +280,28 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                     : strMod;
                   const toHit = abilityMod + proficiencyBonus;
                   const formattedToHit = toHit >= 0 ? `+${toHit}` : `${toHit}`;
-                  const totalDamage = `${damage} ${abilityMod >= 0 ? `+ ${abilityMod}` : `- ${Math.abs(abilityMod)}`} ${dmgType}`;
+                  const totalDamage = `${damage} ${
+                    abilityMod >= 0
+                      ? `+ ${abilityMod}`
+                      : `- ${Math.abs(abilityMod)}`
+                  } ${dmgType}`;
 
                   return (
                     <div
                       key={idx}
-                      className="p-3 bg-[#361a12] border border-amber-500/40 rounded-lg space-y-2 shadow-inner"
+                      className="min-w-0 p-3 bg-[#361a12] border border-amber-500/40 rounded-lg space-y-2 shadow-inner"
                     >
-                      <div className="flex justify-between items-start">
-                        <span className="font-bold text-sm text-[#f0e6d2]">
+                      <div className="flex justify-between items-start gap-2">
+                        <span className="font-bold text-sm text-[#f0e6d2] break-words min-w-0">
                           {name}
                         </span>
-                        <span className="px-2 py-0.5 bg-[#4a261c] border border-amber-500/30 rounded text-[10px] text-amber-300 font-bold">
+                        <span className="px-2 py-0.5 bg-[#4a261c] border border-amber-500/30 rounded text-[10px] text-amber-300 font-bold shrink-0">
                           {item?.is_equipped ? "Equipped" : "In Pack"}
                         </span>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-amber-500/20">
-                        <div>
+
+                      <div className="grid grid-cols-2 gap-2 text-xs pt-1.5 border-t border-amber-500/20">
+                        <div className="min-w-0">
                           <span className="text-[10px] text-[#889c9b] uppercase block">
                             To Hit / Attack
                           </span>
@@ -274,11 +309,11 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                             {formattedToHit}
                           </span>
                         </div>
-                        <div>
+                        <div className="min-w-0">
                           <span className="text-[10px] text-[#889c9b] uppercase block">
                             Damage & Type
                           </span>
-                          <span className="text-sm font-bold text-[#f0e6d2]">
+                          <span className="text-sm font-bold text-[#f0e6d2] break-words">
                             {totalDamage}
                           </span>
                         </div>
@@ -296,10 +331,12 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
           </div>
         )}
 
-        {/* TAB 2: SPELLS */}
+        {/* -------------------------------------------------------------------
+          TAB 2: SPELLBOOK & CANTRIPS
+          ------------------------------------------------------------------- */}
         {activeTab === "spells" && (
           <div className="space-y-4 animate-fadeIn">
-            <div className="flex justify-between items-center border-b border-amber-500/30 pb-2">
+            <div className="flex flex-wrap justify-between items-center gap-2 border-b border-amber-500/30 pb-2">
               <h3 className="text-sm font-bold text-amber-300 uppercase tracking-widest">
                 Spellbook & Cantrips
               </h3>
@@ -314,8 +351,8 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
               </div>
             </div>
 
-            {/* Spell Slots Trackers */}
-            <div className="p-3 bg-[#361a12] border border-amber-500/30 rounded-lg flex flex-wrap gap-4 items-center">
+            {/* Interactive Spell Slot Trackers (Touch-Sized `-` / `+` Buttons) */}
+            <div className="p-3 bg-[#361a12] border border-amber-500/30 rounded-lg flex flex-wrap gap-2.5 sm:gap-4 items-center">
               <span className="text-xs font-bold uppercase text-amber-300">
                 Spell Slots:
               </span>
@@ -328,7 +365,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                 return (
                   <div
                     key={lvl}
-                    className="flex items-center space-x-2 text-xs bg-[#4a261c] px-2.5 py-1 rounded border border-amber-500/30"
+                    className="flex items-center gap-2 text-xs bg-[#4a261c] px-2.5 py-1.5 sm:py-1 rounded border border-amber-500/30"
                   >
                     <span className="text-[#f0e6d2] font-bold">Lvl {lvl}:</span>
                     <span className="text-amber-400 font-bold">
@@ -336,6 +373,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                     </span>
                     <button
                       type="button"
+                      aria-label={`Spend Level ${lvl} Spell Slot`}
                       onClick={() => {
                         const newUsed = Math.max(0, used - 1);
                         onUpdateSpellSlots({
@@ -343,12 +381,13 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                           [lvl]: newUsed,
                         });
                       }}
-                      className="w-4 h-4 bg-[#361a12] rounded text-xs text-amber-300 font-bold flex items-center justify-center hover:bg-amber-800"
+                      className="w-7 h-7 sm:w-6 sm:h-6 bg-[#361a12] rounded text-xs text-amber-300 font-bold flex items-center justify-center hover:bg-amber-800 border border-amber-500/30 cursor-pointer"
                     >
                       -
                     </button>
                     <button
                       type="button"
+                      aria-label={`Restore Level ${lvl} Spell Slot`}
                       onClick={() => {
                         const newUsed = Math.min(maxSlots, used + 1);
                         onUpdateSpellSlots({
@@ -356,7 +395,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                           [lvl]: newUsed,
                         });
                       }}
-                      className="w-4 h-4 bg-[#361a12] rounded text-xs text-amber-300 font-bold flex items-center justify-center hover:bg-amber-800"
+                      className="w-7 h-7 sm:w-6 sm:h-6 bg-[#361a12] rounded text-xs text-amber-300 font-bold flex items-center justify-center hover:bg-amber-800 border border-amber-500/30 cursor-pointer"
                     >
                       +
                     </button>
@@ -381,7 +420,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                       </span>
                     </div>
 
-                    {/* Collapsible Spell Rows Inside Tier */}
+                    {/* Collapsible Spell Cards */}
                     <div className="space-y-2">
                       {tierGroup.items.map(({ key, entry, spell }) => {
                         const isExpanded = expandedSpellKeys.has(key);
@@ -407,15 +446,15 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                             key={key}
                             className="bg-[#361a12] border border-amber-500/30 rounded-lg overflow-hidden transition"
                           >
-                            {/* Clickable Collapsible Header */}
+                            {/* Clickable/Tappable Accordion Header */}
                             <button
                               type="button"
                               onClick={() => toggleSpellExpanded(key)}
                               aria-expanded={isExpanded}
-                              className="w-full px-3 py-2.5 flex items-center justify-between gap-2 text-left text-xs hover:bg-[#4a261c]/50 transition"
+                              className="w-full px-3 py-3 sm:py-2.5 flex items-start sm:items-center justify-between gap-2 text-left text-xs hover:bg-[#4a261c]/50 transition cursor-pointer"
                             >
-                              <div className="flex items-center flex-wrap gap-1.5">
-                                <span className="font-bold text-[#f0e6d2]">
+                              <div className="flex items-center flex-wrap gap-1.5 min-w-0">
+                                <span className="font-bold text-[#f0e6d2] break-words">
                                   {spellName}
                                 </span>
                                 <span className="text-[#889c9b] text-[11px]">
@@ -454,49 +493,49 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                               </div>
                             </button>
 
-                            {/* Collapsible Spell Mechanics & Explanation */}
+                            {/* Expanded Spell Mechanics & Description */}
                             {isExpanded && (
-                              <div className="px-3.5 py-3 bg-[#28120c] border-t border-amber-500/25 space-y-3 text-xs text-[#e8dcc4]">
+                              <div className="px-3 sm:px-3.5 py-3 bg-[#28120c] border-t border-amber-500/25 space-y-3 text-xs text-[#e8dcc4]">
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 p-2.5 rounded bg-[#361a12]/90 border border-amber-500/20">
-                                  <div>
+                                  <div className="min-w-0">
                                     <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
                                       Casting Time
                                     </span>
-                                    <span className="text-[11px] text-[#f0e6d2]">
+                                    <span className="text-[11px] text-[#f0e6d2] break-words">
                                       {castingTime}
                                     </span>
                                   </div>
-                                  <div>
+                                  <div className="min-w-0">
                                     <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
                                       Range / Contact
                                     </span>
-                                    <span className="text-[11px] text-[#f0e6d2]">
+                                    <span className="text-[11px] text-[#f0e6d2] break-words">
                                       {spellRange}
                                     </span>
                                   </div>
-                                  <div>
+                                  <div className="min-w-0">
                                     <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
                                       Components
                                     </span>
-                                    <span className="text-[11px] text-[#f0e6d2]">
+                                    <span className="text-[11px] text-[#f0e6d2] break-words">
                                       {componentsText}
                                     </span>
                                   </div>
-                                  <div>
+                                  <div className="min-w-0">
                                     <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
                                       Duration
                                     </span>
-                                    <span className="text-[11px] text-[#f0e6d2]">
+                                    <span className="text-[11px] text-[#f0e6d2] break-words">
                                       {duration}
                                     </span>
                                   </div>
                                 </div>
 
-                                <div className="space-y-1 leading-relaxed whitespace-pre-line">
+                                <div className="space-y-1 leading-relaxed whitespace-pre-line break-words">
                                   <span className="text-[9px] uppercase tracking-wider text-amber-300 font-bold block">
                                     Spell Description & Effects
                                   </span>
-                                  <p className="text-[11px] text-[#f0e6d2]/95">
+                                  <p className="text-xs sm:text-[11px] text-[#f0e6d2]/95">
                                     {description}
                                   </p>
                                 </div>
@@ -517,7 +556,9 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
           </div>
         )}
 
-        {/* TAB 3: FEATURES & TRAITS */}
+        {/* -------------------------------------------------------------------
+          TAB 3: FEATURES & TRAITS
+          ------------------------------------------------------------------- */}
         {activeTab === "features" && (
           <div className="space-y-4 animate-fadeIn">
             <div className="border-b border-amber-500/30 pb-2">
@@ -547,7 +588,9 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
           </div>
         )}
 
-        {/* TAB 4: BACKGROUND */}
+        {/* -------------------------------------------------------------------
+          TAB 4: BACKGROUND & PERSONALITY
+          ------------------------------------------------------------------- */}
         {activeTab === "background" && (
           <div className="space-y-4 animate-fadeIn">
             <div className="border-b border-amber-500/30 pb-2">
@@ -555,13 +598,13 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                 Background & Personality
               </h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-              <div className="p-3 bg-[#361a12] border border-amber-500/30 rounded space-y-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs">
+              <div className="min-w-0 p-3 bg-[#361a12] border border-amber-500/30 rounded space-y-2">
                 <div>
                   <span className="text-[10px] text-[#889c9b] uppercase block">
                     Background
                   </span>
-                  <strong className="text-amber-300 text-sm">
+                  <strong className="text-amber-300 text-sm break-words">
                     {character.background?.name || "Custom Background"}
                   </strong>
                 </div>
@@ -574,12 +617,12 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                   </span>
                 </div>
               </div>
-              <div className="p-3 bg-[#361a12] border border-amber-500/30 rounded space-y-2">
+              <div className="min-w-0 p-3 bg-[#361a12] border border-amber-500/30 rounded space-y-2">
                 <div>
                   <span className="text-[10px] text-[#889c9b] uppercase block">
                     Personality Traits
                   </span>
-                  <p className="text-[#f0e6d2] italic">
+                  <p className="text-[#f0e6d2] italic break-words">
                     {character.personality_traits || "None recorded."}
                   </p>
                 </div>
@@ -587,7 +630,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
                   <span className="text-[10px] text-[#889c9b] uppercase block">
                     Ideals & Bonds
                   </span>
-                  <p className="text-[#f0e6d2] italic">
+                  <p className="text-[#f0e6d2] italic break-words">
                     {character.ideals || "None recorded."}
                   </p>
                 </div>
@@ -596,10 +639,12 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
           </div>
         )}
 
-        {/* TAB 5: QUICK NOTES */}
+        {/* -------------------------------------------------------------------
+          TAB 5: QUICK SESSION SCRATCHPAD
+          ------------------------------------------------------------------- */}
         {activeTab === "notes" && (
           <div className="space-y-3 animate-fadeIn">
-            <div className="flex justify-between items-center border-b border-amber-500/30 pb-2">
+            <div className="flex flex-wrap justify-between items-center gap-1 border-b border-amber-500/30 pb-2">
               <h3 className="text-sm font-bold text-amber-300 uppercase tracking-widest">
                 📝 Quick Session Scratchpad
               </h3>
@@ -612,7 +657,7 @@ export default function SheetTabsSection({ character, onUpdateSpellSlots }) {
               onChange={(e) => setQuickNotes(e.target.value)}
               placeholder="Jot down temporary combat counts, initiative reminders, or loot notes here before migrating them to your Journal..."
               rows={6}
-              className="w-full p-3 bg-[#361a12] border border-amber-500/40 rounded-lg text-xs text-[#f0e6d2] placeholder-[#889c9b] focus:outline-none focus:border-amber-400 shadow-inner resize-none"
+              className="w-full p-3 bg-[#361a12] border border-amber-500/40 rounded-lg text-sm sm:text-xs text-[#f0e6d2] placeholder-[#889c9b] focus:outline-none focus:border-amber-400 shadow-inner resize-none"
             />
           </div>
         )}

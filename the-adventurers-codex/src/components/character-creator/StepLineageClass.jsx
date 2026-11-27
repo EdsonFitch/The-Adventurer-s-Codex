@@ -1,23 +1,29 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: StepLineageClass.jsx
+ * -----------------------------------------------------------------------------
+ * Description:
+ * Manages Step 2 of Character Creation:
+ * - Official & Homebrew Race / Subrace selection.
+ * - Official & Homebrew Class / Subclass selection.
+ * - Inline homebrew builders that insert new lineages or classes into Supabase.
+ *
+ * Responsive & Touch Behavior:
+ * - Section Header Toggles: Uses `flex-wrap gap-2` so `+ Add Custom Homebrew...`
+ *   links wrap gracefully below section labels on narrow 375px screens.
+ * - Card & Pill Tap Targets: Adds `min-w-0`, `break-words`, and generous
+ *   vertical padding (`p-3.5 sm:p-3` on cards; `py-2 sm:py-1.5` on subrace/
+ *   subclass pills) for easy thumb selection.
+ * - Form Controls: Uses `text-sm sm:text-xs` on homebrew inputs/selects to
+ *   prevent mobile browser auto-zoom.
+ *
+ * @param {Object} props - Component properties.
+ * -----------------------------------------------------------------------------
+ */
+
 import React, { useState, useMemo } from "react";
 import { supabase } from "../../supabaseClient";
 
-/**
- * StepLineageClass Component
- * -----------------------------------------------------------------------------
- * Manages Step 2 of Character Creation:
- * - Race & Subrace Selection (Official or Homebrew)
- * - Class & Subclass Selection (Official or Homebrew)
- * - Dynamic inline form toggles for inserting custom lineages or classes into Supabase.
- *
- * @param {Object} props
- * @param {Object} props.characterData - Master character payload state
- * @param {Function} props.updateCharacterData - Callback to update master state
- * @param {Array} props.racesList - Pre-fetched races from Supabase
- * @param {Array} props.subracesList - Pre-fetched subraces from Supabase
- * @param {Array} props.classesList - Pre-fetched classes from Supabase
- * @param {Array} props.subclassesList - Pre-fetched subclasses from Supabase
- * @param {string} props.userId - Authenticated user UUID for homebrew ownership
- */
 export default function StepLineageClass({
   characterData,
   updateCharacterData,
@@ -34,7 +40,6 @@ export default function StepLineageClass({
   const [isAddingCustomClass, setIsAddingCustomClass] = useState(false);
   const [isSavingCustom, setIsSavingCustom] = useState(false);
 
-  // Custom Race Form Payload
   const [customRace, setCustomRace] = useState({
     name: "",
     speed: 30,
@@ -42,7 +47,6 @@ export default function StepLineageClass({
     description: "",
   });
 
-  // Custom Class Form Payload
   const [customClass, setCustomClass] = useState({
     name: "",
     hit_die: 8,
@@ -53,14 +57,11 @@ export default function StepLineageClass({
   // ---------------------------------------------------------------------------
   // 2. DYNAMIC SUB-OPTION FILTERING
   // ---------------------------------------------------------------------------
-
-  // Filter subraces belonging to the currently selected race_id
   const filteredSubraces = useMemo(() => {
     if (!characterData.raceId) return [];
     return subracesList.filter((sub) => sub.race_id === characterData.raceId);
   }, [characterData.raceId, subracesList]);
 
-  // Filter subclasses belonging to the currently selected class_id
   const filteredSubclasses = useMemo(() => {
     if (!characterData.classId) return [];
     return subclassesList.filter(
@@ -68,17 +69,12 @@ export default function StepLineageClass({
     );
   }, [characterData.classId, subclassesList]);
 
-  // Active selected entities for UI summary/preview
   const selectedRace = racesList.find((r) => r.id === characterData.raceId);
   const selectedClass = classesList.find((c) => c.id === characterData.classId);
 
   // ---------------------------------------------------------------------------
   // 3. HOMEBREW DATABASE INSERTION HANDLERS
   // ---------------------------------------------------------------------------
-
-  /**
-   * Saves a new custom homebrew race directly to Supabase 'races' table
-   */
   const handleSaveCustomRace = async () => {
     if (!customRace.name.trim()) {
       alert("Please provide a name for your custom lineage.");
@@ -89,7 +85,7 @@ export default function StepLineageClass({
       setIsSavingCustom(true);
       const newRacePayload = {
         name: customRace.name,
-        speed: parseInt(customRace.speed) || 30,
+        speed: parseInt(customRace.speed, 10) || 30,
         size: customRace.size,
         description: customRace.description,
         is_custom: true,
@@ -106,7 +102,6 @@ export default function StepLineageClass({
 
       if (error) throw error;
 
-      // Update parent character data with newly created Race ID
       updateCharacterData({ raceId: data.id, subraceId: "" });
       setIsAddingCustomRace(false);
       setCustomRace({ name: "", speed: 30, size: "Medium", description: "" });
@@ -118,9 +113,6 @@ export default function StepLineageClass({
     }
   };
 
-  /**
-   * Saves a new custom homebrew class directly to Supabase 'classes' table
-   */
   const handleSaveCustomClass = async () => {
     if (!customClass.name.trim()) {
       alert("Please provide a name for your custom class.");
@@ -131,7 +123,7 @@ export default function StepLineageClass({
       setIsSavingCustom(true);
       const newClassPayload = {
         name: customClass.name,
-        hit_die: parseInt(customClass.hit_die) || 8,
+        hit_die: parseInt(customClass.hit_die, 10) || 8,
         primary_ability: customClass.primary_ability,
         saving_throw_proficiencies: customClass.saving_throws,
         is_custom: true,
@@ -146,7 +138,6 @@ export default function StepLineageClass({
 
       if (error) throw error;
 
-      // Update parent character data with newly created Class ID
       updateCharacterData({ classId: data.id, subclassId: "" });
       setIsAddingCustomClass(false);
       setCustomClass({
@@ -167,7 +158,7 @@ export default function StepLineageClass({
   // 4. RENDER UI
   // ---------------------------------------------------------------------------
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-6 sm:space-y-8 animate-fadeIn">
       {/* Header */}
       <div>
         <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
@@ -179,18 +170,18 @@ export default function StepLineageClass({
         </p>
       </div>
 
-      {/* =================================================================== */}
-      {/* SECTION 1: LINEAGE & SUBRACE SELECTION                             */}
-      {/* =================================================================== */}
+      {/* =====================================================================
+        SECTION 1: LINEAGE & SUBRACE SELECTION
+        ===================================================================== */}
       <div className="space-y-4 border-b border-[#a59075]/20 pb-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             1. Race / Lineage
           </label>
           <button
             type="button"
             onClick={() => setIsAddingCustomRace(!isAddingCustomRace)}
-            className="text-xs text-amber-400 hover:text-amber-300 underline transition"
+            className="py-1 text-xs text-amber-400 hover:text-amber-300 underline transition cursor-pointer"
           >
             {isAddingCustomRace
               ? "← Select Standard Race"
@@ -198,15 +189,14 @@ export default function StepLineageClass({
           </button>
         </div>
 
-        {/* Homebrew Inline Builder: Custom Race */}
         {isAddingCustomRace ? (
-          <div className="p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-3">
+          <div className="p-3.5 sm:p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-3">
             <h4 className="text-xs font-bold text-amber-300 uppercase">
               Forge Custom Lineage
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Race Name *
                 </label>
                 <input
@@ -216,11 +206,11 @@ export default function StepLineageClass({
                     setCustomRace({ ...customRace, name: e.target.value })
                   }
                   placeholder="e.g. Dhampir"
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Speed (ft)
                 </label>
                 <input
@@ -229,17 +219,19 @@ export default function StepLineageClass({
                   onChange={(e) =>
                     setCustomRace({ ...customRace, speed: e.target.value })
                   }
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-[#889c9b]">Size</label>
+                <label className="block text-[10px] text-[#889c9b] mb-1">
+                  Size
+                </label>
                 <select
                   value={customRace.size}
                   onChange={(e) =>
                     setCustomRace({ ...customRace, size: e.target.value })
                   }
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 >
                   <option value="Small">Small</option>
                   <option value="Medium">Medium</option>
@@ -248,7 +240,7 @@ export default function StepLineageClass({
               </div>
             </div>
             <div>
-              <label className="block text-[10px] text-[#889c9b]">
+              <label className="block text-[10px] text-[#889c9b] mb-1">
                 Description / Lore
               </label>
               <textarea
@@ -257,21 +249,20 @@ export default function StepLineageClass({
                   setCustomRace({ ...customRace, description: e.target.value })
                 }
                 rows={2}
-                className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
               />
             </div>
             <button
               type="button"
               disabled={isSavingCustom}
               onClick={handleSaveCustomRace}
-              className="px-4 py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition"
+              className="px-4 py-2 sm:py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition cursor-pointer"
             >
               {isSavingCustom ? "Saving..." : "Save & Select Custom Race"}
             </button>
           </div>
         ) : (
-          /* Standard Race Selection Grid */
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
             {racesList.map((race) => (
               <button
                 key={race.id}
@@ -279,16 +270,16 @@ export default function StepLineageClass({
                 onClick={() =>
                   updateCharacterData({ raceId: race.id, subraceId: "" })
                 }
-                className={`p-3 rounded-lg border text-left transition-all ${
+                className={`min-w-0 p-3.5 sm:p-3 rounded-lg border text-left transition-all cursor-pointer ${
                   characterData.raceId === race.id
                     ? "bg-[#4a261c] border-amber-500 shadow-lg text-[#f0e6d2]"
                     : "bg-[#4a261c]/40 border-[#a59075]/30 hover:border-[#a59075]/60 text-[#938f71]"
                 }`}
               >
-                <div className="font-bold text-xs flex justify-between items-center">
-                  <span>{race.name}</span>
+                <div className="font-bold text-xs flex flex-wrap justify-between items-center gap-1">
+                  <span className="break-words">{race.name}</span>
                   {race.is_custom && (
-                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded">
+                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded shrink-0">
                       Homebrew
                     </span>
                   )}
@@ -301,7 +292,7 @@ export default function StepLineageClass({
           </div>
         )}
 
-        {/* Subrace Selector (Rendered if chosen race has available subraces) */}
+        {/* Subrace Pills */}
         {filteredSubraces.length > 0 && !isAddingCustomRace && (
           <div className="mt-4 p-3 bg-[#4a261c]/30 rounded-lg border border-[#a59075]/20">
             <label className="block text-xs uppercase tracking-wider text-[#889c9b] mb-2">
@@ -313,7 +304,7 @@ export default function StepLineageClass({
                   key={subrace.id}
                   type="button"
                   onClick={() => updateCharacterData({ subraceId: subrace.id })}
-                  className={`px-3 py-1.5 rounded text-xs transition border ${
+                  className={`px-3 py-2 sm:py-1.5 rounded text-xs transition border cursor-pointer ${
                     characterData.subraceId === subrace.id
                       ? "bg-amber-800 border-amber-500 text-white font-bold"
                       : "bg-[#4a261c] border-[#a59075]/30 text-[#938f71] hover:border-[#a59075]"
@@ -327,18 +318,18 @@ export default function StepLineageClass({
         )}
       </div>
 
-      {/* =================================================================== */}
-      {/* SECTION 2: CLASS & SUBCLASS SELECTION                             */}
-      {/* =================================================================== */}
+      {/* =====================================================================
+        SECTION 2: CLASS & SUBCLASS SELECTION
+        ===================================================================== */}
       <div className="space-y-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             2. Class & Archetype
           </label>
           <button
             type="button"
             onClick={() => setIsAddingCustomClass(!isAddingCustomClass)}
-            className="text-xs text-amber-400 hover:text-amber-300 underline transition"
+            className="py-1 text-xs text-amber-400 hover:text-amber-300 underline transition cursor-pointer"
           >
             {isAddingCustomClass
               ? "← Select Standard Class"
@@ -346,15 +337,14 @@ export default function StepLineageClass({
           </button>
         </div>
 
-        {/* Homebrew Inline Builder: Custom Class */}
         {isAddingCustomClass ? (
-          <div className="p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-3">
+          <div className="p-3.5 sm:p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-3">
             <h4 className="text-xs font-bold text-amber-300 uppercase">
               Forge Custom Class
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Class Name *
                 </label>
                 <input
@@ -364,11 +354,11 @@ export default function StepLineageClass({
                     setCustomClass({ ...customClass, name: e.target.value })
                   }
                   placeholder="e.g. Blood Hunter"
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Hit Die (d6, d8, d10, d12)
                 </label>
                 <select
@@ -376,7 +366,7 @@ export default function StepLineageClass({
                   onChange={(e) =>
                     setCustomClass({ ...customClass, hit_die: e.target.value })
                   }
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 >
                   <option value={6}>d6</option>
                   <option value={8}>d8</option>
@@ -385,7 +375,7 @@ export default function StepLineageClass({
                 </select>
               </div>
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Primary Ability
                 </label>
                 <select
@@ -396,7 +386,7 @@ export default function StepLineageClass({
                       primary_ability: e.target.value,
                     })
                   }
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 >
                   {["STR", "DEX", "CON", "INT", "WIS", "CHA"].map((stat) => (
                     <option key={stat} value={stat}>
@@ -410,14 +400,13 @@ export default function StepLineageClass({
               type="button"
               disabled={isSavingCustom}
               onClick={handleSaveCustomClass}
-              className="px-4 py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition"
+              className="px-4 py-2 sm:py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition cursor-pointer"
             >
               {isSavingCustom ? "Saving..." : "Save & Select Custom Class"}
             </button>
           </div>
         ) : (
-          /* Standard Class Selection Grid */
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
             {classesList.map((cls) => (
               <button
                 key={cls.id}
@@ -425,16 +414,16 @@ export default function StepLineageClass({
                 onClick={() =>
                   updateCharacterData({ classId: cls.id, subclassId: "" })
                 }
-                className={`p-3 rounded-lg border text-left transition-all ${
+                className={`min-w-0 p-3.5 sm:p-3 rounded-lg border text-left transition-all cursor-pointer ${
                   characterData.classId === cls.id
                     ? "bg-[#4a261c] border-amber-500 shadow-lg text-[#f0e6d2]"
                     : "bg-[#4a261c]/40 border-[#a59075]/30 hover:border-[#a59075]/60 text-[#938f71]"
                 }`}
               >
-                <div className="font-bold text-xs flex justify-between items-center">
-                  <span>{cls.name}</span>
+                <div className="font-bold text-xs flex flex-wrap justify-between items-center gap-1">
+                  <span className="break-words">{cls.name}</span>
                   {cls.is_custom && (
-                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded">
+                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded shrink-0">
                       Homebrew
                     </span>
                   )}
@@ -447,7 +436,7 @@ export default function StepLineageClass({
           </div>
         )}
 
-        {/* Subclass Selector (Rendered if chosen class has available subclasses) */}
+        {/* Subclass Pills */}
         {filteredSubclasses.length > 0 && !isAddingCustomClass && (
           <div className="mt-4 p-3 bg-[#4a261c]/30 rounded-lg border border-[#a59075]/20">
             <label className="block text-xs uppercase tracking-wider text-[#889c9b] mb-2">
@@ -461,7 +450,7 @@ export default function StepLineageClass({
                   onClick={() =>
                     updateCharacterData({ subclassId: subclass.id })
                   }
-                  className={`px-3 py-1.5 rounded text-xs transition border ${
+                  className={`px-3 py-2 sm:py-1.5 rounded text-xs transition border cursor-pointer ${
                     characterData.subclassId === subclass.id
                       ? "bg-amber-800 border-amber-500 text-white font-bold"
                       : "bg-[#4a261c] border-[#a59075]/30 text-[#938f71] hover:border-[#a59075]"

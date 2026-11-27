@@ -1,20 +1,28 @@
 /**
  * -----------------------------------------------------------------------------
- * COMPONENT: MainContentArea
+ * COMPONENT: MainContentArea.jsx
  * -----------------------------------------------------------------------------
- * Manages the main dashboard content canvas. It renders either sub-views
- * (like the Character Creator Wizard or Character Sheet) or defaults to
- * displaying the user's active adventurer cards roster fetched from Supabase.
+ * Description:
+ * Scrollable main dashboard canvas. Renders either the active routed child
+ * view (Character Sheet, Creator Wizard, Journal, Inventory) or the default
+ * Adventurers Roster grid fetched from Supabase.
  *
- * Includes optimistic roster synchronization and robust cascading character
- * deletion from Supabase (clearing relational tables, journal entries, and
- * cleaning up Supabase Storage artwork and session banners).
+ * Responsive Breakpoints & Touch Updates:
+ * - Outer Canvas Padding: `p-3 sm:p-4 lg:p-6` preserves screen real estate on
+ *   375px phones while keeping comfortable margins on tablets and desktops.
+ * - Roster Grid: `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` gives phones 1
+ *   full-width column, tablets 2 roomy columns, and desktops 3 columns.
+ * - Touch-Friendly Delete Action: Always visible (`opacity-90`) with `p-2`
+ *   tap padding rather than relying solely on desktop hover states.
+ * - Overflow Protection: `min-w-0` and `truncate` prevent long character names
+ *   from stretching cards past the screen edge.
  *
  * @param {Object} props - Component properties.
- * @param {Function} props.onSelectCharacter - Callback triggered when clicking a character card to open their sheet.
- * @param {Function} props.onOpenCreator - Callback triggered to switch the view to the Character Creator Wizard.
- * @param {number} props.refreshTrigger - Counter prop that forces the roster effect hook to re-fetch when incremented.
- * @param {React.ReactNode} props.children - Sub-views rendered inside the container if active.
+ * @param {Function} props.onSelectCharacter - Opens selected character's sheet.
+ * @param {Function} props.onOpenCreator - Opens Character Creator Wizard.
+ * @param {number} props.refreshTrigger - Re-fetches character roster when incremented.
+ * @param {React.ReactNode} props.children - Active sub-view rendered instead of roster.
+ * -----------------------------------------------------------------------------
  */
 
 import React, { useState, useEffect } from "react";
@@ -26,20 +34,16 @@ export default function MainContentArea({
   refreshTrigger,
   children,
 }) {
-  // Local state for fetched character records from Supabase
+  // Fetched adventurer records from Supabase
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Tracks which individual character card is currently executing a deletion query
+  // Tracks which character ID is currently undergoing cascading deletion
   const [deletingId, setDeletingId] = useState(null);
 
   /**
-   * ---------------------------------------------------------------------------
-   * EFFECT HOOK: fetchCharactersRoster
-   * ---------------------------------------------------------------------------
-   * Fetches all character records belonging to the user from the Supabase
-   * 'characters' table, sorted by creation date descending.
-   * Re-runs whenever `refreshTrigger` changes (e.g., after forging a new hero).
+   * Effect Hook: Fetches user's characters sorted newest-first whenever
+   * `refreshTrigger` increments.
    */
   useEffect(() => {
     async function fetchCharactersRoster() {
@@ -63,7 +67,7 @@ export default function MainContentArea({
   }, [refreshTrigger]);
 
   /**
-   * Helper utility to safely extract bucket relative path from full public Supabase URL.
+   * Extracts the bucket-relative storage path from a full Supabase public URL.
    */
   const getStoragePathFromUrl = (url, bucketName) => {
     if (!url) return null;
@@ -76,21 +80,16 @@ export default function MainContentArea({
   };
 
   /**
-   * ---------------------------------------------------------------------------
-   * HANDLER: handleDeleteCharacter
-   * ---------------------------------------------------------------------------
-   * Permanently deletes a character record, all dependent database rows
-   * (spells, journal entries), and cleans up all associated images in
-   * Supabase Storage ('character-artwork' and 'journal-banners' buckets).
-   *
-   * @param {Event} e - Mouse click event object (stopped from propagating to card click).
-   * @param {Object} character - The character record targeted for deletion.
+   * Cascading Character Deletion Handler:
+   * 1. Removes journal banner files from `journal-banners` storage bucket.
+   * 2. Removes character portrait from `character-artwork` storage bucket.
+   * 3. Deletes dependent rows in `character_spells` and `journal_entries`.
+   * 4. Deletes the character row in `characters` and updates local state.
    */
   const handleDeleteCharacter = async (e, character) => {
-    // 1. Stop event bubbling so clicking delete doesn't trigger card's `onSelectCharacter`
+    // Prevent card click from opening the character sheet
     e.stopPropagation();
 
-    // 2. Prompt user confirmation to prevent accidental deletions
     const confirmed = window.confirm(
       `Are you sure you want to banish ${character.name} to the void? All journal entries, stats, and stored artwork will be permanently deleted.`,
     );
@@ -100,15 +99,12 @@ export default function MainContentArea({
     try {
       setDeletingId(character.id);
 
-      // Get authenticated user ID for scoped storage cleanup
       const {
         data: { user },
       } = await supabase.auth.getUser();
       const userId = user?.id || character.user_id;
 
-      // -----------------------------------------------------------------------
-      // STEP A: Clean up Storage Bucket ('journal-banners')
-      // -----------------------------------------------------------------------
+      // STEP A: Remove session banners from Supabase Storage
       if (userId && character.id) {
         const folderPath = `${userId}/${character.id}/banners`;
         const { data: bannerFiles, error: listBannerErr } =
@@ -131,9 +127,7 @@ export default function MainContentArea({
         }
       }
 
-      // -----------------------------------------------------------------------
-      // STEP B: Clean up Storage Bucket ('character-artwork')
-      // -----------------------------------------------------------------------
+      // STEP B: Remove character portrait from Supabase Storage
       if (character.portrait_url) {
         const portraitPath = getStoragePathFromUrl(
           character.portrait_url,
@@ -146,10 +140,7 @@ export default function MainContentArea({
         }
       }
 
-      // -----------------------------------------------------------------------
-      // STEP C: Clear Relational DB Tables
-      // -----------------------------------------------------------------------
-      // 1. Clear character spells
+      // STEP C: Clear relational database records
       const { error: spellDeleteErr } = await supabase
         .from("character_spells")
         .delete()
@@ -162,7 +153,6 @@ export default function MainContentArea({
         );
       }
 
-      // 2. Clear journal entries
       const { error: journalDeleteErr } = await supabase
         .from("journal_entries")
         .delete()
@@ -175,9 +165,7 @@ export default function MainContentArea({
         );
       }
 
-      // -----------------------------------------------------------------------
-      // STEP D: Delete Main Character Record
-      // -----------------------------------------------------------------------
+      // STEP D: Delete primary character record
       const { error: charDeleteErr } = await supabase
         .from("characters")
         .delete()
@@ -185,9 +173,7 @@ export default function MainContentArea({
 
       if (charDeleteErr) throw charDeleteErr;
 
-      // -----------------------------------------------------------------------
-      // STEP E: Optimistic State Update
-      // -----------------------------------------------------------------------
+      // STEP E: Optimistically remove deleted card from UI
       setCharacters((prevCharacters) =>
         prevCharacters.filter((c) => c.id !== character.id),
       );
@@ -204,15 +190,15 @@ export default function MainContentArea({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-6 bg-[#3d1c14] text-[#938f71]">
-      {/* Conditional Rendering: If child view exists (Wizard/Sheet), render it */}
+    <div className="flex-1 min-w-0 overflow-y-auto overflow-x-hidden p-3 sm:p-4 lg:p-6 bg-[#3d1c14] text-[#938f71]">
+      {/* Render active sub-view if selected; otherwise display Adventurers Roster */}
       {children ? (
         children
       ) : (
-        /* DEFAULT VIEW: Adventurers Roster Grid */
-        <div className="max-w-6xl mx-auto space-y-6">
-          <div className="text-center space-y-1">
-            <h2 className="text-2xl font-medieval font-bold text-[#f0e6d2]">
+        <div className="max-w-6xl mx-auto space-y-5 sm:space-y-6">
+          {/* Roster Heading */}
+          <div className="text-center space-y-1 px-2">
+            <h2 className="text-xl sm:text-2xl font-medieval font-bold text-[#f0e6d2]">
               Your Adventurers
             </h2>
             <p className="text-xs text-[#a59075]">
@@ -226,19 +212,18 @@ export default function MainContentArea({
               Consulting archives for your heroes...
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Map through fetched character records and render card components */}
+            /* Responsive Roster Grid: 1 col (phone) -> 2 cols (tablet) -> 3 cols (desktop) */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {characters.map((char) => (
                 <div
                   key={char.id}
                   onClick={() => onSelectCharacter(char)}
-                  className="group relative bg-[#5f3426] border-2 border-[#a59075]/40 rounded-xl p-5 cursor-pointer hover:border-[#a59075] transition shadow-xl flex flex-col justify-between"
+                  className="group relative bg-[#5f3426] border-2 border-[#a59075]/40 rounded-xl p-4 sm:p-5 cursor-pointer hover:border-[#a59075] transition shadow-xl flex flex-col justify-between min-w-0"
                 >
-                  {/* Card Header: Portrait, Info, and Delete Button */}
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center space-x-4">
-                      {/* Thumbnail Container */}
-                      <div className="w-16 h-16 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center">
+                  {/* Card Header: Portrait Thumbnail, Name/Level, and Delete Button */}
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center flex-shrink-0">
                         {char.portrait_url ? (
                           <img
                             src={char.portrait_url}
@@ -249,8 +234,8 @@ export default function MainContentArea({
                           <span className="text-xl">🛡️</span>
                         )}
                       </div>
-                      <div>
-                        <h3 className="font-bold font-medieval text-lg text-[#f0e6d2]">
+                      <div className="min-w-0">
+                        <h3 className="font-bold font-medieval text-base sm:text-lg text-[#f0e6d2] truncate">
                           {char.name}
                         </h3>
                         <p className="text-xs text-[#889c9b]">
@@ -260,13 +245,13 @@ export default function MainContentArea({
                       </div>
                     </div>
 
-                    {/* Delete Action Icon Button */}
+                    {/* Touch-Accessible Delete Button */}
                     <button
                       type="button"
                       title="Delete Character"
                       disabled={deletingId === char.id}
                       onClick={(e) => handleDeleteCharacter(e, char)}
-                      className="p-1.5 rounded-lg bg-red-950/40 hover:bg-red-800/60 border border-red-500/30 text-red-300 opacity-80 group-hover:opacity-100 transition shadow"
+                      className="p-2 rounded-lg bg-red-950/40 hover:bg-red-800/60 border border-red-500/30 text-red-300 opacity-90 sm:opacity-80 group-hover:opacity-100 transition shadow flex-shrink-0"
                     >
                       {deletingId === char.id ? (
                         <span className="text-xs animate-spin">⏳</span>
@@ -288,10 +273,10 @@ export default function MainContentArea({
                 </div>
               ))}
 
-              {/* Character Creator Wizard Trigger Card */}
+              {/* Character Creator Wizard Launch Card */}
               <div
                 onClick={onOpenCreator}
-                className="border-2 border-dashed border-[#a59075]/50 rounded-xl p-6 cursor-pointer hover:border-[#a59075] hover:bg-[#5f3426]/30 transition flex flex-col items-center justify-center text-center space-y-3"
+                className="border-2 border-dashed border-[#a59075]/50 rounded-xl p-5 sm:p-6 cursor-pointer hover:border-[#a59075] hover:bg-[#5f3426]/30 transition flex flex-col items-center justify-center text-center space-y-3 min-h-[160px]"
               >
                 <div className="w-12 h-12 rounded-full bg-[#5f3426] border border-[#a59075]/60 flex items-center justify-center text-amber-400 text-xl shadow">
                   ✨
@@ -305,7 +290,7 @@ export default function MainContentArea({
                     ability scores, and craft backstories.
                   </p>
                 </div>
-                <span className="text-xs font-bold text-amber-400 pt-2">
+                <span className="text-xs font-bold text-amber-400 pt-1">
                   Start Creation Wizard +
                 </span>
               </div>

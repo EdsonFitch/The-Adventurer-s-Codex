@@ -1,34 +1,39 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: App.jsx (Root Application Entry)
+ * -----------------------------------------------------------------------------
+ * Description:
+ * Root entry component for The Adventurer's Codex.
+ * - Wraps the application tree inside `AuthProvider` so Supabase session state
+ *   is accessible globally via `useAuth()`.
+ * - Routes unauthenticated visitors to `LandingPage` and authenticated users
+ *   directly into `DashboardContentRouter`.
+ * -----------------------------------------------------------------------------
+ */
+
 import React from "react";
-// 1. Import global AuthProvider and useAuth custom hook from context
 import { AuthProvider, useAuth } from "./context/AuthContext";
-// 2. Import the LandingPage component for unauthenticated visitors
 import LandingPage from "./components/common/LandingPage";
-// 3. Import the fully assembled DashboardContentRouter for authenticated users
 import DashboardContentRouter from "./components/dashboard/DashboardContentRouter";
 
 /**
- * MainApp Component
- * -----------------------------------------------------------------------------
- * Renders the appropriate view based on authentication status:
- * - Unauthenticated users see LandingPage
- * - Authenticated users see DashboardContentRouter with full TopNavbar and LeftSidebar
+ * Switches between the public `LandingPage` and the authenticated
+ * `DashboardContentRouter` based on active Supabase user session state.
  */
 function MainApp() {
   const { user } = useAuth();
 
-  // If no user session exists, display Landing Page
+  // Unauthenticated visitor view
   if (!user) {
     return <LandingPage />;
   }
 
-  // Authenticated State: Renders complete dashboard
+  // Authenticated player/DM workspace
   return <DashboardContentRouter />;
 }
 
 /**
- * Root Application Component
- * -----------------------------------------------------------------------------
- * Wraps main app inside global AuthProvider context.
+ * Root application wrapper providing global authentication context.
  */
 export default function App() {
   return (

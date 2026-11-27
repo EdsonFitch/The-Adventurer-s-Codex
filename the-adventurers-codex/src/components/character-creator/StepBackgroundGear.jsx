@@ -1,9 +1,30 @@
+/**
+ * -----------------------------------------------------------------------------
+ * COMPONENT: StepBackgroundGear.jsx
+ * -----------------------------------------------------------------------------
+ * Description:
+ * Manages Step 4 of Character Creation:
+ * - Official or Homebrew Background selection.
+ * - Inline custom background builder inserting directly into Supabase.
+ * - Safe type-checking and string normalization for background features and
+ *   granted skill proficiencies.
+ *
+ * Responsive & Touch Behavior:
+ * - Background Cards Grid: Uses `grid-cols-1 sm:grid-cols-2 md:grid-cols-3` so
+ *   phones show full-width cards without truncating feature subtitles.
+ * - Touch-Friendly Skill Pills: Enlarges custom background skill pills
+ *   (`px-2.5 py-1.5 sm:px-2 sm:py-1 text-xs sm:text-[10px]`) for reliable finger
+ *   taps on mobile screens.
+ * - Form Controls: Uses `text-sm sm:text-xs` on inputs and textareas to prevent
+ *   mobile browser focus zoom.
+ *
+ * @param {Object} props - Component properties.
+ * -----------------------------------------------------------------------------
+ */
+
 import React, { useState } from "react";
 import { supabase } from "../../supabaseClient";
 
-/**
- * Standard D&D 5e Skill List
- */
 const ALL_SKILLS = [
   "Acrobatics",
   "Animal Handling",
@@ -25,29 +46,12 @@ const ALL_SKILLS = [
   "Survival",
 ];
 
-/**
- * StepBackgroundGear Component
- * -----------------------------------------------------------------------------
- * Manages Step 4 of Character Creation:
- * - Background Selection (Official or Homebrew).
- * - Safe type-checking and string normalization to prevent React render crashes.
- * - Starting Equipment & Custom Homebrew Background Creation.
- *
- * @param {Object} props - Component properties.
- * @param {Object} props.characterData - Master character payload state.
- * @param {Function} props.updateCharacterData - Callback to update master state.
- * @param {Array} props.backgroundsList - Pre-fetched backgrounds from Supabase.
- * @param {string} props.userId - Authenticated user UUID for homebrew ownership.
- */
 export default function StepBackgroundGear({
   characterData,
   updateCharacterData,
   backgroundsList = [],
   userId,
 }) {
-  // ---------------------------------------------------------------------------
-  // 1. HOMEBREW BACKGROUND BUILDER STATE HOOKS
-  // ---------------------------------------------------------------------------
   const [isAddingCustomBg, setIsAddingCustomBg] = useState(false);
   const [isSavingCustom, setIsSavingCustom] = useState(false);
 
@@ -59,30 +63,16 @@ export default function StepBackgroundGear({
     skill_proficiencies: [],
   });
 
-  // Safely locate the selected background object from the reference array
   const selectedBackground = Array.isArray(backgroundsList)
     ? backgroundsList.find((bg) => bg && bg.id === characterData.backgroundId)
     : null;
 
-  // ---------------------------------------------------------------------------
-  // 2. SAFE STRING & JSON NORMALIZATION HELPERS
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Safely converts any Supabase property value into a guaranteed renderable string.
-   * Prevents React from crashing if an object or null is accidentally passed to JSX.
-   *
-   * @param {*} value - Property value from database record.
-   * @param {string} fallback - Default string if value is empty/invalid.
-   * @returns {string} Safe string representation.
-   */
   const safeString = (value, fallback = "") => {
     if (value === null || value === undefined) return fallback;
     if (typeof value === "string") return value;
     if (typeof value === "number" || typeof value === "boolean")
       return String(value);
     if (typeof value === "object") {
-      // If it's an object or array, try extracting text or JSON stringify safely
       try {
         return value.name || value.title || JSON.stringify(value);
       } catch {
@@ -92,11 +82,6 @@ export default function StepBackgroundGear({
     return fallback;
   };
 
-  /**
-   * Safely normalizes skill proficiencies into a clean array of strings.
-   * @param {*} skillsData - Raw skill proficiencies from Supabase.
-   * @returns {string[]} Array of skill names.
-   */
   const getNormalizedSkills = (skillsData) => {
     if (!skillsData) return [];
     if (Array.isArray(skillsData)) {
@@ -118,13 +103,6 @@ export default function StepBackgroundGear({
     return [];
   };
 
-  // ---------------------------------------------------------------------------
-  // 3. HOMEBREW DATABASE INSERTION HANDLER
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Saves a new custom background directly to the Supabase 'backgrounds' table.
-   */
   const handleSaveCustomBackground = async () => {
     if (!customBg.name.trim()) {
       alert("Please provide a name for your custom background.");
@@ -154,7 +132,6 @@ export default function StepBackgroundGear({
 
       if (error) throw error;
 
-      // Update master character state with new background UUID
       updateCharacterData({ backgroundId: data.id });
       setIsAddingCustomBg(false);
       setCustomBg({
@@ -172,9 +149,6 @@ export default function StepBackgroundGear({
     }
   };
 
-  /**
-   * Toggles skill selections within the custom background form safely.
-   */
   const toggleCustomSkill = (skill) => {
     setCustomBg((prev) => {
       const currentSkills = Array.isArray(prev.skill_proficiencies)
@@ -199,11 +173,8 @@ export default function StepBackgroundGear({
     });
   };
 
-  // ---------------------------------------------------------------------------
-  // 4. RENDER UI STRUCTURE
-  // ---------------------------------------------------------------------------
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-6 sm:space-y-8 animate-fadeIn">
       {/* Header */}
       <div>
         <h3 className="text-base font-medieval font-bold text-[#f0e6d2]">
@@ -215,18 +186,18 @@ export default function StepBackgroundGear({
         </p>
       </div>
 
-      {/* =================================================================== */}
-      {/* SECTION 1: BACKGROUND SELECTION                                     */}
-      {/* =================================================================== */}
+      {/* =====================================================================
+        SECTION 1: BACKGROUND SELECTION
+        ===================================================================== */}
       <div className="space-y-4 border-b border-[#a59075]/20 pb-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center gap-2">
           <label className="text-xs uppercase tracking-widest font-bold text-[#f0e6d2]">
             1. Character Background
           </label>
           <button
             type="button"
             onClick={() => setIsAddingCustomBg(!isAddingCustomBg)}
-            className="text-xs text-amber-400 hover:text-amber-300 underline transition"
+            className="py-1 text-xs text-amber-400 hover:text-amber-300 underline transition cursor-pointer"
           >
             {isAddingCustomBg
               ? "← Select Standard Background"
@@ -236,14 +207,14 @@ export default function StepBackgroundGear({
 
         {/* Custom Background Inline Form */}
         {isAddingCustomBg ? (
-          <div className="p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-4">
+          <div className="p-3.5 sm:p-4 bg-[#4a261c] border border-amber-500/40 rounded-lg space-y-4">
             <h4 className="text-xs font-bold text-amber-300 uppercase">
               Forge Custom Background
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Background Name *
                 </label>
                 <input
@@ -253,11 +224,11 @@ export default function StepBackgroundGear({
                     setCustomBg({ ...customBg, name: e.target.value })
                   }
                   placeholder="e.g. Bounty Hunter"
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 />
               </div>
               <div>
-                <label className="block text-[10px] text-[#889c9b]">
+                <label className="block text-[10px] text-[#889c9b] mb-1">
                   Feature Name
                 </label>
                 <input
@@ -267,13 +238,13 @@ export default function StepBackgroundGear({
                     setCustomBg({ ...customBg, feature_name: e.target.value })
                   }
                   placeholder="e.g. Ear to the Ground"
-                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                  className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] text-[#889c9b]">
+              <label className="block text-[10px] text-[#889c9b] mb-1">
                 Feature Description
               </label>
               <textarea
@@ -286,13 +257,13 @@ export default function StepBackgroundGear({
                 }
                 rows={2}
                 placeholder="Describe what unique perk or network this background offers..."
-                className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-xs text-[#f0e6d2]"
+                className="w-full bg-[#361a12] border border-[#a59075]/40 rounded p-2 text-sm sm:text-xs text-[#f0e6d2]"
               />
             </div>
 
-            {/* Custom Skill Proficiency Selection */}
+            {/* Touch-Sized Custom Skill Proficiency Pills */}
             <div>
-              <label className="block text-[10px] text-[#889c9b] mb-1">
+              <label className="block text-[10px] text-[#889c9b] mb-1.5">
                 Select 2 Skill Proficiencies (
                 {Array.isArray(customBg.skill_proficiencies)
                   ? customBg.skill_proficiencies.length
@@ -309,7 +280,7 @@ export default function StepBackgroundGear({
                       key={skill}
                       type="button"
                       onClick={() => toggleCustomSkill(skill)}
-                      className={`px-2 py-1 rounded text-[10px] border transition ${
+                      className={`px-2.5 py-1.5 sm:px-2 sm:py-1 rounded text-xs sm:text-[10px] border transition cursor-pointer ${
                         isSelected
                           ? "bg-amber-800 border-amber-500 text-white font-bold"
                           : "bg-[#361a12] border-[#a59075]/30 text-[#889c9b] hover:text-[#f0e6d2]"
@@ -326,29 +297,31 @@ export default function StepBackgroundGear({
               type="button"
               disabled={isSavingCustom}
               onClick={handleSaveCustomBackground}
-              className="px-4 py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition"
+              className="px-4 py-2 sm:py-1.5 bg-amber-700 hover:bg-amber-600 rounded text-xs text-white font-bold transition cursor-pointer"
             >
               {isSavingCustom ? "Saving..." : "Save & Select Custom Background"}
             </button>
           </div>
         ) : (
-          /* Standard Background Selection Grid */
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          /* Standard Background Selection Grid (`grid-cols-1 sm:grid-cols-2 md:grid-cols-3`) */
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             {backgroundsList.map((bg) => (
               <button
                 key={bg.id}
                 type="button"
                 onClick={() => updateCharacterData({ backgroundId: bg.id })}
-                className={`p-3 rounded-lg border text-left transition-all ${
+                className={`min-w-0 p-3.5 sm:p-3 rounded-lg border text-left transition-all cursor-pointer ${
                   characterData.backgroundId === bg.id
                     ? "bg-[#4a261c] border-amber-500 shadow-lg text-[#f0e6d2]"
                     : "bg-[#4a261c]/40 border-[#a59075]/30 hover:border-[#a59075]/60 text-[#938f71]"
                 }`}
               >
-                <div className="font-bold text-xs flex justify-between items-center">
-                  <span>{safeString(bg.name, "Unnamed Background")}</span>
+                <div className="font-bold text-xs flex flex-wrap justify-between items-center gap-1">
+                  <span className="break-words">
+                    {safeString(bg.name, "Unnamed Background")}
+                  </span>
                   {bg.is_custom && (
-                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded">
+                    <span className="text-[9px] bg-amber-900/60 text-amber-300 px-1 rounded shrink-0">
                       Homebrew
                     </span>
                   )}
@@ -364,12 +337,12 @@ export default function StepBackgroundGear({
         )}
       </div>
 
-      {/* =================================================================== */}
-      {/* SECTION 2: PROFICIENCIES & FEATURE PREVIEW                          */}
-      {/* =================================================================== */}
+      {/* =====================================================================
+        SECTION 2: PROFICIENCIES & FEATURE PREVIEW
+        ===================================================================== */}
       {selectedBackground && (
-        <div className="p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-3">
-          <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider">
+        <div className="p-3.5 sm:p-4 bg-[#4a261c]/50 border border-[#a59075]/30 rounded-xl space-y-3">
+          <h4 className="text-xs font-bold text-[#f0e6d2] uppercase tracking-wider break-words">
             Background Details:{" "}
             {safeString(selectedBackground.name, "Selected Background")}
           </h4>
@@ -379,7 +352,7 @@ export default function StepBackgroundGear({
               <span className="text-xs font-bold text-amber-400">
                 {safeString(selectedBackground.feature_name)}:
               </span>
-              <p className="text-xs text-[#889c9b] mt-0.5">
+              <p className="text-xs text-[#889c9b] mt-0.5 break-words">
                 {safeString(
                   selectedBackground.feature_description ||
                     selectedBackground.description,
@@ -389,9 +362,8 @@ export default function StepBackgroundGear({
             </div>
           )}
 
-          {/* Safely rendered skill proficiencies list */}
           <div>
-            <span className="text-[10px] uppercase tracking-widest text-[#889c9b] block mb-1">
+            <span className="text-[10px] uppercase tracking-widest text-[#889c9b] block mb-1.5">
               Granted Skill Proficiencies:
             </span>
             <div className="flex flex-wrap gap-2">

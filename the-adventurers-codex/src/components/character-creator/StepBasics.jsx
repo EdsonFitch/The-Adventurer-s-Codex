@@ -1,16 +1,26 @@
 /**
  * -----------------------------------------------------------------------------
- * COMPONENT: StepBasics
+ * COMPONENT: StepBasics.jsx
  * -----------------------------------------------------------------------------
- * Represents Step 1 of the D&D Character Creator Wizard.
- * Manages foundational character identity data (Name, Level, Campaign, Alignment)
- * as well as file selections, compression triggers, and live preview rendering
- * for both the Dashboard Roster Portrait and Full-Body Sheet Artwork.
+ * Description:
+ * Manages Step 1 of the D&D Character Creator Wizard:
+ * - Foundational identity inputs (Character Name, Level 1–20, Alignment, Campaign).
+ * - Dual image upload controls with automatic compression and live previews for
+ *   the Dashboard Roster Portrait (1:1) and Full-Body Sheet Artwork (2:3).
+ *
+ * Responsive & Touch Behavior:
+ * - Form Controls: Uses `text-sm sm:text-xs` and `py-2.5 sm:py-2` on inputs and
+ *   select dropdowns so mobile browsers do not zoom on focus and controls are
+ *   comfortable to tap.
+ * - Image Upload Rows: Stacks vertically (`flex-col sm:flex-row`) on phones so
+ *   file input buttons have full width and never get cramped next to preview
+ *   thumbnails.
  *
  * @param {Object} props - Component properties.
- * @param {Object} props.characterData - Current cumulative state object of the character being built.
- * @param {Function} props.updateCharacterData - State dispatcher function to merge updates into characterData.
- * @param {string} props.userId - Unique UUID of the active user for storage scoping.
+ * @param {Object} props.characterData - Cumulative wizard character state.
+ * @param {Function} props.updateCharacterData - Merges updated fields into state.
+ * @param {string} props.userId - Authenticated user UUID for storage scoping.
+ * -----------------------------------------------------------------------------
  */
 
 import React, { useState } from "react";
@@ -21,18 +31,12 @@ export default function StepBasics({
   updateCharacterData,
   userId,
 }) {
-  // Local loading states to show feedback spinners while files compress and upload
+  // Local upload status flags for visual progress feedback
   const [uploadingPortrait, setUploadingPortrait] = useState(false);
   const [uploadingFullBody, setUploadingFullBody] = useState(false);
 
   /**
-   * ---------------------------------------------------------------------------
-   * HANDLER: handlePortraitChange
-   * ---------------------------------------------------------------------------
-   * Triggers when the user selects a file for the dashboard roster portrait.
-   * Passes the file to our upload utility targeting the 'portraits' subfolder.
-   *
-   * @param {Event} e - Native file input change event.
+   * Compresses and uploads the square dashboard roster portrait.
    */
   const handlePortraitChange = async (e) => {
     const file = e.target.files?.[0];
@@ -53,13 +57,7 @@ export default function StepBasics({
   };
 
   /**
-   * ---------------------------------------------------------------------------
-   * HANDLER: handleFullBodyChange
-   * ---------------------------------------------------------------------------
-   * Triggers when the user selects a file for the full-body sheet artwork.
-   * Passes the file to our upload utility targeting the 'full-body' subfolder.
-   *
-   * @param {Event} e - Native file input change event.
+   * Compresses and uploads the vertical full-body sheet artwork.
    */
   const handleFullBodyChange = async (e) => {
     const file = e.target.files?.[0];
@@ -86,12 +84,13 @@ export default function StepBasics({
         1. Basics & Visual Identity
       </h3>
 
-      {/* ----------------------------------------------------------------------- */}
-      {/* SECTION A: Text Inputs & Selectors (Name, Level, Campaign, Alignment)   */}
-      {/* ----------------------------------------------------------------------- */}
+      {/* =====================================================================
+        SECTION A: IDENTITY TEXT INPUTS & DROPDOWNS
+        - `text-sm sm:text-xs` prevents iOS/Android auto-zoom on focus.
+        ===================================================================== */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        {/* Character Name Input */}
-        <div className="space-y-1 md:col-span-2">
+        {/* Character Name */}
+        <div className="space-y-1 md:col-span-2 min-w-0">
           <label className="block text-xs font-bold text-[#a59075]">
             Character Name *
           </label>
@@ -101,12 +100,12 @@ export default function StepBasics({
             value={characterData.name || ""}
             onChange={(e) => updateCharacterData({ name: e.target.value })}
             placeholder="e.g., Lyra Shadowwhisper"
-            className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
+            className="w-full px-3 py-2.5 sm:py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
           />
         </div>
 
-        {/* Character Level Selector (Levels 1 to 20) */}
-        <div className="space-y-1">
+        {/* Character Level (1 - 20) */}
+        <div className="space-y-1 min-w-0">
           <label className="block text-xs font-bold text-[#a59075]">
             Character Level
           </label>
@@ -115,7 +114,7 @@ export default function StepBasics({
             onChange={(e) =>
               updateCharacterData({ level: parseInt(e.target.value, 10) })
             }
-            className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
+            className="w-full px-3 py-2.5 sm:py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
           >
             {Array.from({ length: 20 }, (_, i) => i + 1).map((lvl) => (
               <option key={lvl} value={lvl}>
@@ -125,8 +124,8 @@ export default function StepBasics({
           </select>
         </div>
 
-        {/* Alignment Selector Dropdown */}
-        <div className="space-y-1">
+        {/* Alignment Dropdown */}
+        <div className="space-y-1 min-w-0">
           <label className="block text-xs font-bold text-[#a59075]">
             Alignment
           </label>
@@ -135,7 +134,7 @@ export default function StepBasics({
             onChange={(e) =>
               updateCharacterData({ alignmentCode: e.target.value })
             }
-            className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
+            className="w-full px-3 py-2.5 sm:py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
           >
             <option value="LG">Lawful Good</option>
             <option value="NG">Neutral Good</option>
@@ -149,8 +148,8 @@ export default function StepBasics({
           </select>
         </div>
 
-        {/* Campaign Name Input */}
-        <div className="space-y-1 md:col-span-4">
+        {/* Campaign Name */}
+        <div className="space-y-1 md:col-span-4 min-w-0">
           <label className="block text-xs font-bold text-[#a59075]">
             Campaign Name
           </label>
@@ -161,17 +160,19 @@ export default function StepBasics({
               updateCharacterData({ campaignName: e.target.value })
             }
             placeholder="e.g., Hoard of the Dragon Queen"
-            className="w-full px-3 py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
+            className="w-full px-3 py-2.5 sm:py-2 bg-[#4a261c] border border-[#a59075]/40 rounded text-sm sm:text-xs text-[#f0e6d2] focus:outline-none focus:border-[#a59075]"
           />
         </div>
       </div>
 
-      {/* ----------------------------------------------------------------------- */}
-      {/* SECTION B: Dual Image Upload Inputs (Portrait & Full-Body)            */}
-      {/* ----------------------------------------------------------------------- */}
+      {/* =====================================================================
+        SECTION B: DUAL IMAGE UPLOAD INPUTS (PORTRAIT & FULL-BODY)
+        - Stacks on narrow mobile viewports (`flex-col sm:flex-row`) so file
+          buttons remain roomy and easy to tap.
+        ===================================================================== */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-[#a59075]/30">
-        {/* 1. Dashboard Roster Portrait (Square 1:1 view) */}
-        <div className="space-y-3">
+        {/* 1. Dashboard Roster Portrait (Square 1:1) */}
+        <div className="space-y-3 min-w-0">
           <div>
             <label className="block text-xs font-bold text-[#f0e6d2]">
               Dashboard Roster Portrait (Square)
@@ -181,8 +182,7 @@ export default function StepBasics({
             </p>
           </div>
 
-          <div className="flex items-center space-x-4">
-            {/* Live Preview Container */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-16 h-16 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center shrink-0">
               {characterData.portraitUrl ? (
                 <img
@@ -195,14 +195,13 @@ export default function StepBasics({
               )}
             </div>
 
-            {/* File Input and Upload Status */}
-            <div className="flex-1">
+            <div className="w-full sm:flex-1 min-w-0">
               <input
                 type="file"
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handlePortraitChange}
                 disabled={uploadingPortrait}
-                className="block w-full text-xs text-[#a59075] file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-[#937460]/30 file:text-[#f0e6d2] hover:file:bg-[#937460]/50 cursor-pointer"
+                className="block w-full text-xs text-[#a59075] file:mr-3 file:py-2 sm:file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-[#937460]/30 file:text-[#f0e6d2] hover:file:bg-[#937460]/50 cursor-pointer"
               />
               {uploadingPortrait && (
                 <span className="text-[10px] text-amber-400 mt-1 block animate-pulse">
@@ -213,8 +212,8 @@ export default function StepBasics({
           </div>
         </div>
 
-        {/* 2. Full-Body Sheet Artwork (Vertical 2:3 view) */}
-        <div className="space-y-3">
+        {/* 2. Full-Body Sheet Artwork (Vertical 2:3) */}
+        <div className="space-y-3 min-w-0">
           <div>
             <label className="block text-xs font-bold text-[#f0e6d2]">
               Full-Body Artwork (Character Sheet)
@@ -224,8 +223,7 @@ export default function StepBasics({
             </p>
           </div>
 
-          <div className="flex items-center space-x-4">
-            {/* Live Preview Container (Vertical aspect ratio) */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-16 h-20 rounded-lg bg-[#4a261c] border border-[#a59075]/40 overflow-hidden flex items-center justify-center shrink-0">
               {characterData.fullBodyUrl ? (
                 <img
@@ -238,14 +236,13 @@ export default function StepBasics({
               )}
             </div>
 
-            {/* File Input and Upload Status */}
-            <div className="flex-1">
+            <div className="w-full sm:flex-1 min-w-0">
               <input
                 type="file"
                 accept="image/png, image/jpeg, image/webp"
                 onChange={handleFullBodyChange}
                 disabled={uploadingFullBody}
-                className="block w-full text-xs text-[#a59075] file:mr-3 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-[#937460]/30 file:text-[#f0e6d2] hover:file:bg-[#937460]/50 cursor-pointer"
+                className="block w-full text-xs text-[#a59075] file:mr-3 file:py-2 sm:file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-[#937460]/30 file:text-[#f0e6d2] hover:file:bg-[#937460]/50 cursor-pointer"
               />
               {uploadingFullBody && (
                 <span className="text-[10px] text-amber-400 mt-1 block animate-pulse">

@@ -4,15 +4,18 @@
  * -----------------------------------------------------------------------------
  * Description:
  * Master view router and layout coordinator for authenticated users.
- * Manages the active sidebar navigation tab state, holds the currently selected
- * character object for the character sheet, coordinates roster refresh triggers,
- * and integrates master feature views including the Character Creator Wizard,
- * Character Sheet View, Journal, and the standalone Inventory & Vault View.
+ *
+ * Responsibilities:
+ * - Tracks the active navigation tab (`activeTab`) and selected hero record
+ *   (`selectedCharacter`).
+ * - Coordinates both desktop sidebar collapse state (`isSidebarCollapsed`) and
+ *   mobile/tablet drawer open state (`isMobileMenuOpen`).
+ * - Wraps the workspace in a `min-w-0` flex body so child grids and tables
+ *   shrink properly inside narrow viewports without horizontal overflow.
  * -----------------------------------------------------------------------------
  */
 
 import React, { useState } from "react";
-// Import useAuth hook to supply user ID and metadata for RLS and display
 import { useAuth } from "../../context/AuthContext";
 import DashboardLayout from "./DashboardLayout";
 import TopNavbar from "./TopNavbar";
@@ -20,60 +23,56 @@ import LeftSidebar from "./LeftSidebar";
 import MainContentArea from "./MainContentArea";
 import CharacterCreatorWizard from "../character-creator/CharacterCreatorWizard";
 import JournalView from "../diary/JournalView";
-// Import master interactive CharacterSheetView component
 import CharacterSheetView from "../character/CharacterSheetView";
-// Import standalone Inventory & Vault View component
 import InventoryView from "../inventory/InventoryView";
 
 export default function DashboardContentRouter() {
   // ---------------------------------------------------------------------------
-  // 1. AUTHENTICATION & MASTER STATE MANAGEMENT
+  // 1. AUTHENTICATION & MASTER NAVIGATION STATE
   // ---------------------------------------------------------------------------
   const { user } = useAuth();
 
-  // Active navigation tab key matching LeftSidebar items ('characters', 'character-sheet', etc.)
+  // Active tab key ('characters', 'character-sheet', 'journal', 'inventory', etc.)
   const [activeTab, setActiveTab] = useState("characters");
 
-  // Controls collapsed vs expanded state for LeftSidebar
+  // Controls desktop icon-only collapsed mode (`lg` and up)
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  // Holds the active character object selected for the sheet and campaign views
+  // Controls off-canvas slide-over drawer visibility on phones & tablets (`< lg`)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Currently active character record passed into Sheet, Journal, and Inventory views
   const [selectedCharacter, setSelectedCharacter] = useState(null);
 
-  // Trigger state counter to instruct MainContentArea to re-fetch roster cards after hero creation
+  // Incremented after forging a new hero so MainContentArea re-fetches the roster
   const [characterRefreshTrigger, setCharacterRefreshTrigger] = useState(0);
 
   // ---------------------------------------------------------------------------
-  // 2. NAVIGATION & EVENT HANDLERS
+  // 2. NAVIGATION & WORKFLOW HANDLERS
   // ---------------------------------------------------------------------------
 
   /**
-   * Triggers when a character card is clicked in the roster grid.
-   * Sets the active character and switches view to the character sheet.
-   *
-   * @param {Object} character - The selected character record.
+   * Opens the interactive Character Sheet when a roster card is tapped/clicked.
    */
   const handleSelectCharacter = (character) => {
     setSelectedCharacter(character);
     setActiveTab("character-sheet");
+    setIsMobileMenuOpen(false);
   };
 
   /**
-   * Triggers when a new character is successfully forged in the creation wizard.
-   * Updates selected hero state, increments refresh trigger, and returns to roster.
-   *
-   * @param {Object} forgedCharacter - Newly created character record from Supabase.
+   * Handles completion of the Character Creator Wizard: stores the newly forged
+   * character, triggers a roster refresh, and returns to the roster view.
    */
   const handleCharacterForged = (forgedCharacter) => {
     setSelectedCharacter(forgedCharacter);
     setCharacterRefreshTrigger((prev) => prev + 1);
     setActiveTab("characters");
+    setIsMobileMenuOpen(false);
   };
 
   /**
-   * Computes top navbar subtitle dynamically based on the currently active tab.
-   *
-   * @returns {string} Dynamic header subtitle string.
+   * Resolves the dynamic subtitle displayed in TopNavbar for the current tab.
    */
   const getHeaderSubtitle = () => {
     switch (activeTab) {
@@ -94,27 +93,32 @@ export default function DashboardContentRouter() {
   };
 
   // ---------------------------------------------------------------------------
-  // 3. RENDER UI LAYOUT & ROUTED CONTENT VIEWS
+  // 3. RENDER RESPONSIVE DASHBOARD SHELL & ROUTED SUB-VIEWS
   // ---------------------------------------------------------------------------
   return (
     <DashboardLayout>
-      {/* Persistent Top Navigation Bar with dynamic subtitle */}
+      {/* Persistent Sticky Top Navigation Bar */}
       <TopNavbar
         subtitle={getHeaderSubtitle()}
         selectedCharacter={selectedCharacter}
+        onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
       />
 
-      {/* Main Layout Body: Left Sidebar + Dynamic Content Canvas */}
-      <div className="flex flex-1 overflow-hidden">
-        {/* Collapsible Left Navigation Sidebar */}
+      {/* Main Layout Body:
+          `min-w-0` is critical on flex rows so inner grids do not force the
+          viewport wider than 100% on phones and tablets. */}
+      <div className="flex flex-1 min-w-0 overflow-hidden relative">
+        {/* Responsive Left Sidebar (Drawer on `< lg`, Persistent on `lg+`) */}
         <LeftSidebar
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           isSidebarCollapsed={isSidebarCollapsed}
           setIsSidebarCollapsed={setIsSidebarCollapsed}
+          isMobileMenuOpen={isMobileMenuOpen}
+          onCloseMobileMenu={() => setIsMobileMenuOpen(false)}
         />
 
-        {/* Main Content Area Canvas */}
+        {/* Scrollable Content Canvas */}
         <MainContentArea
           onSelectCharacter={handleSelectCharacter}
           onOpenCreator={() => setActiveTab("character-creation")}
@@ -129,7 +133,7 @@ export default function DashboardContentRouter() {
                     <button
                       type="button"
                       onClick={() => setActiveTab("characters")}
-                      className="px-3 py-1.5 bg-[#5f3426] hover:bg-[#937460]/40 border border-[#a59075]/40 rounded text-xs text-[#938f71] transition flex items-center space-x-2 shadow"
+                      className="px-3 py-2 bg-[#5f3426] hover:bg-[#937460]/40 border border-[#a59075]/40 rounded text-xs text-[#938f71] transition flex items-center space-x-2 shadow"
                     >
                       <span>← Return to Adventurers</span>
                     </button>
@@ -141,7 +145,7 @@ export default function DashboardContentRouter() {
                 </div>
               )}
 
-              {/* VIEW 2: MASTER INTERACTIVE CHARACTER SHEET */}
+              {/* VIEW 2: INTERACTIVE CHARACTER SHEET */}
               {activeTab === "character-sheet" && (
                 <CharacterSheetView
                   selectedCharacter={selectedCharacter}
@@ -154,19 +158,19 @@ export default function DashboardContentRouter() {
                 />
               )}
 
-              {/* VIEW 3: JOURNAL ENTRIES */}
+              {/* VIEW 3: CAMPAIGN & SESSION JOURNAL */}
               {activeTab === "journal" && (
                 <JournalView selectedCharacter={selectedCharacter} />
               )}
 
-              {/* VIEW 4: INVENTORY VAULT */}
+              {/* VIEW 4: INVENTORY & EQUIPMENT VAULT */}
               {activeTab === "inventory" && (
                 <InventoryView selectedCharacter={selectedCharacter} />
               )}
 
               {/* VIEW 5: ACCOUNT PROFILE */}
               {activeTab === "profile" && (
-                <div className="p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
+                <div className="p-4 sm:p-6 bg-[#5f3426]/80 border-2 border-[#a59075]/40 rounded-xl max-w-4xl mx-auto text-[#938f71] space-y-2 animate-fadeIn">
                   <h2 className="text-xl font-bold font-medieval text-[#f0e6d2]">
                     🛡️ Adventurer Profile
                   </h2>
